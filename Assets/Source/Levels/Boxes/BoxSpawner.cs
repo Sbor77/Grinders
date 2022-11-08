@@ -61,7 +61,7 @@ public class BoxSpawner : MonoBehaviour
         {
             Vector2 randomOffsetPosition = Random.insideUnitCircle * _circleOffsetModifier;
 
-            poolBox.transform.position += new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
+            poolBox.transform.position += new Vector3(randomOffsetPosition.x, poolBox.transform.position.y, randomOffsetPosition.y);
 
             poolBox.Activate(_minMoneyAmount, _maxMoneyAmount);
 
