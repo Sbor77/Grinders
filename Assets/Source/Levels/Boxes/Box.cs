@@ -6,10 +6,11 @@ using DG.Tweening;
 
 public class Box : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer wholeBox;
-    [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private GameObject fracturedBox;
-    [SerializeField] private AudioSource crashAudioClip;
+    [SerializeField] private MeshRenderer _wholeBoxRenderer;
+    [SerializeField] private BoxCollider _boxCollider;
+    [SerializeField] private GameObject _fracturedBox;
+    [SerializeField] private AudioSource _crashAudioClip;
+    [SerializeField] private Coin _coinPrefab;
 
     private int _money;
     private float _crushedBoxLivetime = 3f;
@@ -21,27 +22,30 @@ public class Box : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Crush();
-    }
+        Crush();    
+    }    
 
     public void Crush()
     {
-        wholeBox.enabled = false;
-        boxCollider.enabled = false;
-        fracturedBox.SetActive(true);
-        crashAudioClip.Play();        
+        _wholeBoxRenderer.enabled = false;
+        _boxCollider.enabled = false;
+        _fracturedBox.SetActive(true);
+        _crashAudioClip.Play();
 
-        DOVirtual.DelayedCall(_crushedBoxLivetime, Deactivate);
-
-        DOVirtual.DelayedCall(_crushedBoxLivetime, () => IsCrushedBoxDeactivated?.Invoke());        
+        DOVirtual.DelayedCall(_crushedBoxLivetime, () =>
+        {
+            Deactivate();
+            IsCrushedBoxDeactivated?.Invoke();
+        });
     }    
 
     public void Activate(int minMoney, int maxMoney)
     {
         gameObject.SetActive(true);
-        wholeBox.enabled = true;            
-        fracturedBox.SetActive(false);
-
+        _wholeBoxRenderer.enabled = true; 
+        _boxCollider.enabled = true;
+        _fracturedBox.SetActive(false);
+        
         GenerateMoney(minMoney, maxMoney);
 
         GenerateRotationY();

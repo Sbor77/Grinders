@@ -208,10 +208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91d9afaa8b41d045b76e9563dfd83d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wholeBox: {fileID: 5574388082885869830}
-  boxCollider: {fileID: 2482728576502870305}
-  fracturedBox: {fileID: 7780274780782716311}
-  crashAudioClip: {fileID: 792421300316519070}
+  _wholeBoxRenderer: {fileID: 5574388082885869830}
+  _boxCollider: {fileID: 2482728576502870305}
+  _fracturedBox: {fileID: 7780274780782716311}
+  _crashAudioClip: {fileID: 792421300316519070}
+  _coinPrefab: {fileID: 4695964090794007574, guid: ad2363fe4eeb27941abd826d3ddd0882, type: 3}
 --- !u!1 &7780274780782716289
 GameObject:
   m_ObjectHideFlags: 0
