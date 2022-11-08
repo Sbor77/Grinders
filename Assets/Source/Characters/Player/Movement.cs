@@ -68,7 +68,6 @@ public class Movement : MonoBehaviour
         SetChangeMoving(false);
         ChangedStateAttackSpin?.Invoke(true);
         _startAttackPosition = transform.position;
-        _startAttackPosition.y = 0;
         List<Vector3> movePoints = GetMovePoints();
         StartCoroutine(Move(movePoints));
     }
