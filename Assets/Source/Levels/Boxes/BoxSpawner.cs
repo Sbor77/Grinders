@@ -9,8 +9,7 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private Transform _spawnBoxParent;    
     [SerializeField] private Transform _bigBoxPoint;
     [SerializeField] private Box _boxPrefab;
-    [SerializeField] private Box _bigBoxPrefab;
-    //[SerializeField] private Coin _coinPrefab;
+    [SerializeField] private Box _bigBoxPrefab;    
     [SerializeField] private LayerMask _boxLayer;
     [SerializeField] private float _minDistance;
     [SerializeField] private int _targetBoxesCount;
