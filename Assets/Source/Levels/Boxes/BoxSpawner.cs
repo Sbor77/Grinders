@@ -17,14 +17,11 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private int _maxMoneyAmount;
     [SerializeField] private int _finalBoxMoneyAmount;
 
-    private List<Box> _boxes = new List<Box>();
-    private List<Coin> _coins = new List<Coin>();
+    private List<Box> _boxes = new List<Box>();    
 
     private float _respawnDelay = 4f;
     private int _currentBoxCount;
     private float _circleOffsetModifier = 1;
-
-    public int CurrentBoxes => _currentBoxCount;
 
     private void Awake()
     {
@@ -83,10 +80,8 @@ public class BoxSpawner : MonoBehaviour
     {
         _currentBoxCount--;
 
-        if (_targetBoxesCount > _currentBoxCount)
-        {
-            DOVirtual.DelayedCall(_respawnDelay, () => SpawnBox());
-        }
+        if (_targetBoxesCount > _currentBoxCount)        
+            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
     }
 
     private void GenerateAllBoxes()
@@ -98,21 +93,9 @@ public class BoxSpawner : MonoBehaviour
             newBox.Deactivate();            
 
             _boxes.Add(newBox);
-        }
-
-        
+        }        
     }
-    
-    /*private void GenerateAllCoins()
-    {
-        for (int i = 0; i < _boxes.Count; i++)
-        {
-            var newCoin = Instantiate(_coinPrefab, _boxes[i].FracturedBox.transform);
-
-            //newCoin.gameObject.transform.SetParent(_boxes[i].FracturedBoxTransform);
-        }
-    }*/
-
+   
     private bool TryGetInactiveBox(out Box inactiveBox)
     {
         List<Box> inactiveBoxes = new List<Box>();

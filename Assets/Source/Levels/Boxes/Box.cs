@@ -9,11 +9,13 @@ public class Box : MonoBehaviour
     [SerializeField] private MeshRenderer _wholeBoxRenderer;
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private GameObject _fracturedBox;
-    [SerializeField] private AudioSource _crashAudioClip;    
+    [SerializeField] private AudioSource _crashAudioClip;
+    [SerializeField] private Coin _coin;
 
     private int _money;
     private float _crushedBoxLivetime = 3f;
     private int _randomMaxAngle = 90;
+    private bool _isCoinCollected;
 
     public event Action IsCrushedBoxDeactivated;
 
@@ -23,19 +25,35 @@ public class Box : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Crush();    
+        if (_coin.gameObject.activeSelf && _isCoinCollected == false)
+        {
+            _coin.Collect();
+
+            _isCoinCollected = true;
+                        
+            print("Собираем монетку!");
+        }
+
+        if (_wholeBoxRenderer.enabled)            
+        {
+            Crush();
+
+            print("Крашим ящик!");
+        }
     }    
 
     public void Crush()
     {
         _wholeBoxRenderer.enabled = false;
-        _boxCollider.enabled = false;
+        _boxCollider.enabled = true;
         _fracturedBox.SetActive(true);
         _crashAudioClip.Play();
 
+        _coin.Activate();
+
         DOVirtual.DelayedCall(_crushedBoxLivetime, () =>
         {
-            Deactivate();
+            DeactivateCrushedBox();
             IsCrushedBoxDeactivated?.Invoke();
         });
     }    
@@ -47,6 +65,8 @@ public class Box : MonoBehaviour
         _boxCollider.enabled = true;
         _fracturedBox.SetActive(false);
         
+        _coin.Deactivate();        
+        
         GenerateMoney(minMoney, maxMoney);
 
         GenerateRotationY();
@@ -55,6 +75,11 @@ public class Box : MonoBehaviour
     public void Deactivate()
     {
         gameObject.SetActive(false);        
+    }
+
+    private void DeactivateCrushedBox()
+    {
+        _fracturedBox.SetActive(false);
     }
 
     private void GenerateRotationY()
@@ -67,5 +92,7 @@ public class Box : MonoBehaviour
     private void GenerateMoney(int minMoney, int maxMoney)
     {
         _money = UnityEngine.Random.Range(minMoney, maxMoney);
+
+        _isCoinCollected = false;
     }
 }
