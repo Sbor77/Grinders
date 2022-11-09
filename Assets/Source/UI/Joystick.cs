@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -12,6 +9,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     [SerializeField] private RectTransform _joystickInner;
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .3f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
+    [SerializeField] private bool _inversion = true;
     [SerializeField] private LayerMask _groundLayerMask;
 
     private Vector2 _inputVector;
@@ -79,6 +77,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private void CalculateInputVector()
     {
         _inputVector = _joystickInner.anchoredPosition / (_joystickBackground.rect.size * Half);
+
+        if (_inversion)
+            _inputVector *= -1;
     }
 
     private Vector3 GetWorldPosition(Vector2 point)
