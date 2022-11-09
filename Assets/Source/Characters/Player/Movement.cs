@@ -80,9 +80,15 @@ public class Movement : MonoBehaviour
         SetChangeMoving(false);
         _attackDirection = transform.forward;
         _attackDirection.y = 0;
-        ChangedStateAttackSpin?.Invoke(true);
         List<Vector3> movePoints = GetMovePoints();
-        StartCoroutine(Move(movePoints));
+
+        if (movePoints != null)
+        {
+            StartCoroutine(Move(movePoints));
+            ChangedStateAttackSpin?.Invoke(true);
+        }
+        else
+            SetChangeMoving(true);
     }
 
     private List<Vector3> GetMovePoints()
@@ -94,9 +100,12 @@ public class Movement : MonoBehaviour
         while (distance < _attackDistance)
         {
             Vector3 newPoint = GetNextPoint(_startAttackPosition, _attackDistance - distance);
-            movePoints.Add(newPoint);
             distance += Vector3.Distance(_startAttackPosition, newPoint);
             _startAttackPosition = newPoint;
+            movePoints.Add(newPoint);
+
+            if (movePoints.Count > 50)
+                return null;
         }
 
         return movePoints;
