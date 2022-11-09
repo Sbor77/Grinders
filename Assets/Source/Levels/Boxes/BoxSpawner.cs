@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoxSpawner : MonoBehaviour
-{    
+{
     [SerializeField] private List<Transform> _boxSpawnPoints;
-    [SerializeField] private Transform _spawnBoxParent;
+    [SerializeField] private Transform _spawnBoxParent;    
     [SerializeField] private Transform _bigBoxPoint;
     [SerializeField] private Box _boxPrefab;
     [SerializeField] private Box _bigBoxPrefab;
+    //[SerializeField] private Coin _coinPrefab;
     [SerializeField] private LayerMask _boxLayer;
     [SerializeField] private float _minDistance;
     [SerializeField] private int _targetBoxesCount;
@@ -17,8 +18,10 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private int _maxMoneyAmount;
     [SerializeField] private int _finalBoxMoneyAmount;
 
-    private float _respawnDelay = 4f;
     private List<Box> _boxes = new List<Box>();
+    private List<Coin> _coins = new List<Coin>();
+
+    private float _respawnDelay = 4f;
     private int _currentBoxCount;
     private float _circleOffsetModifier = 1;
 
@@ -93,11 +96,23 @@ public class BoxSpawner : MonoBehaviour
         {
             var newBox = Instantiate(_boxPrefab, _boxSpawnPoints[i].position, Quaternion.identity, _spawnBoxParent);
             
-            newBox.Deactivate();
+            newBox.Deactivate();            
 
             _boxes.Add(newBox);
         }
-    }    
+
+        
+    }
+    
+    /*private void GenerateAllCoins()
+    {
+        for (int i = 0; i < _boxes.Count; i++)
+        {
+            var newCoin = Instantiate(_coinPrefab, _boxes[i].FracturedBox.transform);
+
+            //newCoin.gameObject.transform.SetParent(_boxes[i].FracturedBoxTransform);
+        }
+    }*/
 
     private bool TryGetInactiveBox(out Box inactiveBox)
     {
