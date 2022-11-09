@@ -9,14 +9,15 @@ public class Box : MonoBehaviour
     [SerializeField] private MeshRenderer _wholeBoxRenderer;
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private GameObject _fracturedBox;
-    [SerializeField] private AudioSource _crashAudioClip;
-    [SerializeField] private Coin _coinPrefab;
+    [SerializeField] private AudioSource _crashAudioClip;    
 
     private int _money;
     private float _crushedBoxLivetime = 3f;
     private int _randomMaxAngle = 90;
 
     public event Action IsCrushedBoxDeactivated;
+
+    public GameObject FracturedBox => _fracturedBox;
 
     public int Money => _money;
 
