@@ -1,40 +1,36 @@
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.AI;
+using DG.Tweening;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(Movement))]
+[RequireComponent(typeof(Animator),typeof(Movement))]
 public class Animations : MonoBehaviour
 {
     [SerializeField] private float _secondsPerSpin;
     [SerializeField] private ParticleSystem _attackVFX;
 
-    private NavMeshAgent _agent;
     private Animator _animator;
-    private Movement _movement;
+    private Movement _mover;
     private Vector3 _angleRotate = new Vector3(0, -360, 0);
 
     private const string Speed = "MoveSpeed";
     private const string Attack = "Attack";
-    //private const float Angle = 360f;
 
     private void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        _movement = GetComponent<Movement>();
-        _movement.ChangedStateAttackSpin += OnChangedStateAttackSpin;
-        
+        _mover = GetComponent<Movement>();
+        _mover.ChangedStateAttackSpin += OnChangedStateAttackSpin;
+        _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
     }
 
     private void OnDisable()
     {
-        _movement.ChangedStateAttackSpin -= OnChangedStateAttackSpin;
+        _mover.ChangedStateAttackSpin -= OnChangedStateAttackSpin;
+        _mover.ChangedMoveSpeed -= OnChangedMoveSpeed;
     }
 
-    private void FixedUpdate()
+    private void OnChangedMoveSpeed(float speed)
     {
-        float currentSpeed = _agent.velocity.magnitude / _agent.speed;
-        _animator.SetFloat(Speed, currentSpeed);
+        _animator.SetFloat(Speed, speed);
     }
 
     private void OnChangedStateAttackSpin(bool state)

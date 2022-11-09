@@ -9,7 +9,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     [SerializeField] private RectTransform _joystickInner;
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .3f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
-    [SerializeField] private bool _inversion = true;
     [SerializeField] private LayerMask _groundLayerMask;
 
     private Vector2 _inputVector;
@@ -17,7 +16,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private float _currentDownTime;
 
     public event UnityAction<Vector2> ChangedDirection;
-    public event UnityAction<Vector3> ChangedClickPosition;
+    public event UnityAction ChangedClickStatus;
     public event UnityAction ReleasedTouch;
 
     private const float Half = .5f;
@@ -55,12 +54,10 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     {
         _joystickInner.anchoredPosition = Vector2.zero;
         _inputVector = Vector2.zero;
+        ReleasedTouch?.Invoke();
 
         if (_isTouchDown)
-            ChangedClickPosition?.Invoke(GetWorldPosition(eventData.position));
-        else
-            ReleasedTouch?.Invoke();
-
+            ChangedClickStatus?.Invoke();
     }
 
     private void CalculateJoystickInnerPosition(Vector2 position)
@@ -77,21 +74,5 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private void CalculateInputVector()
     {
         _inputVector = _joystickInner.anchoredPosition / (_joystickBackground.rect.size * Half);
-
-        if (_inversion)
-            _inputVector *= -1;
     }
-
-    private Vector3 GetWorldPosition(Vector2 point)
-    {
-        Vector3 position = Vector3.zero;
-        Ray ray = Camera.main.ScreenPointToRay(point);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, _groundLayerMask))
-            position = hit.point;
-
-        return position;
-    }
-
 }
