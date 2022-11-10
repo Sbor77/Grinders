@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
     private Vector3 _moveDirection = Vector3.forward;
     private bool _isMoving = false;
 
-    public event UnityAction<bool> ChangedStateAttackSpin;
+    public event UnityAction<State> ChangedState;
     public event UnityAction<float> ChangedMoveSpeed;
 
     private const float AngleCorrection = -1f;
@@ -85,7 +85,7 @@ public class Movement : MonoBehaviour
         if (movePoints != null)
         {
             StartCoroutine(Move(movePoints));
-            ChangedStateAttackSpin?.Invoke(true);
+            ChangedState?.Invoke(State.Attack);
         }
         else
             SetChangeMoving(true);
@@ -138,7 +138,7 @@ public class Movement : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
             yield return StartMove(points[i]);
 
-        ChangedStateAttackSpin?.Invoke(false);
+        ChangedState?.Invoke(State.Move);
         SetChangeMoving(true);
     }
 

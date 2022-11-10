@@ -13,5 +13,11 @@ public class Subject : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         _box.Crush();
+        this.enabled = false;
+    }
+
+    public void Activate()
+    {
+        this.enabled = true;
     }
 }

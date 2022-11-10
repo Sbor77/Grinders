@@ -7,10 +7,10 @@ public abstract class Characters : MonoBehaviour, IDamageable
     [SerializeField] private float _damage;
 
     public abstract void TakeDamage(float damage);
-    
-    protected void Attack(Characters character)
+
+    protected void Attack(IDamageable damageable)
     {
-        character.TakeDamage(_damage);
+        damageable.TakeDamage(_damage);
     }
 }
 
