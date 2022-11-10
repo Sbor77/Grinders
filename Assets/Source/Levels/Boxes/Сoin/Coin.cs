@@ -7,13 +7,15 @@ public class Coin : MonoBehaviour
 {
     private int _value;
     private Sequence _scalingSequence;
+    private Sequence _collectingSequence;
     private Vector3 _defaultScale;
     private Vector3 _defaultRotation;
+    private float _defaultHeight;
     private float _rotationTime = 1;
-    private float _scaleTime = 0.2f;
+    private float _scaleTime = 0.5f;
     private float _decreaseScaleRatio = 0.11f;
-    private float _increaseScaleRatio = 2f;
-
+    private float _increaseScaleRatio = 3f;    
+    
     public int Value => _value;
 
     private void Start()
@@ -21,6 +23,8 @@ public class Coin : MonoBehaviour
         _defaultScale = transform.localScale;
 
         _defaultRotation = transform.eulerAngles;
+
+        _defaultHeight = transform.position.y;
 
         RotateOnY();
     }
@@ -31,12 +35,26 @@ public class Coin : MonoBehaviour
             ScaleToDestroy();*/
     }
 
-    public void Create(int minValue, int maxValue)
+    public void Collect()
     {
-        if (minValue > 0 && maxValue > 0)
-        {
-            _value = Random.Range(minValue, maxValue + 1);
-        }
+        _collectingSequence = DOTween.Sequence();
+
+        _collectingSequence.Append(transform.DOMoveY(_defaultHeight + 3, 0.6f).SetEase(Ease.InQuart));        
+        _collectingSequence.Append(transform.DOScale(_defaultScale * _increaseScaleRatio, _scaleTime));
+        _collectingSequence.Append(transform.DORotate(new Vector3(_defaultRotation.x, 360, _defaultRotation.z), 0.3f, RotateMode.FastBeyond360)
+            .SetLoops(3).SetEase(Ease.Linear));
+        _collectingSequence.Append(transform.DOScale(_defaultScale * _decreaseScaleRatio, _scaleTime));
+        _collectingSequence.AppendCallback(Deactivate);
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);        
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);        
     }
 
     private void RotateOnY()
@@ -52,4 +70,6 @@ public class Coin : MonoBehaviour
         _scalingSequence.Append(transform.DOScale(_defaultScale * _decreaseScaleRatio, _scaleTime));
         _scalingSequence.AppendCallback(() => Destroy(gameObject));
     }
+
+
 }
