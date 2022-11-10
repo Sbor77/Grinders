@@ -31,7 +31,9 @@ public class Box : MonoBehaviour
 
             _isCoinCollected = true;
                         
-            print("Собираем монетку!");
+            print("Собрали монетку номиналом " + _money);
+
+            DOVirtual.DelayedCall(3f, DeactivateWholeBox);
         }
 
         if (_wholeBoxRenderer.enabled)            
@@ -58,7 +60,7 @@ public class Box : MonoBehaviour
         });
     }    
 
-    public void Activate(int minMoney, int maxMoney)
+    public void ActivateWholeBox(int minMoney, int maxMoney)
     {
         gameObject.SetActive(true);
         _wholeBoxRenderer.enabled = true; 
@@ -72,7 +74,7 @@ public class Box : MonoBehaviour
         GenerateRotationY();
     }
 
-    public void Deactivate()
+    public void DeactivateWholeBox()
     {
         gameObject.SetActive(false);        
     }
@@ -91,7 +93,7 @@ public class Box : MonoBehaviour
 
     private void GenerateMoney(int minMoney, int maxMoney)
     {
-        _money = UnityEngine.Random.Range(minMoney, maxMoney);
+        _money = UnityEngine.Random.Range(minMoney, maxMoney + 1);
 
         _isCoinCollected = false;
     }

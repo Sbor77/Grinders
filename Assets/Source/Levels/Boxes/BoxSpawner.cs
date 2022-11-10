@@ -62,9 +62,12 @@ public class BoxSpawner : MonoBehaviour
 
             poolBox.transform.position += new Vector3(randomOffsetPosition.x, poolBox.transform.position.y, randomOffsetPosition.y);
 
-            poolBox.Activate(_minMoneyAmount, _maxMoneyAmount);
+            poolBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
 
-            _currentBoxCount++;            
+            _currentBoxCount++;
+
+            if (_targetBoxesCount > _currentBoxCount)            
+                SpawnBox();            
         }
     }
 
@@ -72,7 +75,7 @@ public class BoxSpawner : MonoBehaviour
     {
         Box bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
 
-        bigBox.Activate(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
+        bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
     }
 
 
@@ -90,7 +93,7 @@ public class BoxSpawner : MonoBehaviour
         {
             var newBox = Instantiate(_boxPrefab, _boxSpawnPoints[i].position, Quaternion.identity, _spawnBoxParent);
             
-            newBox.Deactivate();            
+            newBox.DeactivateWholeBox();            
 
             _boxes.Add(newBox);
         }        
