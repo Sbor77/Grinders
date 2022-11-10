@@ -9,7 +9,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     [SerializeField] private RectTransform _joystickInner;
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .3f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
-    [SerializeField] private LayerMask _groundLayerMask;
 
     private Vector2 _inputVector;
     private bool _isTouchDown = false;
