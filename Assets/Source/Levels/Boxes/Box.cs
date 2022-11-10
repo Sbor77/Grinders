@@ -6,41 +6,53 @@ using DG.Tweening;
 
 public class Box : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> _pieces;
     [SerializeField] private MeshRenderer _wholeBoxRenderer;
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private GameObject _fracturedBox;
     [SerializeField] private AudioSource _crashAudioClip;
     [SerializeField] private Coin _coin;
 
+    private List<Vector3> _piecesDefaultPositions = new();
     private int _money;
     private float _crushedBoxLivetime = 3f;
     private int _randomMaxAngle = 90;
-    private bool _isCoinCollected;
-
-    public event Action IsCrushedBoxDeactivated;
+    private bool _isCoinCollectable;
+        
+    public event Action IsCoinCollected;
 
     public GameObject FracturedBox => _fracturedBox;
 
     public int Money => _money;
 
+    private void Start()
+    {
+        SaveDefaultPiecesPositions();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (_coin.gameObject.activeSelf && _isCoinCollected == false)
+        if (other.TryGetComponent<Player>(out Player player))
         {
-            _coin.Collect();
+            if (player.CurrentState == State.Move && _coin.gameObject.activeSelf && _isCoinCollectable == true)
+            {
+                _coin.AnimateCollection();
 
-            _isCoinCollected = true;
-                        
-            print("Собрали монетку номиналом " + _money);
+                IsCoinCollected?.Invoke();                    
 
-            DOVirtual.DelayedCall(3f, DeactivateWholeBox);
-        }
+                print("Собрали монетку номиналом " + _money);
 
-        if (_wholeBoxRenderer.enabled)            
-        {
-            Crush();
+                _isCoinCollectable = false;
 
-            print("Крашим ящик!");
+                DOVirtual.DelayedCall(3f, DeactivateWholeBox);
+            }
+
+            if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)
+            {
+                Crush();
+
+                print("Крашим ящик!");
+            }
         }
     }    
 
@@ -56,7 +68,8 @@ public class Box : MonoBehaviour
         DOVirtual.DelayedCall(_crushedBoxLivetime, () =>
         {
             DeactivateCrushedBox();
-            IsCrushedBoxDeactivated?.Invoke();
+            _isCoinCollectable = true;
+            RestoreDefaultPiecesPositions();
         });
     }    
 
@@ -95,6 +108,22 @@ public class Box : MonoBehaviour
     {
         _money = UnityEngine.Random.Range(minMoney, maxMoney + 1);
 
-        _isCoinCollected = false;
+        _isCoinCollectable = false;
+    }
+
+    private void SaveDefaultPiecesPositions()
+    {
+        for (int i = 0; i < _pieces.Count; i++)
+        {
+            _piecesDefaultPositions.Add(_pieces[i].transform.position);
+        }        
+    }
+
+    private void RestoreDefaultPiecesPositions()
+    {
+        for (int i = 0; i < _pieces.Count; i++)
+        {
+            _pieces[i].transform.position = _piecesDefaultPositions[i];
+        }
     }
 }

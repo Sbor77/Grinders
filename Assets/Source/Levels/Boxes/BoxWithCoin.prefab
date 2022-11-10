@@ -305,6 +305,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91d9afaa8b41d045b76e9563dfd83d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pieces:
+  - {fileID: 6108084464405132487}
+  - {fileID: 6108084464405132481}
+  - {fileID: 6108084464405132483}
+  - {fileID: 6108084464405132493}
+  - {fileID: 6108084464405132495}
+  - {fileID: 6108084464405132489}
+  - {fileID: 6108084464405132491}
+  - {fileID: 6108084464405132501}
+  - {fileID: 6108084464405132503}
+  - {fileID: 6108084464405132497}
+  - {fileID: 6108084464405132499}
+  - {fileID: 6108084464405132509}
   _wholeBoxRenderer: {fileID: 3549205897666254692}
   _boxCollider: {fileID: 6802994983119955779}
   _fracturedBox: {fileID: 6108084464405132485}

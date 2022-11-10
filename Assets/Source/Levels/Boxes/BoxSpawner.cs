@@ -42,7 +42,7 @@ public class BoxSpawner : MonoBehaviour
     {
         foreach (var box in _boxes)
         {
-            box.IsCrushedBoxDeactivated += IsCrushedBoxDeactivated;            
+            box.IsCoinCollected += OnCoinCollected;            
         }
     }
 
@@ -50,7 +50,7 @@ public class BoxSpawner : MonoBehaviour
     {
         foreach (var box in _boxes)
         {
-            box.IsCrushedBoxDeactivated -= IsCrushedBoxDeactivated;
+            box.IsCoinCollected -= OnCoinCollected;
         }
     }
 
@@ -79,7 +79,7 @@ public class BoxSpawner : MonoBehaviour
     }
 
 
-    private void IsCrushedBoxDeactivated()
+    private void OnCoinCollected()
     {
         _currentBoxCount--;
 

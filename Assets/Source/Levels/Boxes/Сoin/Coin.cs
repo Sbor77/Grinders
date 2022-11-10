@@ -5,18 +5,17 @@ using DG.Tweening;
 
 public class Coin : MonoBehaviour
 {
-    private int _value;
-    private Sequence _scalingSequence;
+    private Tweener _endlessRotation;    
     private Sequence _collectingSequence;
     private Vector3 _defaultScale;
     private Vector3 _defaultRotation;
+    private Vector3 _defaultPosition;
+    private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
     private float _defaultHeight;
     private float _rotationTime = 1;
     private float _scaleTime = 0.5f;
     private float _decreaseScaleRatio = 0.11f;
-    private float _increaseScaleRatio = 3f;    
-    
-    public int Value => _value;
+    private float _increaseScaleRatio = 3f;        
 
     private void Start()
     {
@@ -26,25 +25,27 @@ public class Coin : MonoBehaviour
 
         _defaultHeight = transform.position.y;
 
-        RotateOnY();
+        _defaultPosition = transform.position;        
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void AnimateCollection()
     {
-        /*if (other.gameObject.GetComponent<Player>())
-            ScaleToDestroy();*/
-    }
+        _endlessRotation.Kill();
 
-    public void Collect()
-    {
         _collectingSequence = DOTween.Sequence();
 
+        transform.eulerAngles = Vector3.zero;
+
         _collectingSequence.Append(transform.DOMoveY(_defaultHeight + 3, 0.6f).SetEase(Ease.InQuart));        
-        _collectingSequence.Append(transform.DOScale(_defaultScale * _increaseScaleRatio, _scaleTime));
-        _collectingSequence.Append(transform.DORotate(new Vector3(_defaultRotation.x, 360, _defaultRotation.z), 0.3f, RotateMode.FastBeyond360)
-            .SetLoops(3).SetEase(Ease.Linear));
+        _collectingSequence.Append(transform.DOScale(_defaultScale * _increaseScaleRatio, _scaleTime));        
+        _collectingSequence.Append(transform.DORotate(_rotationAroundY, 0.3f, RotateMode.FastBeyond360).SetLoops(3).SetEase(Ease.Linear));
         _collectingSequence.Append(transform.DOScale(_defaultScale * _decreaseScaleRatio, _scaleTime));
-        _collectingSequence.AppendCallback(Deactivate);
+        _collectingSequence.AppendCallback(() =>
+        {
+            Deactivate();
+            transform.localScale = _defaultScale;
+            transform.position = _defaultPosition;
+        });        
     }
 
     public void Deactivate()
@@ -54,22 +55,15 @@ public class Coin : MonoBehaviour
 
     public void Activate()
     {
-        gameObject.SetActive(true);        
+        gameObject.SetActive(true);
+
+        RotateOnY();
     }
 
     private void RotateOnY()
     {
-        transform.DORotate(new Vector3(_defaultRotation.x, 360, _defaultRotation.z), _rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+        transform.eulerAngles = Vector3.zero;
+
+        _endlessRotation = transform.DORotate(_rotationAroundY, _rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);        
     }
-
-    private void ScaleToDestroy()
-    {
-        _scalingSequence = DOTween.Sequence();
-
-        _scalingSequence.Append(transform.DOScale(_defaultScale * _increaseScaleRatio, _scaleTime));
-        _scalingSequence.Append(transform.DOScale(_defaultScale * _decreaseScaleRatio, _scaleTime));
-        _scalingSequence.AppendCallback(() => Destroy(gameObject));
-    }
-
-
 }

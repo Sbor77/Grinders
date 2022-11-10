@@ -12,6 +12,8 @@ public class Player : Characters
     public event UnityAction<float> ChangedHealth;
     public event UnityAction Dying;
 
+    public State CurrentState => _currentState;
+
     private void Start()
     {
         _movement = GetComponent<Movement>();
@@ -54,7 +56,7 @@ public class Player : Characters
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+   /* private void OnTriggerEnter(Collider other)
     {
         if (_currentState == State.Attack)
         {
@@ -66,7 +68,7 @@ public class Player : Characters
             if (other.TryGetComponent(out Coin coin))
                 Debug.Log($"GetCoin: {coin.name}");//coin.GetCoin();
         }
-    }
+    }*/
 }
 
 public enum State
