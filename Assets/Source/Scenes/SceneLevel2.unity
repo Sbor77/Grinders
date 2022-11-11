@@ -1303,7 +1303,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27084
+  m_Name: pb_Mesh36868
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8746,10 +8746,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7359821875597467272, guid: 1d9efcbbdb2df874fba81913df0fae02, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f31fb701fbd0369499b893cc76a96fd4, type: 2}
     - target: {fileID: 8575599888075067344, guid: 1d9efcbbdb2df874fba81913df0fae02, type: 3}
       propertyPath: m_Name
       value: Antenna2
@@ -9295,7 +9291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 189868884715903570, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2728
+      value: 0.2742
       objectReference: {fileID: 0}
     - target: {fileID: 189868884715903570, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9333,10 +9329,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2442481775070392220, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f31fb701fbd0369499b893cc76a96fd4, type: 2}
     - target: {fileID: 5550221085939132825, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
       propertyPath: m_Name
       value: Antenna3
@@ -9827,17 +9819,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5021614823269797244}
     m_Modifications:
-    - target: {fileID: 3604328574607764772, guid: 89176a071232de0488e7392c6054b3db, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f31fb701fbd0369499b893cc76a96fd4, type: 2}
     - target: {fileID: 4844711858493536920, guid: 89176a071232de0488e7392c6054b3db, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4844711858493536920, guid: 89176a071232de0488e7392c6054b3db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0373
+      value: -0.0364
       objectReference: {fileID: 0}
     - target: {fileID: 4844711858493536920, guid: 89176a071232de0488e7392c6054b3db, type: 3}
       propertyPath: m_LocalPosition.y

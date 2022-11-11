@@ -1061,8 +1061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _rotationSpeed: 270
-  _speedInAttack: 10
+  _rotationSpeed: 360
+  _speedInAttack: 15
   _attackDistance: 15
   _joystick: {fileID: 0}
   _wallLayerMask:

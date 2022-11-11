@@ -802,7 +802,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24780
+  m_Name: pb_Mesh29530
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6191,6 +6191,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628560659}
     m_Modifications:
+    - target: {fileID: 5325134720385733122, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5325134720387801924, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_Name
       value: Bin
@@ -6209,7 +6213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325134720388050572, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.08
+      value: 18.76
       objectReference: {fileID: 0}
     - target: {fileID: 5325134720388050572, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6920,6 +6924,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7359821875597467272, guid: 1d9efcbbdb2df874fba81913df0fae02, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fa9ee04282c72c843a366d8823440f26, type: 2}
     - target: {fileID: 8575599888075067344, guid: 1d9efcbbdb2df874fba81913df0fae02, type: 3}
       propertyPath: m_Name
       value: Antenna2
@@ -7502,6 +7510,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2442481775070392220, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fa9ee04282c72c843a366d8823440f26, type: 2}
     - target: {fileID: 5550221085939132825, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
       propertyPath: m_Name
       value: Antenna3
@@ -7622,7 +7634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325134720388050572, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.74
+      value: -14.55
       objectReference: {fileID: 0}
     - target: {fileID: 5325134720388050572, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7630,7 +7642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325134720388050572, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -35.51
+      value: -34.36
       objectReference: {fileID: 0}
     - target: {fileID: 5325134720388050572, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7890,6 +7902,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5021614823269797244}
     m_Modifications:
+    - target: {fileID: 3604328574607764772, guid: 89176a071232de0488e7392c6054b3db, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fa9ee04282c72c843a366d8823440f26, type: 2}
     - target: {fileID: 4844711858493536920, guid: 89176a071232de0488e7392c6054b3db, type: 3}
       propertyPath: m_RootOrder
       value: 0

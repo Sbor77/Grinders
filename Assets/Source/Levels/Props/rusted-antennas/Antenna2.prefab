@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2923443499692079578}
   - component: {fileID: 2353603878987647992}
   - component: {fileID: 7359821875597467272}
-  m_Layer: 0
+  - component: {fileID: 3502650522891547517}
+  m_Layer: 7
   m_Name: Antenna2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa9ee04282c72c843a366d8823440f26, type: 2}
+  - {fileID: 2100000, guid: f31fb701fbd0369499b893cc76a96fd4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3502650522891547517
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575599888075067344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.017068362, y: 0.047445197, z: 0.03206515}
+  m_Center: {x: 0.0038089163, y: 0.0000000026490954, z: -0.000000014625924}
