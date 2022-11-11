@@ -14,13 +14,13 @@ public class Mover : MonoBehaviour
 
     public event UnityAction InPosition;
 
-    void Start()
+    private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _movePoint = transform.position;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Vector3.Distance(transform.position, _movePoint) <= _stoppingDistance)
             InPosition?.Invoke();

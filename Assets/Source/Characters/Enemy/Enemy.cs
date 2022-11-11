@@ -13,12 +13,13 @@ public class Enemy : Characters
 
     private Mover _mover;
     private float _currentHealth;
+    private float _bias = 1f;
     private Vector3 _currentPoint;
     private int _currentPointIndex = 0;
-    private bool _isAcquireTarget;
+    //private bool _isAcquireTarget;
     //private Player _target;
 
-    public event UnityAction<float> ChangedHealth;
+    //public event UnityAction<float> ChangedHealth;
     public event UnityAction Dying;
 
     private void Start()
@@ -49,7 +50,8 @@ public class Enemy : Characters
             _currentPointIndex = 0;
 
         _currentPoint = _patrolPoints[_currentPointIndex].position;
-        _mover.SetMovePosition(_currentPoint);
+        Vector3 bias = new (Random.Range(-_bias, _bias), 0, Random.Range(-_bias, _bias));
+        _mover.SetMovePosition(_currentPoint + bias);
     }
 
     private void IsAlive()
