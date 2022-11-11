@@ -7,17 +7,12 @@ using UnityEngine.Events;
 public class Enemy : Characters
 {
     [SerializeField] private float _health;
-    [SerializeField] private Collider _searchZoneCollider;
-    [SerializeField] private List<Transform> _patrolPoints;
+    [SerializeField] private SearchZone _searchZone;
     [SerializeField] private float _attackDistance;
 
     private Mover _mover;
     private float _currentHealth;
-    private float _bias = 1f;
-    private Vector3 _currentPoint;
-    private int _currentPointIndex = 0;
-    //private bool _isAcquireTarget;
-    //private Player _target;
+    private Player _target;
 
     //public event UnityAction<float> ChangedHealth;
     public event UnityAction Dying;
@@ -25,15 +20,13 @@ public class Enemy : Characters
     private void Start()
     {
         _mover = GetComponent<Mover>();
-        _mover.InPosition += Patrolling;
-
-        if (_patrolPoints.Count > 0)
-            Patrolling();
+        //_searchZone = GetComponentInChildren<SearchZone>();
+        _searchZone.ChangedTarget += OnChanngedTarget;
     }
 
     private void OnDisable()
     {
-        _mover.InPosition -= Patrolling;
+        _searchZone.ChangedTarget -= OnChanngedTarget;
     }
 
     public override void TakeDamage(float damage)
@@ -42,17 +35,17 @@ public class Enemy : Characters
         IsAlive();
     }
 
-    private void Patrolling()
+    public void Init(List<Transform> patrolPointsList)
     {
-        _currentPointIndex++;
-
-        if (_currentPointIndex >= _patrolPoints.Count)
-            _currentPointIndex = 0;
-
-        _currentPoint = _patrolPoints[_currentPointIndex].position;
-        Vector3 bias = new (Random.Range(-_bias, _bias), 0, Random.Range(-_bias, _bias));
-        _mover.SetMovePosition(_currentPoint + bias);
+        _mover.Init(patrolPointsList, _attackDistance);
     }
+
+    private void OnChanngedTarget(Player target)
+    {
+        _target = target;
+        _mover.SetTarget(_target);
+    }
+    
 
     private void IsAlive()
     {
@@ -62,6 +55,4 @@ public class Enemy : Characters
             this.enabled = false;
         }
     }
-
-
 }

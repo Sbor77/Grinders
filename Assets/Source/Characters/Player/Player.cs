@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Movement))]
 public class Player : Characters
 {
     [SerializeField] private float _health;
