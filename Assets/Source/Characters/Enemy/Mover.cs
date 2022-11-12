@@ -8,13 +8,13 @@ using UnityEngine.Events;
 public class Mover : MonoBehaviour
 {
     [SerializeField] private float _stoppingDistance;
-    [SerializeField] private List<Transform> _patrolPoints;
+    [SerializeField] private float _bias = 1f;
+    [SerializeField] private float _maxDelay = 3f;
 
     private NavMeshAgent _agent;
-    private float _bias = 1f;
-    private Vector3 _currentPoint;
-    private int _currentPointIndex = 0;
-
+    private Coroutine GetNewPointWithDelay;
+    private WaitForSeconds _delay;
+    private Vector3 _zeroPoint;
     private Vector3 _movePoint;
     private Player _target;
     private float _maxStopedDistance;
@@ -25,10 +25,8 @@ public class Mover : MonoBehaviour
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _movePoint = transform.position;
-
-        if (_patrolPoints.Count > 0)
-            StartMove(_patrolPoints[0].position);
+        _zeroPoint = transform.position;
+        Patrol();
     }
 
     private void FixedUpdate()
@@ -42,19 +40,18 @@ public class Mover : MonoBehaviour
                     _agent.ResetPath();
                     _agent.destination = _target.transform.position;
                 }
-                //Debug.Log(_agent.remainingDistance + " " + );
             }
         }
         else
         {
-            if (Vector3.Distance(transform.position, _movePoint) <= _stoppingDistance)
-                Patrolling();
+            if (GetNewPointWithDelay == null)
+                if (_agent.remainingDistance <= _stoppingDistance)
+                    GetNewPointWithDelay = StartCoroutine(GetNextPoint());
         }
     }
 
-    public void Init(List<Transform> patrolPoints, float maxStopedDistance)
+    public void Init(float maxStopedDistance)
     {
-        _patrolPoints = patrolPoints;
         _maxStopedDistance = maxStopedDistance;
     }
 
@@ -68,21 +65,31 @@ public class Mover : MonoBehaviour
             _agent.SetDestination(_movePoint);
     }
 
-    private void Patrolling()
+    private IEnumerator GetNextPoint()
     {
-        _currentPointIndex++;
-
-        if (_currentPointIndex >= _patrolPoints.Count)
-            _currentPointIndex = 0;
-
-        _movePoint = _patrolPoints[_currentPointIndex].position;
-        Vector3 bias = new(Random.Range(-_bias, _bias), 0, Random.Range(-_bias, _bias));
-        StartMove(_movePoint + bias);
+        float timeDelay = Random.Range(0, _maxDelay);
+        _delay = new WaitForSeconds(timeDelay);
+        
+        yield return _delay;
+        Patrol();
+        GetNewPointWithDelay = null;
     }
 
-    private void StartMove(Vector3 position)
+    private void Patrol()
     {
-        _agent.SetDestination(_movePoint);
+        _movePoint = GetNewPatrolPoint();
+        NavMeshPath path = new NavMeshPath();
+        _agent.CalculatePath(_movePoint, path);
+
+        if (path.status == NavMeshPathStatus.PathComplete)
+            _agent.destination = _movePoint;
     }
 
+    private Vector3 GetNewPatrolPoint()
+    {
+        float randomX = Random.Range(-_bias, _bias);
+        float randomZ = Random.Range(-_bias, _bias);
+        Vector3 newPoint = new(_zeroPoint.x + randomX, _zeroPoint.y, _zeroPoint.z + randomZ);
+        return newPoint;
+    }
 }

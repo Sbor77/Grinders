@@ -17,7 +17,6 @@ public class EnemyAnimator : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        //_animator.speed = _agent.speed / 5f;
         _enemy = GetComponent<Enemy>();
         _enemy.Dying += OnDying;
     }

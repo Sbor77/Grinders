@@ -20,6 +20,7 @@ public class Enemy : Characters
     private void Start()
     {
         _mover = GetComponent<Mover>();
+        _mover.Init( _attackDistance);
         //_searchZone = GetComponentInChildren<SearchZone>();
         _searchZone.ChangedTarget += OnChanngedTarget;
     }
@@ -33,11 +34,6 @@ public class Enemy : Characters
     {
         _currentHealth -= damage;
         IsAlive();
-    }
-
-    public void Init(List<Transform> patrolPointsList)
-    {
-        _mover.Init(patrolPointsList, _attackDistance);
     }
 
     private void OnChanngedTarget(Player target)
