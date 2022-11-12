@@ -7,21 +7,14 @@ public class Coin : MonoBehaviour
 {
     private Tweener _endlessRotation;    
     private Sequence _collectingSequence;
-    private Vector3 _defaultScale;
-    private Vector3 _defaultRotation;
+    private Vector3 _defaultScale;    
     private Vector3 _defaultPosition;
-    private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
-    private float _defaultHeight;
-    private float _rotationTime = 1;
-    private float _scaleTime = 0.5f;
-    private float _decreaseScaleRatio = 0.11f;
-    private float _increaseScaleRatio = 3f;        
+    private Vector3 _rotationAroundY = new (0, 360, 0);
+    private float _defaultHeight;    
 
     private void Start()
     {
-        _defaultScale = transform.localScale;
-
-        _defaultRotation = transform.eulerAngles;
+        _defaultScale = transform.localScale;        
 
         _defaultHeight = transform.position.y;
 
@@ -30,16 +23,24 @@ public class Coin : MonoBehaviour
 
     public void AnimateCollection()
     {
+        int heightOffset = 3;
+        float liftTime = 0.6f;
+        float scaleTime = 0.5f;
+        float rotationTime = 0.3f;
+        int rotationLoops = 3;
+        float decreaseScaleRatio = 0.11f;
+        float increaseScaleRatio = 3f;
+
         _endlessRotation.Kill();
 
         _collectingSequence = DOTween.Sequence();
 
         transform.eulerAngles = Vector3.zero;
 
-        _collectingSequence.Append(transform.DOMoveY(_defaultHeight + 3, 0.6f).SetEase(Ease.InQuart));        
-        _collectingSequence.Append(transform.DOScale(_defaultScale * _increaseScaleRatio, _scaleTime));        
-        _collectingSequence.Append(transform.DORotate(_rotationAroundY, 0.3f, RotateMode.FastBeyond360).SetLoops(3).SetEase(Ease.Linear));
-        _collectingSequence.Append(transform.DOScale(_defaultScale * _decreaseScaleRatio, _scaleTime));
+        _collectingSequence.Append(transform.DOMoveY(_defaultHeight + heightOffset, liftTime).SetEase(Ease.InQuart));        
+        _collectingSequence.Append(transform.DOScale(_defaultScale * increaseScaleRatio, scaleTime));        
+        _collectingSequence.Append(transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(rotationLoops).SetEase(Ease.Linear));
+        _collectingSequence.Append(transform.DOScale(_defaultScale * decreaseScaleRatio, scaleTime));
         _collectingSequence.AppendCallback(() =>
         {
             Deactivate();
@@ -62,8 +63,10 @@ public class Coin : MonoBehaviour
 
     private void RotateOnY()
     {
+        float rotationTime = 1;
+
         transform.eulerAngles = Vector3.zero;
 
-        _endlessRotation = transform.DORotate(_rotationAroundY, _rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);        
+        _endlessRotation = transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);        
     }
 }

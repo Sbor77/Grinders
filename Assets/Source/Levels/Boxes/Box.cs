@@ -14,14 +14,10 @@ public class Box : MonoBehaviour
     [SerializeField] private Coin _coin;
 
     private List<Vector3> _piecesDefaultPositions = new();
-    private int _money;
-    private float _crushedBoxLivetime = 3f;
-    private int _randomMaxAngle = 90;
+    private int _money;        
     private bool _isCoinCollectable;
         
     public event Action IsCoinCollected;
-
-    public GameObject FracturedBox => _fracturedBox;
 
     public int Money => _money;
 
@@ -58,6 +54,8 @@ public class Box : MonoBehaviour
 
     public void Crush()
     {
+        float crushedBoxLivetime = 3f;
+
         _wholeBoxRenderer.enabled = false;
         _boxCollider.enabled = true;
         _fracturedBox.SetActive(true);
@@ -65,7 +63,7 @@ public class Box : MonoBehaviour
 
         _coin.Activate();
 
-        DOVirtual.DelayedCall(_crushedBoxLivetime, () =>
+        DOVirtual.DelayedCall(crushedBoxLivetime, () =>
         {
             DeactivateCrushedBox();
             _isCoinCollectable = true;
@@ -99,7 +97,9 @@ public class Box : MonoBehaviour
 
     private void GenerateRotationY()
     {
-        int randomAngleY = UnityEngine.Random.Range(0, _randomMaxAngle);
+        int randomMaxAngle = 90;
+
+        int randomAngleY = UnityEngine.Random.Range(0, randomMaxAngle);
 
         transform.eulerAngles = new Vector3(0, randomAngleY, 0);
     }
