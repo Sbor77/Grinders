@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(Enemy))]
 public class EnemyAnimator : MonoBehaviour
 {
     private NavMeshAgent _agent;
@@ -24,6 +25,12 @@ public class EnemyAnimator : MonoBehaviour
     private void FixedUpdate()
     {
         _animator.SetFloat(Speed, _agent.velocity.magnitude / _agent.speed);
+    }
+
+    public float StartAttack()
+    {
+        _animator.SetTrigger(Attack);
+        return _animator.GetCurrentAnimatorClipInfo(0).Length;
     }
 
     private void OnDying()

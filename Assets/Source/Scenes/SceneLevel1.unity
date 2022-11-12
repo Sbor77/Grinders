@@ -7201,6 +7201,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5866666020242272254, guid: c12314af1d5c8694c91a571883f94133, type: 3}
+      propertyPath: _searchZone
+      value: 
+      objectReference: {fileID: 864340982}
+    - target: {fileID: 5866666020242272254, guid: c12314af1d5c8694c91a571883f94133, type: 3}
+      propertyPath: _attackDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666020242272254, guid: c12314af1d5c8694c91a571883f94133, type: 3}
       propertyPath: _patrolPoints.Array.size
       value: 4
       objectReference: {fileID: 0}

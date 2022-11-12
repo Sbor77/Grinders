@@ -8,7 +8,7 @@ public abstract class Characters : MonoBehaviour, IDamageable
 
     public abstract void TakeDamage(float damage);
 
-    protected void Attack(IDamageable damageable)
+    public void Attack(IDamageable damageable)
     {
         damageable.TakeDamage(_damage);
     }

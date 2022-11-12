@@ -45,6 +45,7 @@ public class Player : Characters
     {
         float healthValue = Mathf.Clamp(_currentHealth + value, 0, _health);
         ChangedHealth?.Invoke(healthValue);
+        Debug.Log($"здоровье: {healthValue}");
         return healthValue;
     }
 
