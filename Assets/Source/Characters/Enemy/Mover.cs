@@ -22,6 +22,7 @@ public class Mover : MonoBehaviour
     private Vector3 _movePoint;
     private Player _target;
     private bool _isAttaking = false;
+    private bool _isAlive = true;
 
     private bool _isAcquireTarget => _target != null;
 
@@ -32,35 +33,28 @@ public class Mover : MonoBehaviour
         _animator = GetComponent<EnemyAnimator>();
         _zeroPoint = transform.position;
         _searchZone.ChangedTarget += OnChangedTarget;
+        _enemy.Dying += OnDying;
         Patrol();
     }
 
     private void OnDisable()
     {
         _searchZone.ChangedTarget -= OnChangedTarget;
+        _enemy.Dying -= OnDying;
     }
 
     private void FixedUpdate()
     {
+        if (_isAlive == false)
+        {
+            _agent.ResetPath();
+            return;
+        }
+
         if (_isAcquireTarget)
         {
             if (_isAttaking == false)
-            {
-                float distance = _agent.remainingDistance;
-
-                if (Vector3.Distance(_target.transform.position, transform.position) > _attackDistance)
-                {
-                    _agent.ResetPath();
-                    _agent.destination = _target.transform.position;
-                }
-                else
-                {
-                    _agent.ResetPath();
-                    _isAttaking = true;
-                    float attackDelay = _animator.StartAttack();
-                    Invoke(nameof(Attack), attackDelay);
-                }
-            }
+                _agent.destination = _target.transform.position;
         }
         else
         {
@@ -70,13 +64,22 @@ public class Mover : MonoBehaviour
         }
     }
 
+    private void OnDying() => _isAlive = false;
+
     private void Attack()
     {
-        if (_agent.remainingDistance <= _attackDistance)
+        _isAttaking = false;
+
+        if (_isAlive == false || _target == null)
+            return;
+
+        float distanceToPlayer = Vector3.Distance(_target.transform.position, transform.position);
+
+        if (distanceToPlayer <= _attackDistance)
+        {
             if (_target.CurrentState == State.Move)
                 _enemy.Attack(_target);
-        
-        _isAttaking = false;
+        }
     }
 
     private IEnumerator GetNextPoint()
@@ -115,5 +118,28 @@ public class Mover : MonoBehaviour
             _agent.destination = _target.transform.position;
         else
             _agent.SetDestination(_movePoint);
+    }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.TryGetComponent(out Player player))
+    //    {
+    //        Debug.Log("enemy atacking player");
+    //        _isAttaking = true;
+    //        _agent.ResetPath();
+    //        float attackDelay = _animator.StartAttack();
+    //        Invoke(nameof(Attack), attackDelay);
+    //    }
+    //}
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out Player player) && !_isAttaking)
+        {
+            _isAttaking = true;
+            _agent.ResetPath();
+            float attackDelay = _animator.StartAttack();
+            Invoke(nameof(Attack), attackDelay);
+        }
     }
 }

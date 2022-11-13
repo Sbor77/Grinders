@@ -16,12 +16,13 @@ public class Enemy : Characters
     public override void TakeDamage(float damage)
     {
         _currentHealth -= damage;
+        Debug.Log(_currentHealth);
         IsAlive();
     }
 
     private void IsAlive()
     {
-        if (_currentHealth == 0)
+        if (_currentHealth <= 0)
         {
             Dying?.Invoke();
             this.enabled = false;

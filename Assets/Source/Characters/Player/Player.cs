@@ -58,14 +58,15 @@ public class Player : Characters
         }
     }
 
-   /* private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (_currentState == State.Attack)
         {
             if (other.TryGetComponent(out IDamageable damageable))
                 Attack(damageable);
         }
-        else
+    }
+    /*    else
         {
             if (other.TryGetComponent(out Coin coin))
                 Debug.Log($"GetCoin: {coin.name}");//coin.GetCoin();
