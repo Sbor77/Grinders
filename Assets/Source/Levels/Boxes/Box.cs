@@ -18,6 +18,7 @@ public class Box : MonoBehaviour
     private bool _isCoinCollectable;
         
     public event Action IsCoinCollected;
+    public event Action IsActiveStateChanged;
 
     public int Money => _money;
 
@@ -40,7 +41,7 @@ public class Box : MonoBehaviour
 
                 _isCoinCollectable = false;
 
-                DOVirtual.DelayedCall(3f, DeactivateWholeBox);
+                DOVirtual.DelayedCall(3f, DeactivateWholeBox);                
             }
 
             if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)

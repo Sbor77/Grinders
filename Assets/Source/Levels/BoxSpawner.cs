@@ -11,7 +11,7 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private Box _boxPrefab;
     [SerializeField] private Box _bigBoxPrefab;    
     [SerializeField] private LayerMask _boxLayer;
-    [SerializeField] private float _minDistance;
+    //[SerializeField] private float _minDistance;
     [SerializeField] private int _targetBoxesCount;
     [SerializeField] private int _minMoneyAmount;
     [SerializeField] private int _maxMoneyAmount;
@@ -30,10 +30,7 @@ public class BoxSpawner : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _boxSpawnPoints.Count; i++)
-        {
-            SpawnBox();
-        }
+        SpawnBox();
 
         SpawnBigBox();
     }    
@@ -54,7 +51,7 @@ public class BoxSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnBox()
+    private void SpawnBox()
     {
         if (TryGetInactiveBox(out Box poolBox) && _targetBoxesCount > _currentBoxCount)
         {
