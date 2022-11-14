@@ -32,7 +32,6 @@ public class Enemy : Characters
     public override void TakeDamage(float damage)
     {
         _currentHealth -= damage;
-        //Debug.Log(_currentHealth);
         IsAlive();
     }
 
@@ -47,9 +46,6 @@ public class Enemy : Characters
                 Deactivate();
                 IsDeactivated?.Invoke();
             });
-
-            /*Dying?.Invoke();
-            Invoke(nameof(Deactivate), _delayDieHiding);*/
         }
     }
 
