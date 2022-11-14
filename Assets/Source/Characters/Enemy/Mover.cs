@@ -26,7 +26,7 @@ public class Mover : MonoBehaviour
 
     private bool _isAcquireTarget => _target != null;
 
-    private void Start()
+    private void OnEnable()
     {
         _agent = GetComponent<NavMeshAgent>();
         _enemy = GetComponent<Enemy>();
@@ -48,9 +48,7 @@ public class Mover : MonoBehaviour
     private void FixedUpdate()
     {
         if (_isAlive == false)
-        {
             return;
-        }
 
         if (_isAcquireTarget)
         {
@@ -65,10 +63,24 @@ public class Mover : MonoBehaviour
         }
     }
 
+    public void SetDamage()
+    {
+        if (_isAlive == false || _target == null)
+            return;
+
+        float distanceToPlayer = Vector3.Distance(_target.transform.position, transform.position);
+        Debug.Log($"Дистанция между {gameObject.name} и игроком - {distanceToPlayer}");
+
+        if (distanceToPlayer <= _attackDistance)
+        {
+            if (_target.CurrentState == State.Move)
+                _enemy.Attack(_target);
+        }
+    }
+
     private void OnDying()
     {
         _searchZone.gameObject.SetActive(false);
-        //_agent.ResetPath();
         _agent.destination = transform.position;
         _isAlive = false;
     }
@@ -76,17 +88,6 @@ public class Mover : MonoBehaviour
     private void Attack()
     {
         _isAttaking = false;
-
-        if (_isAlive == false || _target == null)
-            return;
-
-        float distanceToPlayer = Vector3.Distance(_target.transform.position, transform.position);
-
-        if (distanceToPlayer <= _attackDistance)
-        {
-            if (_target.CurrentState == State.Move)
-                _enemy.Attack(_target);
-        }
     }
 
     private IEnumerator GetNextPoint()
@@ -142,5 +143,10 @@ public class Mover : MonoBehaviour
     {
         _isAlive = true;
         _searchZone.gameObject.SetActive(true);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, _attackDistance);
     }
 }

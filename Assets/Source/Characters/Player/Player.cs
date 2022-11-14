@@ -55,7 +55,7 @@ public class Player : Characters
         if (_currentHealth == 0)
         {
             Dying?.Invoke();
-            this.enabled = false;
+            Destroy(this);
         }
     }
 

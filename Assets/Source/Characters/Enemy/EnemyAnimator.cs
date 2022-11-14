@@ -20,7 +20,7 @@ public class EnemyAnimator : MonoBehaviour
     private const string Died = "Died";
     private const string Reset = "Reset";
 
-    private void Start()
+    private void OnEnable()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
