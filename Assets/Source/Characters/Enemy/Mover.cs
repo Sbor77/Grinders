@@ -10,7 +10,7 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _stoppingDistance;
     [SerializeField] private float _bias = 1f;
     [SerializeField] private float _maxDelay = 3f;
-    [SerializeField] private float _attackDistance = 1f;
+    [SerializeField] private float _attackDistance = 2f;
     [SerializeField] private SearchZone _searchZone;
 
     private NavMeshAgent _agent;
@@ -34,6 +34,7 @@ public class Mover : MonoBehaviour
         _zeroPoint = transform.position;
         _searchZone.ChangedTarget += OnChangedTarget;
         _enemy.Dying += OnDying;
+        _enemy.ResetState += OnResetState;
         Patrol();
     }
 
@@ -41,13 +42,13 @@ public class Mover : MonoBehaviour
     {
         _searchZone.ChangedTarget -= OnChangedTarget;
         _enemy.Dying -= OnDying;
+        _enemy.ResetState -= OnResetState;
     }
 
     private void FixedUpdate()
     {
         if (_isAlive == false)
         {
-            _agent.ResetPath();
             return;
         }
 
@@ -64,7 +65,12 @@ public class Mover : MonoBehaviour
         }
     }
 
-    private void OnDying() => _isAlive = false;
+    private void OnDying()
+    {
+        _isAlive = false;
+        _agent.ResetPath();
+        _searchZone.gameObject.SetActive(false);
+    }
 
     private void Attack()
     {
@@ -120,18 +126,6 @@ public class Mover : MonoBehaviour
             _agent.SetDestination(_movePoint);
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.TryGetComponent(out Player player))
-    //    {
-    //        Debug.Log("enemy atacking player");
-    //        _isAttaking = true;
-    //        _agent.ResetPath();
-    //        float attackDelay = _animator.StartAttack();
-    //        Invoke(nameof(Attack), attackDelay);
-    //    }
-    //}
-
     private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out Player player) && !_isAttaking)
@@ -141,5 +135,11 @@ public class Mover : MonoBehaviour
             float attackDelay = _animator.StartAttack();
             Invoke(nameof(Attack), attackDelay);
         }
+    }
+
+    private void OnResetState()
+    {
+        _isAlive = true;
+        _searchZone.gameObject.SetActive(true);
     }
 }

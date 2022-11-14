@@ -12,6 +12,7 @@ public class Enemy : Characters
 
     //public event UnityAction<float> ChangedHealth;
     public event UnityAction Dying;
+    public event UnityAction ResetState;
 
     public override void TakeDamage(float damage)
     {
@@ -23,9 +24,12 @@ public class Enemy : Characters
     private void IsAlive()
     {
         if (_currentHealth <= 0)
-        {
             Dying?.Invoke();
-            this.enabled = false;
-        }
+    }
+
+    public void Resetting()
+    {
+        _currentHealth = _health;
+        ResetState?.Invoke();
     }
 }

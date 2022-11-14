@@ -14,6 +14,7 @@ public class Player : Characters
     public event UnityAction Dying;
 
     public State CurrentState => _currentState;
+    public float MaxHealth => _health;
 
     private void Start()
     {
