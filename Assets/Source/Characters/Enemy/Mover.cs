@@ -82,7 +82,6 @@ public class Mover : MonoBehaviour
 
     public void ResetState()
     {
-        _agent.isStopped = false;
         _isAlive = true;
         _target = null;
         _searchZone.gameObject.SetActive(true);        
