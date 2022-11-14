@@ -12,7 +12,7 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private Box _boxPrefab;
     [SerializeField] private Box _bigBoxPrefab;    
     [SerializeField] private LayerMask _boxLayer;    
-    [SerializeField] private int _targetBoxesCount;
+    [SerializeField] private int _boxesCount;
     [SerializeField] private int _minMoneyAmount;
     [SerializeField] private int _maxMoneyAmount;
     [SerializeField] private int _finalBoxMoneyAmount;
@@ -53,19 +53,31 @@ public class BoxSpawner : MonoBehaviour
         }
     }
 
+    private void GenerateAllBoxes()
+    {
+        for (int i = 0; i < _boxesCount; i++)
+        {
+            var newBox = Instantiate(_boxPrefab, _boxSpawnPoints[i].position, Quaternion.identity, _spawnBoxParent);
+            
+            newBox.DeactivateWholeBox();            
+
+            _boxes.Add(newBox);
+        }        
+    }
+
     private void SpawnBox()
     {
-        if (TryGetInactiveBox(out Box poolBox) && _targetBoxesCount > _currentBoxCount)
+        if (TryGetInactiveBox(out Box inactiveBox) && _boxesCount > _currentBoxCount)
         {
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _circleOffsetModifier;
 
-            poolBox.transform.position += new Vector3(randomOffsetPosition.x, poolBox.transform.position.y, randomOffsetPosition.y);
+            inactiveBox.transform.position += new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
-            poolBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
+            inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
 
             _currentBoxCount++;
 
-            if (_targetBoxesCount > _currentBoxCount)            
+            if (_boxesCount > _currentBoxCount)            
                 SpawnBox();            
         }
     }
@@ -86,20 +98,8 @@ public class BoxSpawner : MonoBehaviour
 
         _currentBoxCount--;
 
-        if (_targetBoxesCount > _currentBoxCount)        
+        if (_boxesCount > _currentBoxCount)        
             DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
-    }
-
-    private void GenerateAllBoxes()
-    {
-        for (int i = 0; i < _boxSpawnPoints.Count; i++)
-        {
-            var newBox = Instantiate(_boxPrefab, _boxSpawnPoints[i].position, Quaternion.identity, _spawnBoxParent);
-            
-            newBox.DeactivateWholeBox();            
-
-            _boxes.Add(newBox);
-        }        
     }
    
     private bool TryGetInactiveBox(out Box inactiveBox)

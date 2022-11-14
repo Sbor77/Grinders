@@ -4,14 +4,14 @@ using UnityEngine;
 
 public abstract class draft_Spawner : MonoBehaviour
 {
-    [SerializeField] protected List<draft_SpawnedObject> _spawnedPrefabs;
+    [SerializeField] protected List<SpawnedObject> _spawnedPrefabs;
     [SerializeField] protected List<Transform> _spawnPoints;    
     [SerializeField] protected Transform _spawnParent;
     [SerializeField] protected LayerMask _objectLayer;    
     //[SerializeField] protected float _respawnTime;
     [SerializeField] protected int _spawnObjectsCount;
 
-    protected List<draft_SpawnedObject> _spawnedObjects = new ();
+    protected List<SpawnedObject> _spawnedObjects = new ();
 
     public int _currentSpawnedObjects;
     private float _spawnRadiusModifier = 1;
@@ -65,7 +65,7 @@ public abstract class draft_Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (TryGetInactiveObject(out draft_SpawnedObject inactiveObject) && _currentSpawnedObjects < _spawnObjectsCount)         
+        if (TryGetInactiveObject(out SpawnedObject inactiveObject) && _currentSpawnedObjects < _spawnObjectsCount)         
         {
             Vector2 randomOffsetPosition = Random.insideUnitCircle * _spawnRadiusModifier;
 
@@ -110,7 +110,7 @@ public abstract class draft_Spawner : MonoBehaviour
     {
         for (int i = 0; i < _spawnObjectsCount; i++)
         {
-            draft_SpawnedObject randomPrefab = GetRandomSpawnObject(_spawnedPrefabs);
+            SpawnedObject randomPrefab = GetRandomSpawnObject(_spawnedPrefabs);
 
             var newObject = Instantiate(randomPrefab, _spawnPoints[i].position, Quaternion.identity, _spawnParent);
 
@@ -122,9 +122,9 @@ public abstract class draft_Spawner : MonoBehaviour
         }
     }
 
-    private bool TryGetInactiveObject(out draft_SpawnedObject inactiveObject)
+    private bool TryGetInactiveObject(out SpawnedObject inactiveObject)
     {
-        List<draft_SpawnedObject> inactiveObjects = new ();
+        List<SpawnedObject> inactiveObjects = new ();
 
         inactiveObject = null;
 
@@ -142,7 +142,7 @@ public abstract class draft_Spawner : MonoBehaviour
         return inactiveObject != null;
     }
 
-    private draft_SpawnedObject GetRandomSpawnObject(List<draft_SpawnedObject> sourceObjects)
+    private SpawnedObject GetRandomSpawnObject(List<SpawnedObject> sourceObjects)
     {
         return sourceObjects[Random.Range(0, sourceObjects.Count)];
     }

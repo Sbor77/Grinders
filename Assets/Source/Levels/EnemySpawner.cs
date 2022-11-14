@@ -79,15 +79,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (TryGetInactiveEnemy(out Enemy enemy) && _currentEnemyCount <_enemyCount)
+        if (TryGetInactiveEnemy(out Enemy inactiveEnemy) && _currentEnemyCount <_enemyCount)
         {
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _spawnRadiusModifier;
 
-            enemy.transform.position += new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
+            inactiveEnemy.transform.position += new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
-            enemy.Restore();
+            inactiveEnemy.Restore();
 
-            enemy.gameObject.SetActive(true); 
+            inactiveEnemy.gameObject.SetActive(true); 
 
             _currentEnemyCount++;
 

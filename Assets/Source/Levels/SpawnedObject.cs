@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class draft_SpawnedObject : MonoBehaviour
+public class SpawnedObject : MonoBehaviour
 {
     
 }
