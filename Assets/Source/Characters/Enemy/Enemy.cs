@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using DG.Tweening;
 using System;
 
@@ -16,7 +15,7 @@ public class Enemy : Characters
     private Vector3 _defaultPosition;
 
     //public event UnityAction<float> ChangedHealth;
-    public event UnityAction Dying;
+    public event Action Dying;
     public event Action IsDeactivated;
 
     private void Awake()

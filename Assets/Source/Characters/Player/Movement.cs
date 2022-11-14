@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController), typeof(CapsuleCollider))]
 public class Movement : MonoBehaviour
@@ -19,8 +19,8 @@ public class Movement : MonoBehaviour
     private Vector3 _moveDirection = Vector3.forward;
     private bool _isMoving = false;
 
-    public event UnityAction<State> ChangedState;
-    public event UnityAction<float> ChangedMoveSpeed;
+    public event Action<State> ChangedState;
+    public event Action<float> ChangedMoveSpeed;
 
     private const float AngleCorrection = -1f;
 
@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
         _collider = GetComponent<CapsuleCollider>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _collider.enabled = _isMoving;
         _joystick.ChangedDirection += OnChangedDirection;
@@ -55,6 +55,10 @@ public class Movement : MonoBehaviour
         _joystick.ReleasedTouch -= OnReleasedTouch;
         _joystick.ChangedClickStatus -= StartMoveingAtack;
 
+    }
+    public void OnDied()
+    {
+        this.enabled = false;
     }
 
     private void OnChangedDirection(Vector2 direction)

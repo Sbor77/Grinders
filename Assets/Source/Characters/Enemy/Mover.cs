@@ -92,6 +92,7 @@ public class Mover : MonoBehaviour
     {
         _searchZone.gameObject.SetActive(false);
         _agent.destination = transform.position;
+        _agent.ResetPath();
         _agent.isStopped = true;
         _isAlive = false;
     }
