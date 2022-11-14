@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class BoxSpawner : MonoBehaviour
     private float _respawnDelay = 4f;
     private int _currentBoxCount;
     private float _circleOffsetModifier = 1;
+
+    public event Action IsCoinCollected;
 
     private void Awake()
     {
@@ -55,7 +58,7 @@ public class BoxSpawner : MonoBehaviour
     {
         if (TryGetInactiveBox(out Box poolBox) && _targetBoxesCount > _currentBoxCount)
         {
-            Vector2 randomOffsetPosition = Random.insideUnitCircle * _circleOffsetModifier;
+            Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _circleOffsetModifier;
 
             poolBox.transform.position += new Vector3(randomOffsetPosition.x, poolBox.transform.position.y, randomOffsetPosition.y);
 
@@ -78,6 +81,8 @@ public class BoxSpawner : MonoBehaviour
 
     private void OnCoinCollected()
     {
+        IsCoinCollected?.Invoke();
+
         _currentBoxCount--;
 
         if (_targetBoxesCount > _currentBoxCount)        
@@ -110,7 +115,7 @@ public class BoxSpawner : MonoBehaviour
 
         if (inactiveBoxes.Count > 0)
         {
-            int randomIndex = Random.Range(0, inactiveBoxes.Count);
+            int randomIndex = UnityEngine.Random.Range(0, inactiveBoxes.Count);
 
             inactiveBox = inactiveBoxes[randomIndex];            
         }

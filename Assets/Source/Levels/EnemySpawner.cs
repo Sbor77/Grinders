@@ -17,6 +17,8 @@ public class EnemySpawner : MonoBehaviour
     private int _currentEnemyCount;
     private float _spawnRadiusModifier = 1;
 
+    public event Action IsEnemyKilled;
+
     private void Awake()
     {
         GenerateAllEnemies();
@@ -45,6 +47,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDying()
     {
+        IsEnemyKilled?.Invoke();
+
         _currentEnemyCount--;
 
         if (_currentEnemyCount > _enemyCount)
