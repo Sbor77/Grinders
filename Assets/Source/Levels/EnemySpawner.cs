@@ -14,10 +14,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _respawnTime = 5f;
 
     private List<Enemy> _generatedEnemies = new();
+    private int _playerKills;
     private int _currentEnemyCount;
     private float _spawnRadiusModifier = 1;
 
     public event Action IsEnemyKilled;
+
+    public int PlayerKills => _playerKills;
 
     private void Awake()
     {
@@ -50,6 +53,8 @@ public class EnemySpawner : MonoBehaviour
         IsEnemyKilled?.Invoke();
 
         print("труп врага деактивирован!!!");
+
+        _playerKills++;
 
         _currentEnemyCount--;
 

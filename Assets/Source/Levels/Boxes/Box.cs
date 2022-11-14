@@ -17,10 +17,8 @@ public class Box : MonoBehaviour
     private int _money;        
     private bool _isCoinCollectable;
         
-    public event Action IsCoinCollected;
-    public event Action IsActiveStateChanged;
-
-    public int Money => _money;
+    public event Action <int>IsCoinCollected;
+    public event Action IsActiveStateChanged;    
 
     private void Start()
     {
@@ -35,7 +33,7 @@ public class Box : MonoBehaviour
             {
                 _coin.AnimateCollection();
 
-                IsCoinCollected?.Invoke();                    
+                IsCoinCollected?.Invoke(_money);                    
 
                 //print("Собрали монетку номиналом " + _money);
 

@@ -11,20 +11,19 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private Transform _bigBoxPoint;
     [SerializeField] private Box _boxPrefab;
     [SerializeField] private Box _bigBoxPrefab;    
-    [SerializeField] private LayerMask _boxLayer;
-    //[SerializeField] private float _minDistance;
+    [SerializeField] private LayerMask _boxLayer;    
     [SerializeField] private int _targetBoxesCount;
     [SerializeField] private int _minMoneyAmount;
     [SerializeField] private int _maxMoneyAmount;
     [SerializeField] private int _finalBoxMoneyAmount;
 
     private List<Box> _boxes = new List<Box>();    
-
-    private float _respawnDelay = 4f;
+    private int _playerMoney;
     private int _currentBoxCount;
+    private float _respawnDelay = 4f;
     private float _circleOffsetModifier = 1;
 
-    public event Action IsCoinCollected;
+    public int PlayerMoney => _playerMoney;    
 
     private void Awake()
     {
@@ -79,9 +78,9 @@ public class BoxSpawner : MonoBehaviour
     }
 
 
-    private void OnCoinCollected()
+    private void OnCoinCollected(int money)
     {
-        IsCoinCollected?.Invoke();
+        _playerMoney += money;
 
         _currentBoxCount--;
 
