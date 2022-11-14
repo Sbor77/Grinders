@@ -77,6 +77,8 @@ public class EnemySpawner : MonoBehaviour
 
             enemy.transform.position += new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
+            enemy.Resetting();
+
             enemy.gameObject.SetActive(true); 
 
             _currentEnemyCount++;
