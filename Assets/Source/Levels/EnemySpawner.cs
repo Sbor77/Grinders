@@ -18,9 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private int _currentEnemyCount;
     private float _spawnRadiusModifier = 1;
 
-    public event Action IsEnemyKilled;
-
-    public int PlayerKills => _playerKills;
+    public event Action <int> IsPLayerKillsIncreased;
 
     private void Awake()
     {
@@ -50,11 +48,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDeactivated()
     {
-        IsEnemyKilled?.Invoke();
-
-        print("труп врага деактивирован!!!");
-
         _playerKills++;
+
+        IsPLayerKillsIncreased?.Invoke(_playerKills);        
 
         _currentEnemyCount--;
 

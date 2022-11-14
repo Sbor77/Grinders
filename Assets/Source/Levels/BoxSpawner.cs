@@ -23,7 +23,7 @@ public class BoxSpawner : MonoBehaviour
     private float _respawnDelay = 4f;
     private float _circleOffsetModifier = 1;
 
-    public int PlayerMoney => _playerMoney;    
+    public event Action<int> IsPlayerMoneyIncreased;
 
     private void Awake()
     {
@@ -81,6 +81,8 @@ public class BoxSpawner : MonoBehaviour
     private void OnCoinCollected(int money)
     {
         _playerMoney += money;
+
+        IsPlayerMoneyIncreased?.Invoke(_playerMoney);
 
         _currentBoxCount--;
 
