@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Enemy : Characters
 {
     [SerializeField] private float _health;
+    [SerializeField] private float _delayDieHiding = 3f;
 
     private Mover _mover;
     private float _currentHealth;
@@ -29,10 +30,18 @@ public class Enemy : Characters
     private void IsAlive()
     {
         if (_currentHealth <= 0)
+        {
             Dying?.Invoke();
+            Invoke(nameof(Deactivate), _delayDieHiding);
+        }
     }
 
-    public void Resetting()
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Restor()
     {
         _currentHealth = _health;
         _mover.ResetState();
