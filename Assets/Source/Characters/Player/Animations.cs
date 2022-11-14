@@ -19,11 +19,15 @@ public class Animations : MonoBehaviour
     private const string Attack = "Attack";
     private const string Died = "Died";
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
         _mover = GetComponent<Movement>();
         _player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
         _mover.ChangedState += OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
         _player.Dying += OnDying;

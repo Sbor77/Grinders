@@ -16,9 +16,13 @@ public class Player : Characters
     public State CurrentState => _currentState;
     public float MaxHealth => _health;
 
-    private void Start()
+    private void Awake()
     {
         _movement = GetComponent<Movement>();
+    }
+
+    private void Start()
+    {
         _currentHealth = _health;
         _movement.ChangedState += OnChangedState;
     }

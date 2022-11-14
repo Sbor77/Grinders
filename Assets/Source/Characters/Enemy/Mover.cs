@@ -26,15 +26,18 @@ public class Mover : MonoBehaviour
 
     private bool _isAcquireTarget => _target != null;
 
-    private void OnEnable()
+    private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _enemy = GetComponent<Enemy>();
         _animator = GetComponent<EnemyAnimator>();
+    }
+
+    private void OnEnable()
+    {
         _zeroPoint = transform.position;
         _searchZone.ChangedTarget += OnChangedTarget;
         _enemy.Dying += OnDying;
-        _enemy.ResetState += OnResetState;
         Patrol();
     }
 
@@ -42,7 +45,6 @@ public class Mover : MonoBehaviour
     {
         _searchZone.ChangedTarget -= OnChangedTarget;
         _enemy.Dying -= OnDying;
-        _enemy.ResetState -= OnResetState;
     }
 
     private void FixedUpdate()
@@ -76,6 +78,13 @@ public class Mover : MonoBehaviour
             if (_target.CurrentState == State.Move)
                 _enemy.Attack(_target);
         }
+    }
+
+    public void ResetState()
+    {
+        _isAlive = true;
+        _searchZone.gameObject.SetActive(true);
+        _animator.ResetState();
     }
 
     private void OnDying()
@@ -137,12 +146,6 @@ public class Mover : MonoBehaviour
             float attackDelay = _animator.StartAttack();
             Invoke(nameof(Attack), attackDelay);
         }
-    }
-
-    private void OnResetState()
-    {
-        _isAlive = true;
-        _searchZone.gameObject.SetActive(true);
     }
 
     private void OnDrawGizmos()
