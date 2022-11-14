@@ -14,9 +14,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private bool _isTouchDown = false;
     private float _currentDownTime;
 
-    public event UnityAction<Vector2> ChangedDirection;
-    public event UnityAction ChangedClickStatus;
-    public event UnityAction ReleasedTouch;
+    public event Action<Vector2> ChangedDirection;
+    public event Action ChangedClickStatus;
+    public event Action ReleasedTouch;
 
     private const float Half = .5f;
 

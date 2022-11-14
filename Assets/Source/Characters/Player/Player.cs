@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Movement))]
 public class Player : Characters
@@ -10,8 +10,8 @@ public class Player : Characters
     private float _currentHealth;
     private State _currentState = State.Move;
 
-    public event UnityAction<float> ChangedHealth;
-    public event UnityAction Dying;
+    public event Action<float> ChangedHealth;
+    public event Action Dying;
 
     public State CurrentState => _currentState;
     public float MaxHealth => _health;
@@ -50,7 +50,6 @@ public class Player : Characters
     {
         float healthValue = Mathf.Clamp(_currentHealth + value, 0, _health);
         ChangedHealth?.Invoke(healthValue);
-        Debug.Log($"здоровье: {healthValue}");
         return healthValue;
     }
 
@@ -59,7 +58,8 @@ public class Player : Characters
         if (_currentHealth == 0)
         {
             Dying?.Invoke();
-            Destroy(this);
+            _movement.OnDied();
+            this.enabled = false;
         }
     }
 

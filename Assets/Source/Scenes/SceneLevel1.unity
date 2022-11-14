@@ -8876,6 +8876,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540436693}
     m_Modifications:
+    - target: {fileID: 8453041982118279783, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.34256253
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453041982118279783, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.8477778
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453041982118279783, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453041982118279783, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453041982118279783, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453041982118279783, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8453041982494279979, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8968,6 +8992,14 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 2064478774}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _boxSpawner
+      value: 
+      objectReference: {fileID: 1371502433}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _enemySpawner
+      value: 
+      objectReference: {fileID: 519430086}
     - target: {fileID: 8453041983040492525, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
