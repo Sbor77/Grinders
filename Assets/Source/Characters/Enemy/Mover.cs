@@ -67,9 +67,10 @@ public class Mover : MonoBehaviour
 
     private void OnDying()
     {
-        _isAlive = false;
-        _agent.ResetPath();
         _searchZone.gameObject.SetActive(false);
+        //_agent.ResetPath();
+        _agent.destination = transform.position;
+        _isAlive = false;
     }
 
     private void Attack()
