@@ -8,11 +8,16 @@ public class Enemy : Characters
 {
     [SerializeField] private float _health;
 
+    private Mover _mover;
     private float _currentHealth;
 
     //public event UnityAction<float> ChangedHealth;
     public event UnityAction Dying;
-    public event UnityAction ResetState;
+
+    private void Awake()
+    {
+        _mover = GetComponent<Mover>();
+    }
 
     public override void TakeDamage(float damage)
     {
@@ -30,6 +35,6 @@ public class Enemy : Characters
     public void Resetting()
     {
         _currentHealth = _health;
-        ResetState?.Invoke();
+        _mover.ResetState();
     }
 }

@@ -20,13 +20,16 @@ public class EnemyAnimator : MonoBehaviour
     private const string Died = "Died";
     private const string Reset = "Reset";
 
-    private void OnEnable()
+    private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _enemy = GetComponent<Enemy>();
+    }
+
+    private void OnEnable()
+    {
         _enemy.Dying += OnDying;
-        _enemy.ResetState += OnResetState;
         _animator.SetFloat(AttackSpeed, _attackMultiplie);
         _attackLenght = _attackAnimation.length / _attackMultiplie;
     }
@@ -34,7 +37,6 @@ public class EnemyAnimator : MonoBehaviour
     private void OnDisable()
     {
         _enemy.Dying -= OnDying;
-        _enemy.ResetState -= OnResetState;
     }
 
     private void FixedUpdate()
@@ -48,14 +50,13 @@ public class EnemyAnimator : MonoBehaviour
         return _attackLenght;
     }
 
-    private void OnDying()
-    {
-        this.enabled = false;
-        _animator.SetTrigger(Died);
-    }
-
-    private void OnResetState()
+    public void ResetState()
     {
         _animator.SetTrigger(Reset);
+    }
+
+    private void OnDying()
+    {
+        _animator.SetTrigger(Died);
     }
 }

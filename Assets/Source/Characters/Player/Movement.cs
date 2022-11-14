@@ -24,10 +24,14 @@ public class Movement : MonoBehaviour
 
     private const float AngleCorrection = -1f;
 
-    private void Start()
+    private void Awake()
     {
         _controller = GetComponent<CharacterController>();
         _collider = GetComponent<CapsuleCollider>();
+    }
+
+    private void Start()
+    {
         _collider.enabled = _isMoving;
         _joystick.ChangedDirection += OnChangedDirection;
         _joystick.ReleasedTouch += OnReleasedTouch;
