@@ -82,7 +82,9 @@ public class Mover : MonoBehaviour
 
     public void ResetState()
     {
+        _agent.isStopped = false;
         _isAlive = true;
+        _target = null;
         _searchZone.gameObject.SetActive(true);        
         _animator.ResetState();
     }
@@ -91,6 +93,7 @@ public class Mover : MonoBehaviour
     {
         _searchZone.gameObject.SetActive(false);
         _agent.destination = transform.position;
+        _agent.isStopped = true;
         _isAlive = false;
     }
 
