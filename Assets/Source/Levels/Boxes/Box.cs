@@ -37,7 +37,7 @@ public class Box : MonoBehaviour
 
                 IsCoinCollected?.Invoke();                    
 
-                print("Собрали монетку номиналом " + _money);
+                //print("Собрали монетку номиналом " + _money);
 
                 _isCoinCollectable = false;
 
@@ -48,7 +48,7 @@ public class Box : MonoBehaviour
             {
                 Crush();
 
-                print("Крашим ящик!");
+                //print("Крашим ящик!");
             }
         }
     }    

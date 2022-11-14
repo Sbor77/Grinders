@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] protected Transform _enemyParent;
     [SerializeField] protected LayerMask _enemyLayer;
     [SerializeField] private int _enemyCount;
-    [SerializeField] private float _respawnTime = 3f;
+    [SerializeField] private float _respawnTime = 5f;
 
     private List<Enemy> _generatedEnemies = new();
     private int _currentEnemyCount;
@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var enemy in _generatedEnemies)
         {
-            enemy.Dying += OnEnemyDying;
+            enemy.IsDeactivated += OnEnemyDeactivated;
         }
     }
 
@@ -41,27 +41,34 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var enemy in _generatedEnemies)
         {
-            enemy.Dying -= OnEnemyDying;
+            enemy.IsDeactivated -= OnEnemyDeactivated;
         }
     }
 
-    private void OnEnemyDying()
+    private void OnEnemyDeactivated()
     {
         IsEnemyKilled?.Invoke();
 
+        print("труп врага деактивирован!!!");
+
         _currentEnemyCount--;
 
-        if (_currentEnemyCount > _enemyCount)
+        if (_currentEnemyCount < _enemyCount)                    
             DOVirtual.DelayedCall(_respawnTime, SpawnEnemy);
+        
     }
 
     private void GenerateAllEnemies()
     {
         for (int i = 0; i < _enemyCount; i++)
         {
+            Vector3 position = _spawnPoints[i].position;
+
             Enemy randomPrefab = GetRandomEnemy(_enemyPrefabs);
 
-            var newEnemy = Instantiate(randomPrefab, _spawnPoints[i].position, Quaternion.identity, _enemyParent);
+            var newEnemy = Instantiate(randomPrefab, position, Quaternion.identity, _enemyParent);
+
+            newEnemy.SetDefaultPosition(position);
 
             newEnemy.gameObject.SetActive(false);
 
@@ -77,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
 
             enemy.transform.position += new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
-            enemy.Restor();
+            enemy.Restore();
 
             enemy.gameObject.SetActive(true); 
 

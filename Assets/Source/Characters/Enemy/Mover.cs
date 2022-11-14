@@ -71,7 +71,7 @@ public class Mover : MonoBehaviour
             return;
 
         float distanceToPlayer = Vector3.Distance(_target.transform.position, transform.position);
-        Debug.Log($"Дистанция между {gameObject.name} и игроком - {distanceToPlayer}");
+        //Debug.Log($"Дистанция между {gameObject.name} и игроком - {distanceToPlayer}");
 
         if (distanceToPlayer <= _attackDistance)
         {
@@ -83,7 +83,7 @@ public class Mover : MonoBehaviour
     public void ResetState()
     {
         _isAlive = true;
-        _searchZone.gameObject.SetActive(true);
+        _searchZone.gameObject.SetActive(true);        
         _animator.ResetState();
     }
 
