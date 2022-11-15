@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3626896409722150644}
   - component: {fileID: 1563211245160507966}
   - component: {fileID: 1563211245160507965}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 3549205897666254692}
   - component: {fileID: 8566485726950763772}
   - component: {fileID: 5172793039412916207}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BoxWithCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 6802994983119955779}
   _fracturedBox: {fileID: 6108084464405132485}
   _crashAudioClip: {fileID: 8566485726950763772}
-  _coin: {fileID: 1563211245160507965}
+  _item: {fileID: 1563211245160507965}
 --- !u!1 &6108084464405132481
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 6108084464402934279}
   - component: {fileID: 6108084464398834279}
   - component: {fileID: 7811818201207682619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 6108084464402934273}
   - component: {fileID: 6108084464398834273}
   - component: {fileID: 6230772557993421571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6108084464405227749}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Fractured_LOD_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 6108084464402934277}
   - component: {fileID: 6108084464398834277}
   - component: {fileID: 1625221289329900987}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 6108084464402934287}
   - component: {fileID: 6108084464398834287}
   - component: {fileID: 897098702618301976}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 6108084464402934281}
   - component: {fileID: 6108084464398834281}
   - component: {fileID: 1554273781336789530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -954,7 +954,7 @@ GameObject:
   - component: {fileID: 6108084464402934275}
   - component: {fileID: 6108084464398834275}
   - component: {fileID: 5616712156461783978}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1069,7 +1069,7 @@ GameObject:
   - component: {fileID: 6108084464402934285}
   - component: {fileID: 6108084464398834285}
   - component: {fileID: 5127481998857768784}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1184,7 +1184,7 @@ GameObject:
   - component: {fileID: 6108084464402934295}
   - component: {fileID: 6108084464398834295}
   - component: {fileID: 4119901462841431840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 6108084464402934289}
   - component: {fileID: 6108084464398834289}
   - component: {fileID: 6062378967085663683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1414,7 +1414,7 @@ GameObject:
   - component: {fileID: 6108084464402934283}
   - component: {fileID: 6108084464398834283}
   - component: {fileID: 3660855810579331410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1529,7 +1529,7 @@ GameObject:
   - component: {fileID: 6108084464402934293}
   - component: {fileID: 6108084464398834293}
   - component: {fileID: 7125804868925407537}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1644,7 +1644,7 @@ GameObject:
   - component: {fileID: 6108084464402934291}
   - component: {fileID: 6108084464398834291}
   - component: {fileID: 7948919653842071297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crash_Crate_Piece_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,8 +9,10 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private List<Transform> _boxSpawnPoints;
     [SerializeField] private Transform _spawnBoxParent;    
     [SerializeField] private Transform _bigBoxPoint;
-    [SerializeField] private Box _boxPrefab;
-    [SerializeField] private Box _bigBoxPrefab;    
+    [SerializeField] private Box _boxWithCoinPrefab;
+    [SerializeField] private Box _boxWithCrossPrefab;
+    [SerializeField] private Box _bigBoxPrefab;
+    [SerializeField] private float _boxWithCrossChanceRatio;
     [SerializeField] private LayerMask _boxLayer;    
     [SerializeField] private int _boxesCount;
     [SerializeField] private int _minMoneyAmount;
@@ -20,6 +22,7 @@ public class BoxSpawner : MonoBehaviour
     private List<Box> _boxes = new List<Box>();    
     private int _playerMoney;
     private int _currentBoxCount;
+    private Vector3 _tempPosition = new Vector3(0, 5, 0);
     private float _respawnDelay = 4f;
     private float _circleOffsetModifier = 1;
 
@@ -35,7 +38,7 @@ public class BoxSpawner : MonoBehaviour
         SpawnBox();
 
         SpawnBigBox();
-    }    
+    }
 
     private void OnEnable()
     {
@@ -53,11 +56,43 @@ public class BoxSpawner : MonoBehaviour
         }
     }
 
+    private void OnCoinCollected(int money)
+    {
+        _playerMoney += money;
+
+        IsPlayerMoneyIncreased?.Invoke(_playerMoney);
+
+        _currentBoxCount--;
+
+        if (_boxesCount > _currentBoxCount)        
+            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
+    }
+
     private void GenerateAllBoxes()
     {
-        for (int i = 0; i < _boxesCount; i++)
+        float countMultiplier = 2;
+        float countAdditive = 10;
+
+        int boxWithCrossCount = Mathf.CeilToInt(_boxesCount * _boxWithCrossChanceRatio);
+
+        int count = Mathf.CeilToInt(_boxesCount * countMultiplier < _boxesCount + countAdditive ? _boxesCount * countMultiplier : _boxesCount + countAdditive);
+
+        for (int i = 0; i < count; i++)
         {
-            var newBox = Instantiate(_boxPrefab, _boxSpawnPoints[i].position, Quaternion.identity, _spawnBoxParent);
+            Box boxPrefab;
+
+            if (boxWithCrossCount > 0)
+            {
+                boxPrefab = _boxWithCrossPrefab;
+
+                boxWithCrossCount--;
+            }
+            else
+            {
+                boxPrefab = _boxWithCoinPrefab;
+            }            
+
+            var newBox = Instantiate(boxPrefab, _tempPosition, Quaternion.identity, _spawnBoxParent);
             
             newBox.DeactivateWholeBox();            
 
@@ -67,15 +102,15 @@ public class BoxSpawner : MonoBehaviour
 
     private void SpawnBox()
     {
-        if (TryGetInactiveBox(out Box inactiveBox) && _boxesCount > _currentBoxCount)
+        if (TryGetInactiveBox(out Box inactiveBox) && _boxesCount > _currentBoxCount && TryGetFreePointToSpawn(out Vector3 freePoint))
         {
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _circleOffsetModifier;
 
-            inactiveBox.transform.position += new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
+            inactiveBox.transform.position = freePoint + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
             inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
 
-            _currentBoxCount++;
+            _currentBoxCount++;            
 
             if (_boxesCount > _currentBoxCount)            
                 SpawnBox();            
@@ -89,22 +124,33 @@ public class BoxSpawner : MonoBehaviour
         bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
     }
 
-
-    private void OnCoinCollected(int money)
+    private bool TryGetFreePointToSpawn(out Vector3 freePoint)
     {
-        _playerMoney += money;
+        List<Vector3> freePoints = new();
 
-        IsPlayerMoneyIncreased?.Invoke(_playerMoney);
+        freePoint = _tempPosition;
 
-        _currentBoxCount--;
+        foreach (var point in _boxSpawnPoints)
+        {
+            if (Physics.CheckSphere(point.position, 2f, _boxLayer) == false)
+            {
+                freePoints.Add(point.position);
+            }
+        }
 
-        if (_boxesCount > _currentBoxCount)        
-            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
+        if (freePoints.Count > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, freePoints.Count);
+
+            freePoint = freePoints[randomIndex];        
+        }
+
+        return freePoints.Count > 0;
     }
    
     private bool TryGetInactiveBox(out Box inactiveBox)
     {
-        List<Box> inactiveBoxes = new List<Box>();
+        List<Box> inactiveBoxes = new ();
 
         inactiveBox = null;
 
@@ -122,5 +168,5 @@ public class BoxSpawner : MonoBehaviour
         }
 
         return inactiveBox != null;
-    }
+    }   
 }

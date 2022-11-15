@@ -11,7 +11,7 @@ public class Box : MonoBehaviour
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private GameObject _fracturedBox;
     [SerializeField] private AudioSource _crashAudioClip;
-    [SerializeField] private Coin _coin;
+    [SerializeField] private BoxItem _item;
 
     private List<Vector3> _piecesDefaultPositions = new();
     private int _money;        
@@ -29,9 +29,9 @@ public class Box : MonoBehaviour
     {
         if (other.TryGetComponent<Player>(out Player player))
         {
-            if (player.CurrentState == State.Move && _coin.gameObject.activeSelf && _isCoinCollectable == true)
+            if (player.CurrentState == State.Move && _item.gameObject.activeSelf && _isCoinCollectable == true)
             {
-                _coin.AnimateCollection();
+                _item.AnimateCollection();
 
                 IsCoinCollected?.Invoke(_money);                    
 
@@ -60,7 +60,7 @@ public class Box : MonoBehaviour
         _fracturedBox.SetActive(true);
         _crashAudioClip.Play();
 
-        _coin.Activate();
+        _item.Activate();
 
         DOVirtual.DelayedCall(crushedBoxLivetime, () =>
         {
@@ -77,7 +77,7 @@ public class Box : MonoBehaviour
         _boxCollider.enabled = true;
         _fracturedBox.SetActive(false);
         
-        _coin.Deactivate();        
+        _item.Deactivate();        
         
         GenerateMoney(minMoney, maxMoney);
 

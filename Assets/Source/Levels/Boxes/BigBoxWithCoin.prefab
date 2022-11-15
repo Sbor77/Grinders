@@ -209,11 +209,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91d9afaa8b41d045b76e9563dfd83d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pieces: []
   _wholeBoxRenderer: {fileID: 2042805655323420240}
   _boxCollider: {fileID: 8318668558104614519}
   _fracturedBox: {fileID: 4250450508748718785}
   _crashAudioClip: {fileID: 6627762082445188552}
-  _coin: {fileID: 7268686413848879449}
+  _item: {fileID: 7268686413848879449}
 --- !u!1 &4250450508748718753
 GameObject:
   m_ObjectHideFlags: 0

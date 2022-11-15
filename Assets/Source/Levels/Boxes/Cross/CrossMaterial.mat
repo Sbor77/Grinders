@@ -10,7 +10,6 @@ Material:
   m_Name: CrossMaterial
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_ValidKeywords:
-  - DR_RIM_ON
   - _CELPRIMARYMODE_SINGLE
   - _TEXTUREBLENDINGMODE_MULTIPLY
   m_InvalidKeywords:
@@ -104,7 +103,7 @@ Material:
     - _OverrideLightmapDir: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
-    - _RimEnabled: 1
+    - _RimEnabled: 0
     - _SelfShadingSize: 0.674
     - _SelfShadingSizeExtra: 0.6
     - _ShadowEdgeSize: 0.129

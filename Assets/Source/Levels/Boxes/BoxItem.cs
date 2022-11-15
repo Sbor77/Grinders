@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Coin : MonoBehaviour
+public class BoxItem : MonoBehaviour
 {
     private Tweener _endlessRotation;    
     private Sequence _collectingSequence;
     private Vector3 _defaultScale;    
-    private Vector3 _defaultPosition;
-    private Vector3 _rotationAroundY = new (0, 360, 0);
+    private Vector3 _defaultPosition;    
+    private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
     private float _defaultHeight;    
 
     private void Start()
@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour
 
         _defaultHeight = transform.position.y;
 
-        _defaultPosition = transform.position;        
+        _defaultPosition = transform.position;                
     }
 
     public void AnimateCollection()
