@@ -807,7 +807,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35696
+  m_Name: pb_Mesh25516
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1983,8 +1983,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bigboxCamera: {fileID: 1461278847}
   _playCamera: {fileID: 440582302}
+  _josytick: {fileID: 1766064448}
   _playCameraPositionY: 20
-  _targetBigboxCameraPosition: {x: 5, y: 28, z: -40}
+  _targetBigboxCameraPosition: {x: 5, y: 32, z: -40}
+  _bigboxCameraTime: 2
+  _bigboxCameraDelay: 0.5
 --- !u!1 &620143272
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,7 +4901,7 @@ GameObject:
   - component: {fileID: 1371502432}
   - component: {fileID: 1371502433}
   m_Layer: 0
-  m_Name: BoxWithCoinSpawner
+  m_Name: BoxWithItemSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6245,6 +6248,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540436693}
     m_Modifications:
+    - target: {fileID: 2701210816371816788, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2701210816371816789, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
       propertyPath: _moveToTouchDownPosition
       value: 0
