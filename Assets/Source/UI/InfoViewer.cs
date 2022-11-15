@@ -11,7 +11,12 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private TMP_Text _goldText;
     [SerializeField] private BoxSpawner _boxSpawner;
     [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private TMP_Text _bigBoxText;
     [SerializeField] private TMP_Text _KillsText;
+
+    private int _questCoinCollected;
+    private int _questEnemyKills;
+    private bool _questbigBoxDestroyed;
 
     private float _maxHealth;
     private float _currentHealth;
@@ -38,6 +43,21 @@ public class InfoViewer : MonoBehaviour
         _player.ChangedHealth -= OnChangedHealth;
     }
 
+    public void SetQuestCollected(QuestInfo conditions)
+    {
+        _questCoinCollected = conditions.NeedCoinCollected;
+        _questbigBoxDestroyed = conditions.NeedDestroyBigBox;
+        _questEnemyKills = conditions.NeedEnemyKilled;
+        SetStartConditionsText();
+    }
+
+    private void SetStartConditionsText()
+    {
+        OnChangedPlayerCoins(0);
+        OnChangedPlayerKills(0);
+        OnDestroyBigBox(0);
+    }
+
     private void OnChangedHealth(float health)
     {
         _healthBarSlider.value = health;
@@ -45,12 +65,25 @@ public class InfoViewer : MonoBehaviour
 
     private void OnChangedPlayerCoins(int value)
     {
-        print("Get " + value);
-        _goldText.text = value.ToString();
+        if (_questCoinCollected == 0)
+            _goldText.text = value.ToString();
+        else
+        _goldText.text = $"{value.ToString()}/{_questCoinCollected}";
     }
 
     private void OnChangedPlayerKills(int value)
     {
-        _KillsText.text = value.ToString();
+        if (_questEnemyKills == 0)
+            _KillsText.text = value.ToString();
+        else
+            _KillsText.text = $"{value.ToString()}/{_questEnemyKills}";
+    }
+
+    private void OnDestroyBigBox(int count)
+    {
+        if (_questbigBoxDestroyed)
+            _bigBoxText.text = $"{count.ToString()}/1";
+        else
+            _bigBoxText.text = count.ToString();
     }
 }
