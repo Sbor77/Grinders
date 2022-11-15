@@ -12,6 +12,7 @@ public class Player : Characters
 
     public event Action<float> ChangedHealth;
     public event Action Dying;
+    public event Action TakedDamage;
 
     public State CurrentState => _currentState;
     public float MaxHealth => _health;
@@ -36,6 +37,7 @@ public class Player : Characters
     {
         if (_currentState == State.Move)
         {
+            TakedDamage?.Invoke();
             _currentHealth = ChangeHealth(-damage);
             IsAlive();
         }

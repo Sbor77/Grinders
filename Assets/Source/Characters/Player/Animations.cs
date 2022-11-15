@@ -20,6 +20,7 @@ public class Animations : MonoBehaviour
     private const string Modifier = "SpeedModifier";
     private const string Attack = "Attack";
     private const string Died = "Died";
+    private const string TakedDamage = "TakeDamage";
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class Animations : MonoBehaviour
         _mover.ChangedState += OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
         _player.Dying += OnDying;
+        _player.TakedDamage += OnTakedDamage;
 
         _animator.SetFloat(Modifier, _mover.Speed / SpeedModifier);
     }
@@ -41,8 +43,11 @@ public class Animations : MonoBehaviour
     {
         _mover.ChangedState -= OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed -= OnChangedMoveSpeed;
-        _player.Dying += OnDying;
+        _player.Dying -= OnDying;
+        _player.TakedDamage -= OnTakedDamage;
     }
+
+    private void OnTakedDamage() => _animator.SetTrigger(TakedDamage);
 
     private void OnDying() => _animator.SetTrigger(Died);
 

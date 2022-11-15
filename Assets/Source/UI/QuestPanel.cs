@@ -36,7 +36,7 @@ public class QuestPanel : MonoBehaviour
             ConditionsText += $"Collect {_needEnemyKilled} Enemy kills\n";
 
         if (_needDestroyBigBox)
-            ConditionsText += "Destroyed big box";
+            ConditionsText += "Destroy big box";
 
         _conditionsText.text = ConditionsText;
     }
