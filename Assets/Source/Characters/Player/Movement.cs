@@ -22,6 +22,8 @@ public class Movement : MonoBehaviour
     public event Action<State> ChangedState;
     public event Action<float> ChangedMoveSpeed;
 
+    public float Speed => _speed;
+
     private const float AngleCorrection = -1f;
 
     private void Awake()

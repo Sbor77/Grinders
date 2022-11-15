@@ -14,8 +14,10 @@ public class Animations : MonoBehaviour
     private Vector3 _angleRotate = new Vector3(0, -360, 0);
     private Vector3 _startAngleRotate;
 
+    private const float SpeedModifier = 4f;
     private const float FinishedSpin = 0.1f;
     private const string Speed = "MoveSpeed";
+    private const string Modifier = "SpeedModifier";
     private const string Attack = "Attack";
     private const string Died = "Died";
 
@@ -31,6 +33,8 @@ public class Animations : MonoBehaviour
         _mover.ChangedState += OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
         _player.Dying += OnDying;
+
+        _animator.SetFloat(Modifier, _mover.Speed / SpeedModifier);
     }
 
     private void OnDisable()
