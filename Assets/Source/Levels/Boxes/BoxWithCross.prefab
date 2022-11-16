@@ -1084,6 +1084,7 @@ GameObject:
   - component: {fileID: 2292820817332798530}
   - component: {fileID: 6373357592977801178}
   - component: {fileID: 7591239710437129417}
+  - component: {fileID: -4780305139285716795}
   m_Layer: 8
   m_Name: BoxWithCross
   m_TagString: Untagged
@@ -1297,6 +1298,18 @@ MonoBehaviour:
   _fracturedBox: {fileID: 8814870354638104547}
   _crashAudioClip: {fileID: 6373357592977801178}
   _item: {fileID: 415897515228319785}
+--- !u!114 &-4780305139285716795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199220655135993944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc850e16b95ab2498806d6fceffd01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8814870354638104545
 GameObject:
   m_ObjectHideFlags: 0

@@ -4560,6 +4560,8 @@ MonoBehaviour:
   _boxesCount: 13
   _minMoneyAmount: 1
   _maxMoneyAmount: 1
+  _minHealthAmount: 3
+  _maxHealthAmount: 5
   _finalBoxMoneyAmount: 50
 --- !u!1 &1390931331
 GameObject:
@@ -8155,6 +8157,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuestPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6047048542587295036, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295037, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8238,6 +8244,14 @@ PrefabInstance:
     - target: {fileID: 6047048542587295037, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047048542699893295, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
+      propertyPath: m_text
+      value: 'Your mission:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047048542699893295, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
+      propertyPath: m_fontSize
+      value: 130.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
@@ -8577,6 +8591,10 @@ PrefabInstance:
     - target: {fileID: 8453041982494279980, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_Name
       value: UserPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453041982494279980, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: _player

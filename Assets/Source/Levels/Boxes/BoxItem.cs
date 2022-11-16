@@ -5,12 +5,15 @@ using DG.Tweening;
 
 public class BoxItem : MonoBehaviour
 {
+    private int _value;
     private Tweener _endlessRotation;    
     private Sequence _collectingSequence;
     private Vector3 _defaultScale;        
     private Vector3 _defaultLocalPosition;
     private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
     private float _defaultHeight;    
+
+    public int Value => _value;
 
     private void Start()
     {
@@ -19,7 +22,7 @@ public class BoxItem : MonoBehaviour
         _defaultHeight = transform.position.y;        
 
         _defaultLocalPosition = transform.localPosition;
-    }
+    }    
 
     public void AnimateCollection()
     {
@@ -56,11 +59,14 @@ public class BoxItem : MonoBehaviour
 
     public void Activate()
     {
-        //transform.position = _defaultLocalPosition;
-
-        gameObject.SetActive(true);
+        gameObject.SetActive(true);        
 
         RotateOnY();
+    }
+
+    public void GenerateValue(int minValue, int maxValue)
+    {
+        _value = UnityEngine.Random.Range(minValue, maxValue + 1);
     }
 
     private void RotateOnY()
@@ -71,4 +77,5 @@ public class BoxItem : MonoBehaviour
 
         _endlessRotation = transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);        
     }
+
 }

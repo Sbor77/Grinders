@@ -13,12 +13,12 @@ public class Box : MonoBehaviour
     [SerializeField] private AudioSource _crashAudioClip;
     [SerializeField] private BoxItem _item;
 
-    private List<Vector3> _piecesDefaultPositions = new();
-    private int _money;        
-    private bool _isCoinCollectable;
+    private List<Vector3> _piecesDefaultPositions = new();    
+    private bool _isItemCollectable;
         
-    public event Action <int>IsCoinCollected;
-    public event Action IsActiveStateChanged;    
+    public event Action <int> IsCoinCollected;
+    public event Action IsItemCollected;
+
 
     private void Start()
     {
@@ -29,15 +29,20 @@ public class Box : MonoBehaviour
     {
         if (other.TryGetComponent<Player>(out Player player))
         {
-            if (player.CurrentState == State.Move && _item.gameObject.activeSelf && _isCoinCollectable == true)
+            if (player.CurrentState == State.Move && _item.gameObject.activeSelf && _isItemCollectable == true)
             {
                 _item.AnimateCollection();
 
-                IsCoinCollected?.Invoke(_money);                    
+                if (GetComponent<Coin>())                
+                    IsCoinCollected?.Invoke(_item.Value);
 
-                //print("Собрали монетку номиналом " + _money);
+                if (GetComponent<Cross>())
+                {
+                    player.TakeDamage(-_item.Value);
+                    IsItemCollected?.Invoke();                    
+                }                                
 
-                _isCoinCollectable = false;
+                _isItemCollectable = false;
 
                 DOVirtual.DelayedCall(3f, DeactivateWholeBox);                
             }
@@ -65,21 +70,23 @@ public class Box : MonoBehaviour
         DOVirtual.DelayedCall(crushedBoxLivetime, () =>
         {
             DeactivateCrushedBox();
-            _isCoinCollectable = true;
+            _isItemCollectable = true;
             RestoreDefaultPiecesPositions();
         });
     }    
 
-    public void ActivateWholeBox(int minMoney, int maxMoney)
+    public void ActivateWholeBox(int minValue, int maxValue)
     {
         gameObject.SetActive(true);
         _wholeBoxRenderer.enabled = true; 
         _boxCollider.enabled = true;
         _fracturedBox.SetActive(false);
-        
+
+        _item.GenerateValue(minValue, maxValue);
+
         _item.Deactivate();        
         
-        GenerateMoney(minMoney, maxMoney);
+        //GenerateMoney(minMoney, maxMoney);
 
         GenerateRotationY();
 
@@ -105,12 +112,12 @@ public class Box : MonoBehaviour
         transform.eulerAngles = new Vector3(0, randomAngleY, 0);
     }
 
-    private void GenerateMoney(int minMoney, int maxMoney)
+    /*private void GenerateMoney(int minMoney, int maxMoney)
     {
         _money = UnityEngine.Random.Range(minMoney, maxMoney + 1);
 
         _isCoinCollectable = false;
-    }
+    }*/
 
     private void SaveDefaultPiecesPositions()
     {

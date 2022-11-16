@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 3549205897666254692}
   - component: {fileID: 8566485726950763772}
   - component: {fileID: 5172793039412916207}
+  - component: {fileID: 6790020038105182898}
   m_Layer: 8
   m_Name: BoxWithCoin
   m_TagString: Untagged
@@ -323,6 +324,18 @@ MonoBehaviour:
   _fracturedBox: {fileID: 6108084464405132485}
   _crashAudioClip: {fileID: 8566485726950763772}
   _item: {fileID: 1563211245160507965}
+--- !u!114 &6790020038105182898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464886730387448702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a72c0579aba7d0d4bba041b8ac8f8176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6108084464405132481
 GameObject:
   m_ObjectHideFlags: 0

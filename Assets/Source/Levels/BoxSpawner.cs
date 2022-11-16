@@ -47,7 +47,8 @@ public class BoxSpawner : MonoBehaviour
     {
         foreach (var box in _boxes)
         {
-            box.IsCoinCollected += OnCoinCollected;            
+            box.IsCoinCollected += OnCoinCollected;
+            box.IsItemCollected += OnItemCollected;
         }
     }
 
@@ -56,6 +57,7 @@ public class BoxSpawner : MonoBehaviour
         foreach (var box in _boxes)
         {
             box.IsCoinCollected -= OnCoinCollected;
+            box.IsItemCollected -= OnItemCollected;
         }
     }
 
@@ -70,6 +72,15 @@ public class BoxSpawner : MonoBehaviour
         if (_boxesCount > _currentBoxCount)        
             DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
     }
+
+    private void OnItemCollected()
+    {
+        _currentBoxCount--;
+
+        if (_boxesCount > _currentBoxCount)
+            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);
+    }
+
 
     private void GenerateAllBoxes()
     {
@@ -111,7 +122,11 @@ public class BoxSpawner : MonoBehaviour
 
             inactiveBox.transform.position = freePoint + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
-            inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
+            if (inactiveBox.GetComponent<Coin>())            
+                inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);              
+
+            if (inactiveBox.GetComponent<Cross>())            
+                inactiveBox.ActivateWholeBox(_minHealthAmount, _maxHealthAmount);                
 
             _currentBoxCount++;            
 
