@@ -17,6 +17,9 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private int _boxesCount;
     [SerializeField] private int _minMoneyAmount;
     [SerializeField] private int _maxMoneyAmount;
+    [SerializeField] private int _minHealthAmount;
+    [SerializeField] private int _maxHealthAmount;
+
     [SerializeField] private int _finalBoxMoneyAmount;
 
     private List<Box> _boxes = new List<Box>();    

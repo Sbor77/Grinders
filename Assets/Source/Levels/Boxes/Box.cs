@@ -82,6 +82,8 @@ public class Box : MonoBehaviour
         GenerateMoney(minMoney, maxMoney);
 
         GenerateRotationY();
+
+        SaveDefaultPiecesPositions();
     }
 
     public void DeactivateWholeBox()
@@ -114,7 +116,7 @@ public class Box : MonoBehaviour
     {
         for (int i = 0; i < _pieces.Count; i++)
         {
-            _piecesDefaultPositions.Add(_pieces[i].transform.position);
+            _piecesDefaultPositions.Add(_pieces[i].transform.localPosition);
         }        
     }
 
@@ -122,7 +124,7 @@ public class Box : MonoBehaviour
     {
         for (int i = 0; i < _pieces.Count; i++)
         {
-            _pieces[i].transform.position = _piecesDefaultPositions[i];
+            _pieces[i].transform.localPosition = _piecesDefaultPositions[i];
         }
     }
 }

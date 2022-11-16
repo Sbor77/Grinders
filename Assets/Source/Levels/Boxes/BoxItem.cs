@@ -7,8 +7,8 @@ public class BoxItem : MonoBehaviour
 {
     private Tweener _endlessRotation;    
     private Sequence _collectingSequence;
-    private Vector3 _defaultScale;    
-    private Vector3 _defaultPosition;    
+    private Vector3 _defaultScale;        
+    private Vector3 _defaultLocalPosition;
     private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
     private float _defaultHeight;    
 
@@ -16,9 +16,9 @@ public class BoxItem : MonoBehaviour
     {
         _defaultScale = transform.localScale;        
 
-        _defaultHeight = transform.position.y;
+        _defaultHeight = transform.position.y;        
 
-        _defaultPosition = transform.position;                
+        _defaultLocalPosition = transform.localPosition;
     }
 
     public void AnimateCollection()
@@ -45,7 +45,7 @@ public class BoxItem : MonoBehaviour
         {
             Deactivate();
             transform.localScale = _defaultScale;
-            transform.position = _defaultPosition;
+            transform.localPosition = _defaultLocalPosition;            
         });        
     }
 
@@ -56,6 +56,8 @@ public class BoxItem : MonoBehaviour
 
     public void Activate()
     {
+        transform.position = _defaultLocalPosition;
+
         gameObject.SetActive(true);
 
         RotateOnY();
