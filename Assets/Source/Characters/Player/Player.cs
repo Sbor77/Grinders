@@ -16,6 +16,7 @@ public class Player : Characters
 
     public State CurrentState => _currentState;
     public float MaxHealth => _health;
+    public bool IsDead => _currentHealth == 0;
 
     private void Awake()
     {

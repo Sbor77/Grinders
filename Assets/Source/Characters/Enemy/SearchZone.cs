@@ -9,7 +9,8 @@ public class SearchZone : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            ChangedTarget?.Invoke(player);
+            if (player.IsDead == false)
+                ChangedTarget?.Invoke(player);
         }
     }
 

@@ -1084,6 +1084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 4
   _health: 5
+  _delayDieHiding: 3
 --- !u!114 &4449667726229326941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1101,6 +1102,7 @@ MonoBehaviour:
   _maxDelay: 3
   _attackDistance: 3
   _searchZone: {fileID: 5303139178216487822}
+  _weapon: {fileID: 3294603986966758997}
 --- !u!114 &1456876114613797010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,6 +1116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackAnimation: {fileID: -203655887218126122, guid: 3f855dc027f718e449ff113899b6c45b, type: 3}
+  _dancingAnimation: {fileID: -203655887218126122, guid: 0eaf8984709fb62499df339914cfc1dd, type: 3}
 --- !u!1 &5212803384031170495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,7 +1852,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7830335409787740169}
   - component: {fileID: 7830335409787740170}
-  - component: {fileID: 4789266000408394845}
   - component: {fileID: 5303139178216487822}
   m_Layer: 9
   m_Name: SearchZone
@@ -1886,18 +1888,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4789266000408394845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7830335409787740171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78063136d8a61824b9703c4e1406f428, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5303139178216487822
 MonoBehaviour:
   m_ObjectHideFlags: 0

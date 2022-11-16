@@ -12,6 +12,7 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _maxDelay = 3f;
     [SerializeField] private float _attackDistance = 2f;
     [SerializeField] private SearchZone _searchZone;
+    [SerializeField] private Transform _weapon;
 
     private NavMeshAgent _agent;
     private Enemy _enemy;
@@ -23,6 +24,7 @@ public class Mover : MonoBehaviour
     private Player _target;
     private bool _isAttaking = false;
     private bool _isAlive = true;
+    private bool _isDancing = false;
 
     private bool _isAcquireTarget => _target != null;
 
@@ -59,7 +61,7 @@ public class Mover : MonoBehaviour
         }
         else
         {
-            if (GetNewPointWithDelay == null)
+            if (GetNewPointWithDelay == null && _isDancing == false)
                 if (_agent.remainingDistance <= _stoppingDistance)
                     GetNewPointWithDelay = StartCoroutine(GetNextPoint());
         }
@@ -67,16 +69,23 @@ public class Mover : MonoBehaviour
 
     public void SetDamage()
     {
-        if (_isAlive == false || _target == null)
+        if (_isAlive == false || _target == null || _target.IsDead)
             return;
 
         float distanceToPlayer = Vector3.Distance(_target.transform.position, transform.position);
-        //Debug.Log($"Дистанция между {gameObject.name} и игроком - {distanceToPlayer}");
 
         if (distanceToPlayer <= _attackDistance)
         {
             if (_target.CurrentState == State.Move)
                 _enemy.Attack(_target);
+
+            if (_target.IsDead)
+            {
+                float delay = _animator.StartWin();
+                _weapon.gameObject.SetActive(false);
+                _isDancing = true;
+                Invoke(nameof(StopDance), delay);
+            }
         }
     }
 
@@ -86,6 +95,12 @@ public class Mover : MonoBehaviour
         _target = null;
         _searchZone.gameObject.SetActive(true);        
         _animator.ResetState();
+    }
+
+    private void StopDance()
+    {
+        _isDancing = false;
+        _weapon.gameObject.SetActive(true);
     }
 
     private void OnDying()
@@ -144,10 +159,18 @@ public class Mover : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player) && !_isAttaking)
         {
-            _isAttaking = true;
-            _agent.ResetPath();
-            float attackDelay = _animator.StartAttack();
-            Invoke(nameof(Attack), attackDelay);
+            if (player.IsDead == false)
+            {
+                _isAttaking = true;
+                _agent.ResetPath();
+                float attackDelay = _animator.StartAttack();
+                Invoke(nameof(Attack), attackDelay);
+            }
+            else
+            {
+                if (_isDancing == false)
+                    OnChangedTarget(null);
+            }
         }
     }
 

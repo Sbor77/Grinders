@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class EnemyAnimator : MonoBehaviour
 {
     [SerializeField] private AnimationClip _attackAnimation;
+    [SerializeField] private AnimationClip _dancingAnimation;
 
     private NavMeshAgent _agent;
     private Animator _animator;
@@ -19,6 +20,7 @@ public class EnemyAnimator : MonoBehaviour
     private const string AttackSpeed = "AttackSpeed";
     private const string Died = "Died";
     private const string Reset = "Reset";
+    private const string Dancing = "Win";
 
     private void Awake()
     {
@@ -48,6 +50,12 @@ public class EnemyAnimator : MonoBehaviour
     {
         _animator.SetTrigger(Attack);
         return _attackLenght;
+    }
+
+    public float StartWin()
+    {
+        _animator.SetTrigger(Dancing);
+        return _dancingAnimation.length;
     }
 
     public void ResetState()

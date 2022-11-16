@@ -1196,6 +1196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 5
   _health: 5
+  _delayDieHiding: 3
 --- !u!114 &4604683557206214306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,6 +1214,7 @@ MonoBehaviour:
   _maxDelay: 3
   _attackDistance: 3
   _searchZone: {fileID: 4634659735361173154}
+  _weapon: {fileID: 3431657884605074602}
 --- !u!114 &1589954766622820973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,6 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackAnimation: {fileID: -203655887218126122, guid: 3f855dc027f718e449ff113899b6c45b, type: 3}
+  _dancingAnimation: {fileID: -203655887218126122, guid: 0eaf8984709fb62499df339914cfc1dd, type: 3}
 --- !u!1 &5364037277528966464
 GameObject:
   m_ObjectHideFlags: 0
