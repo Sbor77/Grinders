@@ -15,6 +15,7 @@ public class Box : MonoBehaviour
 
     private List<Vector3> _piecesDefaultPositions = new();    
     private bool _isItemCollectable;
+    private float _boxDeactivationDelay = 3f;
         
     public event Action <int> IsCoinCollected;
     public event Action IsItemCollected;
@@ -44,7 +45,7 @@ public class Box : MonoBehaviour
 
                 _isItemCollectable = false;
 
-                DOVirtual.DelayedCall(3f, DeactivateWholeBox);                
+                DOVirtual.DelayedCall(_boxDeactivationDelay, DeactivateWholeBox);                
             }
 
             if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)
