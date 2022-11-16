@@ -4,11 +4,42 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] private List<Transform> _enemySpawnPoints;
+    [SerializeField] private Player _player;
+    [SerializeField] private InfoViewer _infoViewer;
+    [SerializeField] private EffectHandler _finalEffects;
+    [SerializeField] private DoorOpener _bigboxDoor;
 
-    [SerializeField] private int _enemiesMaxCount;
+    private QuestInfo _missionConditions;    
+    private int _currentCoins;
+    private int _currentKills;
+    private float _currentHealth;
+    private bool _isBigboxDestroyed;
 
-    [SerializeField] private BoxSpawner _boxSpawner;
+    private void Start()
+    {
+        _missionConditions = _infoViewer.MissionConditions;
+    }
 
-    
+    private void OnEnable()
+    {
+        _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
+    }
+
+    private void OnDisable()
+    {
+        _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
+    }
+
+    private void OnCurrentConditionsChanged()
+    {
+        _currentCoins = _infoViewer.CurrentCoins;
+
+        _currentKills = _infoViewer.CurrentKills;
+
+        _currentHealth = _infoViewer.CurrentHealth;
+
+        _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
+
+        print($"Собрано монет: {_currentCoins}, убито врагов: {_currentKills}, здоровья: {_currentHealth}, Большая коробка разушена? {_isBigboxDestroyed}");
+    }
 }

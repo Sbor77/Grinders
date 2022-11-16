@@ -11,7 +11,7 @@ public class QuestPanel : MonoBehaviour
     [SerializeField] private int _needCoinCollected;
     [SerializeField] private int _needEnemyKilled;
     [SerializeField] private bool _needDestroyBigBox;
-
+    
     private void OnEnable()
     {
         Time.timeScale = 0;
@@ -33,7 +33,7 @@ public class QuestPanel : MonoBehaviour
             ConditionsText += $"Collect {_needCoinCollected} Coins\n";
 
         if (_needEnemyKilled > 0)
-            ConditionsText += $"Collect {_needEnemyKilled} Enemy kills\n";
+            ConditionsText += $"Kill {_needEnemyKilled} enemies\n";
 
         if (_needDestroyBigBox)
             ConditionsText += "Destroy big box";
@@ -41,7 +41,7 @@ public class QuestPanel : MonoBehaviour
         _conditionsText.text = ConditionsText;
 
         QuestInfo conditions = new QuestInfo(_needCoinCollected, _needEnemyKilled, _needDestroyBigBox);
-        _infoViewer.SetQuestCollected(conditions);
+        _infoViewer.SetQuestCollected(conditions);        
     }
 
     private void StartGame()
