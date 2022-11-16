@@ -13,6 +13,7 @@ public class Enemy : Characters
     private Mover _mover;
     private float _currentHealth;
     private Vector3 _defaultPosition;
+    private bool _isDead = false;
 
     //public event UnityAction<float> ChangedHealth;
     public event Action Dying;
@@ -30,6 +31,9 @@ public class Enemy : Characters
 
     public override void TakeDamage(float damage)
     {
+        if (_isDead)
+            return;
+
         _currentHealth -= damage;
         IsAlive();
     }
@@ -39,6 +43,7 @@ public class Enemy : Characters
         if (_currentHealth <= 0)
         {
             Dying?.Invoke();
+            _isDead = true;
 
             DOVirtual.DelayedCall(_delayDieHiding, () =>
             {
@@ -58,5 +63,6 @@ public class Enemy : Characters
         transform.position = _defaultPosition;        
         _currentHealth = _health;
         _mover.ResetState();
+        _isDead = false;
     }
 }
