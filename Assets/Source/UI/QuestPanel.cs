@@ -39,12 +39,13 @@ public class QuestPanel : MonoBehaviour
             ConditionsText += "Destroy big box";
 
         _conditionsText.text = ConditionsText;
+
+        QuestInfo conditions = new QuestInfo(_needCoinCollected, _needEnemyKilled, _needDestroyBigBox);
+        _infoViewer.SetQuestCollected(conditions);
     }
 
     private void StartGame()
     {
-        QuestInfo conditions = new QuestInfo(_needCoinCollected, _needEnemyKilled, _needDestroyBigBox);
-        _infoViewer.SetQuestCollected(conditions);
         gameObject.SetActive(false);
     }
 }

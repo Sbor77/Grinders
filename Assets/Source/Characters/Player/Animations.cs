@@ -47,7 +47,11 @@ public class Animations : MonoBehaviour
         _player.TakedDamage -= OnTakedDamage;
     }
 
-    private void OnTakedDamage() => _animator.SetTrigger(TakedDamage);
+    private void OnTakedDamage()
+    {
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(TakedDamage) == false)
+            _animator.SetTrigger(TakedDamage);
+    }
 
     private void OnDying() => _animator.SetTrigger(Died);
 
