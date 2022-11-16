@@ -24,8 +24,8 @@ public class InfoViewer : MonoBehaviour
     private void OnEnable()
     {
         _player.ChangedHealth += OnChangedHealth;
-        _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
-        _boxSpawner.IsPlayerMoneyIncreased += OnChangedPlayerCoins;
+        _player.ChangedCoin += OnChangedPlayerCoins;
+        _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;        
     }
 
     void Start()
@@ -38,9 +38,9 @@ public class InfoViewer : MonoBehaviour
 
     private void OnDisable()
     {
-        _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;
-        _boxSpawner.IsPlayerMoneyIncreased -= OnChangedPlayerCoins;
+        _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;        
         _player.ChangedHealth -= OnChangedHealth;
+        _player.ChangedCoin -= OnChangedPlayerCoins;
     }
 
     public void SetQuestCollected(QuestInfo conditions)

@@ -46,8 +46,7 @@ public class BoxSpawner : MonoBehaviour
     private void OnEnable()
     {
         foreach (var box in _boxes)
-        {
-            box.IsCoinCollected += OnCoinCollected;
+        {            
             box.IsItemCollected += OnItemCollected;
         }
     }
@@ -55,13 +54,12 @@ public class BoxSpawner : MonoBehaviour
     private void OnDisable()
     {
         foreach (var box in _boxes)
-        {
-            box.IsCoinCollected -= OnCoinCollected;
+        {         
             box.IsItemCollected -= OnItemCollected;
         }
     }
 
-    private void OnCoinCollected(int money)
+    /*private void OnCoinCollected(int money)
     {
         _playerMoney += money;
 
@@ -69,9 +67,9 @@ public class BoxSpawner : MonoBehaviour
 
         _currentBoxCount--;
 
-        if (_boxesCount > _currentBoxCount)        
-            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
-    }
+        if (_boxesCount > _currentBoxCount)
+            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);
+    }*/
 
     private void OnItemCollected()
     {

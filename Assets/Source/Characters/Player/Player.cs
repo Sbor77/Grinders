@@ -12,7 +12,7 @@ public class Player : Characters
     private State _currentState = State.Move;
 
     public event Action<float> ChangedHealth;
-    public event Action<float> ChangedCoin;
+    public event Action<int> ChangedCoin;
     public event Action Dying;
     public event Action TakedDamage;
 

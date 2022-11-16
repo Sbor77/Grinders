@@ -17,9 +17,7 @@ public class Box : MonoBehaviour
     private bool _isItemCollectable;
     private float _boxDeactivationDelay = 3f;
         
-    public event Action <int> IsCoinCollected;
     public event Action IsItemCollected;
-
 
     private void Start()
     {
@@ -35,13 +33,12 @@ public class Box : MonoBehaviour
                 _item.AnimateCollection();
 
                 if (GetComponent<Coin>())                
-                    IsCoinCollected?.Invoke(_item.Value);
+                    player.AddMoney(_item.Value);                
 
-                if (GetComponent<Cross>())
-                {
-                    player.TakeDamage(-_item.Value);
-                    IsItemCollected?.Invoke();                    
-                }                                
+                if (GetComponent<Cross>())                
+                    player.Heal(_item.Value);
+
+                IsItemCollected?.Invoke();
 
                 _isItemCollectable = false;
 
