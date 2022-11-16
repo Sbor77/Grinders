@@ -56,7 +56,7 @@ public class BoxItem : MonoBehaviour
 
     public void Activate()
     {
-        transform.position = _defaultLocalPosition;
+        //transform.position = _defaultLocalPosition;
 
         gameObject.SetActive(true);
 
