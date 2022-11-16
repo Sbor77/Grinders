@@ -8,9 +8,11 @@ public class Player : Characters
 
     private Movement _movement;
     private float _currentHealth;
+    private int _coins;
     private State _currentState = State.Move;
 
     public event Action<float> ChangedHealth;
+    public event Action<float> ChangedCoin;
     public event Action Dying;
     public event Action TakedDamage;
 
@@ -34,15 +36,29 @@ public class Player : Characters
         _movement.ChangedState -= OnChangedState;
     }
 
+    public void AddMoney(int value)
+    {
+        _coins += value;
+        ChangedCoin?.Invoke(_coins);
+    }
+
+    public void Heal(int value)
+    {
+        if (IsValid(value))
+            _currentHealth = ChangeHealth(value);
+    }
+
     public override void TakeDamage(float damage)
     {
-        if (_currentState == State.Move)
+        if (_currentState == State.Move && IsValid((int)damage))
         {
             TakedDamage?.Invoke();
             _currentHealth = ChangeHealth(-damage);
             IsAlive();
         }
     }
+
+    private bool IsValid(int value) => value > 0;
 
     private void OnChangedState(State state)
     {
