@@ -20,9 +20,13 @@ public class Player : Characters
     public float MaxHealth => _health;
     public bool IsDead => _currentHealth == 0;
 
+    private const string BoostHealth = "Health";
+    private const int AddBoostMaxHealth = 10;
+
     private void Awake()
     {
         _movement = GetComponent<Movement>();
+        _health += LoadBoostHealth();
     }
 
     private void Start()
@@ -56,6 +60,19 @@ public class Player : Characters
             _currentHealth = ChangeHealth(-damage);
             IsAlive();
         }
+    }
+
+    private float LoadBoostHealth()
+    {
+        int boostSpeedLevel;
+
+        if (PlayerPrefs.HasKey(BoostHealth))
+        {
+            boostSpeedLevel = PlayerPrefs.GetInt(BoostHealth);
+            return (AddBoostMaxHealth * boostSpeedLevel);
+        }
+
+        return 0;
     }
 
     private bool IsValid(int value) => value > 0;
