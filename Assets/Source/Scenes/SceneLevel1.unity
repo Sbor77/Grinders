@@ -1997,7 +1997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4805299535026477587, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_Radius
-      value: 1.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_RootOrder
@@ -2049,7 +2049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: _speed
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: _joystick

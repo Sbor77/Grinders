@@ -24,11 +24,14 @@ public class Movement : MonoBehaviour
     public float Speed => _speed;
 
     private const float AngleCorrection = -1f;
+    private const float AddBoostMoveSpeed = 0.5f;
+    private const string MoveSpeedBoost = "Speed";
 
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
         _collider = GetComponent<CapsuleCollider>();
+        _speed += LoadBoostSpeed();
     }
 
     private void OnEnable()
@@ -55,11 +58,24 @@ public class Movement : MonoBehaviour
         _joystick.ChangedDirection -= OnChangedDirection;
         _joystick.ReleasedTouch -= OnReleasedTouch;
         _joystick.ChangedClickStatus -= StartMoveingAtack;
-
     }
+
     public void OnDied()
     {
         this.enabled = false;
+    }
+
+    private float LoadBoostSpeed()
+    {
+        int boostSpeedLevel;
+
+        if (PlayerPrefs.HasKey(MoveSpeedBoost))
+        {
+            boostSpeedLevel = PlayerPrefs.GetInt(MoveSpeedBoost);
+            return (AddBoostMoveSpeed * boostSpeedLevel);
+        }
+
+        return 0;
     }
 
     private void OnChangedDirection(Vector2 direction)
