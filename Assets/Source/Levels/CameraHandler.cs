@@ -42,6 +42,33 @@ public class CameraHandler : MonoBehaviour
         });
     }
 
+    public void ZoomOutBigboxCamera()
+    {
+        float defaultFieldOfView = _bigboxCamera.m_Lens.FieldOfView;
+
+        float targetFieldOfView = 90;
+
+        float switchTime = 2f;
+
+        float waitingTime = 5f;
+
+        Sequence sequence = DOTween.Sequence();
+
+        Deactivate(_playCamera);
+
+        Activate(_bigboxCamera);
+
+        sequence.AppendCallback(() => DOVirtual.Float(defaultFieldOfView, targetFieldOfView, switchTime, f => _bigboxCamera.m_Lens.FieldOfView = f));
+        sequence.AppendInterval(switchTime + waitingTime);
+        sequence.AppendCallback(() => DOVirtual.Float(targetFieldOfView, defaultFieldOfView, switchTime, f => _bigboxCamera.m_Lens.FieldOfView = f));
+        sequence.AppendInterval(switchTime);
+        sequence.AppendCallback(() =>
+        {
+            Deactivate(_bigboxCamera);
+            Activate(_playCamera);
+        });
+    }
+
     private void Deactivate(CinemachineVirtualCamera camera, float delay = 0)
     {
         DOVirtual.DelayedCall(delay, () => camera.Priority = 0);        
