@@ -43,34 +43,35 @@ public class Level : MonoBehaviour
 
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
 
-        if (IsMissionConditionsFulfilled())
+        if (IsBigBoxConditionsFulfilled())
         {
-            print("Уровень пройден!");
+            print("Bigbox conditions fulfilled!");
 
-            ShowEndLevelScenario();
+            _cameraHandler.ZoomInOutBigboxCamera();
+
+            _enemySpawner.Deactivate();
+
+            DOVirtual.DelayedCall(5.5f, () => _bigboxDoor.Open());
         }
+        
     }
 
-    private bool IsMissionConditionsFulfilled()
+    private bool IsBigBoxConditionsFulfilled()
     {
         bool conditions =
             _currentCoins >= _missionConditions.NeedCoinCollected &&
-            _currentKills >= _missionConditions.NeedEnemyKilled;
-            //_isBigboxDestroyed == _missionConditions.NeedDestroyBigBox &&
-            //_currentHealth > 0;
+            _currentKills >= _missionConditions.NeedEnemyKilled;            
 
         return conditions;
     }
 
     private void ShowEndLevelScenario()
     {
-        _cameraHandler.ZoomOutBigboxCamera();
-
         _enemySpawner.Deactivate();        
 
-        DOVirtual.DelayedCall(2f, () =>
+        DOVirtual.DelayedCall(3f, () =>
         { 
-            _bigboxDoor.Open();
+            
             _finalEffects.PlayAllEffects();
         });
     }
