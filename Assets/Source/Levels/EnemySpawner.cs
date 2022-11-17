@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     private int _playerKills;
     private int _currentEnemyCount;
     private float _spawnRadiusModifier = 1;
+    private bool _isDeactivated;
 
     public event Action <int> IsPLayerKillsIncreased;
 
@@ -43,6 +44,16 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemy in _generatedEnemies)
         {
             enemy.IsDeactivated -= OnEnemyDeactivated;
+        }
+    }
+
+    public void Deactivate()
+    {
+        _isDeactivated = true;
+
+        foreach (var enemy in _generatedEnemies)
+        {
+            enemy.gameObject.SetActive(false);
         }
     }
 
@@ -79,7 +90,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (TryGetInactiveEnemy(out Enemy inactiveEnemy) && _currentEnemyCount <_enemyCount)
+        if (TryGetInactiveEnemy(out Enemy inactiveEnemy) && _currentEnemyCount <_enemyCount && _isDeactivated == false)
         {
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _spawnRadiusModifier;
 

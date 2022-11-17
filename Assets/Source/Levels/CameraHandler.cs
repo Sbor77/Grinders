@@ -15,8 +15,12 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] private float _bigboxCameraTime;
     [SerializeField] private float _bigboxCameraDelay;
 
+    private Vector3 _defaultBigboxCameraPosition;
+
     private void Start()
     {
+        _defaultBigboxCameraPosition = _bigboxCamera.transform.position;
+
         MoveBigboxCamera();
 
         SetJoystickActive(false);
@@ -38,7 +42,12 @@ public class CameraHandler : MonoBehaviour
         {
             Deactivate(_bigboxCamera, _bigboxCameraDelay);
 
-            DOVirtual.DelayedCall(_bigboxCameraTime, () => SetJoystickActive(true));
+            DOVirtual.DelayedCall(_bigboxCameraTime + 1f, () => 
+            {
+                _bigboxCamera.transform.position = _defaultBigboxCameraPosition;
+
+                SetJoystickActive(true);
+            });
         });
     }
 
@@ -48,9 +57,9 @@ public class CameraHandler : MonoBehaviour
 
         float targetFieldOfView = 90;
 
-        float switchTime = 2f;
+        float switchTime = 3f;
 
-        float waitingTime = 5f;
+        float waitingTime = 1f;
 
         Sequence sequence = DOTween.Sequence();
 
@@ -64,8 +73,8 @@ public class CameraHandler : MonoBehaviour
         sequence.AppendInterval(switchTime);
         sequence.AppendCallback(() =>
         {
-            Deactivate(_bigboxCamera);
-            Activate(_playCamera);
+            //Deactivate(_bigboxCamera);
+            //Activate(_playCamera);
         });
     }
 

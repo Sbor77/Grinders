@@ -1140,9 +1140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _doorObject: {fileID: 173210337}
-  _openedPosition: {x: -0.24929118, y: 4, z: 3.377164}
-  _closedPosition: {x: -0.24929118, y: 0.75, z: 3.377164}
-  _doorMovingTime: 3
+  _openedHeight: 1
+  _doorMovingTime: 2
 --- !u!1001 &387340029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1234,7 +1233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440582300}
   m_LocalRotation: {x: 0.4789906, y: -0, z: -0, w: 0.8778201}
-  m_LocalPosition: {x: 5, y: 19.979872, z: -40}
+  m_LocalPosition: {x: 16.5, y: 19.979872, z: -46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2006,7 +2005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 16.5
       objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2014,7 +2013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30
+      value: -36
       objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2446,6 +2445,8 @@ MonoBehaviour:
   _infoViewer: {fileID: 1251975579720424105}
   _finalEffects: {fileID: 2125228735}
   _bigboxDoor: {fileID: 357811033}
+  _cameraHandler: {fileID: 602114699}
+  _enemySpawner: {fileID: 519430086}
 --- !u!1 &788345123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,7 +3012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.4789906, y: 0, z: 0, w: 0.8778201}
-  m_LocalPosition: {x: 3, y: 11, z: -8}
+  m_LocalPosition: {x: 16.5, y: 19.979872, z: -46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8630,7 +8631,15 @@ PrefabInstance:
       objectReference: {fileID: 1251975579720424105}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needEnemyKilled
-      value: 50
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
+      propertyPath: _needCoinCollected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
+      propertyPath: _needDestroyBigBox
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295036, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_Name
