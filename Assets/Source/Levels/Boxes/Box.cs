@@ -14,10 +14,10 @@ public class Box : MonoBehaviour
     [SerializeField] private BoxItem _item;
 
     private List<Vector3> _piecesDefaultPositions = new();    
-    private bool _isItemCollectable;
+    private bool _isItemCollectable;    
     private float _boxDeactivationDelay = 3f;
         
-    public event Action IsItemCollected;
+    public event Action IsItemCollected;    
 
     private void Start()
     {
@@ -38,9 +38,9 @@ public class Box : MonoBehaviour
                 if (GetComponent<Cross>())                
                     player.Heal(_item.Value);
 
-                IsItemCollected?.Invoke();
-
                 _isItemCollectable = false;
+
+                IsItemCollected?.Invoke();
 
                 DOVirtual.DelayedCall(_boxDeactivationDelay, DeactivateWholeBox);                
             }
@@ -83,8 +83,6 @@ public class Box : MonoBehaviour
         _item.GenerateValue(minValue, maxValue);
 
         _item.Deactivate();        
-        
-        //GenerateMoney(minMoney, maxMoney);
 
         GenerateRotationY();
 
@@ -108,14 +106,7 @@ public class Box : MonoBehaviour
         int randomAngleY = UnityEngine.Random.Range(0, randomMaxAngle);
 
         transform.eulerAngles = new Vector3(0, randomAngleY, 0);
-    }
-
-    /*private void GenerateMoney(int minMoney, int maxMoney)
-    {
-        _money = UnityEngine.Random.Range(minMoney, maxMoney + 1);
-
-        _isCoinCollectable = false;
-    }*/
+    }   
 
     private void SaveDefaultPiecesPositions()
     {

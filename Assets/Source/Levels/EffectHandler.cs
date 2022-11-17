@@ -7,7 +7,7 @@ public class EffectHandler : MonoBehaviour
     [SerializeField] private List<ParticleSystem> _effects;
         
     private WaitForSeconds _waitDelay = new WaitForSeconds (1f);        
-    private int _cycles = 10;
+    private int _cycles = 8;
 
     void Start()
     {
@@ -37,9 +37,7 @@ public class EffectHandler : MonoBehaviour
             {
                 effect.Play();
 
-                i++;
-
-                print("Бахнули !!!");
+                i++;                
 
                 yield return _waitDelay;
             }

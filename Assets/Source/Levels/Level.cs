@@ -17,6 +17,7 @@ public class Level : MonoBehaviour
     private int _currentKills;
     private float _currentHealth;
     private bool _isBigboxDestroyed;
+    private bool _isBigboxDoorOpened;
 
     private void Start()
     {
@@ -43,17 +44,19 @@ public class Level : MonoBehaviour
 
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
 
-        if (IsBigBoxConditionsFulfilled())
+        if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
-            print("Bigbox conditions fulfilled!");
-
             _cameraHandler.ZoomInOutBigboxCamera();
 
             _enemySpawner.Deactivate();
 
+            _isBigboxDoorOpened = true;
+
             DOVirtual.DelayedCall(5.5f, () => _bigboxDoor.Open());
         }
-        
+
+        if (_isBigboxDestroyed)
+            ShowEndLevelScenario();
     }
 
     private bool IsBigBoxConditionsFulfilled()
@@ -67,11 +70,10 @@ public class Level : MonoBehaviour
 
     private void ShowEndLevelScenario()
     {
-        _enemySpawner.Deactivate();        
+        _cameraHandler.ZoomInPlayCamera();
 
-        DOVirtual.DelayedCall(3f, () =>
-        { 
-            
+        DOVirtual.DelayedCall(2f, () =>
+        {            
             _finalEffects.PlayAllEffects();
         });
     }

@@ -32,16 +32,17 @@ public class CameraHandler : MonoBehaviour
 
         float defaultFieldOfView = _playCamera.m_Lens.FieldOfView;
 
-        float targetFieldOfView = 40;                
+        float targetFieldOfView = 35;                
 
         float waitingTime = 2f;
 
         Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendCallback(() => DOVirtual.Float(defaultFieldOfView, targetFieldOfView, waitingTime, f => _playCamera.m_Lens.FieldOfView = f));
         sequence.AppendInterval(waitingTime);
-        sequence.AppendCallback(() => DOVirtual.Float(targetFieldOfView, defaultFieldOfView, waitingTime, f => _playCamera.m_Lens.FieldOfView = f));
-        sequence.AppendInterval(waitingTime);
+        sequence.AppendCallback(() => DOVirtual.Float(defaultFieldOfView, targetFieldOfView, 2, f => _playCamera.m_Lens.FieldOfView = f));
+        sequence.AppendInterval(3);
+        sequence.AppendCallback(() => DOVirtual.Float(targetFieldOfView, defaultFieldOfView, 5, f => _playCamera.m_Lens.FieldOfView = f));
+        sequence.AppendInterval(6);
         sequence.AppendCallback(() => SetJoystickActive(true));
 
     }
