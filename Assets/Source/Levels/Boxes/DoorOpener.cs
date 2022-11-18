@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -13,7 +11,7 @@ public class DoorOpener : MonoBehaviour
 
     private void Start()
     {
-        _closedHeight = transform.localPosition.y;        
+        _closedHeight = transform.localPosition.y;     
     }
 
     public void Open()

@@ -12,6 +12,7 @@ public class Level : MonoBehaviour
     [SerializeField] private DoorOpener _bigboxDoor;
     [SerializeField] private CameraHandler _cameraHandler;
     [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private BoxSpawner _boxSpawner;
 
     private int _currentLevel;
     private int _ShopScene = 0;
@@ -28,7 +29,9 @@ public class Level : MonoBehaviour
     
     private void Start()
     {
-        _missionConditions = _infoViewer.MissionConditions;        
+        _missionConditions = _infoViewer.MissionConditions;
+
+        LoadInitialStats();
     }
 
     private void OnEnable()
@@ -41,33 +44,55 @@ public class Level : MonoBehaviour
         _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
     }
 
+    private void LoadInitialStats()
+    {
+        int level = DataHandler.Instance.GetSavedLevel();
+
+        if (level == 0)
+        {
+            level = 1;
+
+            DataHandler.Instance.SaveLevel(level);
+        }
+
+        int money = 0;
+
+        DataHandler.Instance.SaveMoney(money);
+
+        int kills = 0;
+
+        DataHandler.Instance.SaveKills(kills);
+    }
+
     private void OnCurrentConditionsChanged()
     {
         _currentCoins = _infoViewer.CurrentCoins;
 
+        DataHandler.Instance.SaveMoney(_currentCoins);
+
         _currentKills = _infoViewer.CurrentKills;
+
+        DataHandler.Instance.SaveKills(_currentKills);
 
         _currentHealth = _infoViewer.CurrentHealth;
 
-        _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
-        
-        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
-        
-        DataHandler.Instance.SaveStat(DataHandler.Instance.KillsString, _currentKills);
+        DataHandler.Instance.SaveHealth(Mathf.CeilToInt(_currentHealth));
 
-        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
-
-        DataHandler.Instance.SaveStat(DataHandler.Instance.HealthString, Mathf.CeilToInt(_currentHealth));
+        _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;        
 
         if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
+            float doorOpenDelay = 5.5f;
+
             _cameraHandler.ZoomInOutBigboxCamera();
 
             _enemySpawner.Deactivate();
 
+            _boxSpawner.StopSpawn();
+
             _isBigboxDoorOpened = true;
 
-            DOVirtual.DelayedCall(5.5f, () => _bigboxDoor.Open());
+            DOVirtual.DelayedCall(doorOpenDelay, () => _bigboxDoor.Open());
 
             //LoadCurrentStats();
         }
@@ -87,9 +112,13 @@ public class Level : MonoBehaviour
 
     private void ShowEndLevelScenario()
     {
+        DataHandler.Instance.SaveAllStats();
+
+        float cameraZoomTime = 2f;
+
         _cameraHandler.ZoomInPlayCamera();
 
-        DOVirtual.DelayedCall(2f, () => _finalEffects.PlayAllEffects());
+        DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
 
         DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadScene(_ShopScene));
     }
@@ -99,17 +128,5 @@ public class Level : MonoBehaviour
         print("загружаем сцену = " + sceneIndex);
 
         SceneManager.LoadScene(sceneIndex);
-    }
-
-    /*private void LoadCurrentStats() // for test
-    {
-        print("Level = " + PlayerPrefs.GetInt(DataHandler.Instance.LevelString));
-        print("Money = " + PlayerPrefs.GetInt(DataHandler.Instance.MoneyString));
-
-        print("Money = " + DataHandler.Instance.GetSavedStat(DataHandler.Instance.MoneyString));
-
-        print("Kills = " + PlayerPrefs.GetInt(DataHandler.Instance.KillsString));
-        print("Health = " + PlayerPrefs.GetInt(DataHandler.Instance.HealthString));
-        print("MoveSpeed = " + PlayerPrefs.GetInt(DataHandler.Instance.MoveSpeedString));
-    }*/
+    }   
 }

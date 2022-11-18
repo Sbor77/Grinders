@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -45,12 +44,8 @@ public class Box : MonoBehaviour
                 DOVirtual.DelayedCall(_boxDeactivationDelay, DeactivateWholeBox);                
             }
 
-            if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)
-            {
-                Crush();
-
-                //print("Крашим ящик!");
-            }
+            if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)            
+                Crush();                            
         }
     }    
 
@@ -59,8 +54,11 @@ public class Box : MonoBehaviour
         float crushedBoxLivetime = 3f;
 
         _wholeBoxRenderer.enabled = false;
+
         _boxCollider.enabled = true;
+                
         _fracturedBox.SetActive(true);
+
         _crashAudioClip.Play();
 
         _item.Activate();
@@ -76,8 +74,11 @@ public class Box : MonoBehaviour
     public void ActivateWholeBox(int minValue, int maxValue)
     {
         gameObject.SetActive(true);
+
         _wholeBoxRenderer.enabled = true; 
+
         _boxCollider.enabled = true;
+
         _fracturedBox.SetActive(false);
 
         _item.GenerateValue(minValue, maxValue);

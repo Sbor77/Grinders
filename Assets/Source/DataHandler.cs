@@ -29,37 +29,61 @@ public class DataHandler : MonoBehaviour
             Instance = this;
 
             DontDestroyOnLoad(this);
-        }
-
-        InitStats();
+        }        
     }
 
-    public void SaveStat(string name, int value)
+    public void SaveLevel (int level)
     {
-        PlayerPrefs.SetInt(name, value);
+        PlayerPrefs.SetInt(LevelString, level);
+    }
 
+    public void SaveMoney (int money)
+    {
+        PlayerPrefs.SetInt(MoneyString, money);
+    }
+
+    public void SaveKills(int kills)
+    {
+        PlayerPrefs.SetInt(KillsString, kills);
+    }
+
+    public void SaveHealth(int health)
+    {
+        PlayerPrefs.SetInt(HealthString, health);
+    }
+
+    public void SaveMoveSpeed(int moveSpeed)
+    {
+        PlayerPrefs.SetInt(MoveSpeedString, moveSpeed);
+    }
+
+    public void SaveAllStats()
+    {
         PlayerPrefs.Save();
     }
 
-    public int GetSavedStat(string name)
+    public int GetSavedMoney()
     {
-        return PlayerPrefs.GetInt(name);
+        return PlayerPrefs.GetInt(MoneyString);
     }
 
-    private void InitStats()
+    public int GetSavedKills()
     {
-        int defaultValue = -1;
+        return PlayerPrefs.GetInt(KillsString);
+    }
 
-        PlayerPrefs.SetInt(LevelString, defaultValue);
+    public int GetSavedLevel()
+    {
+        return PlayerPrefs.GetInt(LevelString);
+    }
 
-        PlayerPrefs.SetInt(MoneyString, defaultValue);
+    public int GetSavedHealth()
+    {
+        return PlayerPrefs.GetInt(HealthString);
+    }
 
-        PlayerPrefs.SetInt(KillsString, defaultValue);
-
-        PlayerPrefs.SetInt(HealthString, defaultValue);
-
-        PlayerPrefs.SetInt(MoveSpeedString, defaultValue);
-
-        PlayerPrefs.Save();
+    public int GetSavedMoveSpeed()
+    {
+        return PlayerPrefs.GetInt(MoveSpeedString);
     }
 }

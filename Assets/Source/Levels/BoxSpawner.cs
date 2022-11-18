@@ -27,6 +27,7 @@ public class BoxSpawner : MonoBehaviour
     private Vector3 _tempPosition = new Vector3(0, 5, 0);
     private float _respawnDelay = 4f;
     private float _circleOffsetModifier = 1;
+    private bool _isStopped;
 
     public event Action<int> IsPlayerMoneyIncreased;
 
@@ -64,6 +65,11 @@ public class BoxSpawner : MonoBehaviour
         _bigBox.IsItemCollected -= OnBigboxCollected;
     }    
 
+    public void StopSpawn()
+    {
+        _isStopped = true;
+    }
+
     private void OnBigboxCollected()
     {
         int bigboxCount = 1;
@@ -78,7 +84,6 @@ public class BoxSpawner : MonoBehaviour
         if (_boxesCount > _currentBoxCount)
             DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
     }
-
 
     private void GenerateAllBoxes()
     {
@@ -114,7 +119,7 @@ public class BoxSpawner : MonoBehaviour
 
     private void SpawnBox()
     {
-        if (TryGetInactiveBox(out Box inactiveBox) && _boxesCount > _currentBoxCount && TryGetFreePointToSpawn(out Vector3 freePoint))
+        if (TryGetInactiveBox(out Box inactiveBox) && _boxesCount > _currentBoxCount && TryGetFreePointToSpawn(out Vector3 freePoint) && _isStopped == false)
         {
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _circleOffsetModifier;
 
@@ -135,9 +140,12 @@ public class BoxSpawner : MonoBehaviour
 
     private void SpawnBigBox()
     {
-        _bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
+        if (_isStopped == false)
+        {
+            _bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
 
-        _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
+            _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
+        }
     }
 
     private bool TryGetFreePointToSpawn(out Vector3 freePoint)

@@ -25,13 +25,18 @@ public class Player : Characters
     private void Awake()
     {
         _movement = GetComponent<Movement>();
-        _health += LoadBoostHealth();
     }
 
     private void Start()
     {
         _currentHealth = _health;
-        _movement.ChangedState += OnChangedState;
+
+        _health += LoadBoostHealth();
+    }
+
+    private void OnEnable()
+    {
+        _movement.ChangedState += OnChangedState;        
     }
 
     private void OnDisable()
@@ -63,7 +68,7 @@ public class Player : Characters
 
     private float LoadBoostHealth()
     {
-        int boostHealthLevel = DataHandler.Instance.GetSavedStat(DataHandler.Instance.HealthString);
+        int boostHealthLevel = DataHandler.Instance.GetSavedHealth();
         return (AddBoostMaxHealth * boostHealthLevel);
     }
 
