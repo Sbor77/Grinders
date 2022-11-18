@@ -2023,6 +2023,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _health
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 4805299535026477584, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_IsKinematic
       value: 1

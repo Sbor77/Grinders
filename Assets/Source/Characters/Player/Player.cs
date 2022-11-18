@@ -20,7 +20,6 @@ public class Player : Characters
     public float MaxHealth => _health;
     public bool IsDead => _currentHealth == 0;
 
-    private const string BoostHealth = "Health";
     private const int AddBoostMaxHealth = 10;
 
     private void Awake()
@@ -64,15 +63,8 @@ public class Player : Characters
 
     private float LoadBoostHealth()
     {
-        int boostSpeedLevel;
-
-        if (PlayerPrefs.HasKey(BoostHealth))
-        {
-            boostSpeedLevel = PlayerPrefs.GetInt(BoostHealth);
-            return (AddBoostMaxHealth * boostSpeedLevel);
-        }
-
-        return 0;
+        int boostHealthLevel = DataHandler.Instance.GetSavedStat(DataHandler.Instance.HealthString);
+        return (AddBoostMaxHealth * boostHealthLevel);
     }
 
     private bool IsValid(int value) => value > 0;

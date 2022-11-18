@@ -31,7 +31,6 @@ public class Movement : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _collider = GetComponent<CapsuleCollider>();
-        _speed += LoadBoostSpeed();
     }
 
     private void OnEnable()
@@ -40,6 +39,11 @@ public class Movement : MonoBehaviour
         _joystick.ChangedDirection += OnChangedDirection;
         _joystick.ReleasedTouch += OnReleasedTouch;
         _joystick.ChangedClickStatus += StartMoveingAtack;
+    }
+
+    private void Start()
+    {
+        _speed += LoadBoostSpeed();
     }
 
     private void Update()
