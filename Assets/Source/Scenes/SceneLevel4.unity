@@ -7309,7 +7309,7 @@ MonoBehaviour:
   - {fileID: 8791151804551881446, guid: e8997b363bdecd2408076cd6c2fb8781, type: 3}
   - {fileID: 4604683557206214305, guid: db7d6da3e7b8e8c4cb7645409ab71f55, type: 3}
   - {fileID: 5813451299658817458, guid: f314a41252f61d74e9b34ddd9a141bd5, type: 3}
-  - {fileID: 1094094260130659675, guid: b48ef16a9617cda4296c498d57505312, type: 3}
+  - {fileID: 6948732013236413756, guid: 4f987a7eb2e6a2546b021a2081ca06ec, type: 3}
   - {fileID: 4449667726229326942, guid: ca91a23936c860246be3017637cccb7a, type: 3}
   - {fileID: 5866666020242272253, guid: c12314af1d5c8694c91a571883f94133, type: 3}
   _spawnPoints:
@@ -9719,14 +9719,18 @@ MonoBehaviour:
   - {fileID: 1150424599}
   _spawnBoxParent: {fileID: 1414453989}
   _bigBoxPoint: {fileID: 78114139}
-  _boxPrefab: {fileID: 5172793039412916207, guid: 282a5c503c5c8b74dadb62492a5d2267, type: 3}
+  _boxWithCoinPrefab: {fileID: 0}
+  _boxWithCrossPrefab: {fileID: 0}
   _bigBoxPrefab: {fileID: 4931460773048236537, guid: 3ae6a955c9a1d8040b8cf86798f1adb1, type: 3}
+  _boxWithCrossChanceRatio: 0
   _boxLayer:
     serializedVersion: 2
     m_Bits: 256
-  _targetBoxesCount: 13
+  _boxesCount: 0
   _minMoneyAmount: 5
   _maxMoneyAmount: 10
+  _minHealthAmount: 0
+  _maxHealthAmount: 0
   _finalBoxMoneyAmount: 0
 --- !u!1001 &1374623968
 PrefabInstance:

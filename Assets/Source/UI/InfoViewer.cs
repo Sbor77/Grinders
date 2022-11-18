@@ -36,7 +36,8 @@ public class InfoViewer : MonoBehaviour
     {
         _player.ChangedHealth += OnChangedHealth;
         _player.ChangedCoin += OnChangedPlayerCoins;
-        _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;        
+        _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
+        _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
     }
 
     void Start()
@@ -52,6 +53,7 @@ public class InfoViewer : MonoBehaviour
         _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;        
         _player.ChangedHealth -= OnChangedHealth;
         _player.ChangedCoin -= OnChangedPlayerCoins;
+        _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
     }
 
     public void SetQuestCollected(QuestInfo conditions)
@@ -63,6 +65,8 @@ public class InfoViewer : MonoBehaviour
 
         _missonConditions = conditions;
     }
+
+
 
     private void SetStartConditionsText()
     {

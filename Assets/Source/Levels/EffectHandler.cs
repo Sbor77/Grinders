@@ -6,12 +6,19 @@ public class EffectHandler : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystem> _effects;
         
-    private WaitForSeconds _waitDelay = new WaitForSeconds (1f);        
-    private int _cycles = 10;
+    private WaitForSeconds _waitDelay;        
+    private int _cycles = 1;
+    private float _delay = 1f;
 
-    void Start()
+    public float Duration { get; private set; } 
+
+    private void Start()
     {
-        StopAllEffects();        
+        StopAllEffects();
+
+        _waitDelay = new WaitForSeconds(_delay);
+
+        Duration = _effects.Count * _cycles * _delay;
     }
 
     private void StopAllEffects()
@@ -37,9 +44,7 @@ public class EffectHandler : MonoBehaviour
             {
                 effect.Play();
 
-                i++;
-
-                print("Бахнули !!!");
+                i++;                
 
                 yield return _waitDelay;
             }

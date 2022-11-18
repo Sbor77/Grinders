@@ -19,11 +19,10 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private int _maxMoneyAmount;
     [SerializeField] private int _minHealthAmount;
     [SerializeField] private int _maxHealthAmount;
-
     [SerializeField] private int _finalBoxMoneyAmount;
 
-    private List<Box> _boxes = new List<Box>();    
-    private int _playerMoney;
+    private Box _bigBox;
+    private List<Box> _boxes = new List<Box>();        
     private int _currentBoxCount;
     private Vector3 _tempPosition = new Vector3(0, 5, 0);
     private float _respawnDelay = 4f;
@@ -31,16 +30,18 @@ public class BoxSpawner : MonoBehaviour
 
     public event Action<int> IsPlayerMoneyIncreased;
 
+    public event Action <int>IsBigBoxCollected;
+
     private void Awake()
     {
         GenerateAllBoxes();
+
+        SpawnBigBox();
     }
 
     private void Start()
     {
-        SpawnBox();
-
-        SpawnBigBox();
+        SpawnBox();        
     }
 
     private void OnEnable()
@@ -49,6 +50,8 @@ public class BoxSpawner : MonoBehaviour
         {            
             box.IsItemCollected += OnItemCollected;
         }
+
+        _bigBox.IsItemCollected += OnBigboxCollected;
     }
 
     private void OnDisable()
@@ -57,26 +60,23 @@ public class BoxSpawner : MonoBehaviour
         {         
             box.IsItemCollected -= OnItemCollected;
         }
-    }
 
-    /*private void OnCoinCollected(int money)
+        _bigBox.IsItemCollected -= OnBigboxCollected;
+    }    
+
+    private void OnBigboxCollected()
     {
-        _playerMoney += money;
+        int bigboxCount = 1;
 
-        IsPlayerMoneyIncreased?.Invoke(_playerMoney);
-
-        _currentBoxCount--;
-
-        if (_boxesCount > _currentBoxCount)
-            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);
-    }*/
+        IsBigBoxCollected?.Invoke(bigboxCount);        
+    }
 
     private void OnItemCollected()
     {
         _currentBoxCount--;
 
         if (_boxesCount > _currentBoxCount)
-            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);
+            DOVirtual.DelayedCall(_respawnDelay, SpawnBox);        
     }
 
 
@@ -135,9 +135,9 @@ public class BoxSpawner : MonoBehaviour
 
     private void SpawnBigBox()
     {
-        Box bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
+        _bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
 
-        bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
+        _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
     }
 
     private bool TryGetFreePointToSpawn(out Vector3 freePoint)
