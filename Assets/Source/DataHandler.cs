@@ -41,6 +41,11 @@ public class DataHandler : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public int GetSavedStat(string name)
+    {
+        return PlayerPrefs.GetInt(name);
+    }
+
     private void InitStats()
     {
         int defaultValue = -1;

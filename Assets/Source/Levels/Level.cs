@@ -69,7 +69,7 @@ public class Level : MonoBehaviour
 
             DOVirtual.DelayedCall(5.5f, () => _bigboxDoor.Open());
 
-            LoadCurrentStats();
+            //LoadCurrentStats();
         }
 
         if (_isBigboxDestroyed)
@@ -101,12 +101,15 @@ public class Level : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    private void LoadCurrentStats() // for test
+    /*private void LoadCurrentStats() // for test
     {
         print("Level = " + PlayerPrefs.GetInt(DataHandler.Instance.LevelString));
         print("Money = " + PlayerPrefs.GetInt(DataHandler.Instance.MoneyString));
+
+        print("Money = " + DataHandler.Instance.GetSavedStat(DataHandler.Instance.MoneyString));
+
         print("Kills = " + PlayerPrefs.GetInt(DataHandler.Instance.KillsString));
         print("Health = " + PlayerPrefs.GetInt(DataHandler.Instance.HealthString));
         print("MoveSpeed = " + PlayerPrefs.GetInt(DataHandler.Instance.MoveSpeedString));
-    }
+    }*/
 }
