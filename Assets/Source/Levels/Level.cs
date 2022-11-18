@@ -28,9 +28,15 @@ public class Level : MonoBehaviour
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
 
+    private StatsInfo _currentStats;
+
     private void Start()
     {
-        _missionConditions = _infoViewer.MissionConditions;        
+        _missionConditions = _infoViewer.MissionConditions;
+
+        _currentStats = new ();
+
+        
     }
 
     private void OnEnable()
@@ -53,6 +59,12 @@ public class Level : MonoBehaviour
 
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
 
+        _currentStats.SaveStat(_currentStats.KillsString, _currentKills);
+
+        _currentStats.SaveStat(_currentStats.MoneyString, _currentCoins);
+
+        _currentStats.SaveStat(_currentStats.HealthString, Mathf.CeilToInt(_currentHealth));
+
         if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
             _cameraHandler.ZoomInOutBigboxCamera();
@@ -62,6 +74,8 @@ public class Level : MonoBehaviour
             _isBigboxDoorOpened = true;
 
             DOVirtual.DelayedCall(5.5f, () => _bigboxDoor.Open());
+
+            LoadCurrentStats();
         }
 
         if (_isBigboxDestroyed)
@@ -84,7 +98,6 @@ public class Level : MonoBehaviour
         DOVirtual.DelayedCall(2f, () => _finalEffects.PlayAllEffects());
 
         DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadScene(_levelTwoScene));
-
     }
 
     private void LoadScene (int sceneIndex)
@@ -92,5 +105,14 @@ public class Level : MonoBehaviour
         print("загружаем сцену = " + sceneIndex);
 
         SceneManager.LoadScene(sceneIndex);
+    }
+
+    private void LoadCurrentStats()
+    {
+        print("Level = " + _currentStats.Level);
+        print("Money = " + _currentStats.Money);
+        print("Kills = " + _currentStats.Kills);
+        print("Health = " + _currentStats.Health);
+        print("MoveSpeed = " + _currentStats.MoveSpeed);
     }
 }

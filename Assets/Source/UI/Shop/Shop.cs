@@ -66,6 +66,12 @@ public class StatsInfo
     public int Health { get; private set; }
     public int MoveSpeed { get; private set; }
 
+    public string LevelString => "Level";
+    public string MoneyString => "Money";
+    public string KillsString => "Kills";
+    public string HealthString => "Health";
+    public string MoveSpeedString => "MoveSpeed";
+
     public StatsInfo(int level, int money, int kills, int health, int moveSpeed)
     {
         Level = level;
@@ -74,4 +80,67 @@ public class StatsInfo
         Health = health;
         MoveSpeed = moveSpeed;
     }
+
+    public StatsInfo() 
+    {
+        InitStats();
+    }
+
+    public void SaveStat(string name, int value)
+    {
+        PlayerPrefs.SetInt(name, value);
+
+        PlayerPrefs.Save();
+    }
+
+    private void InitStats()
+    {
+        int defaultValue = -1;
+
+        PlayerPrefs.SetInt(LevelString, defaultValue);
+
+        PlayerPrefs.SetInt(MoneyString, defaultValue);
+
+        PlayerPrefs.SetInt(KillsString, defaultValue);
+
+        PlayerPrefs.SetInt(HealthString, defaultValue);
+
+        PlayerPrefs.SetInt(MoveSpeedString, defaultValue);
+
+        PlayerPrefs.Save();
+    }
+
+
+
+    public bool TryGetCurrentStats()
+    {
+        bool result = true;
+
+        if (PlayerPrefs.HasKey(LevelString))
+            Level = PlayerPrefs.GetInt(LevelString);
+        else
+            result = false;
+
+        if (PlayerPrefs.HasKey(MoneyString))
+            Money = PlayerPrefs.GetInt(MoneyString);
+        else
+            result = false;
+
+        if (PlayerPrefs.HasKey(KillsString))
+            Kills = PlayerPrefs.GetInt(KillsString);
+        else
+            result = false;
+
+        if (PlayerPrefs.HasKey(HealthString))
+            Health = PlayerPrefs.GetInt(HealthString);
+        else
+            result = false;
+
+        if (PlayerPrefs.HasKey(MoveSpeedString))
+            MoveSpeed = PlayerPrefs.GetInt(MoveSpeedString);
+        else
+            result = false;
+
+        return result;
+    }    
 }
