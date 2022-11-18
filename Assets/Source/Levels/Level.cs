@@ -28,15 +28,11 @@ public class Level : MonoBehaviour
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
 
-    private StatsInfo _currentStats;
+    //private StatsInfo _currentStats;
 
     private void Start()
     {
-        _missionConditions = _infoViewer.MissionConditions;
-
-        _currentStats = new ();
-
-        
+        _missionConditions = _infoViewer.MissionConditions;        
     }
 
     private void OnEnable()
@@ -59,11 +55,11 @@ public class Level : MonoBehaviour
 
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
 
-        _currentStats.SaveStat(_currentStats.KillsString, _currentKills);
+        DataHandler.Instance.SaveStat(DataHandler.Instance.KillsString, _currentKills);
 
-        _currentStats.SaveStat(_currentStats.MoneyString, _currentCoins);
+        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
 
-        _currentStats.SaveStat(_currentStats.HealthString, Mathf.CeilToInt(_currentHealth));
+        DataHandler.Instance.SaveStat(DataHandler.Instance.HealthString, Mathf.CeilToInt(_currentHealth));
 
         if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
@@ -109,10 +105,10 @@ public class Level : MonoBehaviour
 
     private void LoadCurrentStats()
     {
-        print("Level = " + _currentStats.Level);
-        print("Money = " + _currentStats.Money);
-        print("Kills = " + _currentStats.Kills);
-        print("Health = " + _currentStats.Health);
-        print("MoveSpeed = " + _currentStats.MoveSpeed);
+        print("Level = " + DataHandler.Instance.Level);
+        print("Money = " + DataHandler.Instance.Money);
+        print("Kills = " + DataHandler.Instance.Kills);
+        print("Health = " + DataHandler.Instance.Health);
+        print("MoveSpeed = " + DataHandler.Instance.MoveSpeed);
     }
 }

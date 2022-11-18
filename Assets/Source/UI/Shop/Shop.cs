@@ -11,7 +11,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private StatsViewer _viewer;
     [SerializeField] private Button _exitButton;
 
-    private StatsInfo _statsInfo;
+    //private StatsInfo _statsInfo;
 
     private const string Level = "Level";
     private const string Money = "Money";
@@ -36,17 +36,17 @@ public class Shop : MonoBehaviour
 
     private void CloseShop()
     {
-        SceneManager.LoadScene(_statsInfo.Level);
+        SceneManager.LoadScene(DataHandler.Instance.Level);
     }
 
     private void OnStatBought()
     {
-        _statsInfo = new(GetSavedValue(Level), GetSavedValue(Money), GetSavedValue(Kills),
+        /*_statsInfo = new(GetSavedValue(Level), GetSavedValue(Money), GetSavedValue(Kills),
                      GetSavedValue(Health), GetSavedValue(MoveSpeed));
 
         _viewer.Init(_statsInfo);
 
-        _buyer.Init(_statsInfo);
+        _buyer.Init(_statsInfo);*/
     }
 
     private int GetSavedValue(string name)
@@ -58,8 +58,10 @@ public class Shop : MonoBehaviour
     }
 }
 
-public class StatsInfo
+/*public class StatsInfo : MonoBehaviour
 {
+    public static StatsInfo Instance { get; private set; }
+
     public int Level { get; private set; }
     public int Money { get; private set; }
     public int Kills { get; private set; }
@@ -72,7 +74,23 @@ public class StatsInfo
     public string HealthString => "Health";
     public string MoveSpeedString => "MoveSpeed";
 
-    public StatsInfo(int level, int money, int kills, int health, int moveSpeed)
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+
+            DontDestroyOnLoad(this);
+        }
+        
+        InitStats();
+    }
+
+    *//*public StatsInfo(int level, int money, int kills, int health, int moveSpeed)
     {
         Level = level;
         Money = money;
@@ -81,10 +99,10 @@ public class StatsInfo
         MoveSpeed = moveSpeed;
     }
 
-    public StatsInfo() 
+    public StatsInfo()
     {
         InitStats();
-    }
+    }*//*
 
     public void SaveStat(string name, int value)
     {
@@ -108,39 +126,5 @@ public class StatsInfo
         PlayerPrefs.SetInt(MoveSpeedString, defaultValue);
 
         PlayerPrefs.Save();
-    }
-
-
-
-    public bool TryGetCurrentStats()
-    {
-        bool result = true;
-
-        if (PlayerPrefs.HasKey(LevelString))
-            Level = PlayerPrefs.GetInt(LevelString);
-        else
-            result = false;
-
-        if (PlayerPrefs.HasKey(MoneyString))
-            Money = PlayerPrefs.GetInt(MoneyString);
-        else
-            result = false;
-
-        if (PlayerPrefs.HasKey(KillsString))
-            Kills = PlayerPrefs.GetInt(KillsString);
-        else
-            result = false;
-
-        if (PlayerPrefs.HasKey(HealthString))
-            Health = PlayerPrefs.GetInt(HealthString);
-        else
-            result = false;
-
-        if (PlayerPrefs.HasKey(MoveSpeedString))
-            MoveSpeed = PlayerPrefs.GetInt(MoveSpeedString);
-        else
-            result = false;
-
-        return result;
     }    
-}
+}*/
