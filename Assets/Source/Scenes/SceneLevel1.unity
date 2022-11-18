@@ -1405,9 +1405,6 @@ MonoBehaviour:
   - {fileID: 8791151804551881446, guid: e8997b363bdecd2408076cd6c2fb8781, type: 3}
   - {fileID: 4604683557206214305, guid: db7d6da3e7b8e8c4cb7645409ab71f55, type: 3}
   - {fileID: 5813451299658817458, guid: f314a41252f61d74e9b34ddd9a141bd5, type: 3}
-  - {fileID: 6948732013236413756, guid: 4f987a7eb2e6a2546b021a2081ca06ec, type: 3}
-  - {fileID: 4449667726229326942, guid: ca91a23936c860246be3017637cccb7a, type: 3}
-  - {fileID: 5866666020242272253, guid: c12314af1d5c8694c91a571883f94133, type: 3}
   _spawnPoints:
   - {fileID: 2011928833}
   - {fileID: 633104827}
