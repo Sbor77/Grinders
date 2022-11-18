@@ -14,22 +14,18 @@ public class Level : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
 
     private int _currentLevel;
-
     private int _ShopScene = 0;
     private int _levelOneScene = 1;
     private int _levelTwoScene = 2;
     private int _levelThreeScene = 3;
     private int _levelFourScene = 4;
-
     private QuestInfo _missionConditions;    
     private int _currentCoins;
     private int _currentKills;
     private float _currentHealth;
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
-
-    //private StatsInfo _currentStats;
-
+    
     private void Start()
     {
         _missionConditions = _infoViewer.MissionConditions;        
@@ -54,7 +50,9 @@ public class Level : MonoBehaviour
         _currentHealth = _infoViewer.CurrentHealth;
 
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
-
+        
+        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
+        
         DataHandler.Instance.SaveStat(DataHandler.Instance.KillsString, _currentKills);
 
         DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
@@ -93,7 +91,7 @@ public class Level : MonoBehaviour
 
         DOVirtual.DelayedCall(2f, () => _finalEffects.PlayAllEffects());
 
-        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadScene(_levelTwoScene));
+        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadScene(_ShopScene));
     }
 
     private void LoadScene (int sceneIndex)
@@ -103,12 +101,12 @@ public class Level : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    private void LoadCurrentStats()
+    private void LoadCurrentStats() // for test
     {
-        print("Level = " + DataHandler.Instance.Level);
-        print("Money = " + DataHandler.Instance.Money);
-        print("Kills = " + DataHandler.Instance.Kills);
-        print("Health = " + DataHandler.Instance.Health);
-        print("MoveSpeed = " + DataHandler.Instance.MoveSpeed);
+        print("Level = " + PlayerPrefs.GetInt(DataHandler.Instance.LevelString));
+        print("Money = " + PlayerPrefs.GetInt(DataHandler.Instance.MoneyString));
+        print("Kills = " + PlayerPrefs.GetInt(DataHandler.Instance.KillsString));
+        print("Health = " + PlayerPrefs.GetInt(DataHandler.Instance.HealthString));
+        print("MoveSpeed = " + PlayerPrefs.GetInt(DataHandler.Instance.MoveSpeedString));
     }
 }
