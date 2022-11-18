@@ -13,8 +13,8 @@ public class StatsViewer : MonoBehaviour
 
     public void Init(StatsInfo info)
     {
-        _stageText.text = $"Stage: {info.Stage}";
-        _goldText.text = $"Gold: {info.Golds}";
+        _stageText.text = $"Level: {info.Level}";
+        _goldText.text = $"Money: {info.Money}";
         _killedText.text = $"Killed: {info.Kills}";
         _healthText.text = $"Health level: {info.Health}";
         _speedText.text = $"Speed level: {info.MoveSpeed}";

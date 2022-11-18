@@ -1812,7 +1812,7 @@ GameObject:
   - component: {fileID: 1340263728}
   - component: {fileID: 1340263731}
   m_Layer: 5
-  m_Name: Buying
+  m_Name: Buyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1988,7 +1988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be5f006cfd322c409beea00dbd0b3c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buying: {fileID: 1340263731}
+  _buyer: {fileID: 1340263731}
   _viewer: {fileID: 418787954}
   _exitButton: {fileID: 0}
 --- !u!1 &1756099802

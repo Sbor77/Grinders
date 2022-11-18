@@ -30,9 +30,7 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        _missionConditions = _infoViewer.MissionConditions;
-
-        
+        _missionConditions = _infoViewer.MissionConditions;        
     }
 
     private void OnEnable()

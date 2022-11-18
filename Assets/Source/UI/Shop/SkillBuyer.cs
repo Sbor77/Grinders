@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillBuying : MonoBehaviour
+public class SkillBuyer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _healthPriceText;
     [SerializeField] private TMP_Text _movePriceText;
@@ -15,58 +15,65 @@ public class SkillBuying : MonoBehaviour
     [SerializeField] private int[] _healthLevelPrices;
 
     private StatsInfo _statsInfo;
-
-    private const string Golds = "Golds";
+    private const string Money = "Money";
     private const string Health = "Health";
     private const string MoveSpeed = "Speed";
 
-    public event Action ChangedStatsInfo; 
+    public event Action IsStatBought; 
 
     private void OnEnable()
     {
-        _buyHealthButton.onClick.AddListener(OnBuyHealth);
-        _buyMoveButton.onClick.AddListener(OnBuyMoveSpeed);
+        _buyHealthButton.onClick.AddListener(OnHealthBuy);
+
+        _buyMoveButton.onClick.AddListener(OnMoveSpeedBuy);
     }
 
     private void OnDisable()
     {
-        _buyHealthButton.onClick.RemoveListener(OnBuyHealth);
-        _buyMoveButton.onClick.RemoveListener(OnBuyMoveSpeed);
+        _buyHealthButton.onClick.RemoveListener(OnHealthBuy);
+
+        _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
     }
 
     public void Init(StatsInfo info)
     {
         _statsInfo = info;
+
         _healthPriceText.text = _healthLevelPrices[info.Health].ToString();
+
         _movePriceText.text = _moveLevelPrices[info.MoveSpeed].ToString();
     }
 
-    private void OnBuyHealth()
+    private void OnHealthBuy()
     {
         int price = _healthLevelPrices[_statsInfo.Health];
 
-        if (TryBuying(price))
+        if (IsMoneyEnough(price))
         {
-            UpdateStats(_statsInfo.Golds - price, Health, _statsInfo.Health + 1);
-            ChangedStatsInfo?.Invoke();
+            BuyStat(_statsInfo.Money - price, Health, _statsInfo.Health + 1);
+
+            IsStatBought?.Invoke();
         }
     }
 
-    private void OnBuyMoveSpeed()
+    private void OnMoveSpeedBuy()
     {
         int price = _moveLevelPrices[_statsInfo.MoveSpeed];
 
-        if (TryBuying(price))
+        if (IsMoneyEnough(price))
         {
-            UpdateStats(_statsInfo.Golds - price, MoveSpeed, _statsInfo.MoveSpeed + 1);
-            ChangedStatsInfo?.Invoke();
+            BuyStat(_statsInfo.Money - price, MoveSpeed, _statsInfo.MoveSpeed + 1);
+
+            IsStatBought?.Invoke();
         }
     }
 
-    private void UpdateStats(int newGoldsValue, string nameChangedStat, int newStatValue)
+    private void BuyStat(int newGoldsValue, string boughtStatName, int newStatValue)
     {
-        SetValue(Golds, newGoldsValue);
-        SetValue(nameChangedStat, newStatValue);
+        SetValue(Money, newGoldsValue);
+
+        SetValue(boughtStatName, newStatValue);
+
         PlayerPrefs.Save();
     }
 
@@ -75,9 +82,9 @@ public class SkillBuying : MonoBehaviour
         PlayerPrefs.SetInt(name, value);
     }
 
-    private bool TryBuying(int price)
+    private bool IsMoneyEnough(int statPrice)
     {
-        if (_statsInfo.Golds >= price)
+        if (_statsInfo.Money >= statPrice)
         {
             return true;
         }
