@@ -40,6 +40,7 @@ public class Mover : MonoBehaviour
         _zeroPoint = transform.position;
         _searchZone.ChangedTarget += OnChangedTarget;
         _enemy.Dying += OnDying;
+        _agent.enabled = true;
         Patrol();
     }
 
@@ -95,6 +96,8 @@ public class Mover : MonoBehaviour
         _target = null;
         _searchZone.gameObject.SetActive(true);        
         _animator.ResetState();
+        _agent.enabled = true;
+        //_agent.ResetPath();
     }
 
     private void StopDance()
@@ -106,9 +109,7 @@ public class Mover : MonoBehaviour
     private void OnDying()
     {
         _searchZone.gameObject.SetActive(false);
-        _agent.destination = transform.position;
-        _agent.ResetPath();
-        _agent.isStopped = true;
+        _agent.enabled = false;
         _isAlive = false;
     }
 
@@ -131,7 +132,9 @@ public class Mover : MonoBehaviour
     {
         _movePoint = GetNewPatrolPoint();
         NavMeshPath path = new NavMeshPath();
-        _agent.CalculatePath(_movePoint, path);
+
+        if (_agent.enabled)
+            _agent.CalculatePath(_movePoint, path);
 
         if (path.status == NavMeshPathStatus.PathComplete)
             _agent.destination = _movePoint;
@@ -162,7 +165,7 @@ public class Mover : MonoBehaviour
             if (player.IsDead == false)
             {
                 _isAttaking = true;
-                _agent.ResetPath();
+                //_agent.ResetPath();
                 float attackDelay = _animator.StartAttack();
                 Invoke(nameof(Attack), attackDelay);
             }
