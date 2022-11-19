@@ -15,12 +15,12 @@ public class Level : MonoBehaviour
     [SerializeField] private BoxSpawner _boxSpawner;
 
     private int _currentLevel;
-    private int _ShopScene = 0;
-    private int _levelOneScene = 1;
-    private int _levelTwoScene = 2;
-    private int _levelThreeScene = 3;
-    private int _levelFourScene = 4;
-    private string _SceneShop = "SceneShop";
+    private int _ShopSceneIndex = 0;
+    private int _levelOneSceneIndex = 1;
+    private int _levelTwoSceneIndex = 2;
+    private int _levelThreeSceneIndex = 3;
+    private int _levelFourSceneIndex = 4;
+    
     private QuestInfo _missionConditions;    
     private int _currentCoins;
     private int _currentKills;
@@ -32,7 +32,7 @@ public class Level : MonoBehaviour
     {
         _missionConditions = _infoViewer.MissionConditions;
 
-        if (SceneManager.GetActiveScene().buildIndex == _levelOneScene)
+        if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)
         {
             print("Мы на первой сцене!");
             SaveDefaultStats();
@@ -55,7 +55,6 @@ public class Level : MonoBehaviour
 
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
-
 
     private void OnActiveSceneChanged(Scene current, Scene next)
     {
@@ -121,13 +120,17 @@ public class Level : MonoBehaviour
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
-        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadShopScene());
+
+        if (DataHandler.Instance.GetSavedLevel() < _levelFourSceneIndex)
+        {
+            DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadScene(_ShopSceneIndex));
+        }
     }
 
-    private void LoadShopScene()
+    private void LoadScene(int index)
     {
         SaveProgress();
-        SceneManager.LoadScene(_SceneShop);
+        SceneManager.LoadScene(index);
     }
 
     private void SaveProgress()

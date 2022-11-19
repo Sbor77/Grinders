@@ -4816,7 +4816,7 @@ MonoBehaviour:
   _boxWithCoinPrefab: {fileID: 5172793039412916207, guid: 282a5c503c5c8b74dadb62492a5d2267, type: 3}
   _boxWithCrossPrefab: {fileID: 7591239710437129417, guid: ccaa296c9d425ef438077c3104be7f5f, type: 3}
   _bigBoxPrefab: {fileID: 4931460773048236537, guid: 3ae6a955c9a1d8040b8cf86798f1adb1, type: 3}
-  _boxWithCrossChanceRatio: 0.2
+  _boxWithCrossChanceRatio: 0.9
   _boxLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -8689,7 +8689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needCoinCollected
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needDestroyBigBox
