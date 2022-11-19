@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +11,6 @@ public class SkillBuyer : MonoBehaviour
     [SerializeField] private Button _buyHealthButton;
     [SerializeField] private int[] _moveLevelPrices;
     [SerializeField] private int[] _healthLevelPrices;
-
-    //private StatsData _statsInfo;
-    private const string Money = "Money";
-    private const string Health = "Health";
-    private const string MoveSpeed = "Speed";
 
     public event Action IsStatBought; 
 
@@ -33,52 +26,21 @@ public class SkillBuyer : MonoBehaviour
         _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
     }
 
-    /*public void Init(StatsInfo info)
-    {
-        _statsInfo = info;
-
-        _healthPriceText.text = _healthLevelPrices[info.Health].ToString();
-
-        _movePriceText.text = _moveLevelPrices[info.MoveSpeed].ToString();
-    }*/
-
     public void Init()
     {
-        _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.Health].ToString();
-        _movePriceText.text = _moveLevelPrices[DataHandler.Instance.MoveSpeed].ToString();
+        _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.GetSavedHealth()].ToString();
+        _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedMoveSpeed()].ToString();
     }
-
-    /*private void OnHealthBuy()
-    {
-        int price = _healthLevelPrices[_statsInfo.Health];
-
-        if (IsMoneyEnough(price))
-        {
-            BuyStat(_statsInfo.Money - price, Health, _statsInfo.Health + 1);
-
-            IsStatBought?.Invoke();
-        }
-    }
-
-    private void OnMoveSpeedBuy()
-    {
-        int price = _moveLevelPrices[_statsInfo.MoveSpeed];
-
-        if (IsMoneyEnough(price))
-        {
-            BuyStat(_statsInfo.Money - price, MoveSpeed, _statsInfo.MoveSpeed + 1);
-
-            IsStatBought?.Invoke();
-        }
-    }*/
 
     private void OnHealthBuy()
     {
-        int price = _healthLevelPrices[DataHandler.Instance.Health];
+        int health = DataHandler.Instance.GetSavedHealth();
+        int price = _healthLevelPrices[health];
 
-        if (IsMoneyEnough(price))
+        if (TryBuying(price))
         {
-            BuyStat(DataHandler.Instance.Money - price, DataHandler.Instance.HealthString, DataHandler.Instance.Health + 1);
+            DataHandler.Instance.SaveHealth(health + 1);
+            DataHandler.Instance.SaveAllStats();
 
             IsStatBought?.Invoke();
         }
@@ -86,45 +48,26 @@ public class SkillBuyer : MonoBehaviour
 
     private void OnMoveSpeedBuy()
     {
-        int price = _moveLevelPrices[DataHandler.Instance.MoveSpeed];
+        int moveSpeed = DataHandler.Instance.GetSavedMoveSpeed();
+        int price = _moveLevelPrices[moveSpeed];
 
-        if (IsMoneyEnough(price))
+        if (TryBuying(price))
         {
-            BuyStat(DataHandler.Instance.Money - price, DataHandler.Instance.MoveSpeedString, DataHandler.Instance.MoveSpeed + 1);
+            DataHandler.Instance.SaveMoveSpeed(moveSpeed + 1);
 
             IsStatBought?.Invoke();
         }
     }
 
-    private void BuyStat(int newGoldsValue, string boughtStatName, int newStatValue)
+    private bool TryBuying(int statPrice)
     {
-        //SetValue(Money, newGoldsValue);
-        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, newGoldsValue);
-        DataHandler.Instance.SaveStat(boughtStatName, newStatValue);
-        //SetValue(boughtStatName, newStatValue);
+        int money = DataHandler.Instance.GetSavedMoney();
 
-        //PlayerPrefs.Save();
-    }
-
-    //private void SetValue(string name, int value)
-    //{
-    //    PlayerPrefs.SetInt(name, value);
-    //}
-
-    /*private bool IsMoneyEnough(int statPrice)
-    {
-        if (_statsInfo.Money >= statPrice)
+        if (money >= statPrice)
         {
+            DataHandler.Instance.SaveMoney(money - statPrice);
             return true;
         }
-
-        return false;
-    }*/
-
-    private bool IsMoneyEnough(int statPrice)
-    {
-        if (DataHandler.Instance.Money >= statPrice)
-            return true;
 
         return false;
     }

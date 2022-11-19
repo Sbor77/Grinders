@@ -6,12 +6,6 @@ public class DataHandler : MonoBehaviour
 {
     public static DataHandler Instance { get; private set; }
 
-    public int Level { get; private set; }
-    public int Money { get; private set; }
-    public int Kills { get; private set; }
-    public int Health { get; private set; }
-    public int MoveSpeed { get; private set; }
-
     public string LevelString => "Level";
     public string MoneyString => "Money";
     public string KillsString => "Kills";
@@ -29,46 +23,61 @@ public class DataHandler : MonoBehaviour
             Instance = this;
 
             DontDestroyOnLoad(this);
-        }
-
-        //InitStats();
-        LoadStats();
+        }        
     }
 
-    public void SaveStat(string name, int value)
+    public void SaveLevel (int level)
     {
-        PlayerPrefs.SetInt(name, value);
+        PlayerPrefs.SetInt(LevelString, level);
+    }
 
+    public void SaveMoney (int money)
+    {
+        PlayerPrefs.SetInt(MoneyString, money);
+    }
+
+    public void SaveKills(int kills)
+    {
+        PlayerPrefs.SetInt(KillsString, kills);
+    }
+
+    public void SaveHealth(int health)
+    {
+        PlayerPrefs.SetInt(HealthString, health);
+    }
+
+    public void SaveMoveSpeed(int moveSpeed)
+    {
+        PlayerPrefs.SetInt(MoveSpeedString, moveSpeed);
+    }
+
+    public void SaveAllStats()
+    {
         PlayerPrefs.Save();
-        LoadStats();
     }
 
-    public int GetSavedStat(string name)
+    public int GetSavedMoney()
     {
-        if (PlayerPrefs.HasKey(name))
-            return PlayerPrefs.GetInt(name);
-
-        return 0;
+        return PlayerPrefs.GetInt(MoneyString);
     }
 
-    private void LoadStats()
+    public int GetSavedKills()
     {
-        Level = GetSavedStat(LevelString);
-        Money = GetSavedStat(MoneyString);
-        Kills = GetSavedStat(KillsString);
-        Health = GetSavedStat(HealthString);
-        MoveSpeed = GetSavedStat(MoveSpeedString);
+        return PlayerPrefs.GetInt(KillsString);
     }
 
-    private void InitStats()
+    public int GetSavedLevel()
     {
-        int defaultValue = 0;
+        return PlayerPrefs.GetInt(LevelString);
+    }
 
-        PlayerPrefs.SetInt(LevelString, defaultValue);
-        PlayerPrefs.SetInt(MoneyString, defaultValue);
-        PlayerPrefs.SetInt(KillsString, defaultValue);
-        PlayerPrefs.SetInt(HealthString, defaultValue);
-        PlayerPrefs.SetInt(MoveSpeedString, defaultValue);
-        PlayerPrefs.Save();
+    public int GetSavedHealth()
+    {
+        return PlayerPrefs.GetInt(HealthString);
+    }
+
+    public int GetSavedMoveSpeed()
+    {
+        return PlayerPrefs.GetInt(MoveSpeedString);
     }
 }

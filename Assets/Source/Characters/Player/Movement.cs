@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
 
     private float LoadBoostSpeed()
     {
-        int boostSpeedLevel = DataHandler.Instance.GetSavedStat(DataHandler.Instance.MoveSpeedString);
+        int boostSpeedLevel = DataHandler.Instance.GetSavedMoveSpeed();
         return boostSpeedLevel * AddBoostMoveSpeed;
     }
 
