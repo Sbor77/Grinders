@@ -42,7 +42,7 @@ public class DataHandler : MonoBehaviour
 
     public void SaveKills(int kills)
     {
-        if (kills > 0)
+        if (kills >= 0)
             PlayerPrefs.SetInt(KillsString, kills);
     }
 

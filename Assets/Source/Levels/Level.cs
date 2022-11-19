@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Level : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Level : MonoBehaviour
     [SerializeField] private CameraHandler _cameraHandler;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private BoxSpawner _boxSpawner;
+    [SerializeField] private DeathPanel _deathPanel;
 
     private int _currentLevel;
     private int _ShopScene = 0;
@@ -20,8 +22,7 @@ public class Level : MonoBehaviour
     private int _levelTwoScene = 2;
     private int _levelThreeScene = 3;
     private int _levelFourScene = 4;
-    private string _SceneShop = "SceneShop";
-    private QuestInfo _missionConditions;    
+    private QuestInfo _missionConditions;
     private int _currentCoins;
     private int _currentKills;
     private float _currentHealth;
@@ -37,25 +38,26 @@ public class Level : MonoBehaviour
             print("Мы на первой сцене!");
             SaveDefaultStats();
         }
-
-        
     }
 
     private void OnEnable()
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
-
+        _player.Dying += OnDyingPlayerScreen;
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
     }
-
 
     private void OnDisable()
     {
         _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
-
+        _player.Dying -= OnDyingPlayerScreen;
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 
+    private void OnDyingPlayerScreen()
+    {
+        _deathPanel.gameObject.SetActive(true);
+    }
 
     private void OnActiveSceneChanged(Scene current, Scene next)
     {
@@ -127,7 +129,7 @@ public class Level : MonoBehaviour
     private void LoadShopScene()
     {
         SaveProgress();
-        SceneManager.LoadScene(_SceneShop);
+        SceneManager.LoadScene(_ShopScene);
     }
 
     private void SaveProgress()
