@@ -14,7 +14,7 @@ public class SkillBuyer : MonoBehaviour
     [SerializeField] private int[] _moveLevelPrices;
     [SerializeField] private int[] _healthLevelPrices;
 
-    //private StatsInfo _statsInfo;
+    //private StatsData _statsInfo;
     private const string Money = "Money";
     private const string Health = "Health";
     private const string MoveSpeed = "Speed";
@@ -24,14 +24,12 @@ public class SkillBuyer : MonoBehaviour
     private void OnEnable()
     {
         _buyHealthButton.onClick.AddListener(OnHealthBuy);
-
         _buyMoveButton.onClick.AddListener(OnMoveSpeedBuy);
     }
 
     private void OnDisable()
     {
         _buyHealthButton.onClick.RemoveListener(OnHealthBuy);
-
         _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
     }
 
@@ -47,7 +45,6 @@ public class SkillBuyer : MonoBehaviour
     public void Init()
     {
         _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.Health].ToString();
-
         _movePriceText.text = _moveLevelPrices[DataHandler.Instance.MoveSpeed].ToString();
     }
 
@@ -81,7 +78,7 @@ public class SkillBuyer : MonoBehaviour
 
         if (IsMoneyEnough(price))
         {
-            BuyStat(DataHandler.Instance.Money - price, Health, DataHandler.Instance.Health + 1);
+            BuyStat(DataHandler.Instance.Money - price, DataHandler.Instance.HealthString, DataHandler.Instance.Health + 1);
 
             IsStatBought?.Invoke();
         }
@@ -93,7 +90,7 @@ public class SkillBuyer : MonoBehaviour
 
         if (IsMoneyEnough(price))
         {
-            BuyStat(DataHandler.Instance.Money - price, MoveSpeed, DataHandler.Instance.MoveSpeed + 1);
+            BuyStat(DataHandler.Instance.Money - price, DataHandler.Instance.MoveSpeedString, DataHandler.Instance.MoveSpeed + 1);
 
             IsStatBought?.Invoke();
         }
@@ -101,17 +98,18 @@ public class SkillBuyer : MonoBehaviour
 
     private void BuyStat(int newGoldsValue, string boughtStatName, int newStatValue)
     {
-        SetValue(Money, newGoldsValue);
+        //SetValue(Money, newGoldsValue);
+        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, newGoldsValue);
+        DataHandler.Instance.SaveStat(boughtStatName, newStatValue);
+        //SetValue(boughtStatName, newStatValue);
 
-        SetValue(boughtStatName, newStatValue);
-
-        PlayerPrefs.Save();
+        //PlayerPrefs.Save();
     }
 
-    private void SetValue(string name, int value)
-    {
-        PlayerPrefs.SetInt(name, value);
-    }
+    //private void SetValue(string name, int value)
+    //{
+    //    PlayerPrefs.SetInt(name, value);
+    //}
 
     /*private bool IsMoneyEnough(int statPrice)
     {
@@ -126,9 +124,7 @@ public class SkillBuyer : MonoBehaviour
     private bool IsMoneyEnough(int statPrice)
     {
         if (DataHandler.Instance.Money >= statPrice)
-        {
             return true;
-        }
 
         return false;
     }

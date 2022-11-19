@@ -71,15 +71,8 @@ public class Movement : MonoBehaviour
 
     private float LoadBoostSpeed()
     {
-        int boostSpeedLevel;
-
-        if (PlayerPrefs.HasKey(MoveSpeedBoost))
-        {
-            boostSpeedLevel = PlayerPrefs.GetInt(MoveSpeedBoost);
-            return (AddBoostMoveSpeed * boostSpeedLevel);
-        }
-
-        return 0;
+        int boostSpeedLevel = DataHandler.Instance.GetSavedStat(DataHandler.Instance.MoveSpeedString);
+        return boostSpeedLevel * AddBoostMoveSpeed;
     }
 
     private void OnChangedDirection(Vector2 direction)

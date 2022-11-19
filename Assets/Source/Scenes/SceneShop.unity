@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 154646138}
   - component: {fileID: 154646137}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Exit_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2028,8 +2028,8 @@ MonoBehaviour:
   _movePriceText: {fileID: 105732797}
   _buyMoveButton: {fileID: 1240869883}
   _buyHealthButton: {fileID: 2039647907}
-  _moveLevelPrices: 64000000c80000002c010000f401000020030000
-  _healthLevelPrices: 64000000c80000002c01000090010000f4010000
+  _moveLevelPrices: 0a000000140000001e000000f401000020030000
+  _healthLevelPrices: 0a000000140000001e00000090010000f4010000
 --- !u!1 &1537015380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,7 +2125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buyer: {fileID: 1340263731}
   _viewer: {fileID: 418787954}
-  _exitButton: {fileID: 0}
+  _exitButton: {fileID: 154646137}
 --- !u!1 &1756099802
 GameObject:
   m_ObjectHideFlags: 0

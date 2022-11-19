@@ -31,7 +31,8 @@ public class DataHandler : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        InitStats();
+        //InitStats();
+        LoadStats();
     }
 
     public void SaveStat(string name, int value)
@@ -39,27 +40,35 @@ public class DataHandler : MonoBehaviour
         PlayerPrefs.SetInt(name, value);
 
         PlayerPrefs.Save();
+        LoadStats();
     }
 
     public int GetSavedStat(string name)
     {
-        return PlayerPrefs.GetInt(name);
+        if (PlayerPrefs.HasKey(name))
+            return PlayerPrefs.GetInt(name);
+
+        return 0;
+    }
+
+    private void LoadStats()
+    {
+        Level = GetSavedStat(LevelString);
+        Money = GetSavedStat(MoneyString);
+        Kills = GetSavedStat(KillsString);
+        Health = GetSavedStat(HealthString);
+        MoveSpeed = GetSavedStat(MoveSpeedString);
     }
 
     private void InitStats()
     {
-        int defaultValue = -1;
+        int defaultValue = 0;
 
         PlayerPrefs.SetInt(LevelString, defaultValue);
-
         PlayerPrefs.SetInt(MoneyString, defaultValue);
-
         PlayerPrefs.SetInt(KillsString, defaultValue);
-
         PlayerPrefs.SetInt(HealthString, defaultValue);
-
         PlayerPrefs.SetInt(MoveSpeedString, defaultValue);
-
         PlayerPrefs.Save();
     }
 }

@@ -19,6 +19,7 @@ public class Level : MonoBehaviour
     private int _levelTwoScene = 2;
     private int _levelThreeScene = 3;
     private int _levelFourScene = 4;
+    private string _SceneShop = "SceneShop";
     private QuestInfo _missionConditions;    
     private int _currentCoins;
     private int _currentKills;
@@ -51,13 +52,13 @@ public class Level : MonoBehaviour
 
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
         
-        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
+        //DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
         
-        DataHandler.Instance.SaveStat(DataHandler.Instance.KillsString, _currentKills);
+        //DataHandler.Instance.SaveStat(DataHandler.Instance.KillsString, _currentKills);
 
-        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
+        //DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, _currentCoins);
 
-        DataHandler.Instance.SaveStat(DataHandler.Instance.HealthString, Mathf.CeilToInt(_currentHealth));
+        //DataHandler.Instance.SaveStat(DataHandler.Instance.HealthString, Mathf.CeilToInt(_currentHealth));
 
         if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
@@ -90,7 +91,7 @@ public class Level : MonoBehaviour
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(2f, () => _finalEffects.PlayAllEffects());
-
+        SaveCurrentStats();
         DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadScene(_ShopScene));
     }
 
@@ -98,7 +99,20 @@ public class Level : MonoBehaviour
     {
         print("загружаем сцену = " + sceneIndex);
 
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(_SceneShop);// (sceneIndex);
+    }
+
+    private void SaveCurrentStats()
+    {
+        int coins = _currentCoins + DataHandler.Instance.GetSavedStat(DataHandler.Instance.MoneyString);
+        int kills = _currentKills + DataHandler.Instance.GetSavedStat(DataHandler.Instance.KillsString);
+        int level = SceneManager.GetActiveScene().buildIndex; //DataHandler.Instance.GetSavedStat(DataHandler.Instance.LevelString) + 1;
+
+        DataHandler.Instance.SaveStat(DataHandler.Instance.MoneyString, coins);
+        DataHandler.Instance.SaveStat(DataHandler.Instance.KillsString, kills);
+        DataHandler.Instance.SaveStat(DataHandler.Instance.LevelString, level);
+        //DataHandler.Instance.SaveStat(DataHandler.Instance.HealthString, Mathf.CeilToInt(_currentHealth));
+
     }
 
     /*private void LoadCurrentStats() // for test

@@ -2025,7 +2025,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: _health
-      value: 3000
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4805299535026477584, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_IsKinematic
@@ -8676,11 +8676,11 @@ PrefabInstance:
       objectReference: {fileID: 1251975579720424105}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needEnemyKilled
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needCoinCollected
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needDestroyBigBox
