@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
 
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
-    private const string MoveSpeedBoost = "Speed";
+    private const int _maxPointCount = 50;
 
     private void Awake()
     {
@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
 
     private float LoadBoostSpeed()
     {
-        int boostSpeedLevel = DataHandler.Instance.GetSavedSpeedSkill();
+        int boostSpeedLevel = DataHandler.Instance.GetSavedSpeedSkill() - 1;
         return boostSpeedLevel * AddBoostMoveSpeed;
     }
 
@@ -126,7 +126,7 @@ public class Movement : MonoBehaviour
             _startAttackPosition = newPoint;
             movePoints.Add(newPoint);
 
-            if (movePoints.Count > 50)
+            if (movePoints.Count > _maxPointCount)
                 return null;
         }
 

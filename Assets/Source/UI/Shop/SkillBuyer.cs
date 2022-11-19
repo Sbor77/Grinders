@@ -12,7 +12,7 @@ public class SkillBuyer : MonoBehaviour
     [SerializeField] private int[] _moveLevelPrices;
     [SerializeField] private int[] _healthLevelPrices;
 
-    public event Action IsStatBought; 
+    public event Action IsStatBought;
 
     private void OnEnable()
     {
@@ -30,6 +30,16 @@ public class SkillBuyer : MonoBehaviour
     {
         _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.GetSavedHealthSkill()].ToString();
         _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedSpeedSkill()].ToString();
+        ButtonIsValid();
+    }
+
+    private void ButtonIsValid()
+    {
+        if (DataHandler.Instance.GetSavedHealthSkill() >= _healthLevelPrices.Length)
+            _buyHealthButton.interactable = false;
+
+        if (DataHandler.Instance.GetSavedSpeedSkill() >= _moveLevelPrices.Length)
+            _buyMoveButton.interactable = false;
     }
 
     private void OnHealthBuy()

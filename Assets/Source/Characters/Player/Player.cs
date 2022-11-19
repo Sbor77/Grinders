@@ -29,9 +29,8 @@ public class Player : Characters
 
     private void Start()
     {
-        _currentHealth = _health;
-
         _health += LoadBoostHealth();
+        _currentHealth = _health;
     }
 
     private void OnEnable()
@@ -68,7 +67,7 @@ public class Player : Characters
 
     private float LoadBoostHealth()
     {
-        int boostHealthLevel = DataHandler.Instance.GetSavedHealthSkill();
+        int boostHealthLevel = DataHandler.Instance.GetSavedHealthSkill() - 1;
         return (AddBoostMaxHealth * boostHealthLevel);
     }
 
