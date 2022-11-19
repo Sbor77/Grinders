@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 1459760949184593603}
   - component: {fileID: 5394273445764335061}
   - component: {fileID: 7510729138401826809}
+  - component: {fileID: 386824782230901069}
   m_Layer: 5
   m_Name: DeathPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1459760949184593603
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79,6 +80,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &386824782230901069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60059798979228210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8318561392e9647b17fdf74bae3902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dieButton: {fileID: 8219981547018279380}
+  _continueButton: {fileID: 1177390561130231193}
 --- !u!1 &1137367153079548918
 GameObject:
   m_ObjectHideFlags: 0

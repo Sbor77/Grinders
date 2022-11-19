@@ -145,7 +145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: Start!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7659f6d6ec9b642db8be29bc45fe97cc, type: 2}
   m_sharedMaterial: {fileID: 8690591861142563998, guid: 7659f6d6ec9b642db8be29bc45fe97cc, type: 2}
@@ -314,12 +314,12 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 5
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -489,8 +489,8 @@ MonoBehaviour:
   _infoViewer: {fileID: 0}
   _continueButton: {fileID: 6047048542596863574}
   _conditionsText: {fileID: 6047048541489648877}
-  _needCoinCollected: 50
-  _needEnemyKilled: 0
+  _needCoinCollected: 1
+  _needEnemyKilled: 1
   _needDestroyBigBox: 1
 --- !u!114 &6047048542587295038
 MonoBehaviour:
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Quest:'
+  m_text: 'Mission:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
   m_sharedMaterial: {fileID: 3074828514974314926, guid: c2f49fe8c22d94f9a9e6cd06ad490155, type: 2}
@@ -737,7 +737,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 79.15
+  m_fontSize: 130.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
