@@ -68,7 +68,7 @@ public class Player : Characters
 
     private float LoadBoostHealth()
     {
-        int boostHealthLevel = DataHandler.Instance.GetSavedHealth();
+        int boostHealthLevel = DataHandler.Instance.GetSavedHealthSkill();
         return (AddBoostMaxHealth * boostHealthLevel);
     }
 

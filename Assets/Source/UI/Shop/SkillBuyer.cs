@@ -28,18 +28,18 @@ public class SkillBuyer : MonoBehaviour
 
     public void Init()
     {
-        _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.GetSavedHealth()].ToString();
-        _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedMoveSpeed()].ToString();
+        _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.GetSavedHealthSkill()].ToString();
+        _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedSpeedSkill()].ToString();
     }
 
     private void OnHealthBuy()
     {
-        int health = DataHandler.Instance.GetSavedHealth();
+        int health = DataHandler.Instance.GetSavedHealthSkill();
         int price = _healthLevelPrices[health];
 
         if (TryBuying(price))
         {
-            DataHandler.Instance.SaveHealth(health + 1);
+            DataHandler.Instance.SaveHealthSkill(health + 1);
             DataHandler.Instance.SaveAllStats();
 
             IsStatBought?.Invoke();
@@ -48,12 +48,12 @@ public class SkillBuyer : MonoBehaviour
 
     private void OnMoveSpeedBuy()
     {
-        int moveSpeed = DataHandler.Instance.GetSavedMoveSpeed();
+        int moveSpeed = DataHandler.Instance.GetSavedSpeedSkill();
         int price = _moveLevelPrices[moveSpeed];
 
         if (TryBuying(price))
         {
-            DataHandler.Instance.SaveMoveSpeed(moveSpeed + 1);
+            DataHandler.Instance.SaveSpeedSkill(moveSpeed + 1);
 
             IsStatBought?.Invoke();
         }

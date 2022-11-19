@@ -32,35 +32,51 @@ public class Level : MonoBehaviour
     {
         _missionConditions = _infoViewer.MissionConditions;
 
-        LoadInitialStats();
+        if (SceneManager.GetActiveScene().buildIndex == _levelOneScene)
+        {
+            print("Мы на первой сцене!");
+            SaveDefaultStats();
+        }
+
+        
     }
 
     private void OnEnable()
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
+
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
     }
+
 
     private void OnDisable()
     {
         _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
+
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 
-    private void LoadInitialStats()
+
+    private void OnActiveSceneChanged(Scene current, Scene next)
     {
-        int level = DataHandler.Instance.GetSavedLevel();
-
-        if (level == 0)
-        {
-            level = 1;
-            DataHandler.Instance.SaveLevel(level);
-        }
-
-        int money = 0;
-        DataHandler.Instance.SaveMoney(money);
-
-        int kills = 0;
-        DataHandler.Instance.SaveKills(kills);
+        print($"Перешли из сцены c индексом: {current.buildIndex} в сцену с индексом: {next.buildIndex}");
     }
+
+    private void SaveDefaultStats()
+    {
+        int defaultLevel = 1;
+        int defaultHealthSkill = 1;
+        int defaultSpeedSkill = 1;
+        int defaultKills = 0;
+        int defaultMoney = 0;
+
+        DataHandler.Instance.SaveHealthSkill(defaultHealthSkill);
+        DataHandler.Instance.SaveSpeedSkill(defaultSpeedSkill);
+        DataHandler.Instance.SaveLevel(defaultLevel);        
+        DataHandler.Instance.SaveMoney(defaultMoney);        
+        DataHandler.Instance.SaveKills(defaultKills);
+    }
+
 
     private void OnCurrentConditionsChanged()
     {

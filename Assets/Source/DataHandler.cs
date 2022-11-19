@@ -9,8 +9,8 @@ public class DataHandler : MonoBehaviour
     public string LevelString => "Level";
     public string MoneyString => "Money";
     public string KillsString => "Kills";
-    public string HealthString => "Health";
-    public string MoveSpeedString => "MoveSpeed";
+    public string HealthSkillString => "HealthSkill";
+    public string SpeedSkillString => "SpeedSkill";
 
     private void Awake()
     {
@@ -28,27 +28,38 @@ public class DataHandler : MonoBehaviour
 
     public void SaveLevel (int level)
     {
-        PlayerPrefs.SetInt(LevelString, level);
+        if (level <= 0)
+            PlayerPrefs.SetInt(LevelString, 1);
+        else        
+            PlayerPrefs.SetInt(LevelString, level);
     }
 
     public void SaveMoney (int money)
     {
-        PlayerPrefs.SetInt(MoneyString, money);
+        if (money >= 0)
+            PlayerPrefs.SetInt(MoneyString, money);
     }
 
     public void SaveKills(int kills)
     {
-        PlayerPrefs.SetInt(KillsString, kills);
+        if (kills > 0)
+            PlayerPrefs.SetInt(KillsString, kills);
     }
 
-    public void SaveHealth(int health)
+    public void SaveHealthSkill(int healthSkill)
     {
-        PlayerPrefs.SetInt(HealthString, health);
+        if (healthSkill <= 0)
+            PlayerPrefs.SetInt(HealthSkillString, 1);
+        else
+            PlayerPrefs.SetInt(HealthSkillString, healthSkill);
     }
 
-    public void SaveMoveSpeed(int moveSpeed)
+    public void SaveSpeedSkill(int speedSkill)
     {
-        PlayerPrefs.SetInt(MoveSpeedString, moveSpeed);
+        if (speedSkill <= 0)
+            PlayerPrefs.SetInt(SpeedSkillString, 1);
+        else
+            PlayerPrefs.SetInt(SpeedSkillString, speedSkill);
     }
 
     public void SaveAllStats()
@@ -71,13 +82,13 @@ public class DataHandler : MonoBehaviour
         return PlayerPrefs.GetInt(LevelString);
     }
 
-    public int GetSavedHealth()
+    public int GetSavedHealthSkill()
     {
-        return PlayerPrefs.GetInt(HealthString);
+        return PlayerPrefs.GetInt(HealthSkillString);
     }
 
-    public int GetSavedMoveSpeed()
+    public int GetSavedSpeedSkill()
     {
-        return PlayerPrefs.GetInt(MoveSpeedString);
+        return PlayerPrefs.GetInt(SpeedSkillString);
     }
 }
