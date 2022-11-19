@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2042805655323420240}
   - component: {fileID: 6627762082445188552}
   - component: {fileID: 4931460773048236537}
+  - component: {fileID: 4980201745053812987}
   m_Layer: 8
   m_Name: BigBoxWithCoin
   m_TagString: Untagged
@@ -215,6 +216,18 @@ MonoBehaviour:
   _fracturedBox: {fileID: 4250450508748718785}
   _crashAudioClip: {fileID: 6627762082445188552}
   _item: {fileID: 7268686413848879449}
+--- !u!114 &4980201745053812987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093345901251465802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a72c0579aba7d0d4bba041b8ac8f8176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4250450508748718753
 GameObject:
   m_ObjectHideFlags: 0

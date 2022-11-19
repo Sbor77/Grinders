@@ -4,12 +4,10 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private SkillBuyer _buyer;
-    [SerializeField] private StatsViewer _viewer;
+    [SerializeField] private SkillBuyer _skillBuyer;
+    [SerializeField] private StatsViewer _statsViewer;
     [SerializeField] private Button _exitButton;
-    [SerializeField] private Button _nextButton;
-
-    private const string Level = "SceneLevel";
+    [SerializeField] private Button _nextButton;       
 
     private void Start()
     {
@@ -18,7 +16,7 @@ public class Shop : MonoBehaviour
 
     private void OnEnable()
     {
-        _buyer.IsStatBought += OnStatBought;
+        _skillBuyer.IsStatBought += OnStatBought;
 
         _exitButton.onClick.AddListener(CloseShop);
 
@@ -27,7 +25,7 @@ public class Shop : MonoBehaviour
 
     private void OnDisable()
     {
-        _buyer.IsStatBought -= OnStatBought;
+        _skillBuyer.IsStatBought -= OnStatBought;
 
         _exitButton.onClick.RemoveListener(CloseShop);
 
@@ -41,15 +39,15 @@ public class Shop : MonoBehaviour
 
     private void NextLevel()
     {
-        SceneManager.LoadScene(Level + (DataHandler.Instance.GetSavedLevel() + 1));
+        SceneManager.LoadScene(DataHandler.Instance.GetSavedLevel() + 1);
     }
 
     private void OnStatBought()
     {
         DataHandler.Instance.SaveAllStats();
 
-        _viewer.Init();
+        _statsViewer.Init();
 
-        _buyer.Init();
+        _skillBuyer.Init();
     }
 }

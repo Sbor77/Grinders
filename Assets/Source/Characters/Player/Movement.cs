@@ -18,27 +18,20 @@ public class Movement : MonoBehaviour
     private Vector3 _attackDirection = Vector3.forward;
     private Vector3 _moveDirection = Vector3.forward;
     private bool _isMoving = false;
-
-    public event Action<State> ChangedState;
-    public event Action<float> ChangedMoveSpeed;
-    public float Speed => _speed;
-
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
     private const int _maxPointCount = 50;
 
+    public event Action<State> ChangedState;
+    public event Action<float> ChangedMoveSpeed;
+
+    public float Speed => _speed;
+
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _collider = GetComponent<CapsuleCollider>();
-    }
 
-    private void OnEnable()
-    {
-        _collider.enabled = _isMoving;
-        _joystick.ChangedDirection += OnChangedDirection;
-        _joystick.ReleasedTouch += OnReleasedTouch;
-        _joystick.ChangedClickStatus += StartMoveingAtack;
+        _collider = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
@@ -46,22 +39,38 @@ public class Movement : MonoBehaviour
         _speed += LoadBoostSpeed();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (_isMoving)
-        {
-            TurnDirection();
-            _controller.Move(_speed * Time.deltaTime * transform.forward);
-            float currentSpeed = _controller.velocity.magnitude / _speed;
-            ChangedMoveSpeed?.Invoke(currentSpeed);
-        }
+        _collider.enabled = _isMoving;
+
+        _joystick.ChangedDirection += OnChangedDirection;
+
+        _joystick.ReleasedTouch += OnReleasedTouch;
+
+        _joystick.ChangedClickStatus += StartMoveingAtack;
     }
 
     private void OnDisable()
     {
         _joystick.ChangedDirection -= OnChangedDirection;
+
         _joystick.ReleasedTouch -= OnReleasedTouch;
+
         _joystick.ChangedClickStatus -= StartMoveingAtack;
+    }
+
+    private void Update()
+    {
+        if (_isMoving)
+        {
+            TurnDirection();
+
+            _controller.Move(_speed * Time.deltaTime * transform.forward);
+
+            float currentSpeed = _controller.velocity.magnitude / _speed;
+
+            ChangedMoveSpeed?.Invoke(currentSpeed);
+        }
     }
 
     public void OnDied()
@@ -72,6 +81,7 @@ public class Movement : MonoBehaviour
     private float LoadBoostSpeed()
     {
         int boostSpeedLevel = DataHandler.Instance.GetSavedSpeedSkill() - 1;
+
         return boostSpeedLevel * AddBoostMoveSpeed;
     }
 
@@ -80,50 +90,65 @@ public class Movement : MonoBehaviour
         if (direction != Vector2.zero)
         {
             _moveDirection = new Vector3(direction.x, 0, direction.y);
+
             _isMoving = true;
         }
     }
 
     private void TurnDirection()
     {
-            float angle = Vector3.SignedAngle(_moveDirection, Vector3.forward, Vector3.up);
-            float currentAngle = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, angle * AngleCorrection, _rotationSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(0f, currentAngle, 0f);
+        float angle = Vector3.SignedAngle(_moveDirection, Vector3.forward, Vector3.up);
+
+        float currentAngle = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, angle * AngleCorrection, _rotationSpeed * Time.deltaTime);
+
+        transform.rotation = Quaternion.Euler(0f, currentAngle, 0f);
     }
 
     private void OnReleasedTouch()
     {
         _isMoving = false;
+
         ChangedMoveSpeed?.Invoke(0f);
     }
 
     private void StartMoveingAtack()
     {
         SetChangeMoving(false);
+
         _attackDirection = transform.forward;
+
         _attackDirection.y = 0;
+
         List<Vector3> movePoints = GetMovePoints();
 
         if (movePoints != null)
         {
             StartCoroutine(Move(movePoints));
+
             ChangedState?.Invoke(State.Attack);
         }
         else
-            SetChangeMoving(true);
+        { 
+            SetChangeMoving(true); 
+        }            
     }
 
     private List<Vector3> GetMovePoints()
     {
         float distance = 0;
+
         Vector3 _startAttackPosition = transform.position;
+
         List<Vector3> movePoints = new();
 
         while (distance < _attackDistance)
         {
             Vector3 newPoint = GetNextPoint(_startAttackPosition, _attackDistance - distance);
+
             distance += Vector3.Distance(_startAttackPosition, newPoint);
+
             _startAttackPosition = newPoint;
+
             movePoints.Add(newPoint);
 
             if (movePoints.Count > _maxPointCount)
@@ -140,10 +165,13 @@ public class Movement : MonoBehaviour
         if (Physics.Raycast(startPosition, _attackDirection, out RaycastHit hit, distance, _wallLayerMask))
         {
             point = hit.point;
+
             _attackDirection = Vector3.Reflect(_attackDirection, hit.normal);
         }
         else
+        {
             point = startPosition + _attackDirection * distance;
+        }
 
         return point;
     }
@@ -151,7 +179,9 @@ public class Movement : MonoBehaviour
     private void SetChangeMoving(bool activate)
     {
         _controller.enabled = activate;
+
         _joystick.enabled = activate;
+
         _collider.enabled = !activate;
     }
 
@@ -161,6 +191,7 @@ public class Movement : MonoBehaviour
             yield return StartMove(points[i]);
 
         ChangedState?.Invoke(State.Move);
+
         SetChangeMoving(true);
     }
 
@@ -174,6 +205,7 @@ public class Movement : MonoBehaviour
         while (Vector3.Distance(transform.position, pointPosition) >= stoppingDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointPosition, _speedInAttack * Time.deltaTime);
+
             yield return null;
         }
     }

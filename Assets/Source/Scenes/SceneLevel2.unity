@@ -7183,7 +7183,7 @@ GameObject:
   - component: {fileID: 1371502432}
   - component: {fileID: 1371502433}
   m_Layer: 0
-  m_Name: BoxWithItemSpawner
+  m_Name: BoxSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7259,7 +7259,7 @@ MonoBehaviour:
   _maxMoneyAmount: 1
   _minHealthAmount: 5
   _maxHealthAmount: 5
-  _finalBoxMoneyAmount: 30
+  _finalBoxMoneyAmount: 1000
 --- !u!1 &1386454497
 GameObject:
   m_ObjectHideFlags: 0
@@ -9281,7 +9281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needDestroyBigBox
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295036, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_Name

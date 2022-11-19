@@ -45,7 +45,7 @@ public class DeathPanel : MonoBehaviour
     private void OnDieClick()
     {
         DataHandler.Instance.SaveLevel(1);
-        DataHandler.Instance.SaveMoney(0);
+        DataHandler.Instance.SaveLevelMoney(0);
         DataHandler.Instance.SaveKills(0);
         DataHandler.Instance.SaveHealthSkill(1);
         DataHandler.Instance.SaveSpeedSkill(1);

@@ -30,6 +30,7 @@ public class Player : Characters
     private void Start()
     {
         _health += LoadBoostHealth();
+
         _currentHealth = _health;
     }
 
@@ -46,6 +47,7 @@ public class Player : Characters
     public void AddMoney(int value)
     {
         _coins += value;
+
         ChangedCoin?.Invoke(_coins);
     }
 
@@ -60,7 +62,9 @@ public class Player : Characters
         if (_currentState == State.Move && IsValid((int)damage))
         {
             TakedDamage?.Invoke();
+
             _currentHealth = ChangeHealth(-damage);
+
             IsAlive();
         }
     }
@@ -68,6 +72,7 @@ public class Player : Characters
     private float LoadBoostHealth()
     {
         int boostHealthLevel = DataHandler.Instance.GetSavedHealthSkill() - 1;
+
         return (AddBoostMaxHealth * boostHealthLevel);
     }
 
@@ -81,7 +86,9 @@ public class Player : Characters
     private float ChangeHealth(float value)
     {
         float healthValue = Mathf.Clamp(_currentHealth + value, 0, _health);
+
         ChangedHealth?.Invoke(healthValue);
+
         return healthValue;
     }
 
@@ -90,17 +97,21 @@ public class Player : Characters
         if (_currentHealth == 0)
         {
             IsDied?.Invoke();
+
             _movement.OnDied();
+
             this.enabled = false;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_currentState == State.Attack)
+        if (_currentState == State.Attack && other.TryGetComponent(out IDamageable damageable))
         {
-            if (other.TryGetComponent(out IDamageable damageable))
-                Attack(damageable);
+            Attack(damageable);
+
+            /*if (other.TryGetComponent(out IDamageable damageable))
+                Attack(damageable);*/
         }
     }
     /*    else

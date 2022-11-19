@@ -30,9 +30,15 @@ public class SkillBuyer : MonoBehaviour
 
     public void Init()
     {
-        _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.GetSavedHealthSkill()].ToString();
-
-        _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedSpeedSkill()].ToString();
+        if (DataHandler.Instance.GetSavedHealthSkill() >= _healthLevelPrices.Length)        
+            _healthPriceText.text = "MAX!";
+        else
+            _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.GetSavedHealthSkill()].ToString();
+        
+        if (DataHandler.Instance.GetSavedSpeedSkill() >= _moveLevelPrices.Length)
+            _movePriceText.text = "MAX!"; 
+        else
+            _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedSpeedSkill()].ToString();
 
         ButtonIsValid();
     }
@@ -78,11 +84,11 @@ public class SkillBuyer : MonoBehaviour
 
     private bool TryBuying(int statPrice)
     {
-        int money = DataHandler.Instance.GetSavedMoney();
+        int money = DataHandler.Instance.GetSavedTotalMoney();
 
         if (money >= statPrice)
         {
-            DataHandler.Instance.SaveMoney(money - statPrice);
+            DataHandler.Instance.SaveTotalMoney(money - statPrice);
             return true;
         }
 

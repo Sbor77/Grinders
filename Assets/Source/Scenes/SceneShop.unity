@@ -2399,8 +2399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be5f006cfd322c409beea00dbd0b3c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buyer: {fileID: 1340263731}
-  _viewer: {fileID: 418787954}
+  _skillBuyer: {fileID: 1340263731}
+  _statsViewer: {fileID: 418787954}
   _exitButton: {fileID: 154646137}
   _nextButton: {fileID: 374310366}
 --- !u!1 &1756099802

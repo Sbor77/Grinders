@@ -5,9 +5,10 @@ using UnityEngine;
 public class DataHandler : MonoBehaviour
 {
     private string _levelKey = "Level";
-    private string _moneyKey = "Money";
+    private string _totalMoneyKey = "TotalMoney";
+    private string _levelMoneyKey = "LevelMoney";
     private string _killsKey = "Kills";
-    private string _healthSkillKey = "HealthSkill";
+    private string _healthSkillKey = "HealthSkill";    
     private string _speedSkillKey = "SpeedSkill";
 
     public static DataHandler Instance { get; private set; }
@@ -34,10 +35,16 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_levelKey, level);
     }
 
-    public void SaveMoney (int money)
+    public void SaveTotalMoney(int totalMoney)
     {
-        if (money >= 0)
-            PlayerPrefs.SetInt(_moneyKey, money);
+        if (totalMoney >= 0)
+            PlayerPrefs.SetInt(_totalMoneyKey, totalMoney);
+    }
+
+    public void SaveLevelMoney (int levelMoney)
+    {
+        if (levelMoney >= 0)
+            PlayerPrefs.SetInt(_levelMoneyKey, levelMoney);
     }
 
     public void SaveKills(int kills)
@@ -67,9 +74,14 @@ public class DataHandler : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public int GetSavedMoney()
+    public int GetSavedTotalMoney()
     {
-        return PlayerPrefs.GetInt(_moneyKey);
+        return PlayerPrefs.GetInt(_totalMoneyKey);
+    }
+
+    public int GetSavedLevelMoney()
+    {
+        return PlayerPrefs.GetInt(_levelMoneyKey);
     }
 
     public int GetSavedKills()

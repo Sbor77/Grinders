@@ -32,7 +32,7 @@ public class Box : MonoBehaviour
                 _item.AnimateCollection();
 
                 if (GetComponent<Coin>())                
-                    player.AddMoney(_item.Value);                
+                    player.AddMoney(_item.Value);                                   
 
                 if (GetComponent<Cross>())                
                     player.Heal(_item.Value);

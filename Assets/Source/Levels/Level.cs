@@ -32,11 +32,8 @@ public class Level : MonoBehaviour
     {
         _missionConditions = _infoViewer.MissionConditions;
 
-        if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)
-        {
-            print("Мы на первой сцене!");
-            SaveDefaultStats();
-        }
+        if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)                    
+            SaveDefaultStats();        
     }
 
     private void OnEnable()
@@ -64,7 +61,7 @@ public class Level : MonoBehaviour
 
     private void OnActiveSceneChanged(Scene current, Scene next)
     {
-        print($"Перешли из сцены c индексом: {current.buildIndex} в сцену с индексом: {next.buildIndex}");
+        //print($"Перешли из сцены c индексом: {current.buildIndex} в сцену с индексом: {next.buildIndex}");
     }
 
     private void SaveDefaultStats()
@@ -73,20 +70,26 @@ public class Level : MonoBehaviour
         int defaultHealthSkill = 1;
         int defaultSpeedSkill = 1;
         int defaultKills = 0;
-        int defaultMoney = 0;
+        int defaultTotalMoney = 0;
+        int defaultLevelMoney = 0;
 
         DataHandler.Instance.SaveLevel(defaultLevel);
-        DataHandler.Instance.SaveHealthSkill(defaultHealthSkill);
-        DataHandler.Instance.SaveSpeedSkill(defaultSpeedSkill);
-        DataHandler.Instance.SaveKills(defaultKills);
-        DataHandler.Instance.SaveMoney(defaultMoney);
-    }
 
+        DataHandler.Instance.SaveHealthSkill(defaultHealthSkill);
+
+        DataHandler.Instance.SaveSpeedSkill(defaultSpeedSkill);
+
+        DataHandler.Instance.SaveKills(defaultKills);
+
+        DataHandler.Instance.SaveTotalMoney(defaultTotalMoney);
+
+        DataHandler.Instance.SaveLevelMoney(defaultLevelMoney);
+    }
 
     private void OnCurrentConditionsChanged()
     {
         _currentCoins = _infoViewer.CurrentCoins;
-        DataHandler.Instance.SaveMoney(_currentCoins);
+        DataHandler.Instance.SaveLevelMoney(_currentCoins);
 
         _currentKills = _infoViewer.CurrentKills;
         DataHandler.Instance.SaveKills(_currentKills);
@@ -125,13 +128,19 @@ public class Level : MonoBehaviour
     {
         DataHandler.Instance.SaveAllStats();
 
-        float cameraZoomTime = 2f;
+        // uncomment after testing
+
+        /*float cameraZoomTime = 2f;
 
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
 
-        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadShopScene());
+        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadShopScene());*/
+
+        
+        // delete after testing
+        LoadShopScene();
     }
 
     private void LoadShopScene()
@@ -145,13 +154,17 @@ public class Level : MonoBehaviour
     {
         int level = SceneManager.GetActiveScene().buildIndex;
 
-        int money = DataHandler.Instance.GetSavedMoney() + _currentCoins;
+        int levelMoney = DataHandler.Instance.GetSavedLevelMoney();
 
-        int kills = DataHandler.Instance.GetSavedKills() + _currentKills;
+        int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + levelMoney;
+
+        int kills = DataHandler.Instance.GetSavedKills();
 
         DataHandler.Instance.SaveLevel(level);
 
-        DataHandler.Instance.SaveMoney(money);
+        DataHandler.Instance.SaveLevelMoney(levelMoney);
+
+        DataHandler.Instance.SaveTotalMoney(totalMoney);
 
         DataHandler.Instance.SaveKills(kills);
 
