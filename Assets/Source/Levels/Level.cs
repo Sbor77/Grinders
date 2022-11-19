@@ -13,21 +13,21 @@ public class Level : MonoBehaviour
     [SerializeField] private CameraHandler _cameraHandler;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private BoxSpawner _boxSpawner;
+    [SerializeField] private DeathPanel _deathPanel;
 
+    private QuestInfo _missionConditions;
     private int _currentLevel;
     private int _ShopSceneIndex = 0;
     private int _levelOneSceneIndex = 1;
     private int _levelTwoSceneIndex = 2;
     private int _levelThreeSceneIndex = 3;
     private int _levelFourSceneIndex = 4;
-    
-    private QuestInfo _missionConditions;    
     private int _currentCoins;
     private int _currentKills;
     private float _currentHealth;
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
-    
+
     private void Start()
     {
         _missionConditions = _infoViewer.MissionConditions;
@@ -37,23 +37,29 @@ public class Level : MonoBehaviour
             print("Мы на первой сцене!");
             SaveDefaultStats();
         }
-
-        
     }
 
     private void OnEnable()
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
 
+        _player.IsDied += OnDyingPlayerScreen;
+
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
     }
-
 
     private void OnDisable()
     {
         _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
 
+        _player.IsDied -= OnDyingPlayerScreen;
+
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+    }
+
+    private void OnDyingPlayerScreen()
+    {
+        _deathPanel.Activate();
     }
 
     private void OnActiveSceneChanged(Scene current, Scene next)
@@ -69,11 +75,11 @@ public class Level : MonoBehaviour
         int defaultKills = 0;
         int defaultMoney = 0;
 
+        DataHandler.Instance.SaveLevel(defaultLevel);
         DataHandler.Instance.SaveHealthSkill(defaultHealthSkill);
         DataHandler.Instance.SaveSpeedSkill(defaultSpeedSkill);
-        DataHandler.Instance.SaveLevel(defaultLevel);        
-        DataHandler.Instance.SaveMoney(defaultMoney);        
         DataHandler.Instance.SaveKills(defaultKills);
+        DataHandler.Instance.SaveMoney(defaultMoney);
     }
 
 
@@ -90,9 +96,13 @@ public class Level : MonoBehaviour
         if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
             float doorOpenDelay = 5.5f;
+
             _cameraHandler.ZoomInOutBigboxCamera();
+
             _enemySpawner.Deactivate();
+
             _boxSpawner.StopSpawn();
+
             _isBigboxDoorOpened = true;
 
             DOVirtual.DelayedCall(doorOpenDelay, () => _bigboxDoor.Open());
@@ -106,7 +116,7 @@ public class Level : MonoBehaviour
     {
         bool conditions =
             _currentCoins >= _missionConditions.NeedCoinCollected &&
-            _currentKills >= _missionConditions.NeedEnemyKilled;            
+            _currentKills >= _missionConditions.NeedEnemyKilled;
 
         return conditions;
     }
@@ -121,27 +131,30 @@ public class Level : MonoBehaviour
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
 
-        if (DataHandler.Instance.GetSavedLevel() < _levelFourSceneIndex)
-        {
-            DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadScene(_ShopSceneIndex));
-        }
+        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadShopScene());
     }
 
-    private void LoadScene(int index)
+    private void LoadShopScene()
     {
         SaveProgress();
-        SceneManager.LoadScene(index);
+
+        SceneManager.LoadScene(_ShopSceneIndex);
     }
 
     private void SaveProgress()
     {
         int level = SceneManager.GetActiveScene().buildIndex;
+
         int money = DataHandler.Instance.GetSavedMoney() + _currentCoins;
+
         int kills = DataHandler.Instance.GetSavedKills() + _currentKills;
 
         DataHandler.Instance.SaveLevel(level);
+
         DataHandler.Instance.SaveMoney(money);
+
         DataHandler.Instance.SaveKills(kills);
+
         DataHandler.Instance.SaveAllStats();
     }
 }

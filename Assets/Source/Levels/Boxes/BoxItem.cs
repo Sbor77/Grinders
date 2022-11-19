@@ -77,5 +77,4 @@ public class BoxItem : MonoBehaviour
 
         _endlessRotation = transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);        
     }
-
 }

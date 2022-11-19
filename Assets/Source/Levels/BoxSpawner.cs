@@ -29,9 +29,8 @@ public class BoxSpawner : MonoBehaviour
     private float _circleOffsetModifier = 1;
     private bool _isStopped;
 
-    public event Action<int> IsPlayerMoneyIncreased;
-
-    public event Action <int>IsBigBoxCollected;
+    public event Action <int> IsPlayerMoneyIncreased;
+    public event Action <int> IsBigBoxCollected;
 
     private void Awake()
     {

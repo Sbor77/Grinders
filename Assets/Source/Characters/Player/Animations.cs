@@ -33,7 +33,7 @@ public class Animations : MonoBehaviour
     {
         _mover.ChangedState += OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
-        _player.Dying += OnDying;
+        _player.IsDied += OnDying;
         _player.TakedDamage += OnTakedDamage;
 
         _animator.SetFloat(Modifier, _mover.Speed / SpeedModifier);
@@ -43,7 +43,7 @@ public class Animations : MonoBehaviour
     {
         _mover.ChangedState -= OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed -= OnChangedMoveSpeed;
-        _player.Dying -= OnDying;
+        _player.IsDied -= OnDying;
         _player.TakedDamage -= OnTakedDamage;
     }
 

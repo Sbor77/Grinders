@@ -9,6 +9,21 @@ public class DeathPanel : MonoBehaviour
     [SerializeField] private Button _dieButton;
     [SerializeField] private Button _continueButton;
 
+    private void Start()
+    {
+        Deactivate();
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
         _dieButton.onClick.AddListener(OnDieClick);
@@ -29,7 +44,7 @@ public class DeathPanel : MonoBehaviour
 
     private void OnDieClick()
     {
-        DataHandler.Instance.SaveLevel(0);
+        DataHandler.Instance.SaveLevel(1);
         DataHandler.Instance.SaveMoney(0);
         DataHandler.Instance.SaveKills(0);
         DataHandler.Instance.SaveHealthSkill(1);

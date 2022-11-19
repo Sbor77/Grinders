@@ -93,7 +93,7 @@ MonoBehaviour:
   _joystickBackground: {fileID: 2701210817220805879}
   _joystickInner: {fileID: 2701210817549285138}
   _clickTimeDelta: 0.3
-  _moveToTouchDownPosition: 1
+  _moveToTouchDownPosition: 0
 --- !u!1 &2701210817220805878
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,8 +128,8 @@ RectTransform:
   m_Father: {fileID: 2701210816371816794}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.081875004, y: 0.096}
-  m_AnchorMax: {x: 0.23947917, y: 0.3708889}
+  m_AnchorMin: {x: 0.42100003, y: 0.33}
+  m_AnchorMax: {x: 0.5794616, y: 0.606}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

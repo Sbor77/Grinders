@@ -13,7 +13,7 @@ public class Player : Characters
 
     public event Action<float> ChangedHealth;
     public event Action<int> ChangedCoin;
-    public event Action Dying;
+    public event Action IsDied;
     public event Action TakedDamage;
 
     public State CurrentState => _currentState;
@@ -89,7 +89,7 @@ public class Player : Characters
     {
         if (_currentHealth == 0)
         {
-            Dying?.Invoke();
+            IsDied?.Invoke();
             _movement.OnDied();
             this.enabled = false;
         }

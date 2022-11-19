@@ -17,19 +17,23 @@ public class SkillBuyer : MonoBehaviour
     private void OnEnable()
     {
         _buyHealthButton.onClick.AddListener(OnHealthBuy);
+
         _buyMoveButton.onClick.AddListener(OnMoveSpeedBuy);
     }
 
     private void OnDisable()
     {
         _buyHealthButton.onClick.RemoveListener(OnHealthBuy);
+
         _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
     }
 
     public void Init()
     {
         _healthPriceText.text = _healthLevelPrices[DataHandler.Instance.GetSavedHealthSkill()].ToString();
+
         _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedSpeedSkill()].ToString();
+
         ButtonIsValid();
     }
 
@@ -45,11 +49,13 @@ public class SkillBuyer : MonoBehaviour
     private void OnHealthBuy()
     {
         int health = DataHandler.Instance.GetSavedHealthSkill();
+
         int price = _healthLevelPrices[health];
 
         if (TryBuying(price))
         {
             DataHandler.Instance.SaveHealthSkill(health + 1);
+
             DataHandler.Instance.SaveAllStats();
 
             IsStatBought?.Invoke();
@@ -59,6 +65,7 @@ public class SkillBuyer : MonoBehaviour
     private void OnMoveSpeedBuy()
     {
         int moveSpeed = DataHandler.Instance.GetSavedSpeedSkill();
+
         int price = _moveLevelPrices[moveSpeed];
 
         if (TryBuying(price))

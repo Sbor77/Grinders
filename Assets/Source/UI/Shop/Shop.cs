@@ -19,20 +19,24 @@ public class Shop : MonoBehaviour
     private void OnEnable()
     {
         _buyer.IsStatBought += OnStatBought;
+
         _exitButton.onClick.AddListener(CloseShop);
+
         _nextButton.onClick.AddListener(NextLevel);
     }
 
     private void OnDisable()
     {
         _buyer.IsStatBought -= OnStatBought;
+
         _exitButton.onClick.RemoveListener(CloseShop);
+
         _nextButton.onClick.RemoveListener(NextLevel);
     }
 
     private void CloseShop()
     {
-
+        //exit to start screen
     }
 
     private void NextLevel()
@@ -43,7 +47,9 @@ public class Shop : MonoBehaviour
     private void OnStatBought()
     {
         DataHandler.Instance.SaveAllStats();
+
         _viewer.Init();
+
         _buyer.Init();
     }
 }

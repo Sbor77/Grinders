@@ -3904,7 +3904,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26216
+  m_Name: pb_Mesh75652
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4818,7 +4818,7 @@ MonoBehaviour:
   _boxWithCoinPrefab: {fileID: 5172793039412916207, guid: 282a5c503c5c8b74dadb62492a5d2267, type: 3}
   _boxWithCrossPrefab: {fileID: 7591239710437129417, guid: ccaa296c9d425ef438077c3104be7f5f, type: 3}
   _bigBoxPrefab: {fileID: 4931460773048236537, guid: 3ae6a955c9a1d8040b8cf86798f1adb1, type: 3}
-  _boxWithCrossChanceRatio: 0.9
+  _boxWithCrossChanceRatio: 0.2
   _boxLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -5904,14 +5904,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540436693}
     m_Modifications:
-    - target: {fileID: 2701210816371816788, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210816371816789, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: _moveToTouchDownPosition
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2701210816371816793, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
       propertyPath: m_Name
       value: Joystick
@@ -5999,46 +5991,6 @@ PrefabInstance:
     - target: {fileID: 2701210816371816794, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805872, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_Color.a
-      value: 0.039215688
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5794616
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.606
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.42100003
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817220805879, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701210817549285139, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
-      propertyPath: m_Color.a
-      value: 0.039215688
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}

@@ -15,13 +15,16 @@ public class QuestPanel : MonoBehaviour
     private void OnEnable()
     {
         Time.timeScale = 0;
+
         _continueButton.onClick.AddListener(StartGame);
+
         Init();
     }
 
     private void OnDisable()
     {
         Time.timeScale = 1; 
+
         _continueButton.onClick.RemoveListener(StartGame);
     }
 
@@ -41,6 +44,7 @@ public class QuestPanel : MonoBehaviour
         _conditionsText.text = ConditionsText;
 
         QuestInfo conditions = new QuestInfo(_needCoinCollected, _needEnemyKilled, _needDestroyBigBox);
+
         _infoViewer.SetQuestCollected(conditions);        
     }
 
@@ -53,13 +57,17 @@ public class QuestPanel : MonoBehaviour
 public class QuestInfo
 {
     public int NeedCoinCollected { get; private set; }
+
     public int NeedEnemyKilled { get; private set; }
+
     public bool NeedDestroyBigBox { get; private set; }
 
     public QuestInfo(int coinCollected, int enemyKilled, bool bigBox)
     {
         NeedCoinCollected = coinCollected;
+
         NeedEnemyKilled = enemyKilled;
+
         NeedDestroyBigBox = bigBox;
     }
 }

@@ -12,9 +12,13 @@ public class StatsViewer : MonoBehaviour
     public void Init()
     {
         _stageText.text = $"Level: {DataHandler.Instance.GetSavedLevel()}";
+
         _goldText.text = $"Money: {DataHandler.Instance.GetSavedMoney()}";
+
         _killedText.text = $"Killed: {DataHandler.Instance.GetSavedKills()}";
+
         _healthText.text = $"Health level: {DataHandler.Instance.GetSavedHealthSkill()}";
+
         _speedText.text = $"Speed level: {DataHandler.Instance.GetSavedSpeedSkill()}";
     }
 }
