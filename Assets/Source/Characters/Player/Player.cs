@@ -35,14 +35,9 @@ public class Player : Characters
 
     private void Start()
     {
-        _health += LoadBoostHealth();
-
         _currentHealth = _health;
-
         _weaponEffect.Stop();
-
         _damageEffect.Stop();
-
         _woundEffect.Stop();
     }
 
@@ -56,10 +51,16 @@ public class Player : Characters
         _movement.ChangedState -= OnChangedState;
     }
 
+    public void Init(int healthLevel, int moveSpeedLevel)
+    {
+        _movement.Init(moveSpeedLevel);
+        _health += LoadBoostHealth(healthLevel);
+        _currentHealth = _health;
+    }
+
     public void AddMoney(int value)
     {
         _coins += value;
-
         ChangedCoin?.Invoke(_coins);
     }
 
@@ -74,24 +75,17 @@ public class Player : Characters
         if (_currentState == State.Move && IsValid((int)damage))
         {
             _takeDamageSFX.Play();
-
             _currentHealth = ChangeHealth(-damage);
-
             TakedDamage?.Invoke();
-
             ActivateEffect(_damageEffect, _effectDuration);
-
             ActivateEffect(_woundEffect, _effectDuration);
-
             IsAlive();
         }
     }
 
-    private float LoadBoostHealth()
+    private float LoadBoostHealth(int healthLevel)
     {
-        int boostHealthLevel = DataHandler.Instance.GetSavedHealthSkill() - 1;
-
-        return (AddBoostMaxHealth * boostHealthLevel);
+        return AddBoostMaxHealth * (healthLevel - 1);
     }
 
     private bool IsValid(int value) => value > 0;
@@ -104,7 +98,6 @@ public class Player : Characters
     private float ChangeHealth(float value)
     {
         float healthValue = Mathf.Clamp(_currentHealth + value, 0, _health);
-
         ChangedHealth?.Invoke(healthValue);        
 
         return healthValue;
@@ -115,9 +108,7 @@ public class Player : Characters
         if (_currentHealth == 0)
         {
             IsDied?.Invoke();
-
             _movement.OnDied();
-
             this.enabled = false;
         }
     }
@@ -130,26 +121,14 @@ public class Player : Characters
 
             if (other.GetComponent<Enemy>())
                 ActivateEffect(_weaponEffect, _effectDuration);
-
-            /*if (other.TryGetComponent(out IDamageable damageable))
-                Attack(damageable);*/
         }
     }
 
     private void ActivateEffect(ParticleSystem effect, float duration)
     {
         effect.Play();
-
         DOVirtual.DelayedCall(duration, effect.Stop);
     }
-
-
-    /*    else
-        {
-            if (other.TryGetComponent(out Coin coin))
-                Debug.Log($"GetCoin: {coin.name}");//coin.GetCoin();
-        }
-    }*/
 }
 
 public enum State

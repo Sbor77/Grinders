@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour
 
     public event Action<State> ChangedState;
     public event Action<float> ChangedMoveSpeed;
+    public event Action ChangedBoostSpeed;
 
     public float Speed => _speed;
 
@@ -32,11 +33,6 @@ public class Movement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
 
         _collider = GetComponent<CapsuleCollider>();
-    }
-
-    private void Start()
-    {
-        _speed += LoadBoostSpeed();
     }
 
     private void OnEnable()
@@ -78,11 +74,15 @@ public class Movement : MonoBehaviour
         this.enabled = false;
     }
 
-    private float LoadBoostSpeed()
+    public void Init(int speedLevel)
     {
-        int boostSpeedLevel = DataHandler.Instance.GetSavedSpeedSkill() - 1;
+        _speed += LoadBoostSpeed(speedLevel);
+        ChangedBoostSpeed?.Invoke();
+    }
 
-        return boostSpeedLevel * AddBoostMoveSpeed;
+    private float LoadBoostSpeed(int speedLevel)
+    {
+        return (speedLevel - 1) * AddBoostMoveSpeed;
     }
 
     private void OnChangedDirection(Vector2 direction)

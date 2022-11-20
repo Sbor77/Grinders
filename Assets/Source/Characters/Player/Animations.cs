@@ -38,9 +38,13 @@ public class Animations : MonoBehaviour
         _moveSFX.loop = true;
         _mover.ChangedState += OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
+        _mover.ChangedBoostSpeed += OnCangedBoostSpeed;
         _player.IsDied += OnDying;
         _player.TakedDamage += OnTakedDamage;
+    }
 
+    private void OnCangedBoostSpeed()
+    {
         _animator.SetFloat(Modifier, _mover.Speed / SpeedModifier);
     }
 
