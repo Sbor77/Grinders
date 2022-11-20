@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 
@@ -6,11 +7,15 @@ public class Player : Characters
 {
     [SerializeField] private float _health;
     [SerializeField] private AudioSource _takeDamageSFX;
+    [SerializeField] private ParticleSystem _weaponEffect;
+    [SerializeField] private ParticleSystem _damageEffect;
+    [SerializeField] private ParticleSystem _woundEffect;
 
     private Movement _movement;
     private float _currentHealth;
     private int _coins;
     private State _currentState = State.Move;
+    private float _effectDuration = 3f;
 
     public event Action<float> ChangedHealth;
     public event Action<int> ChangedCoin;
@@ -33,6 +38,12 @@ public class Player : Characters
         _health += LoadBoostHealth();
 
         _currentHealth = _health;
+
+        _weaponEffect.Stop();
+
+        _damageEffect.Stop();
+
+        _woundEffect.Stop();
     }
 
     private void OnEnable()
@@ -63,8 +74,14 @@ public class Player : Characters
         if (_currentState == State.Move && IsValid((int)damage))
         {
             _takeDamageSFX.Play();
+
             _currentHealth = ChangeHealth(-damage);
+
             TakedDamage?.Invoke();
+
+            ActivateEffect(_damageEffect, _effectDuration);
+
+            ActivateEffect(_woundEffect, _effectDuration);
 
             IsAlive();
         }
@@ -88,7 +105,7 @@ public class Player : Characters
     {
         float healthValue = Mathf.Clamp(_currentHealth + value, 0, _health);
 
-        ChangedHealth?.Invoke(healthValue);
+        ChangedHealth?.Invoke(healthValue);        
 
         return healthValue;
     }
@@ -111,10 +128,22 @@ public class Player : Characters
         {
             Attack(damageable);
 
+            if (other.GetComponent<Enemy>())
+                ActivateEffect(_weaponEffect, _effectDuration);
+
             /*if (other.TryGetComponent(out IDamageable damageable))
                 Attack(damageable);*/
         }
     }
+
+    private void ActivateEffect(ParticleSystem effect, float duration)
+    {
+        effect.Play();
+
+        DOVirtual.DelayedCall(duration, effect.Stop);
+    }
+
+
     /*    else
         {
             if (other.TryGetComponent(out Coin coin))
