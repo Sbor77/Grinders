@@ -8,12 +8,14 @@ public class EnemyAnimator : MonoBehaviour
 {
     [SerializeField] private AnimationClip _attackAnimation;
     [SerializeField] private AnimationClip _dancingAnimation;
+    [SerializeField] private AudioSource _moveSFX;
 
     private NavMeshAgent _agent;
     private Animator _animator;
     private Enemy _enemy;
     private float _attackLenght;
     private float _attackMultiplie = 1.5f;
+    private bool _isMoveing;
 
     private const string Speed = "Speed";
     private const string Attack = "Attack";
@@ -43,7 +45,22 @@ public class EnemyAnimator : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _animator.SetFloat(Speed, _agent.velocity.magnitude / _agent.speed);
+        float currentSpeed = _agent.velocity.magnitude;
+        _animator.SetFloat(Speed, currentSpeed / _agent.speed);
+
+        if (currentSpeed / _agent.speed > 0.1f)
+        {
+            if (!_isMoveing)
+            {
+                _isMoveing = true;
+                _moveSFX.Play();
+            }
+        }
+        else
+        {
+            _isMoveing = false;
+            _moveSFX.Stop();
+        }
     }
 
     public float StartAttack()
