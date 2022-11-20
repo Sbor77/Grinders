@@ -124,13 +124,16 @@ public class BoxSpawner : MonoBehaviour
 
             inactiveBox.transform.position = freePoint + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
-            if (inactiveBox.GetComponent<Coin>())            
-                inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);              
+            if (inactiveBox.GetComponentInChildren<Coin>(true))
+                inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
+            
 
-            if (inactiveBox.GetComponent<Cross>())            
-                inactiveBox.ActivateWholeBox(_minHealthAmount, _maxHealthAmount);                
+            if (inactiveBox.GetComponentInChildren<Cross>(true))            
+                inactiveBox.ActivateWholeBox(_minHealthAmount, _maxHealthAmount);            
 
-            _currentBoxCount++;            
+            _currentBoxCount++;
+
+            //print("текущее количество коробок = " + _currentBoxCount);
 
             if (_boxesCount > _currentBoxCount)            
                 SpawnBox();            
@@ -188,7 +191,7 @@ public class BoxSpawner : MonoBehaviour
             int randomIndex = UnityEngine.Random.Range(0, inactiveBoxes.Count);
 
             inactiveBox = inactiveBoxes[randomIndex];            
-        }
+        }        
 
         return inactiveBox != null;
     }   

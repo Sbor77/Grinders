@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class BoxItem : MonoBehaviour
 {
+    [SerializeField] private AudioSource _collectEffect;
+
     private int _value;
     private Tweener _endlessRotation;    
     private Sequence _collectingSequence;
@@ -40,10 +42,11 @@ public class BoxItem : MonoBehaviour
 
         transform.eulerAngles = Vector3.zero;
 
+        _collectingSequence.AppendCallback(_collectEffect.Play);
         _collectingSequence.Append(transform.DOMoveY(_defaultHeight + heightOffset, liftTime).SetEase(Ease.InQuart));        
         _collectingSequence.Append(transform.DOScale(_defaultScale * increaseScaleRatio, scaleTime));        
         _collectingSequence.Append(transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(rotationLoops).SetEase(Ease.Linear));
-        _collectingSequence.Append(transform.DOScale(_defaultScale * decreaseScaleRatio, scaleTime));
+        _collectingSequence.Append(transform.DOScale(_defaultScale * decreaseScaleRatio, scaleTime));        
         _collectingSequence.AppendCallback(() =>
         {
             Deactivate();

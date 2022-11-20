@@ -1986,6 +1986,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2128285235950304034, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: MinDistance
+      value: 25.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2128285235950304034, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e765cf7a1a89ccf4f889abb6c16bb0e4, type: 3}
+    - target: {fileID: 2128285235950304034, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 8232252614479711983, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
@@ -2053,6 +2061,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 1766064448}
+    - target: {fileID: 7174414731611085008, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a6649f44ee794b4dbc8f5ea24bfed71, type: 3}
     - target: {fileID: 7174414731611085008, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
@@ -3842,7 +3854,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31470
+  m_Name: pb_Mesh25518
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4765,7 +4777,7 @@ MonoBehaviour:
   _maxMoneyAmount: 1
   _minHealthAmount: 3
   _maxHealthAmount: 5
-  _finalBoxMoneyAmount: 20000
+  _finalBoxMoneyAmount: 100
 --- !u!1 &1390931331
 GameObject:
   m_ObjectHideFlags: 0
@@ -17873,7 +17885,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -17926,7 +17938,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:

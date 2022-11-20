@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 430806818318438737}
   - component: {fileID: 3626896409722150644}
   - component: {fileID: 1563211245160507966}
-  - component: {fileID: 1563211245160507965}
+  - component: {fileID: 1442290322544714496}
+  - component: {fileID: 1675968225667557870}
   m_Layer: 8
   m_Name: Coin
   m_TagString: Untagged
@@ -84,7 +85,103 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1563211245160507965
+--- !u!82 &1442290322544714496
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058724317675621355}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8355950204708060872, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 79b6bd1d1a17e4a47be0743495985a9c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1675968225667557870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +190,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058724317675621355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b59bf72c68cb23a42b50f44f9d189a3d, type: 3}
+  m_Script: {fileID: 11500000, guid: a72c0579aba7d0d4bba041b8ac8f8176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collectEffect: {fileID: 1442290322544714496}
 --- !u!1 &3464886730387448702
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +208,6 @@ GameObject:
   - component: {fileID: 3549205897666254692}
   - component: {fileID: 8566485726950763772}
   - component: {fileID: 5172793039412916207}
-  - component: {fileID: 6790020038105182898}
   m_Layer: 8
   m_Name: BoxWithCoin
   m_TagString: Untagged
@@ -208,7 +305,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6322163235761381678, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 21b38879518b8734b957cdc47db12ed9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6e4e521b42b16ee4c817fe93ba23da89, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1
@@ -323,19 +420,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 6802994983119955779}
   _fracturedBox: {fileID: 6108084464405132485}
   _crashAudioClip: {fileID: 8566485726950763772}
-  _item: {fileID: 1563211245160507965}
---- !u!114 &6790020038105182898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464886730387448702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72c0579aba7d0d4bba041b8ac8f8176, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _item: {fileID: 1675968225667557870}
 --- !u!1 &6108084464405132481
 GameObject:
   m_ObjectHideFlags: 0
