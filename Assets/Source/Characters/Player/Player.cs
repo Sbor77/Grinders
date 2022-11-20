@@ -56,6 +56,16 @@ public class Player : Characters
         _movement.ChangedState -= OnChangedState;
     }
 
+<<<<<<< HEAD
+=======
+    public void Init(int healthLevel, int moveSpeedLevel) //Add
+    {
+        _movement.Init(moveSpeedLevel);
+        _health += LoadBoostHealth(healthLevel);
+        _currentHealth = _health;
+    }
+
+>>>>>>> develop
     public void AddMoney(int value)
     {
         _coins += value;
