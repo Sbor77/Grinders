@@ -4847,7 +4847,6 @@ MonoBehaviour:
   _josytick: {fileID: 1386809881}
   _playCameraPositionY: 20
   _targetBigboxCameraPoint: {fileID: 1179124702}
-  _bigboxCameraTime: 2
   _bigboxCameraDelay: 0.5
 --- !u!4 &558514150
 Transform:
@@ -12733,7 +12732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1542044807
 Transform:
   m_ObjectHideFlags: 0
