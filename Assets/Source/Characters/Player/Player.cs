@@ -51,7 +51,7 @@ public class Player : Characters
         _movement.ChangedState -= OnChangedState;
     }
 
-    public void Init(int healthLevel, int moveSpeedLevel)
+    public void Init(int healthLevel, int moveSpeedLevel) //Add
     {
         _movement.Init(moveSpeedLevel);
         _health += LoadBoostHealth(healthLevel);
