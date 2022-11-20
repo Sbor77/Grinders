@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : Characters
 {
     [SerializeField] private float _health;
+    [SerializeField] private AudioSource _takeDamageSFX;
 
     private Movement _movement;
     private float _currentHealth;
@@ -61,9 +62,9 @@ public class Player : Characters
     {
         if (_currentState == State.Move && IsValid((int)damage))
         {
-            TakedDamage?.Invoke();
-
+            _takeDamageSFX.Play();
             _currentHealth = ChangeHealth(-damage);
+            TakedDamage?.Invoke();
 
             IsAlive();
         }

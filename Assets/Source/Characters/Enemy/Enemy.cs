@@ -9,6 +9,7 @@ public class Enemy : Characters
 {
     [SerializeField] private float _health;
     [SerializeField] private float _delayDieHiding = 3f;
+    [SerializeField] private AudioSource _takeDamageSFX;
 
     private Mover _mover;
     private float _currentHealth;
@@ -34,6 +35,7 @@ public class Enemy : Characters
         if (_isDead)
             return;
 
+        _takeDamageSFX.Play();
         _currentHealth -= damage;
         IsAlive();
     }

@@ -7,12 +7,16 @@ public class Animations : MonoBehaviour
 {
     [SerializeField] private float _secondsPerSpin;
     [SerializeField] private ParticleSystem _attackVFX;
+    [SerializeField] private AudioSource _moveSFX;
+    [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private AudioClip _walkSound;
 
     private Animator _animator;
     private Movement _mover;
     private Player _player;
     private Vector3 _angleRotate = new Vector3(0, -360, 0);
     private Vector3 _startAngleRotate;
+    private bool _isMoving;
 
     private const float SpeedModifier = 4f;
     private const float FinishedSpin = 0.1f;
@@ -31,6 +35,7 @@ public class Animations : MonoBehaviour
 
     private void Start()
     {
+        _moveSFX.loop = true;
         _mover.ChangedState += OnChangedStateAttackSpin;
         _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
         _player.IsDied += OnDying;
@@ -55,7 +60,24 @@ public class Animations : MonoBehaviour
 
     private void OnDying() => _animator.SetTrigger(Died);
 
-    private void OnChangedMoveSpeed(float speed) => _animator.SetFloat(Speed, speed);
+    private void OnChangedMoveSpeed(float speed)
+    {
+        _animator.SetFloat(Speed, speed);
+
+        if (speed > 0)
+        {
+            if (!_isMoving)
+            {
+                StartAudioClip(_walkSound);
+                _isMoving = true;
+            }
+        }
+        else
+        {
+            _moveSFX.Stop();
+            _isMoving = false;
+        }
+    }
 
     private void OnChangedStateAttackSpin(State state)
     {
@@ -64,16 +86,24 @@ public class Animations : MonoBehaviour
             _startAngleRotate = transform.localRotation.eulerAngles;
             transform.localRotation = Quaternion.identity;
             transform.DOLocalRotate(_angleRotate, _secondsPerSpin, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+            StartAudioClip(_attackSound);
         }
         else
         {
             DOTween.Kill(transform);
             transform.localRotation = Quaternion.identity;
             transform.DOLocalRotate(_startAngleRotate, FinishedSpin, RotateMode.FastBeyond360).SetLoops(0).SetEase(Ease.Linear);
+            _moveSFX.Stop();
         }
 
         bool convertedState = Convert.ToBoolean((int)state);
         _attackVFX.gameObject.SetActive(convertedState);
         _animator.SetBool(Attack, convertedState);
+    }
+
+    private void StartAudioClip(AudioClip audio)
+    {
+        _moveSFX.clip = audio;
+        _moveSFX.Play();
     }
 }

@@ -11,6 +11,7 @@ public class SkillBuyer : MonoBehaviour
     [SerializeField] private Button _buyHealthButton;
     [SerializeField] private int[] _moveLevelPrices;
     [SerializeField] private int[] _healthLevelPrices;
+    [SerializeField] private AudioSource _buySFX;
 
     public event Action IsStatBought;
 
@@ -60,8 +61,8 @@ public class SkillBuyer : MonoBehaviour
 
         if (TryBuying(price))
         {
+            _buySFX.Play();
             DataHandler.Instance.SaveHealthSkill(health + 1);
-
             DataHandler.Instance.SaveAllStats();
 
             IsStatBought?.Invoke();
@@ -76,6 +77,7 @@ public class SkillBuyer : MonoBehaviour
 
         if (TryBuying(price))
         {
+            _buySFX.Play();
             DataHandler.Instance.SaveSpeedSkill(moveSpeed + 1);
 
             IsStatBought?.Invoke();

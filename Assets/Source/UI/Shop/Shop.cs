@@ -7,7 +7,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private SkillBuyer _skillBuyer;
     [SerializeField] private StatsViewer _statsViewer;
     [SerializeField] private Button _exitButton;
-    [SerializeField] private Button _nextButton;       
+    [SerializeField] private Button _nextButton;
 
     private void Start()
     {
