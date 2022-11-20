@@ -90,6 +90,7 @@ public class Movement : MonoBehaviour
         if (direction != Vector2.zero)
         {
             _moveDirection = new Vector3(direction.x, 0, direction.y);
+
             _isMoving = true;
         }
     }
