@@ -2056,7 +2056,7 @@ PrefabInstance:
     - target: {fileID: 7174414731611085008, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 8232252614479711983, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
+      objectReference: {fileID: -8355950204708060872, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
 --- !u!4 &654776514 stripped
@@ -2936,7 +2936,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -7184,7 +7184,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807280821}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &2071354664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5550221085939132825, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}

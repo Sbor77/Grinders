@@ -16,7 +16,6 @@ public class Enemy : Characters
     private Vector3 _defaultPosition;
     private bool _isDead = false;
 
-    //public event UnityAction<float> ChangedHealth;
     public event Action Dying;
     public event Action IsDeactivated;
 
