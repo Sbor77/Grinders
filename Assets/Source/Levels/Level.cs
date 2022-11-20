@@ -32,8 +32,12 @@ public class Level : MonoBehaviour
     {
         _missionConditions = _infoViewer.MissionConditions;
 
-        if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)                    
-            SaveDefaultStats();        
+        if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)
+        {
+            SaveDefaultStats();
+
+            _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
+        }
     }
 
     private void OnEnable()

@@ -16,6 +16,7 @@ public class Player : Characters
     private int _coins;
     private State _currentState = State.Move;
     private float _effectDuration = 3f;
+    private int _addBoostMaxHealth = 10;
 
     public event Action<float> ChangedHealth;
     public event Action<int> ChangedCoin;
@@ -23,10 +24,11 @@ public class Player : Characters
     public event Action TakedDamage;
 
     public State CurrentState => _currentState;
+
     public float MaxHealth => _health;
+
     public bool IsDead => _currentHealth == 0;
 
-    private const int AddBoostMaxHealth = 10;
 
     private void Awake()
     {
@@ -35,8 +37,6 @@ public class Player : Characters
 
     private void Start()
     {
-        _health += LoadBoostHealth();
-
         _currentHealth = _health;
 
         _weaponEffect.Stop();
@@ -48,12 +48,21 @@ public class Player : Characters
 
     private void OnEnable()
     {
-        _movement.ChangedState += OnChangedState;        
+        _movement.ChangedState += OnChangedState;
     }
 
     private void OnDisable()
     {
         _movement.ChangedState -= OnChangedState;
+    }
+
+    public void Init(int healthSkillLevel, int speedSkillLevel)
+    {
+        _movement.Init(speedSkillLevel);
+
+        _health += LoadBoostHealth(healthSkillLevel);
+
+        _currentHealth = _health;
     }
 
     public void AddMoney(int value)
@@ -87,11 +96,9 @@ public class Player : Characters
         }
     }
 
-    private float LoadBoostHealth()
+    private float LoadBoostHealth(int healthLevel)
     {
-        int boostHealthLevel = DataHandler.Instance.GetSavedHealthSkill() - 1;
-
-        return (AddBoostMaxHealth * boostHealthLevel);
+        return _addBoostMaxHealth * (healthLevel - 1);
     }
 
     private bool IsValid(int value) => value > 0;
@@ -104,8 +111,7 @@ public class Player : Characters
     private float ChangeHealth(float value)
     {
         float healthValue = Mathf.Clamp(_currentHealth + value, 0, _health);
-
-        ChangedHealth?.Invoke(healthValue);        
+        ChangedHealth?.Invoke(healthValue);
 
         return healthValue;
     }
@@ -130,9 +136,6 @@ public class Player : Characters
 
             if (other.GetComponent<Enemy>())
                 ActivateEffect(_weaponEffect, _effectDuration);
-
-            /*if (other.TryGetComponent(out IDamageable damageable))
-                Attack(damageable);*/
         }
     }
 
@@ -142,14 +145,6 @@ public class Player : Characters
 
         DOVirtual.DelayedCall(duration, effect.Stop);
     }
-
-
-    /*    else
-        {
-            if (other.TryGetComponent(out Coin coin))
-                Debug.Log($"GetCoin: {coin.name}");//coin.GetCoin();
-        }
-    }*/
 }
 
 public enum State
