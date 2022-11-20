@@ -11,8 +11,7 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _playCamera;
     [SerializeField] private Joystick _josytick;
     [SerializeField] private float _playCameraPositionY;    
-    [SerializeField] private Transform _targetBigboxCameraPoint;
-    [SerializeField] private float _bigboxCameraTime;
+    [SerializeField] private Transform _targetBigboxCameraPoint;    
     [SerializeField] private float _bigboxCameraDelay;
 
     private Vector3 _defaultBigboxCameraPosition;
@@ -23,7 +22,7 @@ public class CameraHandler : MonoBehaviour
 
         MoveBigboxCamera();
 
-        SetJoystickActive(false);
+        SetJoystickActive(false);        
     }
 
     public void ZoomInPlayCamera()
@@ -93,11 +92,15 @@ public class CameraHandler : MonoBehaviour
 
     private void MoveBigboxCamera()
     {
-        _bigboxCamera.transform.DOMove(_targetBigboxCameraPoint.position, _bigboxCameraTime).OnComplete(() =>
+        float distance = Vector3.Distance(_targetBigboxCameraPoint.position, _defaultBigboxCameraPosition);
+        float speed = 22f;
+        float joystickDelay = distance / speed + 1f;
+
+        _bigboxCamera.transform.DOMove(_targetBigboxCameraPoint.position, distance / speed).OnComplete(() =>
         {
             Deactivate(_bigboxCamera, _bigboxCameraDelay);
 
-            DOVirtual.DelayedCall(_bigboxCameraTime + 1f, () => 
+            DOVirtual.DelayedCall(joystickDelay, () => 
             {
                 _bigboxCamera.transform.position = _defaultBigboxCameraPosition;
                 SetJoystickActive(true);
