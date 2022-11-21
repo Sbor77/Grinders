@@ -31,10 +31,10 @@ public class Box : MonoBehaviour
             {
                 _item.AnimateCollection();
 
-                if (GetComponent<Coin>())                
+                if (GetComponentInChildren<Coin>())                
                     player.AddMoney(_item.Value);                                   
 
-                if (GetComponent<Cross>())                
+                if (GetComponentInChildren<Cross>())                
                     player.Heal(_item.Value);
 
                 _isItemCollectable = false;
