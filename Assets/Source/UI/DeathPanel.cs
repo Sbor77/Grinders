@@ -9,11 +9,6 @@ public class DeathPanel : MonoBehaviour
     [SerializeField] private Button _dieButton;
     [SerializeField] private Button _continueButton;
 
-    private void Start()
-    {
-        Deactivate();
-    }
-
     public void Activate()
     {
         gameObject.SetActive(true);

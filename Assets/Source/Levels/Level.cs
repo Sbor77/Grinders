@@ -134,17 +134,17 @@ public class Level : MonoBehaviour
 
         // uncomment after testing
 
-        /*float cameraZoomTime = 2f;
+        float cameraZoomTime = 2f;
 
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
 
-        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadShopScene());*/
+        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadShopScene());
 
         
         // delete after testing
-        LoadShopScene();
+        //LoadShopScene();
     }
 
     private void LoadShopScene()

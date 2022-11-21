@@ -6,7 +6,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Character Volume
+  m_Name: Attack_TakeDamage
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 79bb03cecdac93445943182f2acf7011
   m_Children: []
@@ -104,9 +104,9 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 30aa13f3a23ced84e9c495ea2b24aab6
   m_FloatValues:
-    39f773863973a2642a05f8cd0df0b89b: -7.5
+    39f773863973a2642a05f8cd0df0b89b: 0
     e3e9fc794fa445945bfc55a893003377: 0
-    84d6000ad502801428604c596eef6668: -5.443638
+    84d6000ad502801428604c596eef6668: -4.909557
   m_TransitionOverrides: {}
 --- !u!244 &2192661984698181339
 AudioMixerEffectController:
@@ -128,7 +128,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Environment
+  m_Name: Box_Coin
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: dcb3a01a58fc04d4e9fda73ed307c06e
   m_Children: []
@@ -147,7 +147,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Step Volume
+  m_Name: Steps
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 00e8b07f41a56a54f9838bdeb363dc1d
   m_Children: []

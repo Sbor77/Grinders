@@ -5,6 +5,7 @@ using UnityEngine;
 public class EffectHandler : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystem> _effects;
+    [SerializeField] private AudioSource _effectSFX;
         
     private WaitForSeconds _waitDelay;        
     private int _cycles = 1;
@@ -31,7 +32,8 @@ public class EffectHandler : MonoBehaviour
 
     public void PlayAllEffects()
     {
-        StartCoroutine(StartEffectsWithDelay(_cycles));        
+        StartCoroutine(StartEffectsWithDelay(_cycles));
+        _effectSFX.Play();
     }
 
     private IEnumerator StartEffectsWithDelay(int cycle)
