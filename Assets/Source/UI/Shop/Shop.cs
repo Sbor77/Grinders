@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
@@ -8,6 +7,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private StatsViewer _statsViewer;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _nextButton;
+    [SerializeField] private SceneLevelLoader _levelLoader;
+
+    private int _introScene = 5;
 
     private void Start()
     {
@@ -34,12 +36,12 @@ public class Shop : MonoBehaviour
 
     private void CloseShop()
     {
-        //exit to start screen
+        _levelLoader.LoadLevel(_introScene);
     }
 
     private void NextLevel()
     {
-        SceneManager.LoadScene(DataHandler.Instance.GetSavedLevel() + 1);
+        _levelLoader.LoadLevel(DataHandler.Instance.GetSavedLevel() + 1);
     }
 
     private void OnStatBought()

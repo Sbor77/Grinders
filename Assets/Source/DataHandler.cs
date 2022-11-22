@@ -10,6 +10,7 @@ public class DataHandler : MonoBehaviour
     private string _killsKey = "Kills";
     private string _healthSkillKey = "HealthSkill";    
     private string _speedSkillKey = "SpeedSkill";
+    private string _volume = "MasterVolume";
 
     public static DataHandler Instance { get; private set; }
 
@@ -69,6 +70,14 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_speedSkillKey, speedSkill);
     }
 
+    public void SaveVolume(float value)
+    {
+        if (value >= 0 && value <= 1)
+            PlayerPrefs.SetFloat(_volume, value);
+        else
+            PlayerPrefs.SetFloat(_volume, 1);
+    }
+
     public void SaveAllStats()
     {
         PlayerPrefs.Save();
@@ -102,5 +111,13 @@ public class DataHandler : MonoBehaviour
     public int GetSavedSpeedSkill()
     {
         return PlayerPrefs.GetInt(_speedSkillKey);
+    }
+
+    public float GetSavedVolume()
+    {
+        if (PlayerPrefs.HasKey(_volume))
+            return PlayerPrefs.GetFloat(_volume);
+        else
+            return 1;
     }
 }

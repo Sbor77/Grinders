@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour
 {
-    [SerializeField] private Toggle _muteToggle;
     [SerializeField] private Slider _volumeSlider;
     [SerializeField] private Button _closeButton;
     [SerializeField] private AudioMixer _audio;
@@ -26,8 +25,15 @@ public class SettingPanel : MonoBehaviour
         _volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
     }
 
+    public void Init()
+    {
+        _volumeSlider.value = DataHandler.Instance.GetSavedVolume();
+        OnVolumeChanged(_volumeSlider.value);
+    }
+
     private void OnCloseClick()
     {
+        DataHandler.Instance.SaveAllStats();
         gameObject.SetActive(false);
     }
 
@@ -35,5 +41,6 @@ public class SettingPanel : MonoBehaviour
     {
         float volumeValue = Mathf.Log10(value) * multiplier;
         _audio.SetFloat(Volume, volumeValue);
+        DataHandler.Instance.SaveVolume(value);
     }
 }
