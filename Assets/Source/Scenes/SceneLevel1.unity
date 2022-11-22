@@ -2178,6 +2178,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 1766064448}
+    - target: {fileID: 5713195580975693084, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _walkSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bb2695b7d3ab9b942b1afd039360b073, type: 3}
     - target: {fileID: 7174414731611085008, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_Volume
       value: 0.9
@@ -3184,7 +3188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.4789906, y: 0, z: 0, w: 0.8778201}
-  m_LocalPosition: {x: 3, y: 13.5, z: -9.25}
+  m_LocalPosition: {x: 16.75, y: 19.979872, z: -45.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4038,7 +4042,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34028
+  m_Name: pb_Mesh195248
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

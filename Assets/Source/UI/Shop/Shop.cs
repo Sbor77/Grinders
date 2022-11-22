@@ -9,7 +9,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private Button _nextButton;
     [SerializeField] private SceneLevelLoader _levelLoader;
 
-    private int _introScene = 5;
+    private int _introSceneIndex = 0;
 
     private void Start()
     {
@@ -36,7 +36,7 @@ public class Shop : MonoBehaviour
 
     private void CloseShop()
     {
-        _levelLoader.LoadLevel(_introScene);
+        _levelLoader.LoadLevel(_introSceneIndex);
     }
 
     private void NextLevel()

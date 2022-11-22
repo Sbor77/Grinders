@@ -18,7 +18,8 @@ public class Level : MonoBehaviour
 
     private QuestInfo _missionConditions;
     private int _currentZoneIndex;
-    private int _ShopSceneIndex = 0;
+    private int _shopSceneIndex = 5;
+    private int _introSceneIndex = 0;
     private int _levelOneSceneIndex = 1;
     private int _levelTwoSceneIndex = 2;
     private int _levelThreeSceneIndex = 3;
@@ -210,7 +211,7 @@ public class Level : MonoBehaviour
     {
         SaveProgress();
 
-        SceneManager.LoadScene(_ShopSceneIndex);
+        SceneManager.LoadScene(_shopSceneIndex);
     }
 
     private void SaveProgress()
