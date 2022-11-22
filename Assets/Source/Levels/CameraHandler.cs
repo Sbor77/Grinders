@@ -94,21 +94,25 @@ public class CameraHandler : MonoBehaviour
     {
         float distance = Vector3.Distance(_targetBigboxCameraPoint.position, _defaultBigboxCameraPosition);
         float speed = 22f;
-        float joystickDelay = distance / speed + 1f;
+        float joystickDelay = 3f;
 
         _bigboxCamera.transform.DOMove(_targetBigboxCameraPoint.position, distance / speed).OnComplete(() =>
         {
             Deactivate(_bigboxCamera, _bigboxCameraDelay);
 
-            DOVirtual.DelayedCall(joystickDelay, () => 
+            DOVirtual.DelayedCall(joystickDelay, () =>
             {
                 _bigboxCamera.transform.position = _defaultBigboxCameraPosition;
                 SetJoystickActive(true);
             });
+
+            //DOVirtual.DelayedCall(joystickDelay, () => SetJoystickActive(true));
         });
     }
     private void Deactivate(CinemachineVirtualCamera camera, float delay = 0)
     {
-        DOVirtual.DelayedCall(delay, () => camera.Priority = 0);        
+        DOVirtual.DelayedCall(delay, () => camera.Priority = 0);
+
+        
     }
 }
