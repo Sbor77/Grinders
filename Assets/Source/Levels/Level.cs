@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
-{
+{    
     [SerializeField] private Player _player;
     [SerializeField] private InfoViewer _infoViewer;
     [SerializeField] private EffectHandler _finalEffects;
@@ -14,17 +14,18 @@ public class Level : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private BoxSpawner _boxSpawner;
     [SerializeField] private DeathPanel _deathPanel;
+    [SerializeField] private List<LevelZone> _zones;
 
     private QuestInfo _missionConditions;
-    private int _currentLevel;
+    private int _currentZoneIndex;
     private int _ShopSceneIndex = 0;
     private int _levelOneSceneIndex = 1;
     private int _levelTwoSceneIndex = 2;
     private int _levelThreeSceneIndex = 3;
     private int _levelFourSceneIndex = 4;
     private int _currentCoins;
-    private int _currentKills;
-    private float _currentHealth;
+    private int _currentKills;    
+    
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
 
@@ -38,34 +39,27 @@ public class Level : MonoBehaviour
 
             _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
         }
+
+        InitZones();
     }
 
     private void OnEnable()
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
 
-        _player.IsDied += OnDyingPlayerScreen;
-
-        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        _player.IsDied += OnDyingPlayerScreen;        
     }
 
     private void OnDisable()
     {
         _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
 
-        _player.IsDied -= OnDyingPlayerScreen;
-
-        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        _player.IsDied -= OnDyingPlayerScreen;        
     }
 
     private void OnDyingPlayerScreen()
     {
         _deathPanel.Activate();
-    }
-
-    private void OnActiveSceneChanged(Scene current, Scene next)
-    {
-        //print($"Перешли из сцены c индексом: {current.buildIndex} в сцену с индексом: {next.buildIndex}");
     }
 
     private void SaveDefaultStats()
@@ -99,6 +93,8 @@ public class Level : MonoBehaviour
         DataHandler.Instance.SaveKills(_currentKills);
 
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
+
+        ActivateNextZone();
 
         if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
@@ -145,6 +141,69 @@ public class Level : MonoBehaviour
         
         // delete after testing
         LoadShopScene();
+    }
+
+    private void InitZones()
+    {
+        int targetKills = _missionConditions.NeedEnemyKilled;
+        int targetMoney = _missionConditions.NeedCoinCollected;
+        int zoneKills = targetKills / _zones.Count;
+        int zoneMoney = targetMoney / _zones.Count;
+
+        for (int i = 0; i < _zones.Count; i++)
+        {
+            int accumulatedMoney = zoneMoney + (zoneMoney * i);            
+            int accumulatedKills = zoneKills + (zoneKills * i);
+
+            if (i == _zones.Count - 1)
+            {
+                _zones[i].Init(targetMoney, targetKills);
+            }
+            else
+            {
+                _zones[i].Init(accumulatedMoney, accumulatedKills);
+            }
+        }
+
+        _currentZoneIndex = 0;
+
+        ActivateZone(_currentZoneIndex);
+    }
+
+    private void ActivateZone(int zoneIndex)
+    {
+        LevelZone activatedZone = _zones[zoneIndex];
+
+        activatedZone.Activate();
+    }
+
+    private void DeactivateZone(int zoneIndex)
+    {
+        LevelZone deactivatedZone = _zones[zoneIndex];
+
+        deactivatedZone.Deactivate();
+    }
+
+    private void ActivateNextZone()
+    {
+        if (IsZoneCompleted(_currentZoneIndex) && _currentZoneIndex < _zones.Count - 1)
+        {
+            DeactivateZone(_currentZoneIndex);
+
+            ActivateZone(++_currentZoneIndex);
+
+            _boxSpawner.SetZoneIndex(_zones[_currentZoneIndex]);
+
+            _enemySpawner.SetZoneIndex(_zones[_currentZoneIndex]);
+        }
+    }
+
+    private bool IsZoneCompleted (int zoneIndex)
+    {
+        if (_currentKills >= _zones[zoneIndex].TargetKills && _currentCoins >= _zones[zoneIndex].TargetMoney)        
+            return true;        
+        else        
+            return false;        
     }
 
     private void LoadShopScene()

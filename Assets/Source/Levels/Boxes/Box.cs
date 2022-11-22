@@ -31,8 +31,8 @@ public class Box : MonoBehaviour
             {
                 _item.AnimateCollection();
 
-                if (GetComponentInChildren<Coin>())                
-                    player.AddMoney(_item.Value);                                   
+                if (GetComponentInChildren<Coin>())                    
+                    player.AddMoney(_item.Value);                
 
                 if (GetComponentInChildren<Cross>())                
                     player.Heal(_item.Value);
