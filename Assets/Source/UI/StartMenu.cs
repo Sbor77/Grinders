@@ -19,6 +19,7 @@ public class StartMenu : MonoBehaviour
     {
         _settingsButton.onClick.AddListener(OnSettingsClick);
         _newGameButton.onClick.AddListener(StartNewGame);
+        _continueButton.onClick.AddListener(ContinueGame);
     }
 
     private void Start()
@@ -33,6 +34,7 @@ public class StartMenu : MonoBehaviour
     {
         _settingsButton.onClick.RemoveListener(OnSettingsClick);
         _newGameButton.onClick.RemoveListener(StartNewGame);
+        _continueButton.onClick.RemoveListener(ContinueGame);
     }
 
     private void StartNewGame()

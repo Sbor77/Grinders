@@ -127,7 +127,7 @@ public class Level : MonoBehaviour
 
     private void ShowEndLevelScenario()
     {
-        DataHandler.Instance.SaveAllStats();
+        //DataHandler.Instance.SaveAllStats();
 
         // uncomment after testing
 
@@ -216,7 +216,7 @@ public class Level : MonoBehaviour
 
     private void SaveProgress()
     {
-        int level = SceneManager.GetActiveScene().buildIndex;
+        int level = SceneManager.GetActiveScene().buildIndex + 1;
 
         int levelMoney = DataHandler.Instance.GetSavedLevelMoney();
 

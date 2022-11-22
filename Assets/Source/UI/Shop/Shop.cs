@@ -41,7 +41,7 @@ public class Shop : MonoBehaviour
 
     private void NextLevel()
     {
-        _levelLoader.LoadLevel(DataHandler.Instance.GetSavedLevel() + 1);
+        _levelLoader.LoadLevel(DataHandler.Instance.GetSavedLevel());
     }
 
     private void OnStatBought()
