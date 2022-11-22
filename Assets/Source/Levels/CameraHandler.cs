@@ -57,7 +57,7 @@ public class CameraHandler : MonoBehaviour
 
         float targetFieldOfView = 40;
 
-        float zoomTime = 3f;
+        float zoomTime = 1f;
 
         float waitingTime = 2.5f;
 
@@ -104,9 +104,7 @@ public class CameraHandler : MonoBehaviour
             {
                 _bigboxCamera.transform.position = _defaultBigboxCameraPosition;
                 SetJoystickActive(true);
-            });
-
-            //DOVirtual.DelayedCall(joystickDelay, () => SetJoystickActive(true));
+            });            
         });
     }
     private void Deactivate(CinemachineVirtualCamera camera, float delay = 0)

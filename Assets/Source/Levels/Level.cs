@@ -99,7 +99,7 @@ public class Level : MonoBehaviour
 
         if (IsBigBoxConditionsFulfilled() && _isBigboxDoorOpened == false)
         {
-            float doorOpenDelay = 5.5f;
+            float doorOpenDelay = 3f;
 
             _cameraHandler.ZoomInOutBigboxCamera();
 
@@ -107,9 +107,9 @@ public class Level : MonoBehaviour
 
             _boxSpawner.StopSpawn();
 
-            _isBigboxDoorOpened = true;
-
             DOVirtual.DelayedCall(doorOpenDelay, () => _bigboxDoor.Open());
+
+            _isBigboxDoorOpened = true;
         }
 
         if (_isBigboxDestroyed)
@@ -127,21 +127,14 @@ public class Level : MonoBehaviour
 
     private void ShowEndLevelScenario()
     {
-        //DataHandler.Instance.SaveAllStats();
-
-        // uncomment after testing
-
         float cameraZoomTime = 2f;
+        float openShopDelay = 3f;
 
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
 
-        DOVirtual.DelayedCall(_finalEffects.Duration, () => LoadShopScene());
-
-        
-        // delete after testing
-        //LoadShopScene();
+        DOVirtual.DelayedCall(openShopDelay + _finalEffects.Duration, () => LoadShopScene());        
     }
 
     private void InitZones()
