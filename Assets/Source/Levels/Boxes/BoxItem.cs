@@ -41,8 +41,9 @@ public class BoxItem : MonoBehaviour
         _collectingSequence = DOTween.Sequence();
 
         transform.eulerAngles = Vector3.zero;
+        _collectEffect.Play();
 
-        _collectingSequence.AppendCallback(_collectEffect.Play);
+        //_collectingSequence.AppendCallback(_collectEffect.Play);
         _collectingSequence.Append(transform.DOMoveY(_defaultHeight + heightOffset, liftTime).SetEase(Ease.InQuart));        
         _collectingSequence.Append(transform.DOScale(_defaultScale * increaseScaleRatio, scaleTime));        
         _collectingSequence.Append(transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(rotationLoops).SetEase(Ease.Linear));

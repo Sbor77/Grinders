@@ -977,7 +977,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1335
+  m_VersionIndex: 1392
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1069,7 +1069,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6322163235761381678, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 89fafa3a84fa53741aa9ad8378857e15, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 59541817580aba843853550424867b8c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1079,7 +1079,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
+  MinDistance: 1
   MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
@@ -1115,7 +1115,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1395,6 +1395,7 @@ MonoBehaviour:
   _fracturedBox: {fileID: 8814870354638104547}
   _crashAudioClip: {fileID: 6373357592977801178}
   _item: {fileID: 4347631566169209342}
+  _itemAudio: {fileID: 8300000, guid: 89fafa3a84fa53741aa9ad8378857e15, type: 3}
 --- !u!1 &8814870354638104545
 GameObject:
   m_ObjectHideFlags: 0

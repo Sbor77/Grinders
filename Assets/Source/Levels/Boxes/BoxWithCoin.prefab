@@ -141,7 +141,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -421,6 +421,7 @@ MonoBehaviour:
   _fracturedBox: {fileID: 6108084464405132485}
   _crashAudioClip: {fileID: 8566485726950763772}
   _item: {fileID: 1675968225667557870}
+  _itemAudio: {fileID: 8300000, guid: 79b6bd1d1a17e4a47be0743495985a9c, type: 3}
 --- !u!1 &6108084464405132481
 GameObject:
   m_ObjectHideFlags: 0
