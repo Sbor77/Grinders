@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class DataHandler : MonoBehaviour
@@ -120,4 +122,20 @@ public class DataHandler : MonoBehaviour
         else
             return 1;
     }
+
+
+    #region Import WebGL for check mobile platform
+    
+    [DllImport("__Internal")]
+    private static extern bool IsMobilePlatform();
+
+    public bool IsMobile()
+    {
+#if !UNITY_EDITOR && UNITY_WEBGL
+        return IsMobilePlatform();
+#endif
+        return false;
+    }
+    
+    #endregion
 }
