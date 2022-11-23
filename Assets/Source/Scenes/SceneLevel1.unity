@@ -4205,7 +4205,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh235156
+  m_Name: pb_Mesh32348
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8239,7 +8239,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishPanel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2958288116747913565, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
+    - {fileID: 2998537315573829818, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
 --- !u!64 &778262046404451101
 MeshCollider:

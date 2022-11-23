@@ -7193,6 +7193,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1560372872105393956, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
+    - {fileID: 2958288116747913565, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
+    - {fileID: 2998537315573829818, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
+    - {fileID: 329507841, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
 --- !u!224 &1062259841 stripped
 RectTransform:
@@ -7382,7 +7385,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh211072
+  m_Name: pb_Mesh37698
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
