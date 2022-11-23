@@ -36,7 +36,9 @@ public class BoxSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _currentZone = _zones[0];
+        _currentZoneIndex = 0;
+
+        _currentZone = _zones[_currentZoneIndex];        
 
         _boxArray = new List<Box>[_zones.Count];
         
