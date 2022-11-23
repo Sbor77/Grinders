@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class QuestPanel : MonoBehaviour
 {
+    [SerializeField] private CameraHandler _cameraHandler;
     [SerializeField] private InfoViewer _infoViewer;
     [SerializeField] private Button _continueButton;
     [SerializeField] private TMP_Text _conditionsText;
@@ -23,8 +24,6 @@ public class QuestPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        Time.timeScale = 1; 
-
         _continueButton.onClick.RemoveListener(StartGame);
     }
 
@@ -50,7 +49,11 @@ public class QuestPanel : MonoBehaviour
 
     private void StartGame()
     {
+        Time.timeScale = 1;
+
         gameObject.SetActive(false);
+
+        _cameraHandler.ActivateStartScenario();
     }
 }
 
