@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
     [SerializeField] private CameraHandler _cameraHandler;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private BoxSpawner _boxSpawner;
+    [SerializeField] private FinishPanel _finishPanel;
     [SerializeField] private DeathPanel _deathPanel;
     [SerializeField] private List<LevelZone> _zones;
 
@@ -132,7 +133,13 @@ public class Level : MonoBehaviour
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
 
-        DOVirtual.DelayedCall(openShopDelay + _finalEffects.Duration, () => LoadShopScene());        
+        DOVirtual.DelayedCall(openShopDelay + _finalEffects.Duration, () =>
+        {
+            _finishPanel.Init();
+
+            _finishPanel.Activate();
+        }
+        );        
     }
 
     private void InitZones()

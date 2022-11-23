@@ -13,8 +13,8 @@ public class FinishPanel : MonoBehaviour
     [SerializeField] private Button _shopButton;
     [SerializeField] private InfoViewer _infoViewer;
 
-    private int _shopScene = 5;
-
+    private int _shopSceneIndex = 5;
+    
     private void OnEnable()
     {
         _shopButton.onClick.AddListener(LoadShopScene);
@@ -36,6 +36,16 @@ public class FinishPanel : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
     private int GetTotalScore()
     {
         return 0;
@@ -48,6 +58,6 @@ public class FinishPanel : MonoBehaviour
 
     private void LoadShopScene()
     {
-        SceneManager.LoadScene(_shopScene);
+        SceneManager.LoadScene(_shopSceneIndex);
     }
 }

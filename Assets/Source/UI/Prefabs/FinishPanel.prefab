@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3418328666309824532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.1
+  m_fontSize: 95.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.2
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -712,7 +712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16865382, y: 0}
   m_AnchorMax: {x: 0.82970047, y: 0.7942389}
-  m_AnchoredPosition: {x: -0.07849121, y: -0.009552002}
+  m_AnchoredPosition: {x: -0.07849121, y: -0.009521484}
   m_SizeDelta: {x: -1.3342452, y: 0.17493248}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3418328667838745370
@@ -878,7 +878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2570893856798615850, guid: 36f5497acafabec4a9bacead29315715, type: 3}
       propertyPath: m_fontSize
-      value: 82.65
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2570893856798615850, guid: 36f5497acafabec4a9bacead29315715, type: 3}
       propertyPath: m_fontSizeMax
