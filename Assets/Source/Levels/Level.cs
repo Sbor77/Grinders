@@ -35,11 +35,9 @@ public class Level : MonoBehaviour
         _missionConditions = _infoViewer.MissionConditions;
 
         if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)
-        {
             SaveDefaultStats();
 
-            _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
-        }
+        _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
 
         InitZones();
     }
@@ -48,14 +46,14 @@ public class Level : MonoBehaviour
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
 
-        _player.IsDied += OnDyingPlayerScreen;        
+        _player.IsDied += OnDyingPlayerScreen;
     }
 
     private void OnDisable()
     {
         _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
 
-        _player.IsDied -= OnDyingPlayerScreen;        
+        _player.IsDied -= OnDyingPlayerScreen;
     }
 
     private void OnDyingPlayerScreen()

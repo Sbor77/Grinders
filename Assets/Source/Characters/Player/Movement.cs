@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
     private Vector3 _attackDirection = Vector3.forward;
     private Vector3 _moveDirection = Vector3.forward;
     private bool _isMoving = false;
+    private float _halfRotation => _rotationSpeed / 2f;
+
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
     private const int _maxPointCount = 50;
@@ -77,6 +79,10 @@ public class Movement : MonoBehaviour
     public void Init(int speedLevel)
     {
         _speed += LoadBoostSpeed(speedLevel);
+
+        if (speedLevel > 1)
+            _rotationSpeed += _halfRotation * speedLevel;
+
         ChangedBoostSpeed?.Invoke();
     }
 

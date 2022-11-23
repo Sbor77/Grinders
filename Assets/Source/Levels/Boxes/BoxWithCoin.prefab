@@ -319,9 +319,9 @@ AudioSource:
   MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
-  BypassEffects: 1
+  BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 1
+  BypassReverbZones: 0
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -421,7 +421,6 @@ MonoBehaviour:
   _fracturedBox: {fileID: 6108084464405132485}
   _crashAudioClip: {fileID: 8566485726950763772}
   _item: {fileID: 1675968225667557870}
-  _itemAudio: {fileID: 8300000, guid: 79b6bd1d1a17e4a47be0743495985a9c, type: 3}
 --- !u!1 &6108084464405132481
 GameObject:
   m_ObjectHideFlags: 0
