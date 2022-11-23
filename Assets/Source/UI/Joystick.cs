@@ -20,6 +20,12 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
     private const float Half = .5f;
 
+    private void Start()
+    {
+        if (DataHandler.Instance.IsMobile())
+            _moveToTouchDownPosition = true;
+    }
+
     private void Update()
     {
         if (_isTouchDown)

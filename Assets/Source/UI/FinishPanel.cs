@@ -32,8 +32,6 @@ public class FinishPanel : MonoBehaviour
                             $"Level Score - {GetCurrentScore()}\n " +
                             $"Total Score - {GetTotalScore()}";
         _infoText.text = statsLevel;
-
-        gameObject.SetActive(true);
     }
 
     public void Activate()
