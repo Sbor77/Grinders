@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3418328666309824532}
   - component: {fileID: 3418328666309824534}
-  - component: {fileID: 2958288116747913565}
-  - component: {fileID: 2998537315573829818}
   - component: {fileID: 329507841}
   m_Layer: 5
   m_Name: FinishPanel
@@ -50,36 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3418328666309824533}
   m_CullTransparentMesh: 1
---- !u!114 &2958288116747913565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3418328666309824533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17d9b5e51e3a744484930fec32ddfc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _infoText: {fileID: 3418328666423211782}
-  _shopButton: {fileID: 3418328666321228671}
-  _infoViewer: {fileID: 0}
---- !u!114 &2998537315573829818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3418328666309824533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17d9b5e51e3a744484930fec32ddfc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _infoText: {fileID: 3418328666423211782}
-  _shopButton: {fileID: 3418328666321228671}
-  _infoViewer: {fileID: 0}
 --- !u!114 &329507841
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2783,7 +2783,7 @@ MonoBehaviour:
   _cameraHandler: {fileID: 602114699}
   _enemySpawner: {fileID: 519430086}
   _boxSpawner: {fileID: 1371502433}
-  _finishPanel: {fileID: 0}
+  _finishPanel: {fileID: 498956189143826606}
   _deathPanel: {fileID: 386824782230901069}
   _zones:
   - {fileID: 72986929}
@@ -8147,6 +8147,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540436693}
     m_Modifications:
+    - target: {fileID: 329507841, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
+      propertyPath: _infoViewer
+      value: 
+      objectReference: {fileID: 1251975579720424105}
     - target: {fileID: 2998537315573829818, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
       propertyPath: _infoViewer
       value: 
@@ -8243,6 +8247,17 @@ PrefabInstance:
     - {fileID: 2958288116747913565, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
     - {fileID: 2998537315573829818, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
+--- !u!114 &498956189143826606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 329507841, guid: 527c8f53f7fb1014f9024a9b8420826b, type: 3}
+  m_PrefabInstance: {fileID: 498956189143826605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17d9b5e51e3a744484930fec32ddfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!64 &778262046404451101
 MeshCollider:
   m_ObjectHideFlags: 0
