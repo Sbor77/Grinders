@@ -13,7 +13,7 @@ public class DoorOpener : MonoBehaviour
 
     private void Start()
     {
-        //_closedHeight = transform.localPosition.y;        
+        _closedHeight = transform.localPosition.y;        
     }
 
     public void Open()

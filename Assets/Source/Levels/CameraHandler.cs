@@ -10,15 +10,17 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _bigboxCamera;
     [SerializeField] private CinemachineVirtualCamera _playCamera;
     [SerializeField] private Joystick _josytick;
-    [SerializeField] private float _playCameraPositionY;    
+    [SerializeField] private float _playCameraPositionY;
+    [SerializeField] private Transform _startBigboxCameraPoint;
     [SerializeField] private Transform _targetBigboxCameraPoint;    
     [SerializeField] private float _bigboxCameraDelay;
 
-    private Vector3 _defaultBigboxCameraPosition;
+    //private Vector3 _defaultBigboxCameraPosition;
+
 
     private void Start()
     {
-        _defaultBigboxCameraPosition = _bigboxCamera.transform.position;
+        _bigboxCamera.transform.position = _startBigboxCameraPoint.position;        
 
         MoveBigboxCamera();
 
@@ -51,7 +53,7 @@ public class CameraHandler : MonoBehaviour
 
         Vector3 targetPosition = new Vector3(3, 20, -13);        
 
-        _bigboxCamera.transform.position = _defaultBigboxCameraPosition;
+        _bigboxCamera.transform.position = _startBigboxCameraPoint.position;
 
         float defaultFieldOfView = _bigboxCamera.m_Lens.FieldOfView;
 
@@ -92,7 +94,7 @@ public class CameraHandler : MonoBehaviour
 
     private void MoveBigboxCamera()
     {
-        float distance = Vector3.Distance(_targetBigboxCameraPoint.position, _defaultBigboxCameraPosition);
+        float distance = Vector3.Distance(_targetBigboxCameraPoint.position, _startBigboxCameraPoint.position);
         float speed = 22f;
         float joystickDelay = 3f;
 
@@ -102,15 +104,13 @@ public class CameraHandler : MonoBehaviour
 
             DOVirtual.DelayedCall(joystickDelay, () =>
             {
-                _bigboxCamera.transform.position = _defaultBigboxCameraPosition;
+                _bigboxCamera.transform.position = _startBigboxCameraPoint.position;
                 SetJoystickActive(true);
             });            
         });
     }
     private void Deactivate(CinemachineVirtualCamera camera, float delay = 0)
     {
-        DOVirtual.DelayedCall(delay, () => camera.Priority = 0);
-
-        
+        DOVirtual.DelayedCall(delay, () => camera.Priority = 0);        
     }
 }

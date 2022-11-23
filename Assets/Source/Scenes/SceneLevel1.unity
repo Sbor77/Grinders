@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _zones:
   - {fileID: 72986929}
-  _maxCounts: 0a000000
+  _maxCounts: 0d000000
   _enemyPrefabs:
   - {fileID: 8791151804551881446, guid: e8997b363bdecd2408076cd6c2fb8781, type: 3}
   - {fileID: 4604683557206214305, guid: db7d6da3e7b8e8c4cb7645409ab71f55, type: 3}
@@ -1913,7 +1913,7 @@ Transform:
   - {fileID: 1461278846}
   - {fileID: 440582301}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &602114699
 MonoBehaviour:
@@ -1931,6 +1931,7 @@ MonoBehaviour:
   _playCamera: {fileID: 440582302}
   _josytick: {fileID: 1766064448}
   _playCameraPositionY: 20
+  _startBigboxCameraPoint: {fileID: 1627708164}
   _targetBigboxCameraPoint: {fileID: 1112254650}
   _bigboxCameraDelay: 0.5
 --- !u!1 &620143272
@@ -4899,7 +4900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _zones:
   - {fileID: 72986929}
-  _maxCounts: 05000000
+  _maxCounts: 07000000
   _spawnBoxParent: {fileID: 1414453989}
   _bigBoxPoint: {fileID: 78114139}
   _boxWithCoinPrefab: {fileID: 5172793039412916207, guid: 282a5c503c5c8b74dadb62492a5d2267, type: 3}
@@ -5652,6 +5653,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1627708163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1627708164}
+  m_Layer: 0
+  m_Name: BigboxCameraStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1627708164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627708163}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3, y: 13.5, z: -9.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1628560658
 GameObject:
@@ -8860,11 +8892,11 @@ PrefabInstance:
       objectReference: {fileID: 1251975579720424105}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needEnemyKilled
-      value: 1
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needCoinCollected
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295036, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_Name

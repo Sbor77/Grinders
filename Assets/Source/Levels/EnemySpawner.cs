@@ -139,13 +139,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void DeactivateEnemies(LevelZone zoneExclusive)
     {
-        int targetIndex = -1;
-
         for (int i = 0; i < _zones.Count; i++)
         {
             if (_zones[i] != zoneExclusive)
             {
-                foreach (var enemy in _enemyArray[targetIndex])
+                foreach (var enemy in _enemyArray[i])
                 {
                     enemy.gameObject.SetActive(false);
                 }
