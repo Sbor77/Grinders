@@ -39,6 +39,8 @@ public class StartMenu : MonoBehaviour
 
     private void StartNewGame()
     {
+        DataHandler.Instance.DeleteAllStats();
+
         int defaultLevel = 1;
         int defaultHealthSkill = 1;
         int defaultSpeedSkill = 1;

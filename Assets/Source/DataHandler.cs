@@ -85,6 +85,11 @@ public class DataHandler : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void DeleteAllStats()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public int GetSavedTotalMoney()
     {
         return PlayerPrefs.GetInt(_totalMoneyKey);

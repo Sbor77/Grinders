@@ -1122,7 +1122,7 @@ Transform:
   - {fileID: 218800952}
   - {fileID: 2100773912}
   m_Father: {fileID: 1338395257}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
 --- !u!114 &205710323
 MonoBehaviour:
@@ -8730,11 +8730,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2128685312}
   - {fileID: 1486103557}
   - {fileID: 205710322}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1344807238 stripped
 MonoBehaviour:
@@ -9744,7 +9743,7 @@ Transform:
   m_Children:
   - {fileID: 14625845}
   m_Father: {fileID: 1338395257}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 57.239, y: 0, z: 0}
 --- !u!1 &1530428772
 GameObject:
@@ -10590,11 +10589,11 @@ PrefabInstance:
       objectReference: {fileID: 1338395256}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needEnemyKilled
-      value: 90
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needCoinCollected
-      value: 40
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _startCameraPosition
@@ -13545,8 +13544,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1338395257}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2132506904
 PrefabInstance:

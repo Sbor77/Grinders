@@ -157,20 +157,10 @@ public class Level : MonoBehaviour
             int accumulatedKills = zoneKills + (zoneKills * i);
 
             if (i == _zones.Count - 1)
-            {
-                _zones[i].Init(targetMoney, targetKills);
-
-                //print("Zone " + i + " (money / kills) = " + targetMoney + " / " + targetKills);
-            }
+                _zones[i].Init(targetMoney, targetKills);                            
             else
-            {
-                _zones[i].Init(accumulatedMoney, accumulatedKills);
-
-                //print("Zone " + i + " (money / kills) = " + accumulatedMoney + " / " + accumulatedKills);
-            }
-        }
-
-        
+                _zones[i].Init(accumulatedMoney, accumulatedKills);            
+        }        
 
         _currentZoneIndex = 0;
 
@@ -212,13 +202,6 @@ public class Level : MonoBehaviour
         else        
             return false;        
     }
-/*
-    private void LoadShopScene()
-    {
-        SaveProgress();
-
-        SceneManager.LoadScene(_shopSceneIndex);
-    }*/
 
     private void SaveProgress()
     {

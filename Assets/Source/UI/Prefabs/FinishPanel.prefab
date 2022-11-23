@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17d9b5e51e3a744484930fec32ddfc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _infoText: {fileID: 3418328666423211782}
+  _infoText: {fileID: 3418328667629277636}
   _shopButton: {fileID: 3418328666321228671}
   _infoViewer: {fileID: 0}
 --- !u!1 &3418328666321228669
