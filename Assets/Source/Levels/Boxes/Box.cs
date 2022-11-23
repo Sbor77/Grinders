@@ -52,12 +52,15 @@ public class Box : MonoBehaviour
     public void Crush()
     {
         float crushedBoxLivetime = 3f;
+        float pieceColliderDeactivationDelay = 2f;
 
         _wholeBoxRenderer.enabled = false;
 
         _boxCollider.enabled = true;
-                
+
         _fracturedBox.SetActive(true);
+
+        DOVirtual.DelayedCall(pieceColliderDeactivationDelay, DeactivatePiecesColliders);
 
         _crashAudioClip.Play();
 
@@ -109,6 +112,16 @@ public class Box : MonoBehaviour
         transform.eulerAngles = new Vector3(0, randomAngleY, 0);
     }   
 
+    private void DeactivatePiecesColliders()
+    {
+        for (int i = 0; i < _pieces.Count; i++)
+        {
+            _pieces[i].gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+            _pieces[i].gameObject.GetComponent<MeshCollider>().enabled = false;           
+        }
+    }
+
     private void SaveDefaultPiecesPositions()
     {
         for (int i = 0; i < _pieces.Count; i++)
@@ -122,6 +135,10 @@ public class Box : MonoBehaviour
         for (int i = 0; i < _pieces.Count; i++)
         {
             _pieces[i].transform.localPosition = _piecesDefaultPositions[i];
+
+            _pieces[i].gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            _pieces[i].gameObject.GetComponent<MeshCollider>().enabled = true;
         }
     }
 }

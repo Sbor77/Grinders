@@ -23,10 +23,9 @@ public class BoxSpawner : MonoBehaviour
 
     private List<Box>[] _boxArray;
     private LevelZone _currentZone;
+    private int _currentZoneIndex;
 
-    private Box _bigBox;
-    //private List<Box> _generatedBoxes = new();        
-    private int _currentBoxCount;
+    private Box _bigBox;        
     private Vector3 _tempPosition = new Vector3(0, 5, 0);
     private float _respawnDelay = 4f;
     private float _circleOffsetModifier = 1;
@@ -56,12 +55,7 @@ public class BoxSpawner : MonoBehaviour
             {
                 box.IsItemCollected += OnItemCollected;
             }
-        }
-
-        /*foreach (var box in _generatedBoxes)
-        {            
-            box.IsItemCollected += OnItemCollected;
-        }  */      
+        }    
 
         _bigBox.IsItemCollected += OnBigboxCollected;
     }
@@ -76,17 +70,14 @@ public class BoxSpawner : MonoBehaviour
             }
         }
 
-        /*foreach (var box in _generatedBoxes)
-        {         
-            box.IsItemCollected -= OnItemCollected;
-        }*/
-
         _bigBox.IsItemCollected -= OnBigboxCollected;
     }
 
-    public void SetZoneIndex(LevelZone zone)
+    public void SetZoneIndex(int index)
     {
-        _currentZone = zone;
+        _currentZoneIndex = index;
+
+        _currentZone = _zones[_currentZoneIndex];
 
         SpawnBox();
     }
@@ -105,10 +96,21 @@ public class BoxSpawner : MonoBehaviour
 
     private void OnItemCollected()
     {
-        _currentBoxCount--;
-
-        if (GetMaxBoxCount() > _currentBoxCount)
+        if (GetMaxBoxCount() > GetCurrentBoxCount())
             DOVirtual.DelayedCall(_respawnDelay, () => SpawnBox());        
+    }
+
+    private int GetCurrentBoxCount()
+    {
+        int count = 0;
+
+        foreach (var enemy in _boxArray[_currentZoneIndex])
+        {
+            if (enemy.gameObject.activeSelf == true)
+                count++;
+        }
+
+        return count;
     }
 
     private int GetMaxBoxCount()
@@ -181,36 +183,14 @@ public class BoxSpawner : MonoBehaviour
 
                 _boxArray[i].Add(newBox);
             }
-        }
-
-        /*for (int i = 0; i < count; i++)
-        {
-            Box boxPrefab;
-
-            if (boxWithCrossCount > 0)
-            {
-                boxPrefab = _boxWithCrossPrefab;
-
-                boxWithCrossCount--;
-            }
-            else
-            {
-                boxPrefab = _boxWithCoinPrefab;
-            }            
-
-            var newBox = Instantiate(boxPrefab, _tempPosition, Quaternion.identity, _spawnBoxParent);
-            
-            newBox.DeactivateWholeBox();            
-
-            _generatedBoxes.Add(newBox);
-        }  */      
+        }   
     }
 
     private void SpawnBox()
     {
         var boxes = _boxArray[GetCurrentZoneIndex()];
 
-        if (TryGetInactiveBox(boxes, out Box inactiveBox) && GetMaxBoxCount() > _currentBoxCount &&
+        if (TryGetInactiveBox(boxes, out Box inactiveBox) && GetMaxBoxCount() > GetCurrentBoxCount() &&
             TryGetFreePointToSpawn(_zones[GetCurrentZoneIndex()], out Vector3 freePoint) && _isStopped == false)
         {
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _circleOffsetModifier;
@@ -221,11 +201,9 @@ public class BoxSpawner : MonoBehaviour
                 inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
 
             if (inactiveBox.GetComponentInChildren<Cross>(true))
-                inactiveBox.ActivateWholeBox(_minHealthAmount, _maxHealthAmount);
+                inactiveBox.ActivateWholeBox(_minHealthAmount, _maxHealthAmount);            
 
-            _currentBoxCount++;
-
-            if (GetMaxBoxCount() > _currentBoxCount)
+            if (GetMaxBoxCount() > GetCurrentBoxCount())
                 SpawnBox();
         }
     }

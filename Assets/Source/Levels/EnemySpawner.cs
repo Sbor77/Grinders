@@ -10,13 +10,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<Enemy> _enemyPrefabs;
     [SerializeField] protected Transform _enemyParent;
     [SerializeField] protected LayerMask _enemyLayer;    
-    [SerializeField] private float _respawnTime = 5f;
+    [SerializeField] private float _respawnTime;
         
     List<Enemy>[] _enemyArray;
     private LevelZone _currentZone;
-    private Vector3 _tempPosition = new Vector3(0, 5, 0);    
-    private int _playerKills;
-    private int _currentEnemyCount;
+    private int _currentZoneIndex;      
+    private int _playerKills;    
     private float _spawnRadiusModifier = 1;
     private bool _isDeactivated;
 
@@ -24,7 +23,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
-        _currentZone = _zones[0];
+        _currentZoneIndex = 0;
+
+        _currentZone = _zones[_currentZoneIndex];
 
         _enemyArray = new List<Enemy>[_zones.Count];        
 
@@ -55,11 +56,13 @@ public class EnemySpawner : MonoBehaviour
         }        
     }
 
-    public void SetZoneIndex(LevelZone zone)
+    public void SetZoneIndex(int index)
     {
-        _currentZone = zone;
+        _currentZoneIndex = index;
 
-        DeactivateEnemies(zone);
+        _currentZone = _zones[_currentZoneIndex];
+
+        DeactivateEnemiesInRestZones();
 
         SpawnEnemy();        
     }
@@ -81,12 +84,12 @@ public class EnemySpawner : MonoBehaviour
     {
         _playerKills++;
 
-        IsPLayerKillsIncreased?.Invoke(_playerKills);        
+        IsPLayerKillsIncreased?.Invoke(_playerKills);                
 
-        _currentEnemyCount--;
+        if (GetCurrentEnemyCount() < GetMaxEnemyCount())                    
+            DOVirtual.DelayedCall(_respawnTime, SpawnEnemy);
 
-        if (_currentEnemyCount < GetMaxEnemyCount())                    
-            DOVirtual.DelayedCall(_respawnTime, SpawnEnemy);        
+        DeactivateEnemiesInRestZones();
     }
 
     private void GenerateAllEnemies()
@@ -117,31 +120,30 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        var enemies = _enemyArray[GetCurrentZoneIndex()];
+        var enemies = _enemyArray[_currentZoneIndex];
 
-        if (TryGetInactiveEnemy(enemies, out Enemy inactiveEnemy) && _currentEnemyCount < GetMaxEnemyCount() && _isDeactivated == false &&
-            TryGetFreePointToSpawn(_zones[GetCurrentZoneIndex()], out Vector3 freePoint))
+        if (TryGetInactiveEnemy(enemies, out Enemy inactiveEnemy) && GetCurrentEnemyCount() < GetMaxEnemyCount() && _isDeactivated == false)
         {
+            Vector3 spawnPosition = GetFreePointToSpawn(_currentZone);
+                        
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _spawnRadiusModifier;
 
-            inactiveEnemy.transform.position = freePoint + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
+            inactiveEnemy.transform.position = spawnPosition + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
             inactiveEnemy.Restore();
 
-            inactiveEnemy.gameObject.SetActive(true);
+            inactiveEnemy.gameObject.SetActive(true);              
 
-            _currentEnemyCount++;            
-
-            if (_currentEnemyCount < GetMaxEnemyCount())
+            if (GetCurrentEnemyCount() < GetMaxEnemyCount())
                 SpawnEnemy();
-        }
+        }        
     }
 
-    private void DeactivateEnemies(LevelZone zoneExclusive)
+    private void DeactivateEnemiesInRestZones()
     {
         for (int i = 0; i < _zones.Count; i++)
         {
-            if (_zones[i] != zoneExclusive)
+            if (i != _currentZoneIndex)
             {
                 foreach (var enemy in _enemyArray[i])
                 {
@@ -151,46 +153,47 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private int GetCurrentZoneIndex()
+    private int GetCurrentEnemyCount()
     {
-        int index = -1;
+        int count = 0;
 
-        for (int i = 0; i < _zones.Count; i++)
+        foreach (var enemy in _enemyArray[_currentZoneIndex])
         {
-            if (_zones[i] == _currentZone)
-                index = i;
+            if (enemy.gameObject.activeSelf == true)
+                count++;
         }
 
-        return index;
-    }
+        return count;
+	}
 
     private int GetMaxEnemyCount()
     {
-        return _maxCounts[GetCurrentZoneIndex()];
+        return _maxCounts[_currentZoneIndex];
     }
 
-    private bool TryGetFreePointToSpawn(LevelZone zone, out Vector3 freePoint)
+    private Vector3 GetFreePointToSpawn(LevelZone zone)
     {
-        List<Vector3> freePoints = new();
-
-        freePoint = _tempPosition;
+        Vector3 freePosition = GetRandomPosition(zone.EnemyPoints);     
+                
+        List<Vector3> freePositions = new();                
 
         foreach (var point in zone.EnemyPoints)
         {
-            if (Physics.CheckSphere(point.position, 0.5f, _enemyLayer) == false)
-            {
-                freePoints.Add(point.position);
-            }
+            if (Physics.CheckSphere(point.position, 0.5f, _enemyLayer) == false)            
+                freePositions.Add(point.position);            
         }
 
-        if (freePoints.Count > 0)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, freePoints.Count);
+        if (freePositions.Count > 0)        
+            freePosition = freePositions[UnityEngine.Random.Range(0, freePositions.Count)];        
 
-            freePoint = freePoints[randomIndex];
-        }
+        return freePosition;
+    }
 
-        return freePoints.Count > 0;
+    private Vector3 GetRandomPosition (List<Transform> points)
+    {
+        int randomIndex = UnityEngine.Random.Range(0, points.Count);
+
+        return points[randomIndex].position;
     }
 
     private bool TryGetInactiveEnemy(List<Enemy> enemies, out Enemy inactiveEnemy)

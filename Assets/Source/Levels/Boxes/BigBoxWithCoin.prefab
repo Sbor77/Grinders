@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2042805655323420240}
   - component: {fileID: 6627762082445188552}
   - component: {fileID: 4931460773048236537}
-  - component: {fileID: 4980201745053812987}
   m_Layer: 8
   m_Name: BigBoxWithCoin
   m_TagString: Untagged
@@ -210,25 +209,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91d9afaa8b41d045b76e9563dfd83d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pieces: []
+  _pieces:
+  - {fileID: 4250450508748718787}
+  - {fileID: 4250450508748718789}
+  - {fileID: 4250450508748718791}
+  - {fileID: 4250450508748718793}
+  - {fileID: 4250450508748718795}
+  - {fileID: 4250450508748718797}
+  - {fileID: 4250450508748718799}
+  - {fileID: 4250450508748718801}
+  - {fileID: 4250450508748718803}
+  - {fileID: 4250450508748718805}
+  - {fileID: 4250450508748718807}
+  - {fileID: 4250450508748718809}
+  - {fileID: 4250450508748718811}
+  - {fileID: 4250450508748718813}
+  - {fileID: 4250450508748718815}
+  - {fileID: 4250450508748718753}
+  - {fileID: 4250450508748718755}
+  - {fileID: 4250450508748718757}
+  - {fileID: 4250450508748718759}
+  - {fileID: 4250450508748718761}
+  - {fileID: 4250450508748718763}
+  - {fileID: 4250450508748718765}
+  - {fileID: 4250450508748718767}
+  - {fileID: 4250450508748718769}
+  - {fileID: 4250450508748718771}
+  - {fileID: 4250450508748718773}
+  - {fileID: 4250450508748718775}
+  - {fileID: 4250450508748718777}
   _wholeBoxRenderer: {fileID: 2042805655323420240}
   _boxCollider: {fileID: 8318668558104614519}
   _fracturedBox: {fileID: 4250450508748718785}
   _crashAudioClip: {fileID: 6627762082445188552}
-  _item: {fileID: 7268686413848879449}
---- !u!114 &4980201745053812987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093345901251465802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72c0579aba7d0d4bba041b8ac8f8176, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collectEffect: {fileID: 0}
+  _item: {fileID: 4204835653532769748}
 --- !u!1 &4250450508748718753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,8 +3533,8 @@ GameObject:
   - component: {fileID: 8400518515227122229}
   - component: {fileID: 4844598322486007184}
   - component: {fileID: 7268686413848879450}
-  - component: {fileID: 7268686413848879449}
   - component: {fileID: 5608115838903843982}
+  - component: {fileID: 4204835653532769748}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -3593,19 +3607,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7268686413848879449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9214210598739640463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b59bf72c68cb23a42b50f44f9d189a3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collectEffect: {fileID: 5608115838903843982}
 --- !u!82 &5608115838903843982
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3702,3 +3703,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4204835653532769748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214210598739640463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a72c0579aba7d0d4bba041b8ac8f8176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collectEffect: {fileID: 5608115838903843982}

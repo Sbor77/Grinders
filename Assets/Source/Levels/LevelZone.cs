@@ -24,13 +24,7 @@ public class LevelZone : MonoBehaviour
     public List<Transform> BoxPoints => _boxPoints;
 
     public List<Transform> EnemyPoints => _enemyPoints;
-
-    private void Start()
-    {
         
-    }
-
-    
 
     private void OnTriggerEnter(Collider other)
     {

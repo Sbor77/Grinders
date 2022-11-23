@@ -43,6 +43,7 @@ public class Level : MonoBehaviour
         InitZones();
     }
 
+
     private void OnEnable()
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
@@ -129,6 +130,8 @@ public class Level : MonoBehaviour
         float cameraZoomTime = 2f;
         float openShopDelay = 3f;
 
+        SaveProgress();
+
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
@@ -138,8 +141,7 @@ public class Level : MonoBehaviour
             _finishPanel.Init();
 
             _finishPanel.Activate();
-        }
-        );        
+        });        
     }
 
     private void InitZones()
@@ -157,12 +159,18 @@ public class Level : MonoBehaviour
             if (i == _zones.Count - 1)
             {
                 _zones[i].Init(targetMoney, targetKills);
+
+                //print("Zone " + i + " (money / kills) = " + targetMoney + " / " + targetKills);
             }
             else
             {
                 _zones[i].Init(accumulatedMoney, accumulatedKills);
+
+                //print("Zone " + i + " (money / kills) = " + accumulatedMoney + " / " + accumulatedKills);
             }
         }
+
+        
 
         _currentZoneIndex = 0;
 
@@ -191,9 +199,9 @@ public class Level : MonoBehaviour
 
             ActivateZone(++_currentZoneIndex);
 
-            _boxSpawner.SetZoneIndex(_zones[_currentZoneIndex]);
+            _boxSpawner.SetZoneIndex(_currentZoneIndex);
 
-            _enemySpawner.SetZoneIndex(_zones[_currentZoneIndex]);
+            _enemySpawner.SetZoneIndex(_currentZoneIndex);
         }
     }
 
@@ -204,13 +212,13 @@ public class Level : MonoBehaviour
         else        
             return false;        
     }
-
+/*
     private void LoadShopScene()
     {
         SaveProgress();
 
         SceneManager.LoadScene(_shopSceneIndex);
-    }
+    }*/
 
     private void SaveProgress()
     {
