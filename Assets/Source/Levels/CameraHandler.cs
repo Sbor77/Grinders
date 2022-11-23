@@ -1,9 +1,7 @@
 using Cinemachine;
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class CameraHandler : MonoBehaviour
 {
@@ -14,17 +12,16 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] private Transform _startBigboxCameraPoint;
     [SerializeField] private Transform _targetBigboxCameraPoint;    
     [SerializeField] private float _bigboxCameraDelay;
-
-    //private Vector3 _defaultBigboxCameraPosition;
-
-
-    private void Start()
+    
+    public void ActivateStartScenario()
     {
-        _bigboxCamera.transform.position = _startBigboxCameraPoint.position;        
+        float startDelay = 1;
 
-        MoveBigboxCamera();
+        _bigboxCamera.transform.position = _startBigboxCameraPoint.position;
 
-        SetJoystickActive(false);        
+        SetJoystickActive(false);
+
+        DOVirtual.DelayedCall(startDelay, () => MoveBigboxCamera());
     }
 
     public void ZoomInPlayCamera()
