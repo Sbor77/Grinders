@@ -2418,8 +2418,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.7905133, y: 4.8591123, z: 3.4073884}
-  m_Center: {x: 1.9274869, y: -1.3904955, z: 1.458059}
+  m_Size: {x: 3.4344354, y: 5.1392956, z: 0.61759186}
+  m_Center: {x: 1.9905696, y: -1.2504039, z: 0.06316058}
 --- !u!1001 &686214244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3772,8 +3772,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.8422093, y: 4.1549625, z: 4.2147474}
-  m_Center: {x: 1.9536965, y: -1.0384202, z: -1.8617375}
+  m_Size: {x: 3.436597, y: 4.1549625, z: 0.46214134}
+  m_Center: {x: 1.9902883, y: -1.0384202, z: 0.014566159}
 --- !u!1 &1055008347
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,7 +4203,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32348
+  m_Name: pb_Mesh50804
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7573,8 +7573,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3718946, y: 4.5995126, z: 2.826232}
-  m_Center: {x: 2, y: -1.260695, z: -1.167481}
+  m_Size: {x: 3.4538484, y: 4.5995126, z: 0.49315166}
+  m_Center: {x: 1.9835696, y: -1.260695, z: -0.0009407997}
 --- !u!1001 &2057643494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8569,8 +8569,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3718946, y: 2.905087, z: 2.0449743}
-  m_Center: {x: 2, y: -0.18948293, z: 0.77685213}
+  m_Size: {x: 3.4557824, y: 2.905087, z: 0.5245657}
+  m_Center: {x: 1.9852494, y: -0.18948293, z: 0.016647816}
 --- !u!1001 &1732129146283969190
 PrefabInstance:
   m_ObjectHideFlags: 0
