@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,13 +13,16 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private TMP_Text _bigBoxText;
     [SerializeField] private TMP_Text _KillsText;
+    [SerializeField] private Image _CooldownTimer;
 
+    private Movement _movement;
     private int _questCoinCollected;
     private int _questEnemyKills;
     private bool _questbigBoxDestroyed;
     private float _maxHealth;
     private float _currentHealth;
-    private QuestInfo _missonConditions;    
+    private QuestInfo _missonConditions;
+    private Coroutine _cooldownCoroutine;
 
     public event Action IsCurrentConditionsChanged;
 
@@ -32,6 +36,10 @@ public class InfoViewer : MonoBehaviour
 
     public bool IsBigboxDestroyed { get; private set; }
 
+    private void Awake()
+    {
+        _movement = _player.GetComponent<Movement>();
+    }
 
     private void OnEnable()
     {
@@ -42,6 +50,9 @@ public class InfoViewer : MonoBehaviour
         _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
 
         _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
+
+        _movement.StartAttackCooldown += OnStartCooldown;
+        _movement.ChangedState += OnStartAttack;
     }
 
     void Start()
@@ -52,7 +63,7 @@ public class InfoViewer : MonoBehaviour
 
         _healthBarSlider.maxValue = _maxHealth;
 
-        _healthBarSlider.value = _currentHealth;        
+        _healthBarSlider.value = _currentHealth;
     }
 
     private void OnDisable()
@@ -64,6 +75,9 @@ public class InfoViewer : MonoBehaviour
         _player.ChangedCoin -= OnChangedPlayerCoins;
 
         _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
+
+        _movement.StartAttackCooldown -= OnStartCooldown;
+        _movement.ChangedState -= OnStartAttack;
     }
 
     public void SetQuestCollected(QuestInfo conditions)
@@ -77,6 +91,30 @@ public class InfoViewer : MonoBehaviour
         SetStartConditionsText();
 
         _missonConditions = conditions;
+    }
+
+    private void OnStartAttack(State state)
+    {
+        if (state == State.Attack)
+            _CooldownTimer.fillAmount = 0;
+    }
+
+    private void OnStartCooldown(float delay)
+    {
+        _cooldownCoroutine = StartCoroutine(Cooldown(delay));
+
+    }
+
+    private IEnumerator Cooldown(float maxValue)
+    {
+        float value = 0;
+        while (value < maxValue)
+        {
+            value = Mathf.Clamp(value + Time.deltaTime, 0, maxValue);
+            _CooldownTimer.fillAmount = value / maxValue;
+            yield return null;
+        }
+        yield return null;
     }
 
     private void SetStartConditionsText()

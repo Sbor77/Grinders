@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _speedInAttack;
     [SerializeField] private float _attackDistance = 15f;
+    [SerializeField] private float _delayAttackCooldown = 1f;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
 
@@ -18,6 +19,7 @@ public class Movement : MonoBehaviour
     private Vector3 _attackDirection = Vector3.forward;
     private Vector3 _moveDirection = Vector3.forward;
     private bool _isMoving = false;
+    private bool _cooldown = false;
     private float _halfRotation => _rotationSpeed / 2f;
 
     private const float AngleCorrection = -1f;
@@ -27,8 +29,10 @@ public class Movement : MonoBehaviour
     public event Action<State> ChangedState;
     public event Action<float> ChangedMoveSpeed;
     public event Action ChangedBoostSpeed;
+    public event Action<float> StartAttackCooldown;
 
     public float Speed => _speed;
+    public float AttackCooldown => _delayAttackCooldown;
 
     private void Awake()
     {
@@ -119,6 +123,9 @@ public class Movement : MonoBehaviour
 
     private void StartMoveingAtack()
     {
+        if (_cooldown)
+            return;
+
         SetChangeMoving(false);
 
         _attackDirection = transform.forward;
@@ -199,6 +206,20 @@ public class Movement : MonoBehaviour
         ChangedState?.Invoke(State.Move);
 
         SetChangeMoving(true);
+        StartCooldown();
+    }
+
+    private void StartCooldown()
+    {
+        StartAttackCooldown?.Invoke(_delayAttackCooldown);
+        _cooldown = true;
+
+        Invoke(nameof(EndCooldown),_delayAttackCooldown);
+    }
+
+    private void EndCooldown()
+    {
+        _cooldown = false;
     }
 
     private Coroutine StartMove(Vector3 point)
