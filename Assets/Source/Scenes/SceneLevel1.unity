@@ -2029,10 +2029,8 @@ MonoBehaviour:
   _bigboxCamera: {fileID: 1461278847}
   _playCamera: {fileID: 440582302}
   _josytick: {fileID: 1766064448}
-  _playCameraPositionY: 20
   _startBigboxCameraPoint: {fileID: 1627708164}
   _targetBigboxCameraPoint: {fileID: 1112254650}
-  _bigboxCameraDelay: 0.5
 --- !u!1 &620143272
 GameObject:
   m_ObjectHideFlags: 0
@@ -9326,11 +9324,11 @@ PrefabInstance:
       objectReference: {fileID: 602114699}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needEnemyKilled
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _needCoinCollected
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _startCameraPosition

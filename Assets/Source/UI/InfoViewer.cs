@@ -81,11 +81,9 @@ public class InfoViewer : MonoBehaviour
 
     private void SetStartConditionsText()
     {
-        OnChangedPlayerCoins(0);
-
-        OnChangedPlayerKills(0);
-
-        OnDestroyBigBox(0);
+        ChangeViewText(_goldText, 0, _questCoinCollected);
+        ChangeViewText(_KillsText, 0, _questEnemyKills);
+        ChangeViewText(_bigBoxText, 0, 1);
     }
 
     private void OnChangedHealth(float health)
@@ -94,15 +92,11 @@ public class InfoViewer : MonoBehaviour
 
         CurrentHealth = health;
 
-        IsCurrentConditionsChanged?.Invoke();
     }
 
     private void OnChangedPlayerCoins(int value)
     {
-        if (_questCoinCollected == 0)
-            _goldText.text = value.ToString();
-        else
-            _goldText.text = $"{value.ToString()}/{_questCoinCollected}";
+        ChangeViewText(_goldText, value, _questCoinCollected);
 
         CurrentCoins = value;
 
@@ -111,10 +105,7 @@ public class InfoViewer : MonoBehaviour
 
     private void OnChangedPlayerKills(int value)
     {
-        if (_questEnemyKills == 0)
-            _KillsText.text = value.ToString();
-        else
-            _KillsText.text = $"{value.ToString()}/{_questEnemyKills}";
+        ChangeViewText(_KillsText, value, _questEnemyKills);
 
         CurrentKills = value;
 
@@ -123,13 +114,18 @@ public class InfoViewer : MonoBehaviour
 
     private void OnDestroyBigBox(int count)
     {
-        if (_questbigBoxDestroyed)
-            _bigBoxText.text = $"{count.ToString()}/1";
-        else
-            _bigBoxText.text = count.ToString();
+        ChangeViewText(_bigBoxText, count, 1);
 
         IsBigboxDestroyed = count == 1;
 
         IsCurrentConditionsChanged?.Invoke();
+    }
+
+    private void ChangeViewText(TMP_Text textField, int currentValue, int questValue)
+    {
+        if (questValue == 0)
+            textField.text = currentValue.ToString();
+        else
+            textField.text = $"{currentValue.ToString()}/{questValue.ToString()}";
     }
 }
