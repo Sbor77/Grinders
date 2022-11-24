@@ -7,58 +7,103 @@ using DG.Tweening;
 
 public class TutorialPanel : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _cointText;
+    [SerializeField] private TMP_Text _coinText;
     [SerializeField] private Image _coinArrow;
+    [SerializeField] private Image _coinPad;
+    [Space]
     [SerializeField] private TMP_Text _killText;
     [SerializeField] private Image _killArrow;
+    [SerializeField] private Image _killPad;
+    [Space]
     [SerializeField] private TMP_Text _bigboxText;
     [SerializeField] private Image _bigboxArrow;
-    [SerializeField] private Image _bigboxOnsceneArrow;
+    [SerializeField] private Image _bigboxPad;
+    [SerializeField] private Image _bigboxMark;
+
+    private float _hintDuration = 0.5f;
+    private int _hintLoops = 8;
 
     private void Start()
     {
-     
+        Invoke (nameof(ShowSideHints), 0.5f);
+
+        //AnimateFade(_coinPad, 0, _hintDuration, _hintLoops);
     }
 
-    private void AnimateArrow()
-    {
-        Vector3 startPosition = _coinArrow.transform.position;
-        float targetPositionX = _coinArrow.transform.position.x - 100;
-        float targetPositionY = _coinArrow.transform.position.y + 100;
-        float time = 1f;
-        int loops = 20;
+    private void ShowSideHints()
+    {        
+        float interval = _hintDuration * _hintLoops + 1;        
 
-        Vector3 targetPosition = new Vector3(targetPositionX, targetPositionY, _coinArrow.transform.position.z);
+        Time.timeScale = 0;
 
-        _coinArrow.transform.DOMoveY(targetPositionY, time).SetLoops(loops, LoopType.Yoyo);
-    }
+        Sequence hintSequence = DOTween.Sequence();
 
-    private void AnimateBigboxArrow()
-    {
-        Vector3 startPosition = _bigboxOnsceneArrow.transform.position;        
-        float targetPositionY = _bigboxOnsceneArrow.transform.position.y - 150;
-        float time = 0.5f;
-        int loops = 30;
+        hintSequence.SetUpdate(true);
 
-        _bigboxOnsceneArrow.transform.DOMoveY(targetPositionY, time).SetLoops(loops, LoopType.Yoyo);
-
-
-        /*var fadeSequence = DOTween.Sequence();
-
-        for (int i = 0; i < loops; i++)
+        hintSequence.AppendCallback(() => 
+        { 
+            AnimateMissionHint(_coinArrow, _coinText);
+            FadeOut(_coinPad, 0);
+        });
+        hintSequence.AppendInterval(interval);
+        hintSequence.AppendCallback(() =>
         {
-            fadeSequence.Append(_bigboxOnsceneArrow.DOFade(0, time/2)).SetEase(Ease.OutSine);
-            fadeSequence.Append(_bigboxOnsceneArrow.DOFade(1, time)).SetEase(Ease.InSine);
-            fadeSequence.AppendInterval(time);
-        }*/
+            AnimateMissionHint(_killArrow, _killText);
+            FadeOut(_killPad, 0);
+        });
+        hintSequence.AppendInterval(interval);
+        hintSequence.AppendCallback(() =>
+        {
+            AnimateMissionHint(_bigboxArrow, _bigboxText);
+            FadeOut(_bigboxPad, 0);
+            FadeOut(_bigboxMark, 0);
+        });
+        hintSequence.AppendInterval(interval);
+        hintSequence.AppendCallback(() => Time.timeScale = 1);
 
 
 
 
+        /*AnimateMissionHint(_coinArrow, _coinText);
 
+        DOVirtual.DelayedCall(interval, () => AnimateMissionHint(_killArrow, _killText)).SetUpdate(true);
+
+        DOVirtual.DelayedCall(interval * 2 , () =>
+            {
+                AnimateMissionHint(_bigboxArrow, _bigboxText);
+                AnimateFade(_bigboxMark, 0, _hintTime, _hintLoops);
+            }).SetUpdate(true); 
+
+        DOVirtual.DelayedCall(interval * 3, () => Time.timeScale = 1).SetUpdate(true);    */
     }
 
-    
+    private void AnimateMissionHint(Image arrow, TMP_Text text)
+    {
+        Vector3 startPosition = arrow.transform.position;
+        float offsetX = 150;
+        float offsetY = 120;
 
+        arrow.gameObject.SetActive(true);
 
+        text.gameObject.SetActive(true);
+
+        Vector3 targetPosition = new Vector3(startPosition.x + offsetX, startPosition.y + offsetY, 0);
+
+        arrow.transform.DOMove(targetPosition, _hintDuration).SetLoops(_hintLoops, LoopType.Yoyo).OnComplete(() =>
+        {
+            arrow.gameObject.SetActive(false);
+            text.gameObject.SetActive(false);
+            arrow.transform.position = startPosition;
+        }).SetUpdate(true);
+    }
+
+    private void FadeOut(Image image, float endAlpha)
+    {
+        image.gameObject.SetActive(true);
+
+        image.DOFade(endAlpha, _hintDuration).SetLoops(_hintLoops, LoopType.Yoyo).OnComplete(() =>
+        {
+            image.gameObject.SetActive(false);
+        }).SetUpdate(true);
+    }
 }
