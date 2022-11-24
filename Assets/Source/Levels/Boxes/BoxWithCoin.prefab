@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 3549205897666254692}
   - component: {fileID: 8566485726950763772}
   - component: {fileID: 5172793039412916207}
+  - component: {fileID: 4778183122800473065}
   m_Layer: 8
   m_Name: BoxWithCoin
   m_TagString: Untagged
@@ -421,6 +422,19 @@ MonoBehaviour:
   _fracturedBox: {fileID: 6108084464405132485}
   _crashAudioClip: {fileID: 8566485726950763772}
   _item: {fileID: 1675968225667557870}
+--- !u!65 &4778183122800473065
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464886730387448702}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5074964, y: 1.6280618, z: 1.6991296}
+  m_Center: {x: 0.032040596, y: 0.8140309, z: 0.00048077106}
 --- !u!1 &6108084464405132481
 GameObject:
   m_ObjectHideFlags: 0
