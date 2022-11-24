@@ -2260,6 +2260,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 1766064448}
+    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _delayAttackCooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5713195580975693084, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: _walkSound
       value: 
@@ -4203,7 +4207,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh50804
+  m_Name: pb_Mesh35802
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9621,6 +9625,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540436693}
     m_Modifications:
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.75252223
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.757
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.24700001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.252
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8453041982494279979, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9708,10 +9744,6 @@ PrefabInstance:
     - target: {fileID: 8453041982494279980, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_Name
       value: UserPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453041982494279980, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: _player
