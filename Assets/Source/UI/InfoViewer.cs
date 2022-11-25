@@ -52,6 +52,7 @@ public class InfoViewer : MonoBehaviour
         _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
 
         _movement.StartAttackCooldown += OnStartCooldown;
+
         _movement.ChangedState += OnStartAttack;
     }
 
@@ -77,6 +78,7 @@ public class InfoViewer : MonoBehaviour
         _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
 
         _movement.StartAttackCooldown -= OnStartCooldown;
+
         _movement.ChangedState -= OnStartAttack;
     }
 

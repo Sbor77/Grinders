@@ -12,7 +12,12 @@ public class QuestPanel : MonoBehaviour
     [SerializeField] private int _needCoinCollected;
     [SerializeField] private int _needEnemyKilled;
     [SerializeField] private bool _needDestroyBigBox;
-    
+
+    public int NeedCoinCollected => _needCoinCollected;
+
+    public int NeedEnemyKilled => _needEnemyKilled;
+
+
     private void OnEnable()
     {
         Time.timeScale = 0;

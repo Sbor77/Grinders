@@ -7,6 +7,8 @@ using DG.Tweening;
 
 public class TutorialPanel : MonoBehaviour
 {
+    [SerializeField] private QuestPanel _questPanel;
+    [Space]
     [SerializeField] private TMP_Text _coinText;
     [SerializeField] private Image _coinArrow;
     [SerializeField] private Image _coinPad;
@@ -19,6 +21,9 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private Image _bigboxArrow;
     [SerializeField] private Image _bigboxPad;
     [SerializeField] private Image _bigboxMark;
+    [Space]
+    [SerializeField] private GameObject _playerGuides;
+    [SerializeField] private Button _okButton;
 
     private float _hintDuration = 0.5f;
     private int _hintLoops = 8;
@@ -30,9 +35,28 @@ public class TutorialPanel : MonoBehaviour
         //AnimateFade(_coinPad, 0, _hintDuration, _hintLoops);
     }
 
+    private void OnEnable()
+    {
+        _okButton.onClick.AddListener(OnClickButton);
+    }
+
+    private void OnDisable()
+    {
+        _okButton.onClick.RemoveListener(OnClickButton);
+    }
+
+    private void OnClickButton()
+    {
+        Time.timeScale = 1;
+
+        _playerGuides.gameObject.SetActive(false);
+    }
+
     private void ShowSideHints()
     {        
-        float interval = _hintDuration * _hintLoops + 1;        
+        float interval = _hintDuration * _hintLoops + 1;
+
+        SetText();
 
         Time.timeScale = 0;
 
@@ -59,22 +83,9 @@ public class TutorialPanel : MonoBehaviour
             FadeOut(_bigboxMark, 0);
         });
         hintSequence.AppendInterval(interval);
-        hintSequence.AppendCallback(() => Time.timeScale = 1);
+        hintSequence.AppendCallback(() => _playerGuides.gameObject.SetActive(true));
 
-
-
-
-        /*AnimateMissionHint(_coinArrow, _coinText);
-
-        DOVirtual.DelayedCall(interval, () => AnimateMissionHint(_killArrow, _killText)).SetUpdate(true);
-
-        DOVirtual.DelayedCall(interval * 2 , () =>
-            {
-                AnimateMissionHint(_bigboxArrow, _bigboxText);
-                AnimateFade(_bigboxMark, 0, _hintTime, _hintLoops);
-            }).SetUpdate(true); 
-
-        DOVirtual.DelayedCall(interval * 3, () => Time.timeScale = 1).SetUpdate(true);    */
+        //hintSequence.AppendCallback(() => Time.timeScale = 1);
     }
 
     private void AnimateMissionHint(Image arrow, TMP_Text text)
@@ -105,5 +116,12 @@ public class TutorialPanel : MonoBehaviour
         {
             image.gameObject.SetActive(false);
         }).SetUpdate(true);
+    }
+
+    private void SetText()
+    {
+        _coinText.text = $"Crush small boxes and collect {_questPanel.NeedCoinCollected.ToString()} coins";
+
+        _killText.text = $"Kill {_questPanel.NeedEnemyKilled.ToString()} enemies";
     }
 }
