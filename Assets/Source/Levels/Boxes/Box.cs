@@ -77,7 +77,9 @@ public class Box : MonoBehaviour
 
     public void ActivateWholeBox(int minValue, int maxValue)
     {
-        float fogDelay = 0.7f;
+        float fogDelay = 1.5f;
+
+        _wholeBoxRenderer.enabled = false;
 
         gameObject.SetActive(true);
                 
