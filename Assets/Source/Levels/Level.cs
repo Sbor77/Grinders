@@ -31,6 +31,8 @@ public class Level : MonoBehaviour
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
 
+    private bool _isCheated;
+
     private void Start()
     {
         _missionConditions = _infoViewer.MissionConditions;
@@ -41,6 +43,13 @@ public class Level : MonoBehaviour
         _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
 
         InitZones();
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            _isCheated = true;
     }
 
 
@@ -120,7 +129,7 @@ public class Level : MonoBehaviour
     {
         bool conditions =
             _currentCoins >= _missionConditions.NeedCoinCollected &&
-            _currentKills >= _missionConditions.NeedEnemyKilled;
+            _currentKills >= _missionConditions.NeedEnemyKilled || _isCheated;
 
         return conditions;
     }
@@ -197,7 +206,7 @@ public class Level : MonoBehaviour
 
     private bool IsZoneCompleted (int zoneIndex)
     {
-        if (_currentKills >= _zones[zoneIndex].TargetKills && _currentCoins >= _zones[zoneIndex].TargetMoney)        
+        if (_currentKills >= _zones[zoneIndex].TargetKills && _currentCoins >= _zones[zoneIndex].TargetMoney || _isCheated)        
             return true;        
         else        
             return false;        

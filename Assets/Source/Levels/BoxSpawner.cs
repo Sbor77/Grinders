@@ -27,7 +27,7 @@ public class BoxSpawner : MonoBehaviour
 
     private Box _bigBox;        
     private Vector3 _tempPosition = new Vector3(0, 5, 0);
-    private float _respawnDelay = 4f;
+    private float _respawnDelay = 2f;
     private float _circleOffsetModifier = 1;
     private bool _isStopped;
 

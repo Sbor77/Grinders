@@ -11,6 +11,7 @@ public class Box : MonoBehaviour
     [SerializeField] private GameObject _fracturedBox;
     [SerializeField] private AudioSource _crashAudioClip;
     [SerializeField] private BoxItem _item;
+    [SerializeField] private ParticleSystem _fogEffect;
 
     private List<Vector3> _piecesDefaultPositions = new();    
     private bool _isItemCollectable;    
@@ -76,21 +77,30 @@ public class Box : MonoBehaviour
 
     public void ActivateWholeBox(int minValue, int maxValue)
     {
+        float fogDelay = 0.7f;
+
         gameObject.SetActive(true);
+                
+        _fogEffect.Play();
 
-        _wholeBoxRenderer.enabled = true; 
+        DOVirtual.DelayedCall(fogDelay, () =>
+        {
+            _fogEffect.Stop();
 
-        _boxCollider.enabled = true;
+            _wholeBoxRenderer.enabled = true;
 
-        _fracturedBox.SetActive(false);
+            _boxCollider.enabled = true;
 
-        _item.GenerateValue(minValue, maxValue);
+            _fracturedBox.SetActive(false);
 
-        _item.Deactivate();        
+            _item.GenerateValue(minValue, maxValue);
 
-        GenerateRotationY();
+            _item.Deactivate();
 
-        SaveDefaultPiecesPositions();
+            GenerateRotationY();
+
+            SaveDefaultPiecesPositions();        
+        });
     }
 
     public void DeactivateWholeBox()
