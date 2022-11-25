@@ -1,3 +1,4 @@
+using Agava.WebUtility;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -29,6 +30,25 @@ public class DataHandler : MonoBehaviour
             DontDestroyOnLoad(this);
         }        
     }
+
+    #region Event OnInBackground
+    private void OnEnable()
+    {
+        WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
+    }
+
+    private void OnDisable()
+    {
+        WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
+    }
+
+    private void OnInBackgroundChange(bool inBackground)
+    {
+        AudioListener.pause = inBackground;
+        AudioListener.volume = inBackground ? 0f : 1f;
+        Time.timeScale = inBackground ? 0f : 1f;
+    }
+    #endregion
 
     public void SaveLevel (int level)
     {
