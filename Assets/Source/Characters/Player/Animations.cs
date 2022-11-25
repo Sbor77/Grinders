@@ -23,6 +23,7 @@ public class Animations : MonoBehaviour
     private const string Speed = "MoveSpeed";
     private const string Modifier = "SpeedModifier";
     private const string Attack = "Attack";
+    private const string LowAttack = "LowAttack";
     private const string Died = "Died";
     private const string TakedDamage = "TakeDamage";
 
@@ -42,6 +43,12 @@ public class Animations : MonoBehaviour
         _player.IsDied += OnDying;
         _player.TakedDamage += OnTakedDamage;
         OnChangedBoostSpeed();
+    }
+
+    public void StartLowAttack()
+    {
+        _animator.SetTrigger(LowAttack);
+
     }
 
     private void OnChangedBoostSpeed()

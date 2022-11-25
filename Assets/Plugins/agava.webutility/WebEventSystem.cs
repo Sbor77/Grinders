@@ -1,15 +1,7 @@
 using UnityEngine.EventSystems;
 
-namespace Agava.WebUtility
+public class WebEventSystem : EventSystem
 {
-    /// <summary>
-    /// Fixes unresponsive UI controls after alt-tabbing on mobile Google Chrome.
-    /// </summary>
-    /// <remarks>
-    /// Workaround for <see href="https://trello.com/c/PjW4j3st"/>
-    /// </remarks>
-    public class WebEventSystem : EventSystem
-    {
-        protected override void OnApplicationFocus(bool hasFocus) => base.OnApplicationFocus(true);
-    }
+    protected override void OnApplicationFocus(bool hasFocus) => base.OnApplicationFocus(true);
 }
+

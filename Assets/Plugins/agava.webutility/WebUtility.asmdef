@@ -1,11 +1,12 @@
 {
-    "name": "Agava.WebUtility",
+    "name": "WebUtility",
     "rootNamespace": "",
     "references": [],
-    "includePlatforms": [],
-    "excludePlatforms": [
+    "includePlatforms": [
+        "Editor",
         "WebGL"
     ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
