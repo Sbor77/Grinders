@@ -6,15 +6,20 @@ using UnityEngine;
 public class Player : Characters
 {
     [SerializeField] private float _health;
+    [SerializeField] private float _lowDamage;
+    [SerializeField] private float _strongDamage;
     [SerializeField] private AudioSource _takeDamageSFX;
     [SerializeField] private ParticleSystem _weaponEffect;
     [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _woundEffect;
+    [SerializeField] private SphereCollider _lowAttackCollider;
+    [SerializeField] [Range(0.1f, 2f)] private float _lowAttackDelay;
 
     private Movement _movement;
     private float _currentHealth;
     private int _coins;
     private State _currentState = State.Move;
+    private AttackType _currentAttack = AttackType.Low;
     private float _effectDuration = 3f;
     private int _addBoostMaxHealth = 10;
 
@@ -38,11 +43,8 @@ public class Player : Characters
     private void Start()
     {
         _currentHealth = _health;
-
         _weaponEffect.Stop();
-
         _damageEffect.Stop();
-
         _woundEffect.Stop();
     }
 
@@ -59,16 +61,13 @@ public class Player : Characters
     public void Init(int healthSkillLevel, int speedSkillLevel)
     {
         _movement.Init(speedSkillLevel);
-
         _health += LoadBoostHealth(healthSkillLevel);
-
         _currentHealth = _health;
     }
 
     public void AddMoney(int value)
     {
         _coins += value;
-
         ChangedCoin?.Invoke(_coins);
     }
 
@@ -83,17 +82,28 @@ public class Player : Characters
         if (_currentState == State.Move && IsValid((int)damage))
         {
             _takeDamageSFX.Play();
-
             _currentHealth = ChangeHealth(-damage);
-
             TakedDamage?.Invoke();
-
             ActivateEffect(_damageEffect, _effectDuration);
-
             ActivateEffect(_woundEffect, _effectDuration);
-
             IsAlive();
         }
+    }
+
+    public void AttackNow()
+    {
+        if (_currentAttack == AttackType.Low)
+            ChangeDamage(_lowDamage);
+        else
+            ChangeDamage(_strongDamage);
+
+        _lowAttackCollider.enabled = true;
+        Invoke(nameof(LowAttackingFalse), _lowAttackDelay);
+    }
+
+    private void LowAttackingFalse()
+    {
+        _lowAttackCollider.enabled = false;
     }
 
     private float LoadBoostHealth(int healthLevel)
@@ -103,9 +113,10 @@ public class Player : Characters
 
     private bool IsValid(int value) => value > 0;
 
-    private void OnChangedState(State state)
+    private void OnChangedState(State state, AttackType type)
     {
         _currentState = state;
+        _currentAttack = type;
     }
 
     private float ChangeHealth(float value)
@@ -121,9 +132,7 @@ public class Player : Characters
         if (_currentHealth == 0)
         {
             IsDied?.Invoke();
-
             _movement.OnDied();
-
             this.enabled = false;
         }
     }
@@ -134,7 +143,7 @@ public class Player : Characters
         {
             Attack(damageable);
 
-            if (other.GetComponent<Enemy>())
+            //if (other.GetComponent<Enemy>())
                 ActivateEffect(_weaponEffect, _effectDuration);
         }
     }
@@ -142,7 +151,6 @@ public class Player : Characters
     private void ActivateEffect(ParticleSystem effect, float duration)
     {
         effect.Play();
-
         DOVirtual.DelayedCall(duration, effect.Stop);
     }
 }
@@ -151,4 +159,10 @@ public enum State
 {
     Move,
     Attack
+}
+
+public enum AttackType
+{
+    Low,
+    Strong
 }

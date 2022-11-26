@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System;
+using System.Collections;
 
 [RequireComponent(typeof(Animator),typeof(Movement),typeof(Player))]
 public class Animations : MonoBehaviour
@@ -8,8 +9,10 @@ public class Animations : MonoBehaviour
     [SerializeField] private float _secondsPerSpin;
     [SerializeField] private ParticleSystem _attackVFX;
     [SerializeField] private AudioSource _moveSFX;
-    [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private AudioSource _lowAttackSFX;
+    [SerializeField] private AudioClip _strongAttackSound;
     [SerializeField] private AudioClip _walkSound;
+    [SerializeField] private AnimationClip _lowAttackClip;
 
     private Animator _animator;
     private Movement _mover;
@@ -17,7 +20,9 @@ public class Animations : MonoBehaviour
     private Vector3 _angleRotate = new Vector3(0, -360, 0);
     private Vector3 _startAngleRotate;
     private bool _isMoving;
+    private bool _isAttacking;
 
+    private const float AttackSpeedModifier = 1.5f;
     private const float SpeedModifier = 4f;
     private const float FinishedSpin = 0.1f;
     private const string Speed = "MoveSpeed";
@@ -36,19 +41,12 @@ public class Animations : MonoBehaviour
 
     private void Start()
     {
-        _moveSFX.loop = true;
-        _mover.ChangedState += OnChangedStateAttackSpin;
+        _mover.ChangedState += OnChangedStateAttack;
         _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
         _mover.ChangedBoostSpeed += OnChangedBoostSpeed;
         _player.IsDied += OnDying;
         _player.TakedDamage += OnTakedDamage;
         OnChangedBoostSpeed();
-    }
-
-    public void StartLowAttack()
-    {
-        _animator.SetTrigger(LowAttack);
-
     }
 
     private void OnChangedBoostSpeed()
@@ -58,7 +56,7 @@ public class Animations : MonoBehaviour
 
     private void OnDisable()
     {
-        _mover.ChangedState -= OnChangedStateAttackSpin;
+        _mover.ChangedState -= OnChangedStateAttack;
         _mover.ChangedMoveSpeed -= OnChangedMoveSpeed;
         _player.IsDied -= OnDying;
         _player.TakedDamage -= OnTakedDamage;
@@ -91,21 +89,47 @@ public class Animations : MonoBehaviour
         }
     }
 
-    private void OnChangedStateAttackSpin(State state)
+    private void OnChangedStateAttack(State state, AttackType type)
+    {
+        if (state == State.Attack)
+        {
+            if (type == AttackType.Low)
+                StateAttackLow(state);
+            else
+                StateAttackSpin(state);
+        }
+        else
+            StateAttackSpin(state);
+    }
+
+    private void StateAttackLow(State state)
+    {
+        _animator.SetTrigger(LowAttack);
+        _lowAttackSFX.Play();
+        float delay = _lowAttackClip.length / AttackSpeedModifier;
+        _mover.SetLowAttackLenght(delay);
+    }
+
+    private void StateAttackSpin(State state)
     {
         if (state == State.Attack)
         {
             _startAngleRotate = transform.localRotation.eulerAngles;
             transform.localRotation = Quaternion.identity;
             transform.DOLocalRotate(_angleRotate, _secondsPerSpin, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
-            StartAudioClip(_attackSound);
+            StartAudioClip(_strongAttackSound);
+            _isAttacking = true;
         }
         else
         {
-            DOTween.Kill(transform);
-            transform.localRotation = Quaternion.identity;
-            transform.DOLocalRotate(_startAngleRotate, FinishedSpin, RotateMode.FastBeyond360).SetLoops(0).SetEase(Ease.Linear);
-            _moveSFX.Stop();
+            if (_isAttacking)
+            {
+                DOTween.Kill(transform);
+                transform.localRotation = Quaternion.identity;
+                transform.DOLocalRotate(_startAngleRotate, FinishedSpin, RotateMode.FastBeyond360).SetLoops(0).SetEase(Ease.Linear);
+                _moveSFX.Stop();
+                _isAttacking = false;
+            }
         }
 
         bool convertedState = Convert.ToBoolean((int)state);

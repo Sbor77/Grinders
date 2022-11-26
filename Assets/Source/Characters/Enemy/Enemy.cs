@@ -24,11 +24,6 @@ public class Enemy : Characters
         _mover = GetComponent<Mover>();
     }
 
-    public void SetDefaultPosition(Vector3 position)
-    {
-        _defaultPosition = position;
-    }
-
     public override void TakeDamage(float damage)
     {
         if (_isDead)
@@ -37,6 +32,19 @@ public class Enemy : Characters
         _takeDamageSFX.Play();
         _currentHealth -= damage;
         IsAlive();
+    }
+
+    public void SetDefaultPosition(Vector3 position)
+    {
+        _defaultPosition = position;
+    }
+
+    public void Restore()
+    {
+        transform.position = _defaultPosition;        
+        _currentHealth = _health;
+        _mover.ResetState();
+        _isDead = false;
     }
 
     private void IsAlive()
@@ -57,13 +65,5 @@ public class Enemy : Characters
     private void Deactivate()
     {
         gameObject.SetActive(false);
-    }
-
-    public void Restore()
-    {
-        transform.position = _defaultPosition;        
-        _currentHealth = _health;
-        _mover.ResetState();
-        _isDead = false;
     }
 }

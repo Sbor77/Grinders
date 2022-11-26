@@ -1,0 +1,829 @@
+fileFormatVersion: 2
+guid: fb7fcaf8964b6f34c9c27e23e746f6a3
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: -203655887218126122
+    second: Horizontal Attack Player
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Horizontal Attack Player
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 144
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.37037036
+        functionName: AttackNow
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 0ba7e3032e1b3e64abc5355fec7eb5e9, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: pelvis
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thigh_l
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thigh_r
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: calf_l
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: calf_r
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: foot_l
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: foot_r
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine_01
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine_02
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: neck_01
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: clavicle_l
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: clavicle_r
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upperarm_l
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upperarm_r
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: lowerarm_l
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: lowerarm_r
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_l
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_r
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thumb_01_l
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thumb_02_l
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: index_01_l
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: index_02_l
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thumb_01_r
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: thumb_02_r
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: index_01_r
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: index_02_r
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine_03
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Mafia_Characters 1(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_01_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.00000014910745, y: 1.7055906, z: -0.0000006099667}
+      rotation: {x: -0.00000008429369, y: -0.7071066, z: 0.70710695, w: 0.000000022476483}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_03_Belt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000008429369, y: -0.7071066, z: 0.70710695, w: 0.000000022476483}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Glasses
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.00000003178649, y: 1, z: -0.00000014106496, w: -0.0000000754979}
+      scale: {x: 0.1490618, y: 0.1490618, z: 0.1490618}
+    - name: Armature
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.00000008146034, y: 2.3882977e-15, z: 0.000000043711385, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root
+      parentName: Armature
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000008146035, y: 0.0000020583443, z: -1.6767345e-13, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pelvis
+      parentName: root
+      position: {x: -0.0003530216, y: 0.5320438, z: -0.01040462}
+      rotation: {x: 0.0009382874, y: -0.7071075, z: -0.00093820307, w: 0.70710486}
+      scale: {x: 0.99999994, y: 0.99999976, z: 0.99999994}
+    - name: spine_01
+      parentName: pelvis
+      position: {x: 0.0043312963, y: 0.07350053, z: 0.0000000013029142}
+      rotation: {x: 0.000000013587342, y: 0.00000007083493, z: -0.04456724, w: 0.9990064}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine_02
+      parentName: spine_01
+      position: {x: -0.019369757, y: 0.13551793, z: -0.00000000797306}
+      rotation: {x: -0.000000039434237, y: -0.000000008695066, z: 0.07922263, w: 0.9968569}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine_03
+      parentName: spine_02
+      position: {x: -0.0000000038588532, y: 0.11913534, z: 1.7061907e-12}
+      rotation: {x: -0.00055273843, y: -0.000014660471, z: -0.019595087, w: 0.99980783}
+      scale: {x: 1, y: 1, z: 1}
+    - name: clavicle_l
+      parentName: spine_03
+      position: {x: 0.015249801, y: 0.310688, z: 0.019204088}
+      rotation: {x: 0.7490574, y: -0.09410241, z: 0.11252997, w: 0.646061}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: upperarm_l
+      parentName: clavicle_l
+      position: {x: 0.000000008381903, y: 0.13966928, z: -0.00000014249235}
+      rotation: {x: -0.050697766, y: -0.064915046, z: -0.14667611, w: 0.9857494}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.9999999}
+    - name: lowerarm_l
+      parentName: upperarm_l
+      position: {x: 4.656613e-10, y: 0.26387742, z: -0.00000006053597}
+      rotation: {x: -0.015828757, y: 0.109120406, z: -0.024311868, w: 0.99360514}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: hand_l
+      parentName: lowerarm_l
+      position: {x: -0.00000013038516, y: 0.1986622, z: 0.00000037089922}
+      rotation: {x: -0.19829322, y: 0.59611326, z: -0.021741096, w: 0.7777249}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: index_01_l
+      parentName: hand_l
+      position: {x: -0.012653772, y: 0.062184088, z: -0.0040378356}
+      rotation: {x: 0.05375795, y: -0.18280052, z: 0.10923355, w: 0.97558296}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: index_02_l
+      parentName: index_01_l
+      position: {x: -0.00000008381903, y: 0.053611033, z: 0.000000048428774}
+      rotation: {x: 0.103840105, y: -0.011189875, z: 0.2502332, w: 0.9625359}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: thumb_01_l
+      parentName: hand_l
+      position: {x: -0.0136931315, y: 0.037103146, z: 0.053495828}
+      rotation: {x: 0.45722562, y: -0.52472574, z: -0.17042378, w: 0.697541}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thumb_02_l
+      parentName: thumb_01_l
+      position: {x: 0.00000066682696, y: 0.02858951, z: -0.00000022910535}
+      rotation: {x: 0.12213669, y: -0.14330088, z: 0.16966303, w: 0.9673479}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1}
+    - name: clavicle_r
+      parentName: spine_03
+      position: {x: 0.015247866, y: 0.31073043, z: -0.019225365}
+      rotation: {x: 0.11267142, y: -0.6468836, z: 0.7483374, w: 0.09401042}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: upperarm_r
+      parentName: clavicle_r
+      position: {x: -0.0000000027939677, y: 0.13966928, z: 0.00000008987263}
+      rotation: {x: -0.050697364, y: 0.064914435, z: 0.14667583, w: 0.9857496}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: lowerarm_r
+      parentName: upperarm_r
+      position: {x: -0.000000003259629, y: 0.2638777, z: -0.00000006938353}
+      rotation: {x: -0.015826868, y: -0.109120086, z: 0.02431191, w: 0.9936052}
+      scale: {x: 0.9999999, y: 0.9999998, z: 1}
+    - name: hand_r
+      parentName: lowerarm_r
+      position: {x: 0.00000006891787, y: 0.19866207, z: -0.00000008638017}
+      rotation: {x: -0.19829386, y: -0.59611243, z: 0.021741586, w: 0.7777254}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: index_01_r
+      parentName: hand_r
+      position: {x: 0.012654126, y: 0.06218397, z: -0.004037707}
+      rotation: {x: 0.05375798, y: 0.18279977, z: -0.10923405, w: 0.9755831}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: index_02_r
+      parentName: index_01_r
+      position: {x: -0.0000002682209, y: 0.053610817, z: -0.000000014901161}
+      rotation: {x: 0.1038403, y: 0.011191966, z: -0.25023124, w: 0.9625364}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: thumb_01_r
+      parentName: hand_r
+      position: {x: 0.013693487, y: 0.037102807, z: 0.053495996}
+      rotation: {x: 0.45722783, y: 0.5247259, z: 0.17042316, w: 0.69753957}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1}
+    - name: thumb_02_r
+      parentName: thumb_01_r
+      position: {x: -0.0000005438924, y: 0.028589375, z: -0.00000012293458}
+      rotation: {x: 0.12213661, y: 0.14330082, z: -0.169663, w: 0.9673479}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: neck_01
+      parentName: spine_03
+      position: {x: 0.000024062583, y: 0.33257648, z: 0.00001432062}
+      rotation: {x: 0.0005479729, y: 0.00007391981, z: -0.088181876, w: 0.99610424}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: head
+      parentName: neck_01
+      position: {x: -0.0018451177, y: 0.077221714, z: 5.5741967e-11}
+      rotation: {x: -0.000000020101648, y: -0.00000014960801, z: 0.07571671, w: 0.9971294}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: thigh_l
+      parentName: pelvis
+      position: {x: 0.0019309159, y: 0.060946055, z: 0.10094386}
+      rotation: {x: 0.98902506, y: 0.10933816, z: 0.06741078, w: 0.07300966}
+      scale: {x: 1.0000024, y: 1.0000004, z: 1.0000014}
+    - name: calf_l
+      parentName: thigh_l
+      position: {x: -0.000000007450581, y: 0.3119883, z: 0.0000000027939677}
+      rotation: {x: 0.034538914, y: -0.05257987, z: 0.22297947, w: 0.97279114}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: foot_l
+      parentName: calf_l
+      position: {x: -0.000060839695, y: 0.29228508, z: -0.00028407786}
+      rotation: {x: 0.7818918, y: 0.62286174, z: 0.025919471, w: -0.004095527}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: thigh_r
+      parentName: pelvis
+      position: {x: 0.0019309693, y: 0.060945977, z: -0.101649955}
+      rotation: {x: 0.067410156, y: -0.07300992, z: 0.9890251, w: -0.10933784}
+      scale: {x: 1.0000014, y: 1.0000001, z: 1.000001}
+    - name: calf_r
+      parentName: thigh_r
+      position: {x: -0, y: 0.31198826, z: 0.0000000055879354}
+      rotation: {x: 0.034538943, y: 0.052579667, z: -0.22297955, w: 0.97279114}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+    - name: foot_r
+      parentName: calf_r
+      position: {x: 0.000060802675, y: 0.29228532, z: -0.00028403732}
+      rotation: {x: 0.7818924, y: -0.6228609, z: -0.025918683, w: -0.004094718}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Racketeer_01_Trousers
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379807e-10, z: 0.0000000010331859}
+      rotation: {x: 0.000000054089917, y: -0.7071067, z: 0.7071068, w: -0.00000005268024}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
+    - name: Man_T-Shirt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000008429369, y: -0.7071067, z: 0.7071068, w: 0.000000022476469}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Woman_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.000000013154975, y: 1.4621243, z: 0.05253115}
+      rotation: {x: -0.00000010042335, y: -0.51701146, z: 0.85597855, w: -0.00000014885646}
+      scale: {x: 0.4319171, y: 0.4319172, z: 0.43191716}
+    - name: Racketeer_01_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379807e-10, z: 0.0000000010331859}
+      rotation: {x: 0.000000054089917, y: -0.7071067, z: 0.7071068, w: -0.00000005268024}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
+    - name: Man_Shorts
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000008429369, y: -0.7071067, z: 0.7071068, w: 0.000000022476469}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Woman_Dress
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000009735359, y: 7.821558e-10, z: 7.821619e-10, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Man_Trousers
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000008429369, y: -0.7071067, z: 0.7071068, w: 0.000000022476469}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Racketeer_01_Tie
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379807e-10, z: 0.0000000010331859}
+      rotation: {x: 0.000000054089917, y: -0.7071067, z: 0.7071068, w: -0.00000005268024}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
+    - name: Man_Sandals
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000008429369, y: -0.7071067, z: 0.7071068, w: 0.000000022476469}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Woman_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000008429369, y: -0.7071067, z: 0.7071068, w: 0.000000022476469}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Man_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000008429369, y: -0.7071067, z: 0.7071068, w: 0.000000022476469}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Racketeer_01_Jacket
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379807e-10, z: 0.0000000010331859}
+      rotation: {x: 0.000000054089917, y: -0.7071067, z: 0.7071068, w: -0.00000005268024}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
+    - name: Man_Cap
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.00000027340135, y: 1.7216061, z: -0.019300757}
+      rotation: {x: -0.00000008177047, y: -0.6365635, z: 0.7712243, w: 0.00000003040076}
+      scale: {x: 0.9474431, y: 1.0000001, z: 1}
+    - name: Stickman
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379805e-10, z: 0.0000000010331859}
+      rotation: {x: -0.00000008429369, y: -0.7071067, z: 0.7071068, w: 0.000000022476469}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Racketeer_01_Mustage
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -1.1043822e-14, y: 1.401252, z: 0.26618028}
+      rotation: {x: -0.00000009739324, y: -6.5200785e-15, z: 4.8268496e-23, w: 1}
+      scale: {x: 0.081712924, y: 0.049354076, z: 0.05166821}
+    - name: Racketeer_02_Vest
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_02_Sleeves
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_02_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_02_Mustage
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_02_Trousers
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_02_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_03_Jacket
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.637979e-10, z: 0.0000000010331861}
+      rotation: {x: -3.9451417e-14, y: 0.70710695, z: -0.70710665, w: 0.00000010677017}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999999}
+    - name: Racketeer_03_Tie
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.637979e-10, z: 0.0000000010331861}
+      rotation: {x: -3.9451417e-14, y: 0.70710695, z: -0.70710665, w: 0.00000010677017}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999999}
+    - name: Racketeer_03_Trousers
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_03_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_03_Mustage
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Racketeer_03_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pickpocket_Stickman
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0000000073268893, y: 3.6379785e-10, z: 0.0000000010331861}
+      rotation: {x: 0.00000027535756, y: 0.7071068, z: -0.7071067, w: -0.00000016858738}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Pickpocket_02_Jacket
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_01_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_01_Pants
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_01_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_01_Shirt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_01_Vest
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Man_Hear
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: 0.0143925985, y: 1.7338793, z: 0.008835879}
+      rotation: {x: 0.7071067, y: -0.000000018706784, z: 0.000000012779886, w: 0.7071068}
+      scale: {x: 0.010619237, y: 0.010619237, z: 0.009375122}
+    - name: Hijacker_01_Tie
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_03_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_03_Trousers
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_02_TieTop
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_03_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_01_Shirt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_02_Vest
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_02_Shirt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_03_Shirt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pickpocket_02_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_02_Pants
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_02_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_02_Shirt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_03_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_03_Shirt
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_03_Pants
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Pickpocket_03_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071067, y: -2.4080331e-15, z: 1.0258494e-14, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Hijacker_01_Trousers
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_01_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_01_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_02_Trousers
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_02_Shoes
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hijacker_02_Hat
+      parentName: Mafia_Characters 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000009735359, y: -6.4444427e-15, z: 5.419416e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: fde72a24cf194904db46409168930bb9, type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

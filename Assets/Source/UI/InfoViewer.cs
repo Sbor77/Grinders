@@ -95,7 +95,7 @@ public class InfoViewer : MonoBehaviour
         _missonConditions = conditions;
     }
 
-    private void OnStartAttack(State state)
+    private void OnStartAttack(State state, AttackType type)
     {
         if (state == State.Attack)
             _CooldownTimer.fillAmount = 0;

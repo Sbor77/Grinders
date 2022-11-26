@@ -12,6 +12,8 @@ public abstract class Characters : MonoBehaviour, IDamageable
     {
         damageable.TakeDamage(_damage);
     }
+
+    protected void ChangeDamage(float newDamage) => _damage = newDamage;
 }
 
 public interface IDamageable

@@ -9,8 +9,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _speedInAttack;
+    [SerializeField] private int _beforeStrongAttack = 2;
     [SerializeField] private float _attackDistance = 15f;
-    [SerializeField] private float _delayAttackCooldown = 1f;
+    [SerializeField] private float _strongAttackCooldown = 1f;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
 
@@ -21,44 +22,39 @@ public class Movement : MonoBehaviour
     private bool _isMoving = false;
     private bool _cooldown = false;
     private float _halfRotation => _rotationSpeed / 2f;
+    private int _currentLowAttacks;
 
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
     private const int _maxPointCount = 50;
 
-    public event Action<State> ChangedState;
+    public event Action<State,AttackType> ChangedState;
     public event Action<float> ChangedMoveSpeed;
     public event Action ChangedBoostSpeed;
     public event Action<float> StartAttackCooldown;
 
     public float Speed => _speed;
-    public float AttackCooldown => _delayAttackCooldown;
+    public float AttackCooldown => _strongAttackCooldown;
 
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-
         _collider = GetComponent<CapsuleCollider>();
     }
 
     private void OnEnable()
     {
         _collider.enabled = _isMoving;
-
         _joystick.ChangedDirection += OnChangedDirection;
-
         _joystick.ReleasedTouch += OnReleasedTouch;
-
-        _joystick.ChangedClickStatus += StartMoveingAtack;
+        _joystick.ChangedClickStatus += StartAttack;
     }
 
     private void OnDisable()
     {
         _joystick.ChangedDirection -= OnChangedDirection;
-
         _joystick.ReleasedTouch -= OnReleasedTouch;
-
-        _joystick.ChangedClickStatus -= StartMoveingAtack;
+        _joystick.ChangedClickStatus -= StartAttack;
     }
 
     private void Update()
@@ -66,11 +62,8 @@ public class Movement : MonoBehaviour
         if (_isMoving)
         {
             TurnDirection();
-
             _controller.Move(_speed * Time.deltaTime * transform.forward);
-
             float currentSpeed = _controller.velocity.magnitude / _speed;
-
             ChangedMoveSpeed?.Invoke(currentSpeed);
         }
     }
@@ -90,6 +83,12 @@ public class Movement : MonoBehaviour
         ChangedBoostSpeed?.Invoke();
     }
 
+    public void SetLowAttackLenght(float value)
+    {
+        StartAttackCooldown(value);
+        Invoke(nameof(EndLowAttack), value);
+    }
+
     private float LoadBoostSpeed(int speedLevel)
     {
         return (speedLevel - 1) * AddBoostMoveSpeed;
@@ -100,7 +99,6 @@ public class Movement : MonoBehaviour
         if (direction != Vector2.zero)
         {
             _moveDirection = new Vector3(direction.x, 0, direction.y);
-
             _isMoving = true;
         }
     }
@@ -108,60 +106,74 @@ public class Movement : MonoBehaviour
     private void TurnDirection()
     {
         float angle = Vector3.SignedAngle(_moveDirection, Vector3.forward, Vector3.up);
-
         float currentAngle = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, angle * AngleCorrection, _rotationSpeed * Time.deltaTime);
-
         transform.rotation = Quaternion.Euler(0f, currentAngle, 0f);
     }
 
     private void OnReleasedTouch()
     {
         _isMoving = false;
-
         ChangedMoveSpeed?.Invoke(0f);
     }
 
-    private void StartMoveingAtack()
+    private void StartAttack()
     {
         if (_cooldown)
             return;
 
-        SetChangeMoving(false);
+        _currentLowAttacks++;
 
+        if (_currentLowAttacks <= _beforeStrongAttack)
+        {
+            StartLowAttack();
+        }
+        else
+            StartMoveingAttack();
+    }
+
+    private void StartLowAttack()
+    {
+        ChangedState?.Invoke(State.Attack, AttackType.Low);
+        SetChangeMoving(false, AttackType.Low);
+    }
+
+    private void EndLowAttack()
+    {
+        ChangedState?.Invoke(State.Move, AttackType.Low);
+        SetChangeMoving(true, AttackType.Low);
+    }
+
+    private void StartMoveingAttack()
+    {
+        SetChangeMoving(false, AttackType.Strong);
         _attackDirection = transform.forward;
-
         _attackDirection.y = 0;
-
         List<Vector3> movePoints = GetMovePoints();
 
         if (movePoints != null)
         {
-            StartCoroutine(Move(movePoints));
 
-            ChangedState?.Invoke(State.Attack);
+            StartCoroutine(Move(movePoints));
+            _currentLowAttacks = 0;
+            ChangedState?.Invoke(State.Attack, AttackType.Strong);
         }
         else
         { 
-            SetChangeMoving(true); 
+            SetChangeMoving(true, AttackType.Strong); 
         }            
     }
 
     private List<Vector3> GetMovePoints()
     {
         float distance = 0;
-
         Vector3 _startAttackPosition = transform.position;
-
         List<Vector3> movePoints = new();
 
         while (distance < _attackDistance)
         {
             Vector3 newPoint = GetNextPoint(_startAttackPosition, _attackDistance - distance);
-
             distance += Vector3.Distance(_startAttackPosition, newPoint);
-
             _startAttackPosition = newPoint;
-
             movePoints.Add(newPoint);
 
             if (movePoints.Count > _maxPointCount)
@@ -178,7 +190,6 @@ public class Movement : MonoBehaviour
         if (Physics.Raycast(startPosition, _attackDirection, out RaycastHit hit, distance, _wallLayerMask))
         {
             point = hit.point;
-
             _attackDirection = Vector3.Reflect(_attackDirection, hit.normal);
         }
         else
@@ -189,13 +200,13 @@ public class Movement : MonoBehaviour
         return point;
     }
 
-    private void SetChangeMoving(bool activate)
+    private void SetChangeMoving(bool activate, AttackType type)
     {
         _controller.enabled = activate;
-
         _joystick.enabled = activate;
 
-        _collider.enabled = !activate;
+        if (type == AttackType.Strong)
+            _collider.enabled = !activate;
     }
 
     private IEnumerator Move(List<Vector3> points)
@@ -203,18 +214,16 @@ public class Movement : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
             yield return StartMove(points[i]);
 
-        ChangedState?.Invoke(State.Move);
-
-        SetChangeMoving(true);
-        StartCooldown();
+        ChangedState?.Invoke(State.Move, AttackType.Strong);
+        SetChangeMoving(true, AttackType.Strong);
+        StartCooldown(_strongAttackCooldown);
     }
 
-    private void StartCooldown()
+    private void StartCooldown(float delay)
     {
-        StartAttackCooldown?.Invoke(_delayAttackCooldown);
+        StartAttackCooldown?.Invoke(delay);
         _cooldown = true;
-
-        Invoke(nameof(EndCooldown),_delayAttackCooldown);
+        Invoke(nameof(EndCooldown), delay);
     }
 
     private void EndCooldown()
@@ -232,7 +241,6 @@ public class Movement : MonoBehaviour
         while (Vector3.Distance(transform.position, pointPosition) >= stoppingDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointPosition, _speedInAttack * Time.deltaTime);
-
             yield return null;
         }
     }

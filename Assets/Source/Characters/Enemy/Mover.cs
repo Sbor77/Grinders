@@ -97,7 +97,6 @@ public class Mover : MonoBehaviour
         _searchZone.gameObject.SetActive(true);        
         _animator.ResetState();
         _agent.enabled = true;
-        //_agent.ResetPath();
     }
 
     private void StopDance()
@@ -165,7 +164,6 @@ public class Mover : MonoBehaviour
             if (player.IsDead == false)
             {
                 _isAttaking = true;
-                //_agent.ResetPath();
                 float attackDelay = _animator.StartAttack();
                 Invoke(nameof(Attack), attackDelay);
             }
