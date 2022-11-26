@@ -8,7 +8,7 @@ using System;
 public class Enemy : Characters
 {
     [SerializeField] private float _health;
-    [SerializeField] private float _delayDieHiding = 3f;    
+    [SerializeField] private float _delayDieHiding = 3f;
     [SerializeField] private AudioSource _takeDamageSFX;
 
     private Mover _mover;
@@ -17,11 +17,17 @@ public class Enemy : Characters
     private bool _isDead = false;
 
     public event Action Dying;
+    public event Action TakedDamage;
     public event Action IsDeactivated;
 
     private void Awake()
     {
         _mover = GetComponent<Mover>();
+    }
+
+    private void Start()
+    {
+        _currentHealth = _health;
     }
 
     public override void TakeDamage(float damage)
@@ -31,17 +37,18 @@ public class Enemy : Characters
 
         _takeDamageSFX.Play();
         _currentHealth -= damage;
+        TakedDamage?.Invoke();
         IsAlive();
     }
 
     public void SetDefaultPosition(Vector3 position)
     {
-        //_defaultPosition = position;
+        _defaultPosition = position;
     }
 
     public void Restore()
     {
-        //transform.position = _defaultPosition;
+        transform.position = _defaultPosition;
         _currentHealth = _health;
         _mover.ResetState();
         _isDead = false;

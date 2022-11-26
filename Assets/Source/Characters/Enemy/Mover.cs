@@ -41,7 +41,7 @@ public class Mover : MonoBehaviour
         _zeroPoint = transform.position;
         _searchZone.ChangedTarget += OnChangedTarget;
         _enemy.Dying += OnDying;
-        //_enemy.TakedDamage += OnTakeDamage;
+        _enemy.TakedDamage += OnTakeDamage;
         _agent.enabled = true;
         Patrol();
     }
@@ -50,7 +50,7 @@ public class Mover : MonoBehaviour
     {
         _searchZone.ChangedTarget -= OnChangedTarget;
         _enemy.Dying -= OnDying;
-        //_enemy.TakedDamage -= OnTakeDamage;
+        _enemy.TakedDamage -= OnTakeDamage;
     }
 
     private void FixedUpdate()

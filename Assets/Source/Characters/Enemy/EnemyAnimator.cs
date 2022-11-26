@@ -35,7 +35,7 @@ public class EnemyAnimator : MonoBehaviour
     private void OnEnable()
     {
         _enemy.Dying += OnDying;
-        //_enemy.TakedDamage += OnTakeDamage;
+        _enemy.TakedDamage += OnTakeDamage;
     }
 
     private void Start()
@@ -47,7 +47,7 @@ public class EnemyAnimator : MonoBehaviour
     private void OnDisable()
     {
         _enemy.Dying -= OnDying;
-        //_enemy.TakedDamage -= OnTakeDamage;
+        _enemy.TakedDamage -= OnTakeDamage;
     }
 
     private void FixedUpdate()
@@ -85,6 +85,8 @@ public class EnemyAnimator : MonoBehaviour
     public void ResetState()
     {
         _animator.SetTrigger(Reset);
+        print(gameObject.name + "reset");
+        _animator.ResetTrigger(Reset);
     }
 
     private void OnDying()
