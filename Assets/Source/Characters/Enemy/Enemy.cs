@@ -48,7 +48,7 @@ public class Enemy : Characters
 
     public void Restore()
     {
-        transform.position = _defaultPosition;
+        //transform.position = _defaultPosition;
         _currentHealth = _health;
         _mover.ResetState();
         _isDead = false;

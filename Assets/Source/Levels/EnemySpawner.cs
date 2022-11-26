@@ -127,7 +127,7 @@ public class EnemySpawner : MonoBehaviour
 
                 var newEnemy = Instantiate(randomPrefab, position, Quaternion.identity, _enemyParent);
 
-                newEnemy.SetDefaultPosition(position);
+                //newEnemy.SetDefaultPosition(position);
 
                 newEnemy.gameObject.SetActive(false);
 
