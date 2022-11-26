@@ -6,20 +6,15 @@ using UnityEngine;
 public class Player : Characters
 {
     [SerializeField] private float _health;
-    [SerializeField] private float _lowDamage;
-    [SerializeField] private float _strongDamage;
     [SerializeField] private AudioSource _takeDamageSFX;
     [SerializeField] private ParticleSystem _weaponEffect;
     [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _woundEffect;
-    [SerializeField] private SphereCollider _lowAttackCollider;
-    [SerializeField] [Range(0.1f, 2f)] private float _lowAttackDelay;
 
     private Movement _movement;
     private float _currentHealth;
     private int _coins;
     private State _currentState = State.Move;
-    private AttackType _currentAttack = AttackType.Low;
     private float _effectDuration = 3f;
     private int _addBoostMaxHealth = 10;
 
@@ -90,22 +85,6 @@ public class Player : Characters
         }
     }
 
-    public void AttackNow()
-    {
-        if (_currentAttack == AttackType.Low)
-            ChangeDamage(_lowDamage);
-        else
-            ChangeDamage(_strongDamage);
-
-        _lowAttackCollider.enabled = true;
-        Invoke(nameof(LowAttackingFalse), _lowAttackDelay);
-    }
-
-    private void LowAttackingFalse()
-    {
-        _lowAttackCollider.enabled = false;
-    }
-
     private float LoadBoostHealth(int healthLevel)
     {
         return _addBoostMaxHealth * (healthLevel - 1);
@@ -113,10 +92,9 @@ public class Player : Characters
 
     private bool IsValid(int value) => value > 0;
 
-    private void OnChangedState(State state, AttackType type)
+    private void OnChangedState(State state, bool mass)
     {
         _currentState = state;
-        _currentAttack = type;
     }
 
     private float ChangeHealth(float value)
@@ -143,7 +121,7 @@ public class Player : Characters
         {
             Attack(damageable);
 
-            //if (other.GetComponent<Enemy>())
+            if (other.GetComponent<Enemy>())
                 ActivateEffect(_weaponEffect, _effectDuration);
         }
     }

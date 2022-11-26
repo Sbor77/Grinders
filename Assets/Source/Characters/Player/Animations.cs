@@ -9,10 +9,9 @@ public class Animations : MonoBehaviour
     [SerializeField] private float _secondsPerSpin;
     [SerializeField] private ParticleSystem _attackVFX;
     [SerializeField] private AudioSource _moveSFX;
-    [SerializeField] private AudioSource _lowAttackSFX;
-    [SerializeField] private AudioClip _strongAttackSound;
+    [SerializeField] private AudioClip _spinAttackSound;
     [SerializeField] private AudioClip _walkSound;
-    [SerializeField] private AnimationClip _lowAttackClip;
+    //[SerializeField] private AnimationClip _MassAttackClip;
 
     private Animator _animator;
     private Movement _mover;
@@ -20,9 +19,9 @@ public class Animations : MonoBehaviour
     private Vector3 _angleRotate = new Vector3(0, -360, 0);
     private Vector3 _startAngleRotate;
     private bool _isMoving;
-    private bool _isAttacking;
+    //private bool _isAttacking;
 
-    private const float AttackSpeedModifier = 1.5f;
+    //private const float AttackSpeedModifier = 1.5f;
     private const float SpeedModifier = 4f;
     private const float FinishedSpin = 0.1f;
     private const string Speed = "MoveSpeed";
@@ -89,25 +88,21 @@ public class Animations : MonoBehaviour
         }
     }
 
-    private void OnChangedStateAttack(State state, AttackType type)
+    private void OnChangedStateAttack(State state, bool massAttack)
     {
-        if (state == State.Attack)
+        if (state == State.Attack && massAttack)
         {
-            if (type == AttackType.Low)
-                StateAttackLow(state);
-            else
-                StateAttackSpin(state);
+            MassAttack();
+            state = State.Move;
         }
-        else
-            StateAttackSpin(state);
+
+        StateAttackSpin(state);
     }
 
-    private void StateAttackLow(State state)
+    private void MassAttack()
     {
         _animator.SetTrigger(LowAttack);
-        _lowAttackSFX.Play();
-        float delay = _lowAttackClip.length / AttackSpeedModifier;
-        _mover.SetLowAttackLenght(delay);
+        print("Массовая атака запущена");
     }
 
     private void StateAttackSpin(State state)
@@ -117,19 +112,14 @@ public class Animations : MonoBehaviour
             _startAngleRotate = transform.localRotation.eulerAngles;
             transform.localRotation = Quaternion.identity;
             transform.DOLocalRotate(_angleRotate, _secondsPerSpin, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
-            StartAudioClip(_strongAttackSound);
-            _isAttacking = true;
+            StartAudioClip(_spinAttackSound);
         }
         else
         {
-            if (_isAttacking)
-            {
-                DOTween.Kill(transform);
-                transform.localRotation = Quaternion.identity;
-                transform.DOLocalRotate(_startAngleRotate, FinishedSpin, RotateMode.FastBeyond360).SetLoops(0).SetEase(Ease.Linear);
-                _moveSFX.Stop();
-                _isAttacking = false;
-            }
+            DOTween.Kill(transform);
+            transform.localRotation = Quaternion.identity;
+            transform.DOLocalRotate(_startAngleRotate, FinishedSpin, RotateMode.FastBeyond360).SetLoops(0).SetEase(Ease.Linear);
+            _moveSFX.Stop();
         }
 
         bool convertedState = Convert.ToBoolean((int)state);
