@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -23,7 +24,16 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private void Start()
     {
         if (DataHandler.Instance.IsMobile())
+        {
             _moveToTouchDownPosition = true;
+            _joystickBackground.GetComponent<Image>().color = Color.white;
+            _joystickInner.GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            _joystickBackground.GetComponent<Image>().color = Color.clear;
+            _joystickInner.GetComponent<Image>().color = Color.clear;
+        }
     }
 
     private void Update()
