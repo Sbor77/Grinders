@@ -9,9 +9,11 @@ public class Box : MonoBehaviour
     [SerializeField] private MeshRenderer _wholeBoxRenderer;
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private GameObject _fracturedBox;
-    [SerializeField] private AudioSource _crashAudioClip;
+    [SerializeField] private AudioSource _crashAudio;
+    [SerializeField] private AudioSource _confettiAudio;
     [SerializeField] private BoxItem _item;
     [SerializeField] private ParticleSystem _fogEffect;
+    [SerializeField] private ParticleSystem _burstEffect;
 
     private List<Vector3> _piecesDefaultPositions = new();    
     private bool _isItemCollectable;    
@@ -61,9 +63,17 @@ public class Box : MonoBehaviour
 
         _fracturedBox.SetActive(true);
 
-        DOVirtual.DelayedCall(pieceColliderDeactivationDelay, DeactivatePiecesColliders);
+        _burstEffect.gameObject.SetActive(true);
 
-        _crashAudioClip.Play();
+        DOVirtual.DelayedCall(pieceColliderDeactivationDelay, () => 
+        {
+            DeactivatePiecesColliders();
+            _burstEffect.gameObject.SetActive(false);
+        });
+
+        _crashAudio.Play();
+
+        DOVirtual.DelayedCall(_crashAudio.time, _confettiAudio.Play);
 
         _item.Activate();
 

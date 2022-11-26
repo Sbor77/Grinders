@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour
     public event Action<float> StartAttackCooldown;
 
     public float Speed => _speed;
+
     public float AttackCooldown => _spinAttackCooldown;
 
     private void Awake()

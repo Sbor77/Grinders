@@ -4697,7 +4697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846992690}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 10.2, y: 4, z: 10.4}
+  m_LocalPosition: {x: 10.2, y: 4, z: 10.48}
   m_LocalScale: {x: 3, y: 5, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6381,6 +6381,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _respawnTime: 3
+  _burstPrefab: {fileID: 0}
+  _trailPrefab: {fileID: 0}
+  _effectsParent: {fileID: 0}
+  _effectsCount: 0
 --- !u!1 &1156684111
 GameObject:
   m_ObjectHideFlags: 0
@@ -6910,7 +6914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248469792}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 12.67, y: 4, z: -9.36}
+  m_LocalPosition: {x: 12.67, y: 4, z: -9.769998}
   m_LocalScale: {x: 3, y: 5, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []

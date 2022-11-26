@@ -36,21 +36,20 @@ public class Enemy : Characters
             return;
 
         _takeDamageSFX.Play();
+
         _currentHealth -= damage;
+
         TakedDamage?.Invoke();
+
         IsAlive();
     }
 
-    public void SetDefaultPosition(Vector3 position)
-    {
-        _defaultPosition = position;
-    }
-
     public void Restore()
-    {
-        //transform.position = _defaultPosition;
+    {        
         _currentHealth = _health;
+
         _mover.ResetState();
+
         _isDead = false;
     }
 
@@ -59,6 +58,7 @@ public class Enemy : Characters
         if (_currentHealth <= 0)
         {
             Dying?.Invoke();
+
             _isDead = true;
 
             DOVirtual.DelayedCall(_delayDieHiding, () =>

@@ -16,7 +16,6 @@ public class EnemyAnimator : MonoBehaviour
     private float _attackLenght;
     private float _attackMultiplie = 1.5f;
     private bool _isMoveing;
-
     private const string Speed = "Speed";
     private const string Attack = "Attack";
     private const string AttackSpeed = "AttackSpeed";
@@ -28,31 +27,37 @@ public class EnemyAnimator : MonoBehaviour
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+
         _animator = GetComponent<Animator>();
+
         _enemy = GetComponent<Enemy>();
     }
 
     private void OnEnable()
     {
         _enemy.Dying += OnDying;
+
         _enemy.TakedDamage += OnTakeDamage;
     }
 
     private void Start()
     {
         _animator.SetFloat(AttackSpeed, _attackMultiplie);
+
         _attackLenght = _attackAnimation.length / _attackMultiplie;
     }
 
     private void OnDisable()
     {
         _enemy.Dying -= OnDying;
+
         _enemy.TakedDamage -= OnTakeDamage;
     }
 
     private void FixedUpdate()
     {
         float currentSpeed = _agent.velocity.magnitude;
+
         _animator.SetFloat(Speed, currentSpeed / _agent.speed);
 
         if (currentSpeed / _agent.speed > 0.1f)
@@ -60,12 +65,14 @@ public class EnemyAnimator : MonoBehaviour
             if (!_isMoveing)
             {
                 _isMoveing = true;
+
                 _moveSFX.Play();
             }
         }
         else
         {
             _isMoveing = false;
+
             _moveSFX.Stop();
         }
     }
@@ -73,19 +80,21 @@ public class EnemyAnimator : MonoBehaviour
     public float StartAttack()
     {
         _animator.SetTrigger(Attack);
+
         return _attackLenght;
     }
 
     public float StartWin()
     {
         _animator.SetTrigger(Dancing);
+
         return _dancingAnimation.length;
     }
 
     public void ResetState()
     {
         _animator.SetTrigger(Reset);
-        print(gameObject.name + "reset");
+        
         _animator.ResetTrigger(Reset);
     }
 

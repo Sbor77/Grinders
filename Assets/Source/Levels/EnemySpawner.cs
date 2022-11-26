@@ -16,10 +16,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private ParticleSystem _trailPrefab;
     [SerializeField] private Transform _effectsParent;
     [SerializeField] private int _effectsCount;
+    [SerializeField] private AudioSource _trailSound;
 
     List<ParticleSystem> _bursts;
     List<ParticleSystem> _trails;
-    private float _startTrailHeight = 15;
+    private float _startTrailHeight = 25;
     private float _startBurstHeight = 2.75f;
     private float _trailDuration = 0.3f;
     private float _burstDuration = 0.5f;
@@ -277,7 +278,11 @@ public class EnemySpawner : MonoBehaviour
         
         Sequence effectSequence = DOTween.Sequence();
 
-        effectSequence.AppendCallback(() => trail.gameObject.SetActive(true));
+        effectSequence.AppendCallback(() => 
+        {
+            trail.gameObject.SetActive(true);
+            _trailSound.Play();
+        });
         effectSequence.Append(trail.transform.DOMoveY(0, _trailDuration));
         effectSequence.AppendInterval(_trailDuration);
         effectSequence.AppendCallback(() =>
@@ -285,7 +290,7 @@ public class EnemySpawner : MonoBehaviour
             trail.gameObject.SetActive(false);
             burst.gameObject.SetActive(true);
         });
-        effectSequence.AppendInterval(_burstDuration);
+        effectSequence.AppendInterval(_burstDuration + 1);
         effectSequence.AppendCallback(() => burst.gameObject.SetActive(false));
         effectSequence.AppendCallback(() => effectSequence.Kill());
     }
