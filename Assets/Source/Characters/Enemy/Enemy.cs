@@ -8,7 +8,7 @@ using System;
 public class Enemy : Characters
 {
     [SerializeField] private float _health;
-    [SerializeField] private float _delayDieHiding = 3f;
+    [SerializeField] private float _delayDieHiding = 3f;    
     [SerializeField] private AudioSource _takeDamageSFX;
 
     private Mover _mover;
@@ -36,12 +36,12 @@ public class Enemy : Characters
 
     public void SetDefaultPosition(Vector3 position)
     {
-        _defaultPosition = position;
+        //_defaultPosition = position;
     }
 
     public void Restore()
     {
-        transform.position = _defaultPosition;        
+        //transform.position = _defaultPosition;
         _currentHealth = _health;
         _mover.ResetState();
         _isDead = false;

@@ -77,7 +77,7 @@ public class Box : MonoBehaviour
 
     public void ActivateWholeBox(int minValue, int maxValue)
     {
-        float fogDelay = 0.5f;
+        float fogDelay = 0.75f;
 
         _wholeBoxRenderer.enabled = false;
 
