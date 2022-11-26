@@ -35,7 +35,7 @@ public class EnemyAnimator : MonoBehaviour
     private void OnEnable()
     {
         _enemy.Dying += OnDying;
-        _enemy.TakedDamage += OnTakeDamage;
+        //_enemy.TakedDamage += OnTakeDamage;
     }
 
     private void Start()
@@ -47,7 +47,7 @@ public class EnemyAnimator : MonoBehaviour
     private void OnDisable()
     {
         _enemy.Dying -= OnDying;
-        _enemy.TakedDamage -= OnTakeDamage;
+        //_enemy.TakedDamage -= OnTakeDamage;
     }
 
     private void FixedUpdate()
