@@ -20,6 +20,7 @@ public class EnemyAnimator : MonoBehaviour
     private const string Speed = "Speed";
     private const string Attack = "Attack";
     private const string AttackSpeed = "AttackSpeed";
+    private const string TakeDamage = "TakeDamage";
     private const string Died = "Died";
     private const string Reset = "Reset";
     private const string Dancing = "Win";
@@ -34,6 +35,11 @@ public class EnemyAnimator : MonoBehaviour
     private void OnEnable()
     {
         _enemy.Dying += OnDying;
+        _enemy.TakedDamage += OnTakeDamage;
+    }
+
+    private void Start()
+    {
         _animator.SetFloat(AttackSpeed, _attackMultiplie);
         _attackLenght = _attackAnimation.length / _attackMultiplie;
     }
@@ -41,6 +47,7 @@ public class EnemyAnimator : MonoBehaviour
     private void OnDisable()
     {
         _enemy.Dying -= OnDying;
+        _enemy.TakedDamage -= OnTakeDamage;
     }
 
     private void FixedUpdate()
@@ -83,5 +90,10 @@ public class EnemyAnimator : MonoBehaviour
     private void OnDying()
     {
         _animator.SetTrigger(Died);
+    }
+
+    private void OnTakeDamage()
+    {
+        _animator.SetTrigger(TakeDamage);
     }
 }

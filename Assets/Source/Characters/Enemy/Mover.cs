@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
+using DG.Tweening;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Enemy), typeof(EnemyAnimator))]
 public class Mover : MonoBehaviour
@@ -23,6 +23,7 @@ public class Mover : MonoBehaviour
     private Vector3 _movePoint;
     private Player _target;
     private bool _isAttaking = false;
+    private bool _canMove = true;
     private bool _isAlive = true;
     private bool _isDancing = false;
 
@@ -40,6 +41,7 @@ public class Mover : MonoBehaviour
         _zeroPoint = transform.position;
         _searchZone.ChangedTarget += OnChangedTarget;
         _enemy.Dying += OnDying;
+        _enemy.TakedDamage += OnTakeDamage;
         _agent.enabled = true;
         Patrol();
     }
@@ -48,6 +50,7 @@ public class Mover : MonoBehaviour
     {
         _searchZone.ChangedTarget -= OnChangedTarget;
         _enemy.Dying -= OnDying;
+        _enemy.TakedDamage -= OnTakeDamage;
     }
 
     private void FixedUpdate()
@@ -55,16 +58,23 @@ public class Mover : MonoBehaviour
         if (_isAlive == false)
             return;
 
-        if (_isAcquireTarget)
+        if (_canMove)
         {
-            if (_isAttaking == false)
-                _agent.destination = _target.transform.position;
+            if (_isAcquireTarget)
+            {
+                if (_isAttaking == false)
+                    _agent.destination = _target.transform.position;
+            }
+            else
+            {
+                if (GetNewPointWithDelay == null && _isDancing == false)
+                    if (_agent.remainingDistance <= _stoppingDistance)
+                        GetNewPointWithDelay = StartCoroutine(GetNextPoint());
+            }
         }
         else
         {
-            if (GetNewPointWithDelay == null && _isDancing == false)
-                if (_agent.remainingDistance <= _stoppingDistance)
-                    GetNewPointWithDelay = StartCoroutine(GetNextPoint());
+            _agent.destination = transform.position;
         }
     }
 
@@ -94,9 +104,15 @@ public class Mover : MonoBehaviour
     {
         _isAlive = true;
         _target = null;
-        _searchZone.gameObject.SetActive(true);        
+        _searchZone.gameObject.SetActive(true);
         _animator.ResetState();
         _agent.enabled = true;
+    }
+
+    private void OnTakeDamage()
+    {
+        _canMove = false;
+        DOVirtual.DelayedCall(_maxDelay, () => { _canMove = true; });
     }
 
     private void StopDance()
@@ -117,6 +133,7 @@ public class Mover : MonoBehaviour
         _isAttaking = false;
     }
 
+    #region Patrol
     private IEnumerator GetNextPoint()
     {
         float timeDelay = Random.Range(0, _maxDelay);
@@ -149,13 +166,17 @@ public class Mover : MonoBehaviour
 
     private void OnChangedTarget(Player player)
     {
-        _target = player;
+        if (_canMove)
+        {
+            _target = player;
 
-        if (_target != null)
-            _agent.destination = _target.transform.position;
-        else
-            _agent.SetDestination(_movePoint);
+            if (_target != null)
+                _agent.destination = _target.transform.position;
+            else
+                _agent.SetDestination(_movePoint);
+        }
     }
+    #endregion
 
     private void OnTriggerStay(Collider other)
     {
@@ -175,8 +196,8 @@ public class Mover : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, _attackDistance);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(transform.position, _attackDistance);
+    //}
 }
