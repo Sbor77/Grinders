@@ -9,9 +9,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _speedInAttack;
-    [SerializeField] private int _beforeStrongAttack = 2;
+    [SerializeField] private int _beforeMassAttack = 2;
     [SerializeField] private float _attackDistance = 15f;
-    [SerializeField] private float _strongAttackCooldown = 1f;
+    [SerializeField] private float _spinAttackCooldown = 1f;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
 
@@ -21,20 +21,21 @@ public class Movement : MonoBehaviour
     private Vector3 _moveDirection = Vector3.forward;
     private bool _isMoving = false;
     private bool _cooldown = false;
+    private bool _massAttack = false;
     private float _halfRotation => _rotationSpeed / 2f;
-    private int _currentLowAttacks;
+    private int _currentAttacksCount;
 
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
     private const int _maxPointCount = 50;
 
-    public event Action<State,AttackType> ChangedState;
+    public event Action<State,bool> ChangedState;
     public event Action<float> ChangedMoveSpeed;
     public event Action ChangedBoostSpeed;
     public event Action<float> StartAttackCooldown;
 
     public float Speed => _speed;
-    public float AttackCooldown => _strongAttackCooldown;
+    public float AttackCooldown => _spinAttackCooldown;
 
     private void Awake()
     {
@@ -83,12 +84,6 @@ public class Movement : MonoBehaviour
         ChangedBoostSpeed?.Invoke();
     }
 
-    public void SetLowAttackLenght(float value)
-    {
-        StartAttackCooldown(value);
-        Invoke(nameof(EndLowAttack), value);
-    }
-
     private float LoadBoostSpeed(int speedLevel)
     {
         return (speedLevel - 1) * AddBoostMoveSpeed;
@@ -121,31 +116,36 @@ public class Movement : MonoBehaviour
         if (_cooldown)
             return;
 
-        _currentLowAttacks++;
+        _currentAttacksCount++;
 
-        if (_currentLowAttacks <= _beforeStrongAttack)
+        if (_currentAttacksCount <= _beforeMassAttack)
         {
-            StartLowAttack();
+            _massAttack = false;
+            StartMoveingAttack();
         }
         else
-            StartMoveingAttack();
+        {
+            _massAttack = true;
+            _currentAttacksCount = 0;
+            print("Прыгнул и пиздец всем!");
+        }
     }
 
-    private void StartLowAttack()
+    private void StartMassAttack()
     {
-        ChangedState?.Invoke(State.Attack, AttackType.Low);
-        SetChangeMoving(false, AttackType.Low);
+        ChangedState?.Invoke(State.Attack, true);
+        SetChangeMoving(false);
     }
 
-    private void EndLowAttack()
+    private void EndMassAttack()
     {
-        ChangedState?.Invoke(State.Move, AttackType.Low);
-        SetChangeMoving(true, AttackType.Low);
+        ChangedState?.Invoke(State.Move, false);
+        SetChangeMoving(true);
     }
 
     private void StartMoveingAttack()
     {
-        SetChangeMoving(false, AttackType.Strong);
+        SetChangeMoving(false);
         _attackDirection = transform.forward;
         _attackDirection.y = 0;
         List<Vector3> movePoints = GetMovePoints();
@@ -154,12 +154,11 @@ public class Movement : MonoBehaviour
         {
 
             StartCoroutine(Move(movePoints));
-            _currentLowAttacks = 0;
-            ChangedState?.Invoke(State.Attack, AttackType.Strong);
+            ChangedState?.Invoke(State.Attack, false);
         }
         else
         { 
-            SetChangeMoving(true, AttackType.Strong); 
+            SetChangeMoving(true); 
         }            
     }
 
@@ -200,12 +199,12 @@ public class Movement : MonoBehaviour
         return point;
     }
 
-    private void SetChangeMoving(bool activate, AttackType type)
+    private void SetChangeMoving(bool activate)
     {
         _controller.enabled = activate;
         _joystick.enabled = activate;
 
-        if (type == AttackType.Strong)
+        if (_massAttack == false)
             _collider.enabled = !activate;
     }
 
@@ -214,9 +213,9 @@ public class Movement : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
             yield return StartMove(points[i]);
 
-        ChangedState?.Invoke(State.Move, AttackType.Strong);
-        SetChangeMoving(true, AttackType.Strong);
-        StartCooldown(_strongAttackCooldown);
+        ChangedState?.Invoke(State.Move, false);
+        SetChangeMoving(true);
+        StartCooldown(_spinAttackCooldown);
     }
 
     private void StartCooldown(float delay)
