@@ -48,7 +48,7 @@ public class Level : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F))
             _isCheated = true;
     }
 
