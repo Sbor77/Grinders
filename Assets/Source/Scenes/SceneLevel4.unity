@@ -7063,6 +7063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 60059798979228210, guid: 36c47210086b6854db3b94e416bde756, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1459760949184593603, guid: 36c47210086b6854db3b94e416bde756, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10310,6 +10314,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _respawnTime: 3
+  _burstPrefab: {fileID: 0}
+  _trailPrefab: {fileID: 0}
+  _effectsParent: {fileID: 0}
+  _effectsCount: 0
+  _trailSound: {fileID: 0}
 --- !u!1 &1054241224
 GameObject:
   m_ObjectHideFlags: 0
@@ -13388,7 +13397,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
 --- !u!114 &1386809881 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2701210816371816789, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8319565471361466111, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
   m_PrefabInstance: {fileID: 1386809880}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -33,6 +33,7 @@ public class Movement : MonoBehaviour
     public event Action<float> ChangedMoveSpeed;
     public event Action ChangedBoostSpeed;
     public event Action<float> StartAttackCooldown;
+    public event Action<float,int> ChangedMassAttackCooldown;
 
     public float Speed => _speed;
 
@@ -50,6 +51,7 @@ public class Movement : MonoBehaviour
         _joystick.ChangedDirection += OnChangedDirection;
         _joystick.ReleasedTouch += OnReleasedTouch;
         _joystick.ChangedClickStatus += StartAttack;
+        _joystick.SkillButtonClick += UseMassAttack;
     }
 
     private void OnDisable()
@@ -57,6 +59,7 @@ public class Movement : MonoBehaviour
         _joystick.ChangedDirection -= OnChangedDirection;
         _joystick.ReleasedTouch -= OnReleasedTouch;
         _joystick.ChangedClickStatus -= StartAttack;
+        _joystick.SkillButtonClick -= UseMassAttack;
     }
 
     private void Update()
@@ -83,6 +86,19 @@ public class Movement : MonoBehaviour
             _rotationSpeed += _halfRotation * speedLevel;
 
         ChangedBoostSpeed?.Invoke();
+        ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+    }
+
+    public void KilledPerAttack(bool isKilled)
+    {
+        if (isKilled)
+        {
+            _currentAttacksCount++;
+            ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+
+            if (_currentAttacksCount >= _beforeMassAttack)
+                _joystick.ButtonActivate();
+        }
     }
 
     private float LoadBoostSpeed(int speedLevel)
@@ -97,6 +113,14 @@ public class Movement : MonoBehaviour
             _moveDirection = new Vector3(direction.x, 0, direction.y);
             _isMoving = true;
         }
+    }
+
+    private void UseMassAttack()
+    {
+        _currentAttacksCount = 0;
+        ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+        print("Using mass skill");
+        //StartMassAttack();
     }
 
     private void TurnDirection()
@@ -117,7 +141,7 @@ public class Movement : MonoBehaviour
         if (_cooldown)
             return;
 
-        _currentAttacksCount++;
+        //_currentAttacksCount++;
 
         //if (_currentAttacksCount <= _beforeMassAttack)
         //{
@@ -136,6 +160,9 @@ public class Movement : MonoBehaviour
     {
         ChangedState?.Invoke(State.Attack, true);
         SetChangeMoving(false);
+        _currentAttacksCount = 0;
+        ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+
     }
 
     private void EndMassAttack()
