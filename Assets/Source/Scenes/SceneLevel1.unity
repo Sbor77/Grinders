@@ -1915,6 +1915,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba7e3032e1b3e64abc5355fec7eb5e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &457130063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2118924427606081899, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 7210498082259735427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &466316515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2845,6 +2856,17 @@ MonoBehaviour:
   _josytick: {fileID: 1766064448}
   _startBigboxCameraPoint: {fileID: 1627708164}
   _targetBigboxCameraPoint: {fileID: 1112254650}
+--- !u!114 &615819894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6931363006340237059, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 7210498082259735427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &620143272
 GameObject:
   m_ObjectHideFlags: 0
@@ -7738,6 +7760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33bfe77a9e3dd0d4cb57b2d198a40cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 1977962564}
   _player: {fileID: 451948783}
   _layer:
     serializedVersion: 2
@@ -7748,6 +7771,7 @@ MonoBehaviour:
   _explosionSound: {fileID: 1785197914}
   _chargeSound: {fileID: 1785197917}
   _radius: 4
+  _damage: 0
   _chargeDuration: 1
 --- !u!4 &1785197916
 Transform:
@@ -7757,13 +7781,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785197913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.5, y: 0, z: -27.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 466316517}
   - {fileID: 1270601342}
   - {fileID: 706408291}
+  - {fileID: 1977962565}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9863,6 +9888,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958645904}
   m_CullTransparentMesh: 1
+--- !u!1 &1977962563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1977962565}
+  - component: {fileID: 1977962564}
+  m_Layer: 0
+  m_Name: ColliderTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &1977962564
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977962563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1977962565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977962563}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1785197916}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1981192016
 GameObject:
   m_ObjectHideFlags: 0
@@ -12684,6 +12754,14 @@ PrefabInstance:
       propertyPath: _enemySpawner
       value: 
       objectReference: {fileID: 519430086}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _attackCooldownTimer
+      value: 
+      objectReference: {fileID: 615819894}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _massKillButtonCooldown
+      value: 
+      objectReference: {fileID: 457130063}
     - target: {fileID: 8453041983040492525, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
