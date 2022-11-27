@@ -123,15 +123,32 @@ public class Player : Characters
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_currentState == State.Attack && other.TryGetComponent(out IDamageable damageable))
+        //if (_currentState == State.Attack && other.TryGetComponent(out IDamageable damageable))
+        if (_currentState == State.Attack && other.TryGetComponent(out Characters enemy))
         {
-            Attack(damageable);
+            if (CanAttack(enemy.transform))
+            {
+                Attack(enemy);
 
-            if (other.GetComponent<Enemy>())
+                //if (other.GetComponent<Enemy>())
                 ActivateEffect(_weaponEffect, _effectDuration);
 
-            _isKilledPerAttack = true;
+                _isKilledPerAttack = true;
+            }
         }
+    }
+
+    private bool CanAttack(Transform target)
+    {
+        Vector3 heading = target.position - transform.position;
+        Vector3 direction = heading / heading.magnitude;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, direction, out hit))
+            return hit.collider.TryGetComponent(out Enemy enemy);
+
+        return false;
     }
 
     private void ActivateEffect(ParticleSystem effect, float duration)
