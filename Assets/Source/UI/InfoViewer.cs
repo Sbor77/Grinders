@@ -13,7 +13,8 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private TMP_Text _bigBoxText;
     [SerializeField] private TMP_Text _KillsText;
-    [SerializeField] private Image _CooldownTimer;
+    [SerializeField] private Image _attackCooldownTimer;
+    [SerializeField] private Image _massKillButtonCooldown;
 
     private Movement _movement;
     private int _questCoinCollected;
@@ -54,6 +55,7 @@ public class InfoViewer : MonoBehaviour
         _movement.StartAttackCooldown += OnStartCooldown;
 
         _movement.ChangedState += OnStartAttack;
+        _movement.ChangedMassAttackCooldown += OnChangedMassCooldown;
     }
 
     void Start()
@@ -80,6 +82,8 @@ public class InfoViewer : MonoBehaviour
         _movement.StartAttackCooldown -= OnStartCooldown;
 
         _movement.ChangedState -= OnStartAttack;
+        _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
+
     }
 
     public void SetQuestCollected(QuestInfo conditions)
@@ -95,10 +99,17 @@ public class InfoViewer : MonoBehaviour
         _missonConditions = conditions;
     }
 
+    private void OnChangedMassCooldown(float current, int max)
+    {
+        float value;
+        value = Mathf.Clamp(current, 0, max);
+        _massKillButtonCooldown.fillAmount = 1 - value / max;
+    }
+
     private void OnStartAttack(State state, bool mass)
     {
         if (state == State.Attack)
-            _CooldownTimer.fillAmount = 0;
+            _attackCooldownTimer.fillAmount = 0;
     }
 
     private void OnStartCooldown(float delay)
@@ -113,7 +124,7 @@ public class InfoViewer : MonoBehaviour
         while (value < maxValue)
         {
             value = Mathf.Clamp(value + Time.deltaTime, 0, maxValue);
-            _CooldownTimer.fillAmount = value / maxValue;
+            _attackCooldownTimer.fillAmount = value / maxValue;
             yield return null;
         }
         yield return null;

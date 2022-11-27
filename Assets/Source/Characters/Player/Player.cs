@@ -17,6 +17,7 @@ public class Player : Characters
     private State _currentState = State.Move;
     private float _effectDuration = 3f;
     private int _addBoostMaxHealth = 10;
+    private bool _isKilledPerAttack;
 
     public event Action<float> ChangedHealth;
     public event Action<int> ChangedCoin;
@@ -95,6 +96,11 @@ public class Player : Characters
     private void OnChangedState(State state, bool mass)
     {
         _currentState = state;
+
+        if (state == State.Attack)
+            _isKilledPerAttack = false;
+        else
+            _movement.KilledPerAttack(_isKilledPerAttack);
     }
 
     private float ChangeHealth(float value)
@@ -123,6 +129,8 @@ public class Player : Characters
 
             if (other.GetComponent<Enemy>())
                 ActivateEffect(_weaponEffect, _effectDuration);
+
+            _isKilledPerAttack = true;
         }
     }
 

@@ -10,6 +10,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     [SerializeField] private RectTransform _joystickInner;
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .3f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
+    [SerializeField] private Button _skillButton;
 
     private Vector2 _inputVector;
     private bool _isTouchDown = false;
@@ -18,8 +19,14 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     public event Action<Vector2> ChangedDirection;
     public event Action ChangedClickStatus;
     public event Action ReleasedTouch;
+    public event Action SkillButtonClick;
 
     private const float Half = .5f;
+
+    private void OnEnable()
+    {
+        _skillButton.onClick.AddListener(OnSkillButtonClick);
+    }
 
     private void Start()
     {
@@ -45,11 +52,15 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
             else
                 _isTouchDown = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            OnSkillButtonClick();
     }
 
     private void OnDisable()
     {
         ReleasedJoystick();
+        _skillButton.onClick.RemoveListener(OnSkillButtonClick);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -76,6 +87,20 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
         if (_isTouchDown)
             ChangedClickStatus?.Invoke();
+    }
+
+    public void ButtonActivate()
+    {
+        _skillButton.interactable = true;
+    }
+
+    private void OnSkillButtonClick()
+    {
+        if (_skillButton.interactable)
+        {
+            SkillButtonClick?.Invoke();
+            _skillButton.interactable = false;
+        }
     }
 
     private void CalculateJoystickInnerPosition(Vector2 position)
