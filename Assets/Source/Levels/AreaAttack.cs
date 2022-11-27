@@ -40,6 +40,12 @@ public class AreaAttack : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+            Animate();
+    }
+
     public void Apply()
     {
         print("BOOOOOOM !");
@@ -75,14 +81,17 @@ public class AreaAttack : MonoBehaviour
         });
 
         animation.AppendInterval(0.5f);
-        animation.AppendCallback(_explosionSound.Play);
+        animation.AppendCallback( () =>
+        {
+            _explosionSound.Play();
+            _decalEffect.transform.localScale = Vector3.one * _radius;
+            _decalEffect.gameObject.SetActive(true);
+        });
 
         animation.AppendInterval(_chargeDuration + _explosionEffect.main.duration);
         animation.AppendCallback(() =>
         {
             _explosionEffect.gameObject.SetActive(false);
-            _decalEffect.transform.localScale = Vector3.one * _radius;
-            _decalEffect.gameObject.SetActive(true);
         });
         animation.AppendInterval(_chargeDuration + _explosionEffect.main.duration + _decalEffect.main.duration);
 
