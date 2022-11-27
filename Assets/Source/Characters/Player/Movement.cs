@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _spinAttackCooldown = 1f;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
+    [SerializeField] private AreaAttack _areaAttack;
 
     private CharacterController _controller;
     private CapsuleCollider _collider;
@@ -119,8 +120,7 @@ public class Movement : MonoBehaviour
     {
         _currentAttacksCount = 0;
         ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
-        print("Using mass skill");
-        //StartMassAttack();
+        StartMassAttack();
     }
 
     private void TurnDirection()
@@ -162,7 +162,8 @@ public class Movement : MonoBehaviour
         SetChangeMoving(false);
         _currentAttacksCount = 0;
         ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
-
+        Invoke(nameof(EndMassAttack), 1f);
+        _areaAttack.Apply();
     }
 
     private void EndMassAttack()

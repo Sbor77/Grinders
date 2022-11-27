@@ -11,7 +11,6 @@ public class Animations : MonoBehaviour
     [SerializeField] private AudioSource _moveSFX;
     [SerializeField] private AudioClip _spinAttackSound;
     [SerializeField] private AudioClip _walkSound;
-    //[SerializeField] private AnimationClip _MassAttackClip;
 
     private Animator _animator;
     private Movement _mover;
@@ -19,15 +18,13 @@ public class Animations : MonoBehaviour
     private Vector3 _angleRotate = new Vector3(0, -360, 0);
     private Vector3 _startAngleRotate;
     private bool _isMoving;
-    //private bool _isAttacking;
 
-    //private const float AttackSpeedModifier = 1.5f;
     private const float SpeedModifier = 4f;
     private const float FinishedSpin = 0.1f;
     private const string Speed = "MoveSpeed";
     private const string Modifier = "SpeedModifier";
     private const string Attack = "Attack";
-    private const string LowAttack = "LowAttack";
+    private const string AreaAttack = "LowAttack";
     private const string Died = "Died";
     private const string TakedDamage = "TakeDamage";
 
@@ -101,7 +98,7 @@ public class Animations : MonoBehaviour
 
     private void MassAttack()
     {
-        _animator.SetTrigger(LowAttack);
+        _animator.SetTrigger(AreaAttack);
         print("Массовая атака запущена");
     }
 
