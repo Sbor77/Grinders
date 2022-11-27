@@ -40,12 +40,6 @@ public class AreaAttack : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-            Animate();
-    }
-
     public void Apply()
     {
         print("BOOOOOOM !");
