@@ -141,19 +141,7 @@ public class Movement : MonoBehaviour
         if (_cooldown)
             return;
 
-        //_currentAttacksCount++;
-
-        //if (_currentAttacksCount <= _beforeMassAttack)
-        //{
-            //_massAttack = false;
-            StartMoveingAttack();
-        //}
-        //else
-        //{
-        //    _massAttack = true;
-        //    _currentAttacksCount = 0;
-        //    print("Прыгнул и пиздец всем!");
-        //}
+       StartMoveingAttack();       
     }
 
     private void StartMassAttack()
