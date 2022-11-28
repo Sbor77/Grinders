@@ -43,13 +43,11 @@ public class AreaAttack : MonoBehaviour
 
     public void Apply()
     {
-        print("BOOOOOOM !");
-
         Animate();
 
         _collider.enabled = true;
 
-        DamageTargets();        
+        DamageTargets();
     }
 
     private void OnDrawGizmos()
@@ -96,6 +94,4 @@ public class AreaAttack : MonoBehaviour
 
         animation.AppendCallback(() => _decalEffect.gameObject.SetActive(false));
     }
-
-
 }
