@@ -38,17 +38,11 @@ public class TutorialPanel : MonoBehaviour
         DOVirtual.DelayedCall(0.5f, () =>
         {
             Time.timeScale = 0;
-
             _playerGuides.SetActive(true);
-
             Fade(_targetGuides, 1, 1);
-
-            FadeOut(_missionPad);            
-
+            FadeOut(_missionPad);
             DOVirtual.DelayedCall(_textPause, () => Fade(_bigboxGuides, 1, _textFadeDuration));
         });
-
-        //AnimateFade(_coinPad, 0, _hintDuration, _hintLoops);
     }
 
     private void OnEnable()
@@ -75,23 +69,14 @@ public class TutorialPanel : MonoBehaviour
 
             _missionPad.gameObject.SetActive(false);            
 
-            if (DataHandler.Instance.IsMobile())            {
-
-                /*_attackGuidesMobile.gameObject.SetActive(true);
-
-                _walkGuidesMobile.gameObject.SetActive(true);*/
-
+            if (DataHandler.Instance.IsMobile())            
+            {
                 DOVirtual.DelayedCall(_textPause, () => Fade(_walkGuidesMobile, 1, _textFadeDuration));                
 
                 DOVirtual.DelayedCall(_textPause * 2, () => Fade(_attackGuidesMobile, 1, _textFadeDuration));
-
             }
             else
-            {
-                /*_attackGuides.gameObject.SetActive(true);
-
-                _walkGuides.gameObject.SetActive(true);*/
-
+            {                
                 Fade(_walkGuides, 1, _textFadeDuration);
 
                 DOVirtual.DelayedCall(_textPause, () => 
@@ -99,10 +84,7 @@ public class TutorialPanel : MonoBehaviour
                     Fade(_attackGuides, 1, _textFadeDuration);
                     FadeOut(_attackPad);
                 });
-
-            }
-
-            //_attackGuidesCommon.gameObject.SetActive(true);
+            }            
 
             DOVirtual.DelayedCall(_textPause * 3, () => Fade(_attackGuidesCommon, 1, _textFadeDuration));
 

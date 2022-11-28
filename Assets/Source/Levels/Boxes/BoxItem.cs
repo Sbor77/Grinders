@@ -13,26 +13,18 @@ public class BoxItem : MonoBehaviour
     private Vector3 _defaultScale;        
     private Vector3 _defaultLocalPosition;
     private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
-    private float _defaultHeight;
-
-    private CoinTarget _coinTarget;
-
-    private Camera _mainCamera;
+    private float _defaultHeight;    
 
     public int Value => _value;
 
     private void Start()
     {
-        _mainCamera = Camera.main;
-
-        _coinTarget = FindObjectOfType<CoinTarget>();
-
         _defaultScale = transform.localScale;        
 
         _defaultHeight = transform.position.y;        
 
-        _defaultLocalPosition = transform.localPosition;
-    }    
+        _defaultLocalPosition = transform.localPosition;        
+    }
 
     public void AnimateCollection()
     {
@@ -46,36 +38,23 @@ public class BoxItem : MonoBehaviour
 
         _endlessRotation.Kill();
 
-        _collectingSequence = DOTween.Sequence();
-
         transform.eulerAngles = Vector3.zero;
+
         _collectEffect.Play();
+
+        _collectingSequence = DOTween.Sequence();
 
         _collectingSequence.AppendCallback(_collectEffect.Play);
         _collectingSequence.Append(transform.DOMoveY(_defaultHeight + heightOffset, liftTime).SetEase(Ease.InQuart));        
         _collectingSequence.Append(transform.DOScale(_defaultScale * increaseScaleRatio, scaleTime));        
         _collectingSequence.Append(transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(rotationLoops).SetEase(Ease.Linear));
-        _collectingSequence.Append(transform.DOScale(_defaultScale * decreaseScaleRatio, scaleTime));        
-
-        /*_collectingSequence.AppendCallback(() =>
-        {
-            print("Полетелииииии");
-                        
-            float cameraDistance = _mainCamera.WorldToScreenPoint(transform.position).z;            
-
-            Vector3 coinTargetWorldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(_coinTarget.transform.position.x, _coinTarget.transform.position.y, cameraDistance));
-
-            transform.DOMove(coinTargetWorldPoint, 1f);
-        });        
-        
-        _collectingSequence.AppendInterval(10f);*/
-
+        _collectingSequence.Append(transform.DOScale(_defaultScale * decreaseScaleRatio, scaleTime));
         _collectingSequence.AppendCallback(() =>
-        {
+        {             
             Deactivate();
             transform.localScale = _defaultScale;
-            transform.localPosition = _defaultLocalPosition;            
-        });        
+            transform.localPosition = _defaultLocalPosition;
+        });
     }
 
     public void Deactivate()
