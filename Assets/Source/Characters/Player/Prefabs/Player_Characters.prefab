@@ -34686,6 +34686,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
   _health: 30
   _takeDamageSFX: {fileID: 2128285235950304034}
   _weaponEffect: {fileID: 1551961728017568708}
