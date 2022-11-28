@@ -24,7 +24,7 @@ public class Animations : MonoBehaviour
     private const string Speed = "MoveSpeed";
     private const string Modifier = "SpeedModifier";
     private const string Attack = "Attack";
-    private const string AreaAttack = "LowAttack";
+    private const string AreaAttack = "AreaAttack";
     private const string Died = "Died";
     private const string TakedDamage = "TakeDamage";
 

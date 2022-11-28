@@ -192,13 +192,13 @@ public class Mover : MonoBehaviour
                 //if (_canAttackCoroutine == null)
                 //    _canAttackCoroutine = StartCoroutine(CanAttack());
 
-                if (_enemy.CanSee(player.transform))
-                {
+                //if (_enemy.CanSee(player.transform))
+                //{
                     _isAttaking = true;
                     float attackDelay = _animator.StartAttack();
                     Invoke(nameof(Attack), attackDelay);
                     //StopCanAttackCoroutine();
-                }
+                //}
             }
             else
             {
