@@ -34,6 +34,8 @@ public class AreaAttack : MonoBehaviour
     {
         Collider [] _targetColliders = Physics.OverlapSphere(transform.position, _collider.radius, _layer);
 
+        print("В радиусе объектов = " + _targetColliders.Length);
+
         foreach (var _target in _targetColliders)
         {
             _target.GetComponent<IDamageable>().TakeDamage(_damage);
@@ -42,13 +44,13 @@ public class AreaAttack : MonoBehaviour
 
     public void Apply()
     {
-        print("BOOOOOOM !");
+        //print("BOOOOOOM !");
 
         Animate();
 
         _collider.enabled = true;
 
-        DamageTargets();        
+        //DamageTargets();        
     }
 
 
