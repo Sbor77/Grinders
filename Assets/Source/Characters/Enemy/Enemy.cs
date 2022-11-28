@@ -10,6 +10,7 @@ public class Enemy : Characters
     [SerializeField] private float _health;
     [SerializeField] private float _delayDieHiding = 3f;
     [SerializeField] private AudioSource _takeDamageSFX;
+    [SerializeField] private ParticleSystem _dieEffect;
 
     private Mover _mover;
     private float _currentHealth;
@@ -61,8 +62,11 @@ public class Enemy : Characters
 
             _isDead = true;
 
+            _dieEffect.gameObject.SetActive(true);            
+
             DOVirtual.DelayedCall(_delayDieHiding, () =>
             {
+                _dieEffect.gameObject.SetActive(false);
                 Deactivate();
                 IsDeactivated?.Invoke();
             });
