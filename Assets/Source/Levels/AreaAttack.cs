@@ -32,11 +32,12 @@ public class AreaAttack : MonoBehaviour
 
     private void DamageTargets()
     {
-        Collider [] _targetColliders = Physics.OverlapSphere(transform.position, _collider.radius, _layer);
+        Collider[] _targetColliders = Physics.OverlapSphere(transform.position, _collider.radius, _layer);
 
         foreach (var _target in _targetColliders)
         {
-            _target.GetComponent<IDamageable>().TakeDamage(_damage);
+            if (_target.TryGetComponent(out IDamageable damageable))
+                damageable.TakeDamage(_damage);
         }
     }
 
@@ -51,7 +52,11 @@ public class AreaAttack : MonoBehaviour
         DamageTargets();        
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, _collider.radius);
+    }
 
     private void Animate()
     {

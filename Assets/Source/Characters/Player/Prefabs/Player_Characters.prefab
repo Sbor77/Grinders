@@ -34655,6 +34655,7 @@ MonoBehaviour:
   _wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  _areaAttack: {fileID: 0}
 --- !u!114 &5713195580975693084
 MonoBehaviour:
   m_ObjectHideFlags: 0

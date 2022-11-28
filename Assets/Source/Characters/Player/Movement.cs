@@ -48,7 +48,6 @@ public class Movement : MonoBehaviour
 
     private void OnEnable()
     {
-        _collider.enabled = _isMoving;
         _joystick.ChangedDirection += OnChangedDirection;
         _joystick.ReleasedTouch += OnReleasedTouch;
         _joystick.ChangedClickStatus += StartAttack;
@@ -81,6 +80,7 @@ public class Movement : MonoBehaviour
 
     public void Init(int speedLevel)
     {
+        _collider.enabled = false;
         _speed += LoadBoostSpeed(speedLevel);
 
         if (speedLevel > 1)
@@ -118,8 +118,9 @@ public class Movement : MonoBehaviour
 
     private void UseMassAttack()
     {
-        _currentAttacksCount = 0;
-        ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+        //_currentAttacksCount = 0;
+        //ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+        _massAttack = true;
         StartMassAttack();
     }
 
@@ -158,6 +159,7 @@ public class Movement : MonoBehaviour
     {
         ChangedState?.Invoke(State.Move, false);
         SetChangeMoving(true);
+        _massAttack = false;
     }
 
     private void StartMoveingAttack()

@@ -47,13 +47,16 @@ public class Box : MonoBehaviour
                 DOVirtual.DelayedCall(_boxDeactivationDelay, DeactivateWholeBox);                
             }
 
-            if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)            
-                Crush();                            
+            //if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)            
+            //    Crush();                            
         }
     }    
 
     public void Crush()
     {
+        if (!_wholeBoxRenderer.enabled)
+            return;
+
         float crushedBoxLivetime = 3f;
         float pieceColliderDeactivationDelay = 2f;
 

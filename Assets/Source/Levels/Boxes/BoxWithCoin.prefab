@@ -14505,6 +14505,7 @@ GameObject:
   - component: {fileID: 3549205897666254692}
   - component: {fileID: 8566485726950763772}
   - component: {fileID: 5172793039412916207}
+  - component: {fileID: 824449181478657152}
   - component: {fileID: 4778183122800473065}
   - component: {fileID: 6447775131403456022}
   m_Layer: 8
@@ -14725,6 +14726,18 @@ MonoBehaviour:
   _item: {fileID: 1675968225667557870}
   _fogEffect: {fileID: 3810957938891232438}
   _burstEffect: {fileID: 5082561632401323646}
+--- !u!114 &824449181478657152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464886730387448702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11bde6411bdd4dc43b1a5bfa175e71e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &4778183122800473065
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5992,6 +5992,7 @@ GameObject:
   - component: {fileID: 2292820817332798530}
   - component: {fileID: 6373357592977801178}
   - component: {fileID: 7591239710437129417}
+  - component: {fileID: -8397219288663132964}
   - component: {fileID: 6582332417849829980}
   m_Layer: 8
   m_Name: BoxWithCross
@@ -6211,6 +6212,18 @@ MonoBehaviour:
   _item: {fileID: 4347631566169209342}
   _fogEffect: {fileID: 4802230873878781499}
   _burstEffect: {fileID: 6961620842185812644}
+--- !u!114 &-8397219288663132964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199220655135993944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11bde6411bdd4dc43b1a5bfa175e71e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &6582332417849829980
 AudioSource:
   m_ObjectHideFlags: 0

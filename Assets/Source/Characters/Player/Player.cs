@@ -10,6 +10,7 @@ public class Player : Characters
     [SerializeField] private ParticleSystem _weaponEffect;
     [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _woundEffect;
+    [SerializeField] private LayerMask _wallMask;
 
     private Movement _movement;
     private float _currentHealth;
@@ -123,15 +124,17 @@ public class Player : Characters
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (_currentState == State.Attack && other.TryGetComponent(out IDamageable damageable))
-        if (_currentState == State.Attack && other.TryGetComponent(out Characters enemy))
+        if (_currentState == State.Attack && other.TryGetComponent(out IDamageable damageable))
+        //if (_currentState == State.Attack && other.TryGetComponent(out Characters enemy))
         {
-            if (CanAttack(enemy.transform))
-            {
-                Attack(enemy);
+            Transform interection = other.transform; 
 
-                //if (other.GetComponent<Enemy>())
-                ActivateEffect(_weaponEffect, _effectDuration);
+            if (CanAttack(interection)) //enemy.transform))
+            {
+                Attack(damageable); //enemy);
+
+                if (other.GetComponent<Enemy>())
+                    ActivateEffect(_weaponEffect, _effectDuration);
 
                 _isKilledPerAttack = true;
             }
@@ -145,10 +148,10 @@ public class Player : Characters
 
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, direction, out hit))
-            return hit.collider.TryGetComponent(out Enemy enemy);
+        if (Physics.Raycast(transform.position, direction, out hit, heading.magnitude, _wallMask))
+            return false;
 
-        return false;
+        return true;
     }
 
     private void ActivateEffect(ParticleSystem effect, float duration)

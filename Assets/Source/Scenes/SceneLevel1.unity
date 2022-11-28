@@ -5261,7 +5261,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh48072
+  m_Name: pb_Mesh27498
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7742,7 +7742,7 @@ MonoBehaviour:
   _player: {fileID: 451948783}
   _layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 768
   _auraEffect: {fileID: 466316516}
   _decalEffect: {fileID: 1270601341}
   _explosionEffect: {fileID: 706408290}
@@ -7992,7 +7992,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1809033098
 Transform:
@@ -8819,6 +8819,14 @@ PrefabInstance:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: -8355950204708060872, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
+    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _wallMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -8881,7 +8889,7 @@ PrefabInstance:
       objectReference: {fileID: 1785197915}
     - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: _beforeMassAttack
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
@@ -12588,6 +12596,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540436693}
     m_Modifications:
+    - target: {fileID: 2118924427606081899, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6253105300449583719, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.75252223
