@@ -92,9 +92,9 @@ public class TutorialPanel : MonoBehaviour
 
                 _walkGuides.gameObject.SetActive(true);*/
 
-                DOVirtual.DelayedCall(_textPause, () => Fade(_walkGuides, 1, _textFadeDuration));
+                Fade(_walkGuides, 1, _textFadeDuration);
 
-                DOVirtual.DelayedCall(_textPause * 2, () => 
+                DOVirtual.DelayedCall(_textPause, () => 
                 {
                     Fade(_attackGuides, 1, _textFadeDuration);
                     FadeOut(_attackPad);
@@ -111,7 +111,7 @@ public class TutorialPanel : MonoBehaviour
 
         else if (_clickCounts >= 1)
         {
-            _playerGuides.SetActive(false);
+            gameObject.SetActive(false);
 
             _infoPanel.gameObject.SetActive(true);
 
