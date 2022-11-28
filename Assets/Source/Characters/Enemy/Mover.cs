@@ -13,11 +13,14 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _attackDistance = 2f;
     [SerializeField] private SearchZone _searchZone;
     [SerializeField] private Transform _weapon;
+    [SerializeField] private LayerMask _wallMask;
+    [SerializeField] [Range(0.1f,1f)] private float _canAttackDelay = 0.5f;
 
     private NavMeshAgent _agent;
     private Enemy _enemy;
     private EnemyAnimator _animator;
     private Coroutine GetNewPointWithDelay;
+    private Coroutine _canAttackCoroutine;
     private WaitForSeconds _delay;
     private Vector3 _zeroPoint;
     private Vector3 _movePoint;
@@ -26,6 +29,7 @@ public class Mover : MonoBehaviour
     private bool _canMove = true;
     private bool _isAlive = true;
     private bool _isDancing = false;
+    private bool _isCanAttack = false;
 
     private bool _isAcquireTarget => _target != null;
 
@@ -184,18 +188,47 @@ public class Mover : MonoBehaviour
         {
             if (player.IsDead == false)
             {
-                _isAttaking = true;
-                float attackDelay = _animator.StartAttack();
-                Invoke(nameof(Attack), attackDelay);
+                //_isCanAttack = false;
+                //if (_canAttackCoroutine == null)
+                //    _canAttackCoroutine = StartCoroutine(CanAttack());
+
+                if (_enemy.CanSee(player.transform))
+                {
+                    _isAttaking = true;
+                    float attackDelay = _animator.StartAttack();
+                    Invoke(nameof(Attack), attackDelay);
+                    //StopCanAttackCoroutine();
+                }
             }
             else
             {
+                //StopCanAttackCoroutine();
+                
                 if (_isDancing == false)
                     OnChangedTarget(null);
             }
         }
     }
 
+    //private void StopCanAttackCoroutine()
+    //{
+    //    if (_canAttackCoroutine != null)
+    //    {
+    //        StopCoroutine(_canAttackCoroutine);
+    //        _canAttackCoroutine = null;
+    //    }
+    //}
+
+    //private IEnumerator CanAttack()
+    //{
+    //    while (_isCanAttack == false)
+    //    {
+    //        _isCanAttack = _enemy.CanSee(_target.transform, _wallMask);
+    //        yield return new WaitForSeconds(_canAttackDelay);
+    //    }
+
+    //    yield return null;
+    //}
     //private void OnDrawGizmos()
     //{
     //    Gizmos.DrawWireSphere(transform.position, _attackDistance);

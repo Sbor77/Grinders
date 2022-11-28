@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78063136d8a61824b9703c4e1406f428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 5813451299658817458}
 --- !u!1 &272261981975830865
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +463,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 3
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
   _health: 5
   _delayDieHiding: 3
   _takeDamageSFX: {fileID: 1610300637376162196}
@@ -483,6 +487,10 @@ MonoBehaviour:
   _attackDistance: 3
   _searchZone: {fileID: 2663152278073370722}
   _weapon: {fileID: 4671687199365027257}
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _canAttackDelay: 0.5
 --- !u!114 &8744370913712509822
 MonoBehaviour:
   m_ObjectHideFlags: 0
