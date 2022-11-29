@@ -22,9 +22,7 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private TMP_Text _attackGuidesMobile;
     [SerializeField] private TMP_Text _attackGuidesCommon;
     [Space]
-    [SerializeField] private Button _okButton;
-    [SerializeField] private TMP_Text _start;
-    [SerializeField] private TMP_Text _next;
+    [SerializeField] private Button _nextButton;    
 
     private float _hintDuration = 0.5f;
     private int _hintLoops = -1;
@@ -47,21 +45,21 @@ public class TutorialPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        _okButton.onClick.AddListener(OnClickButton);
+        _nextButton.onClick.AddListener(OnClickButton);
     }
 
     private void OnDisable()
     {
-        _okButton.onClick.RemoveListener(OnClickButton);
+        _nextButton.onClick.RemoveListener(OnClickButton);
     }
 
     private void OnClickButton()
     {        
         if (_clickCounts == 0)
         {
-            _next.gameObject.SetActive(false);
+            /*_next.gameObject.SetActive(false);
 
-            _start.gameObject.SetActive(true);
+            _start.gameObject.SetActive(true);*/
 
             _targetGuides.gameObject.SetActive(false);            
 
@@ -71,9 +69,9 @@ public class TutorialPanel : MonoBehaviour
 
             if (DataHandler.Instance.IsMobile())            
             {
-                DOVirtual.DelayedCall(_textPause, () => Fade(_walkGuidesMobile, 1, _textFadeDuration));                
+                Fade(_walkGuidesMobile, 1, _textFadeDuration);
 
-                DOVirtual.DelayedCall(_textPause * 2, () => Fade(_attackGuidesMobile, 1, _textFadeDuration));
+                DOVirtual.DelayedCall(_textPause, () => Fade(_attackGuidesMobile, 1, _textFadeDuration));
             }
             else
             {                
@@ -86,7 +84,7 @@ public class TutorialPanel : MonoBehaviour
                 });
             }            
 
-            DOVirtual.DelayedCall(_textPause * 3, () => Fade(_attackGuidesCommon, 1, _textFadeDuration));
+            DOVirtual.DelayedCall(_textPause + _textPause, () => Fade(_attackGuidesCommon, 1, _textFadeDuration));
 
             _clickCounts++;
         }
