@@ -4,11 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class TutorialPanel : MonoBehaviour
-{
-    [SerializeField] private GameObject _infoPanel;
-    [Space]    
+{    
     [SerializeField] private Image _missionPad;
     [SerializeField] private Image _attackPad;    
     [Space]
@@ -27,15 +26,16 @@ public class TutorialPanel : MonoBehaviour
     private float _hintDuration = 0.5f;
     private int _hintLoops = -1;
     private int _clickCounts;
-
     private float _textFadeDuration = 1;
     private float _textPause = 1.5f;
+
+    public event Action IsEnded;
 
     private void Start()
     {
         DOVirtual.DelayedCall(0.5f, () =>
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             _playerGuides.SetActive(true);
             Fade(_targetGuides, 1, 1);
             FadeOut(_missionPad);
@@ -53,18 +53,19 @@ public class TutorialPanel : MonoBehaviour
         _nextButton.onClick.RemoveListener(OnClickButton);
     }
 
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
     private void OnClickButton()
     {        
+        _targetGuides.gameObject.SetActive(false);            
+
+        _bigboxGuides.gameObject.SetActive(false);
+
         if (_clickCounts == 0)
         {
-            /*_next.gameObject.SetActive(false);
-
-            _start.gameObject.SetActive(true);*/
-
-            _targetGuides.gameObject.SetActive(false);            
-
-            _bigboxGuides.gameObject.SetActive(false);
-
             _missionPad.gameObject.SetActive(false);            
 
             if (DataHandler.Instance.IsMobile())            
@@ -91,11 +92,11 @@ public class TutorialPanel : MonoBehaviour
 
         else if (_clickCounts >= 1)
         {
-            gameObject.SetActive(false);
+            IsEnded?.Invoke();
 
-            _infoPanel.gameObject.SetActive(true);
+            Deactivate();
 
-            Time.timeScale = 1;
+            //_infoPanel.gameObject.SetActive(true);
         }        
     }
 
@@ -114,5 +115,10 @@ public class TutorialPanel : MonoBehaviour
         text.gameObject.SetActive(true);
 
         text.DOFade(alpha, _hintDuration).SetUpdate(true).SetEase(Ease.InSine).SetUpdate(true);
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }
