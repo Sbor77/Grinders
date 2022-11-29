@@ -118,14 +118,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de776983dc9bdf642b4aaeceea1ef92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 4
+  _damage: 7
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  _health: 5
+  _health: 7
   _delayDieHiding: 3
+  _delayStartStunEffect: 1.5
   _takeDamageSFX: {fileID: 897922176283170088}
   _dieEffect: {fileID: 4591382315737173827}
+  _stunEffect: {fileID: 0}
 --- !u!114 &8791151804551881445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +148,7 @@ MonoBehaviour:
   _weapon: {fileID: 7672123975829252333}
   _wallMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   _canAttackDelay: 0.5
 --- !u!114 &6050526583473352234
 MonoBehaviour:

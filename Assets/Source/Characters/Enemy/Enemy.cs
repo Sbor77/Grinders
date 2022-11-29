@@ -9,13 +9,18 @@ public class Enemy : Characters
 {
     [SerializeField] private float _health;
     [SerializeField] private float _delayDieHiding = 3f;
+    [SerializeField] private float _delayStartStunEffect = 1.5f;
+    [SerializeField] private float _stunEffectDuration = 3f;
     [SerializeField] private AudioSource _takeDamageSFX;
     [SerializeField] private ParticleSystem _dieEffect;
+    [SerializeField] private ParticleSystem _stunEffect;
 
     private Mover _mover;
     private float _currentHealth;
     private Vector3 _defaultPosition;
     private bool _isDead = false;
+
+    public float StanEffectDuration => _stunEffectDuration;
 
     public event Action Dying;
     public event Action TakedDamage;
@@ -62,7 +67,7 @@ public class Enemy : Characters
 
             _isDead = true;
 
-            _dieEffect.gameObject.SetActive(true);            
+            _dieEffect.gameObject.SetActive(true);
 
             DOVirtual.DelayedCall(_delayDieHiding, () =>
             {
@@ -70,6 +75,11 @@ public class Enemy : Characters
                 Deactivate();
                 IsDeactivated?.Invoke();
             });
+        }
+        else
+        {
+            DOVirtual.DelayedCall(_delayStartStunEffect, () => _stunEffect.gameObject.SetActive(true));
+            DOVirtual.DelayedCall(_stunEffectDuration, () => _stunEffect.gameObject.SetActive(false));
         }
     }
 

@@ -116,7 +116,7 @@ public class Mover : MonoBehaviour
     private void OnTakeDamage()
     {
         _canMove = false;
-        DOVirtual.DelayedCall(_maxDelay, () => { _canMove = true; });
+        DOVirtual.DelayedCall(_enemy.StanEffectDuration, () => { _canMove = true; });
     }
 
     private void StopDance()

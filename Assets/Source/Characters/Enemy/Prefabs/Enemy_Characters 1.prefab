@@ -5733,10 +5733,12 @@ MonoBehaviour:
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  _health: 5
+  _health: 10
   _delayDieHiding: 3
+  _delayStartStunEffect: 1.5
   _takeDamageSFX: {fileID: -532422950189297981}
   _dieEffect: {fileID: 4017163649354887755}
+  _stunEffect: {fileID: 0}
 --- !u!114 &4449667726229326941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5757,7 +5759,7 @@ MonoBehaviour:
   _weapon: {fileID: 3294603986966758997}
   _wallMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   _canAttackDelay: 0.5
 --- !u!114 &1456876114613797010
 MonoBehaviour:
