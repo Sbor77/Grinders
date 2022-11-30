@@ -47,12 +47,11 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u0421\u043E\u0431\u0440\u0430\u0442\u044C \u043C\u043E\u043D\u0435\u0442
-      - "
+    Text: "\u0421\u043E\u0431\u0440\u0430\u0442\u044C \u043C\u043E\u043D\u0435\u0442"
     Object: {fileID: 0}
   - Language: English
-    Text: 'Collect coints - '
+    Text: Collect coins
     Object: {fileID: 0}
   - Language: Turkish
-    Text: "Madeni para toplay\u0131n - "
+    Text: Madeni para topla
     Object: {fileID: 0}
