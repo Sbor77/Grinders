@@ -1240,6 +1240,7 @@ MonoBehaviour:
   _enemiesCount: {fileID: 204610323}
   _bigboxToCrush: {fileID: 402300682}
   _tutorialPanel: {fileID: 0}
+  _infoPanel: {fileID: 6047048541179416112}
 --- !u!114 &6047048542587295038
 MonoBehaviour:
   m_ObjectHideFlags: 0
