@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
@@ -186,51 +185,20 @@ public class Mover : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player) && !_isAttaking)
         {
-            if (player.IsDead == false)
+            if (_canMove)
             {
-                //_isCanAttack = false;
-                //if (_canAttackCoroutine == null)
-                //    _canAttackCoroutine = StartCoroutine(CanAttack());
-
-                //if (_enemy.CanSee(player.transform))
-                //{
+                if (player.IsDead == false)
+                {
                     _isAttaking = true;
                     float attackDelay = _animator.StartAttack();
                     Invoke(nameof(Attack), attackDelay);
-                    //StopCanAttackCoroutine();
-                //}
-            }
-            else
-            {
-                //StopCanAttackCoroutine();
-                
-                if (_isDancing == false)
-                    OnChangedTarget(null);
+                }
+                else
+                {
+                    if (_isDancing == false)
+                        OnChangedTarget(null);
+                }
             }
         }
     }
-
-    //private void StopCanAttackCoroutine()
-    //{
-    //    if (_canAttackCoroutine != null)
-    //    {
-    //        StopCoroutine(_canAttackCoroutine);
-    //        _canAttackCoroutine = null;
-    //    }
-    //}
-
-    //private IEnumerator CanAttack()
-    //{
-    //    while (_isCanAttack == false)
-    //    {
-    //        _isCanAttack = _enemy.CanSee(_target.transform, _wallMask);
-    //        yield return new WaitForSeconds(_canAttackDelay);
-    //    }
-
-    //    yield return null;
-    //}
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawWireSphere(transform.position, _attackDistance);
-    //}
 }
