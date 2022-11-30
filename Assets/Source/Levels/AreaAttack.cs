@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 public class AreaAttack : MonoBehaviour
-{
-    [SerializeField] private SphereCollider _collider;
+{    
     [SerializeField] private Player _player;
     [SerializeField] private LayerMask _layer;
     [Space]
@@ -29,13 +26,6 @@ public class AreaAttack : MonoBehaviour
     private Vector3 _effectPosition;
     
     private float _stunRadius => _radius * 2f;
-
-    private void Start()
-    {
-        _collider.enabled = false;
-
-        _collider.radius = _radius;
-    }
 
     private void SetChargeEffectPosition()
     {
@@ -76,11 +66,7 @@ public class AreaAttack : MonoBehaviour
 
     public void Apply()
     {
-        Animate();
-
-        //_collider.enabled = true;
-
-        //DamageTargets();
+        Animate();       
     }
 
     private void OnDrawGizmos()

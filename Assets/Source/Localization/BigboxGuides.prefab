@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7288856284498477929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7288856284498477928}
+  - component: {fileID: 7288856284498477935}
+  m_Layer: 0
+  m_Name: BigboxGuides
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7288856284498477928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7288856284498477929}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7288856284498477935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7288856284498477929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: Russian
+    Text: "\u041A\u0430\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E
+      \u043C\u043E\u043D\u0435\u0442\u043E\u043A \u0438 \u0443\u0431\u0438\u0442\u044B\u0445
+      \u0432\u0440\u0430\u0433\u043E\u0432 \u0434\u043E\u0441\u0442\u0438\u0433\u043D\u0435\u0442
+      \u0437\u0430\u0434\u0430\u043D\u043D\u044B\u0445 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0439
+      \u0442\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0448\u044C \u0434\u043E\u0441\u0442\u0443\u043F
+      \u043A \u0411\u041E\u041B\u042C\u0428\u041E\u041C\u0423 \u044F\u0449\u0438\u043A\u0443"
+    Object: {fileID: 0}
+  - Language: English
+    Text: As soon as  your kills and coins reaches the required numbers you will
+      get access to the BIG box with big money
+    Object: {fileID: 0}
+  - Language: Turkish
+    Text: "\xD6ld\xFCrme ve madeni paralar\u0131n\u0131z gerekli say\u0131lara ula\u015F\u0131r
+      ula\u015Fmaz, b\xFCy\xFCk para i\xE7eren B\xDCY\xDCK kutuya eri\u015Fim elde
+      edeceksiniz"
+    Object: {fileID: 0}

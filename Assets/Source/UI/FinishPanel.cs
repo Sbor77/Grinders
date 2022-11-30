@@ -1,15 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FinishPanel : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _infoText;
+    [SerializeField] private TMP_Text _levelCoinsCount;
+    [SerializeField] private TMP_Text _levelKillsCount;
+    [SerializeField] private TMP_Text _levelScoreCount;
+    [SerializeField] private TMP_Text _totalScoreCount;
     [SerializeField] private Button _shopButton;
     [SerializeField] private InfoViewer _infoViewer;
 
@@ -27,11 +26,13 @@ public class FinishPanel : MonoBehaviour
 
     public void Init()
     {
-        string statsLevel = $"Level money - {_infoViewer.CurrentCoins.ToString()}\n" +
-                            $"Kills enemy - {_infoViewer.CurrentKills.ToString()}\n" +
-                            $"Level Score - {GetCurrentScore()}\n " +
-                            $"Total Score - {GetTotalScore()}";
-        _infoText.text = statsLevel;
+        _levelCoinsCount.text = _infoViewer.CurrentCoins.ToString();
+
+        _levelKillsCount.text = _infoViewer.CurrentKills.ToString();
+
+        _levelScoreCount.text = GetCurrentScore().ToString();
+
+        _totalScoreCount.text = GetTotalScore().ToString();
     }
 
     public void Activate()
