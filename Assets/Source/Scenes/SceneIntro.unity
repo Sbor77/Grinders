@@ -1446,9 +1446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53d6b71d38ffc44e8746f29c5d5d459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _masterVolumeSlider: {fileID: 0}
-  _musicVolumeSlider: {fileID: 0}
-  _effectsVolumeSlider: {fileID: 0}
+  _masterVolumeSlider: {fileID: 1608120833}
+  _musicVolumeSlider: {fileID: 1213370295}
+  _effectsVolumeSlider: {fileID: 148567066}
   _audio: {fileID: 24100000, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
 --- !u!1 &660256908
 GameObject:
@@ -2478,7 +2478,6 @@ GameObject:
   - component: {fileID: 1171978149}
   - component: {fileID: 1171978151}
   - component: {fileID: 1171978150}
-  - component: {fileID: 1171978152}
   m_Layer: 5
   m_Name: StartScreen
   m_TagString: Untagged
@@ -2550,22 +2549,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171978148}
   m_CullTransparentMesh: 1
---- !u!114 &1171978152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171978148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d53d6b71d38ffc44e8746f29c5d5d459, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _masterVolumeSlider: {fileID: 0}
-  _musicVolumeSlider: {fileID: 0}
-  _effectsVolumeSlider: {fileID: 0}
-  _audio: {fileID: 0}
 --- !u!1 &1213370293
 GameObject:
   m_ObjectHideFlags: 0
