@@ -43,9 +43,9 @@ public class AreaAttack : MonoBehaviour
         DOVirtual.DelayedCall(effectLiveTime, () => _chargeEffect.gameObject.SetActive(false));     
     }
 
-    private void DamageTargets()
+    private void DamageTargets(float radius, float damage)
     {
-        ApplyAreaDamage(_radius, _damage);
+        ApplyAreaDamage(radius, damage);
     }
 
     private void StunTargets()
@@ -66,7 +66,9 @@ public class AreaAttack : MonoBehaviour
 
     public void Apply()
     {
-        Animate();       
+        Animate();
+
+        DamageTargets(_radius, 0);
     }
 
     private void OnDrawGizmos()
@@ -100,7 +102,7 @@ public class AreaAttack : MonoBehaviour
         animation.AppendInterval(0.5f);
         animation.AppendCallback(() =>
         {
-            DamageTargets();
+            DamageTargets(_radius, _damage);
             _auraEffect.gameObject.SetActive(false);
             _explosionEffect.transform.localScale = Vector3.one * _radius;
             _explosionEffect.gameObject.SetActive(true);
