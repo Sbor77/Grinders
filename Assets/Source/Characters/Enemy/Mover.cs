@@ -185,7 +185,7 @@ public class Mover : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player) && !_isAttaking)
         {
-            if (_canMove)
+            if (_canMove && _enemy.CanSee(player.transform))
             {
                 if (player.IsDead == false)
                 {
