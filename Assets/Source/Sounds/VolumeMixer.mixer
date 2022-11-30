@@ -97,11 +97,11 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 28a2e91c105018d4e9a6094582679142
-    name: MyExposedParam 1
+    name: EffectsVolume
   - guid: 8f272ccfc5fad4a419df07c20366c46a
     name: MasterVolume
   - guid: f641eb99f7944814cb74e2b965116d78
-    name: MyExposedParam
+    name: MusicVolume
   m_AudioMixerGroupViews:
   - guids:
     - fa7e07c843c1b4544aaca761af55674d
@@ -303,7 +303,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 9095740295467029667}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 5
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -341,7 +341,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 13383179260726529}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 3
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
