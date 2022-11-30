@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class StatsViewer : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _stageText;
-    [SerializeField] private TMP_Text _goldText;
-    [SerializeField] private TMP_Text _killedText;
-    [SerializeField] private TMP_Text _healthText;
-    [SerializeField] private TMP_Text _speedText;
-    
+    [SerializeField] private TMP_Text _currentLevel;
+    [SerializeField] private TMP_Text _totalCoins;    
+    [SerializeField] private TMP_Text _healthLevel;
+    [SerializeField] private TMP_Text _speedLevel;
+    [SerializeField] private TMP_Text _radiusLevel;
+
     public void Init()
     {
-        _stageText.text = $"Level: {DataHandler.Instance.GetSavedLevel()}";
+        _currentLevel.text = DataHandler.Instance.GetSavedLevel().ToString();
 
-        _goldText.text = $"Money: {DataHandler.Instance.GetSavedTotalMoney()}";
+        _totalCoins.text = DataHandler.Instance.GetSavedTotalMoney().ToString();
 
-        _killedText.text = $"Killed: {DataHandler.Instance.GetSavedKills()}";
+        _healthLevel.text = DataHandler.Instance.GetSavedHealthSkill().ToString();
 
-        _healthText.text = $"Health level: {DataHandler.Instance.GetSavedHealthSkill()}";
+        _speedLevel.text = DataHandler.Instance.GetSavedSpeedSkill().ToString();
 
-        _speedText.text = $"Speed level: {DataHandler.Instance.GetSavedSpeedSkill()}";
+        //_radiusLevel.text = DataHandler.Instance.GetSavedSpeedSkill().ToString();
     }
 }
