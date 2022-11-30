@@ -9,7 +9,6 @@ public class SettingPanel : MonoBehaviour
     [SerializeField] private Slider _masterVolumeSlider;
     [SerializeField] private Slider _musicVolumeSlider;
     [SerializeField] private Slider _effectsVolumeSlider;
-    [SerializeField] private Button _closeButton;
     [SerializeField] private AudioMixer _audio;
 
     private const string Master = "MasterVolume";
@@ -19,34 +18,26 @@ public class SettingPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        _closeButton.onClick.AddListener(OnCloseClick);
-        _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
-        _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
-        _effectsVolumeSlider.onValueChanged.AddListener(OnEffectsVolumeChanged);
+        //_masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+        //_musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        //_effectsVolumeSlider.onValueChanged.AddListener(OnEffectsVolumeChanged);
     }
 
     private void OnDisable()
     {
-        _closeButton.onClick.RemoveListener(OnCloseClick);
-        _masterVolumeSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
-        _musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);
-        _effectsVolumeSlider.onValueChanged.RemoveListener(OnEffectsVolumeChanged);
+        //_masterVolumeSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
+        //_musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);
+        //_effectsVolumeSlider.onValueChanged.RemoveListener(OnEffectsVolumeChanged);
     }
 
-    public void Init()
+    public void Start()
     {
-        _masterVolumeSlider.value = DataHandler.Instance.GetSavedMasterVolume();
-        _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
-        _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
-        OnMasterVolumeChanged(_masterVolumeSlider.value);
-        OnMusicVolumeChanged(_musicVolumeSlider.value);
-        OnEffectsVolumeChanged(_effectsVolumeSlider.value);
-    }
-
-    private void OnCloseClick()
-    {
-        DataHandler.Instance.SaveAllStats();
-        gameObject.SetActive(false);
+        //_masterVolumeSlider.value = DataHandler.Instance.GetSavedMasterVolume();
+        //_musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
+        //_effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
+        //OnMasterVolumeChanged(_masterVolumeSlider.value);
+        //OnMusicVolumeChanged(_musicVolumeSlider.value);
+        //OnEffectsVolumeChanged(_effectsVolumeSlider.value);
     }
 
     private void OnMasterVolumeChanged(float value)

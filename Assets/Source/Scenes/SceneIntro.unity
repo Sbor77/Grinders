@@ -1449,7 +1449,6 @@ MonoBehaviour:
   _masterVolumeSlider: {fileID: 0}
   _musicVolumeSlider: {fileID: 0}
   _effectsVolumeSlider: {fileID: 0}
-  _closeButton: {fileID: 866934153}
   _audio: {fileID: 24100000, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
 --- !u!1 &660256908
 GameObject:
@@ -2479,6 +2478,7 @@ GameObject:
   - component: {fileID: 1171978149}
   - component: {fileID: 1171978151}
   - component: {fileID: 1171978150}
+  - component: {fileID: 1171978152}
   m_Layer: 5
   m_Name: StartScreen
   m_TagString: Untagged
@@ -2550,6 +2550,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171978148}
   m_CullTransparentMesh: 1
+--- !u!114 &1171978152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171978148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53d6b71d38ffc44e8746f29c5d5d459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _masterVolumeSlider: {fileID: 0}
+  _musicVolumeSlider: {fileID: 0}
+  _effectsVolumeSlider: {fileID: 0}
+  _audio: {fileID: 0}
 --- !u!1 &1213370293
 GameObject:
   m_ObjectHideFlags: 0
@@ -3879,6 +3895,7 @@ GameObject:
   - component: {fileID: 1678371819}
   - component: {fileID: 1678371821}
   - component: {fileID: 1678371820}
+  - component: {fileID: 1678371822}
   m_Layer: 5
   m_Name: SliderPanel
   m_TagString: Untagged
@@ -3943,6 +3960,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678371818}
   m_CullTransparentMesh: 1
+--- !u!114 &1678371822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678371818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53d6b71d38ffc44e8746f29c5d5d459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _masterVolumeSlider: {fileID: 1608120833}
+  _musicVolumeSlider: {fileID: 1213370295}
+  _effectsVolumeSlider: {fileID: 148567066}
+  _audio: {fileID: 24100000, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
 --- !u!1 &1773549115
 GameObject:
   m_ObjectHideFlags: 0
@@ -4653,8 +4686,6 @@ MonoBehaviour:
   _newGameButton: {fileID: 486874579}
   _continueButton: {fileID: 844173558}
   _leaderboardButton: {fileID: 918383401}
-  _settingsButton: {fileID: 1548340779}
-  _settings: {fileID: 595392769}
   _loaderPanel: {fileID: 1977409682028905153}
 --- !u!82 &2134280543
 AudioSource:
