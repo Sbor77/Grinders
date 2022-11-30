@@ -5438,7 +5438,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh58382
+  m_Name: pb_Mesh129456
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12169,18 +12169,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelKills
       objectReference: {fileID: 0}
-    - target: {fileID: 7591805512055030462, guid: 3f8a0d0e9438341419806afff8abf0b4, type: 3}
-      propertyPath: entries.Array.data[0].Text
-      value: "\u0423\u043D\u0438\u0447\u0442\u043E\u0436\u0435\u043D\u043E \u0432\u0440\u0430\u0433\u043E\u0432"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7591805512055030462, guid: 3f8a0d0e9438341419806afff8abf0b4, type: 3}
-      propertyPath: entries.Array.data[1].Text
-      value: Enemies killed
-      objectReference: {fileID: 0}
-    - target: {fileID: 7591805512055030462, guid: 3f8a0d0e9438341419806afff8abf0b4, type: 3}
-      propertyPath: entries.Array.data[2].Text
-      value: "D\xFC\u015Fmanlar \xF6ld\xFCr\xFCld\xFC"
-      objectReference: {fileID: 0}
     - target: {fileID: 7591805512055030463, guid: 3f8a0d0e9438341419806afff8abf0b4, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -12294,13 +12282,6 @@ PrefabInstance:
     - target: {fileID: 3603230577937597144, guid: 6423c7acbe949884baf39e3e746e023e, type: 3}
       propertyPath: m_Name
       value: TargetGuides
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603230577937597146, guid: 6423c7acbe949884baf39e3e746e023e, type: 3}
-      propertyPath: entries.Array.data[0].Text
-      value: "\u0412\u0410\u0428\u0410 \u0426\u0415\u041B\u042C - \u0441\u043E\u0431\u0440\u0430\u0442\u044C
-        \u043C\u043E\u043D\u0435\u0442\u043A\u0438 \u0438\u0437 \u044F\u0449\u0438\u043A\u043E\u0432
-        \u0438 \u0443\u0431\u0438\u0442\u044C \u043D\u0430\u0439\u0437\u043B\u0438\u0432\u044B\u0445
-        \u0432\u0440\u0430\u0433\u043E\u0432"
       objectReference: {fileID: 0}
     - target: {fileID: 3603230577937597147, guid: 6423c7acbe949884baf39e3e746e023e, type: 3}
       propertyPath: m_RootOrder
@@ -14055,15 +14036,6 @@ PrefabInstance:
     - target: {fileID: 7288856284498477929, guid: 423f3278c351f294a9c964985db7cc98, type: 3}
       propertyPath: m_Name
       value: BigboxGuides
-      objectReference: {fileID: 0}
-    - target: {fileID: 7288856284498477935, guid: 423f3278c351f294a9c964985db7cc98, type: 3}
-      propertyPath: entries.Array.data[0].Text
-      value: "\u041A\u0430\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E
-        \u043C\u043E\u043D\u0435\u0442\u043E\u043A \u0438 \u0443\u0431\u0438\u0442\u044B\u0445
-        \u0432\u0440\u0430\u0433\u043E\u0432 \u0434\u043E\u0441\u0442\u0438\u0433\u043D\u0435\u0442
-        \u0437\u0430\u0434\u0430\u043D\u043D\u044B\u0445 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0439
-        \u0432\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u0434\u043E\u0441\u0442\u0443\u043F
-        \u043A \u0411\u041E\u041B\u042C\u0428\u041E\u041C\u0423 \u044F\u0449\u0438\u043A\u0443"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 423f3278c351f294a9c964985db7cc98, type: 3}
