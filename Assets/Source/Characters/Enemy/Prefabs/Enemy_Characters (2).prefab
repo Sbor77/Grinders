@@ -124,7 +124,7 @@ MonoBehaviour:
     m_Bits: 128
   _health: 7
   _delayDieHiding: 3
-  _delayStartStunEffect: 1.5
+  _delayStartStunEffect: 0.5
   _stunEffectDuration: 3
   _takeDamageSFX: {fileID: 897922176283170088}
   _dieEffect: {fileID: 4591382315737173827}
