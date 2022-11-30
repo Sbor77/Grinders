@@ -243,7 +243,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh190424
+  m_Name: pb_Mesh33648
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1740,7 +1740,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh190652
+  m_Name: pb_Mesh33884
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2359,7 +2359,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh189828
+  m_Name: pb_Mesh33038
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2748,7 +2748,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh146734
+  m_Name: pb_Mesh33346
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3774,6 +3774,8 @@ GameObject:
   - component: {fileID: 612509117}
   - component: {fileID: 612509116}
   - component: {fileID: 612509115}
+  - component: {fileID: 612509120}
+  - component: {fileID: 612509119}
   m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
@@ -4274,6 +4276,32 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!65 &612509119
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612509113}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 25.030657, y: 0.8597425, z: 38.745655}
+  m_Center: {x: -7.5166826, y: 0, z: -10.25058}
+--- !u!65 &612509120
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612509113}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 27.819027, y: 0.8597425, z: 38.783356}
+  m_Center: {x: -22.39049, y: 0, z: -48.98526}
 --- !u!4 &627567342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3729533492151013227, guid: 87b78a1c281471546b6de5c0ce2d90d3, type: 3}
@@ -4482,8 +4510,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3718956, y: 2.2663994, z: 0.4912703}
-  m_Center: {x: 1.9999986, y: 1.1331997, z: 0.0000001862645}
+  m_Size: {x: 1.970509, y: 5.936552, z: 0.4912703}
+  m_Center: {x: 2.7006917, y: -0.70187664, z: 0.000000011756109}
 --- !u!1001 &654776513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6210,7 +6238,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh189996
+  m_Name: pb_Mesh33206
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6472,8 +6500,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.026113, y: 2.2663994, z: 0.49127197}
-  m_Center: {x: -3.1287036, y: 1.1331997, z: 0}
+  m_Size: {x: 14.026113, y: 6.1112986, z: 0.42504156}
+  m_Center: {x: -3.1287036, y: -0.7892499, z: -0.03311521}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -7037,8 +7065,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.4732914, y: 4.1549625, z: 0.48940945}
-  m_Center: {x: 1.99378, y: -1.0384202, z: 0}
+  m_Size: {x: 3.4732914, y: 4.9569407, z: 0.48940945}
+  m_Center: {x: 1.99378, y: -1.4394093, z: -0.000000004985556}
 --- !u!114 &1051662875 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1000149713991367706, guid: 0c6dcf47973be9c45ac3e4bde9b9e938, type: 3}
@@ -8061,8 +8089,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 24.201399, y: 2.2663994, z: 0.49127102}
-  m_Center: {x: -8.132939, y: 1.1331997, z: -0.00000047683716}
+  m_Size: {x: 24.201399, y: 6.0024285, z: 0.49127102}
+  m_Center: {x: -8.132939, y: -0.7348149, z: -0.00000047683716}
 --- !u!4 &1218902937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3637789640338485385, guid: 231ddd1cd2a280649be2fc56fac8ea31, type: 3}
@@ -9666,7 +9694,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh146354
+  m_Name: pb_Mesh33014
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11973,8 +12001,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 37.247425, y: 2.2663994, z: 0.4912759}
-  m_Center: {x: 8.66551, y: 1.1331997, z: -0.000001946809}
+  m_Size: {x: 37.247425, y: 5.998671, z: 0.4912759}
+  m_Center: {x: 8.66551, y: -0.73293614, z: -0.000001946809}
 --- !u!4 &1889935822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 581417263079681496, guid: 22e41c6e3cc018545b1ad81303d2792a, type: 3}
@@ -13568,8 +13596,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.5146775, y: 2.905087, z: 0.51948833}
-  m_Center: {x: 2.011272, y: -0.18948293, z: 0.014109135}
+  m_Size: {x: 3.5146778, y: 5.1045794, z: 0.51948833}
+  m_Center: {x: 2.011272, y: -1.2892292, z: 0.014109135}
 --- !u!1001 &1732129146283969190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14831,8 +14859,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 37.942413, y: 2.2663994, z: 0.4912759}
-  m_Center: {x: 8.884892, y: 1.1331997, z: -0.0000019395093}
+  m_Size: {x: 37.942413, y: 6.0928926, z: 0.4912759}
+  m_Center: {x: 8.8848915, y: -0.78004694, z: -0.000001939509}
 --- !u!4 &8729489369976662588
 Transform:
   m_ObjectHideFlags: 0
