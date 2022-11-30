@@ -455,7 +455,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 69.25
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: NewGame
-  FallbackText: 
+  FallbackText: "\u041D\u041E\u0412\u0410\u042F \u0418\u0413\u0420\u0410"
 --- !u!1 &257059260
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4308103, y: 0.18047412}
   m_AnchorMax: {x: 0.5714426, y: 0.39974448}
-  m_AnchoredPosition: {x: -1, y: -1.85495}
+  m_AnchoredPosition: {x: -1, y: -1.8549194}
   m_SizeDelta: {x: 1, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &257059262
@@ -989,7 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: LeaderBoard
-  FallbackText: 
+  FallbackText: "\u041B\u0438\u0434\u0435\u0440\u044B"
 --- !u!1 &486874577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.063, y: 0.30612957}
   m_AnchorMax: {x: 0.4011898, y: 0.5}
-  m_AnchoredPosition: {x: 0.25299072, y: -0.20095825}
+  m_AnchoredPosition: {x: 0.25305176, y: -0.20095825}
   m_SizeDelta: {x: -1.9998169, y: 0.4019}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &486874579
@@ -1503,7 +1503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59862065, y: 0.081709854}
   m_AnchorMax: {x: 0.9371265, y: 0.2761831}
-  m_AnchoredPosition: {x: 0.000030517578, y: -0.20111084}
+  m_AnchoredPosition: {x: 0, y: -0.20117188}
   m_SizeDelta: {x: -0.000091553, y: 0.4022}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &866934153
@@ -1625,7 +1625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59862065, y: 0.30612957}
   m_AnchorMax: {x: 0.9371265, y: 0.5}
-  m_AnchoredPosition: {x: -0.56900024, y: 0.20095825}
+  m_AnchoredPosition: {x: -0.5689697, y: 0.20095825}
   m_SizeDelta: {x: -1.1292725, y: 0.40190125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &918383401
@@ -1893,12 +1893,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2333,7 +2333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59862065, y: 0.081709854}
   m_AnchorMax: {x: 0.9371265, y: 0.2761831}
-  m_AnchoredPosition: {x: -0.56900024, y: -0.20092773}
+  m_AnchoredPosition: {x: -0.5689697, y: -0.20092773}
   m_SizeDelta: {x: -1.1292725, y: 0.40190125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548340779
@@ -2531,7 +2531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.3659973, y: 4.7613983}
+  m_AnchoredPosition: {x: 1.3660278, y: 4.7613983}
   m_SizeDelta: {x: -40.3731, y: -38.3293}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1674588068
@@ -2717,7 +2717,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 69.4
+  m_fontSize: 53.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2780,7 +2780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: Continue
-  FallbackText: 
+  FallbackText: "\u041F\u0420\u041E\u0414\u041E\u041B\u0416\u0418\u0422\u042C"
 --- !u!1 &1987671874
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,7 +2867,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 59.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2930,7 +2930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: Settings
-  FallbackText: 
+  FallbackText: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
 --- !u!1 &2124232253
 GameObject:
   m_ObjectHideFlags: 0
