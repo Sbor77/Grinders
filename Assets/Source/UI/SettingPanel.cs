@@ -12,7 +12,9 @@ public class SettingPanel : MonoBehaviour
     [SerializeField] private Button _closeButton;
     [SerializeField] private AudioMixer _audio;
 
-    private const string Volume = "MasterVolume";
+    private const string Master = "MasterVolume";
+    private const string Music = "MusicVolume";
+    private const string Effects = "EffectsVolume";
     private const int multiplier = 20;
 
     private void OnEnable()
@@ -34,7 +36,11 @@ public class SettingPanel : MonoBehaviour
     public void Init()
     {
         _masterVolumeSlider.value = DataHandler.Instance.GetSavedMasterVolume();
+        _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
+        _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
         OnMasterVolumeChanged(_masterVolumeSlider.value);
+        OnMusicVolumeChanged(_musicVolumeSlider.value);
+        OnEffectsVolumeChanged(_effectsVolumeSlider.value);
     }
 
     private void OnCloseClick()
@@ -46,21 +52,21 @@ public class SettingPanel : MonoBehaviour
     private void OnMasterVolumeChanged(float value)
     {
         float volumeValue = Mathf.Log10(value) * multiplier;
-        _audio.SetFloat(Volume, volumeValue);
+        _audio.SetFloat(Master, volumeValue);
         DataHandler.Instance.SaveMasterVolume(value);
     }
 
     private void OnMusicVolumeChanged(float value)
     {
         float volumeValue = Mathf.Log10(value) * multiplier;
-        //_audio.SetFloat(Volume, volumeValue);
+        _audio.SetFloat(Music, volumeValue);
         DataHandler.Instance.SaveMusicVolume(value);
     }
 
     private void OnEffectsVolumeChanged(float value)
     {
         float volumeValue = Mathf.Log10(value) * multiplier;
-        //_audio.SetFloat(Volume, volumeValue);
+        _audio.SetFloat(Effects, volumeValue);
         DataHandler.Instance.SaveEffectsVolume(value);
     }
 }
