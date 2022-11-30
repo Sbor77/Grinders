@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour
 {
-    [SerializeField] private Slider _masterVolumeSlider;
+    [SerializeField] private Toggle _masterVolumeToggle;
     [SerializeField] private Slider _musicVolumeSlider;
     [SerializeField] private Slider _effectsVolumeSlider;
     [SerializeField] private AudioMixer _audio;
@@ -15,50 +15,83 @@ public class SettingPanel : MonoBehaviour
     private const string Music = "MusicVolume";
     private const string Effects = "EffectsVolume";
     private const int multiplier = 20;
+    private float maxVolume = 1;
+    private float minVolume = -80;
 
     private void OnEnable()
     {
-        _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+        _masterVolumeToggle.onValueChanged.AddListener(OnMasterVolumeChanged);
         _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
         _effectsVolumeSlider.onValueChanged.AddListener(OnEffectsVolumeChanged);
     }
 
     private void OnDisable()
     {
-        _masterVolumeSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
+        _masterVolumeToggle.onValueChanged.RemoveListener(OnMasterVolumeChanged);
         _musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);
         _effectsVolumeSlider.onValueChanged.RemoveListener(OnEffectsVolumeChanged);
     }
 
     public void Start()
     {
-        _masterVolumeSlider.value = DataHandler.Instance.GetSavedMasterVolume();
+        _masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == 0 ? false : true;
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
         _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
         
-        OnMasterVolumeChanged(_masterVolumeSlider.value);
+        OnMasterVolumeChanged(_masterVolumeToggle.isOn);
         OnMusicVolumeChanged(_musicVolumeSlider.value);
         OnEffectsVolumeChanged(_effectsVolumeSlider.value);
     }
 
-    private void OnMasterVolumeChanged(float value)
-    {
-        float volumeValue = Mathf.Log10(value) * multiplier;
-        _audio.SetFloat(Master, volumeValue);
-        DataHandler.Instance.SaveMasterVolume(value);
+    private void OnMasterVolumeChanged(bool value)
+    {        
+        float volume = minVolume;
+
+        if (value)
+        {
+            volume = maxVolume;
+
+            ActivateSlider(_musicVolumeSlider);
+
+            ActivateSlider(_effectsVolumeSlider);
+        }
+        else
+        {
+            DeactivateSlider(_musicVolumeSlider);
+
+            DeactivateSlider(_effectsVolumeSlider);
+        }
+
+        _audio.SetFloat(Master, volume);
+        
+        DataHandler.Instance.SaveMasterVolume(volume);
     }
 
     private void OnMusicVolumeChanged(float value)
     {
         float volumeValue = Mathf.Log10(value) * multiplier;
+
         _audio.SetFloat(Music, volumeValue);
+
         DataHandler.Instance.SaveMusicVolume(value);
     }
 
     private void OnEffectsVolumeChanged(float value)
     {
         float volumeValue = Mathf.Log10(value) * multiplier;
+
         _audio.SetFloat(Effects, volumeValue);
+
         DataHandler.Instance.SaveEffectsVolume(value);
+    }
+
+    private void DeactivateSlider(Slider slider)
+    {
+        slider.interactable = false;        
+    }
+
+    private void ActivateSlider(Slider slider)
+    {
+        slider.interactable = true;
     }
 }
