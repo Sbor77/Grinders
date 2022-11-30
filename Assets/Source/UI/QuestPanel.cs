@@ -20,6 +20,7 @@ public class QuestPanel : MonoBehaviour
     [SerializeField] private TMP_Text _bigboxToCrush;
     [Space]
     [SerializeField] private TutorialPanel _tutorialPanel;
+    [SerializeField] private GameObject _infoPanel;
 
     public int NeedCoinCollected => _needCoinCollected;
 
@@ -32,7 +33,7 @@ public class QuestPanel : MonoBehaviour
 
         _continueButton.onClick.AddListener(StartGame);
 
-        if (_tutorialPanel != null)        
+        if (_tutorialPanel != null)
             _tutorialPanel.IsEnded += OnTutorialIsEnded;        
     }
 
@@ -49,9 +50,15 @@ public class QuestPanel : MonoBehaviour
         Time.timeScale = 0;
 
         if (_tutorialPanel != null)
+        {
+            DeactivateInfopanel();
+
             _tutorialPanel.gameObject.SetActive(true);
-        else        
+        }
+        else
+        {
             ShowMissionTargets();
+        }
     }
 
     private void OnTutorialIsEnded()
@@ -68,6 +75,8 @@ public class QuestPanel : MonoBehaviour
 
     private void ShowMissionTargets()
     {
+        ActivateInfopanel();
+
         if (_needCoinCollected > 0)
         {
             _coinsToCollect.gameObject.SetActive(true);
@@ -94,7 +103,19 @@ public class QuestPanel : MonoBehaviour
 
         _cameraHandler.ActivateStartScenario();
     }
+    private void ActivateInfopanel()
+    {
+        _infoPanel.gameObject.SetActive(true);
+    }
+
+    private void DeactivateInfopanel()
+    {
+        _infoPanel.gameObject.SetActive(false);
+    }
+
 }
+
+
 
 public class QuestInfo
 {
