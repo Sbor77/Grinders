@@ -13,7 +13,9 @@ public class DataHandler : MonoBehaviour
     private string _killsKey = "Kills";
     private string _healthSkillKey = "HealthSkill";    
     private string _speedSkillKey = "SpeedSkill";
-    private string _volume = "MasterVolume";
+    private string _masterVolume = "MasterVolume";
+    private string _musicVolume = "MusicVolume";
+    private string _effectsVolume = "EffectsVolume";
 
     public static DataHandler Instance { get; private set; }
 
@@ -92,12 +94,28 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_speedSkillKey, speedSkill);
     }
 
-    public void SaveVolume(float value)
+    public void SaveMasterVolume(float value)
     {
         if (value >= 0 && value <= 1)
-            PlayerPrefs.SetFloat(_volume, value);
+            PlayerPrefs.SetFloat(_masterVolume, value);
         else
-            PlayerPrefs.SetFloat(_volume, 1);
+            PlayerPrefs.SetFloat(_masterVolume, 1);
+    }
+
+    public void SaveMusicVolume(float value)
+    {
+        if (value >= 0 && value <= 1)
+            PlayerPrefs.SetFloat(_musicVolume, value);
+        else
+            PlayerPrefs.SetFloat(_musicVolume, 1);
+    }
+
+    public void SaveEffectsVolume(float value)
+    {
+        if (value >= 0 && value <= 1)
+            PlayerPrefs.SetFloat(_effectsVolume, value);
+        else
+            PlayerPrefs.SetFloat(_effectsVolume, 1);
     }
 
     public void SaveAllStats()
@@ -140,17 +158,33 @@ public class DataHandler : MonoBehaviour
         return PlayerPrefs.GetInt(_speedSkillKey);
     }
 
-    public float GetSavedVolume()
+    public float GetSavedMasterVolume()
     {
-        if (PlayerPrefs.HasKey(_volume))
-            return PlayerPrefs.GetFloat(_volume);
+        if (PlayerPrefs.HasKey(_masterVolume))
+            return PlayerPrefs.GetFloat(_masterVolume);
+        else
+            return 1;
+    }
+
+    public float GetSavedMusicVolume()
+    {
+        if (PlayerPrefs.HasKey(_musicVolume))
+            return PlayerPrefs.GetFloat(_musicVolume);
+        else
+            return 1;
+    }
+
+    public float GetSavedEffectsVolume()
+    {
+        if (PlayerPrefs.HasKey(_effectsVolume))
+            return PlayerPrefs.GetFloat(_effectsVolume);
         else
             return 1;
     }
 
 
     #region Import WebGL for check mobile platform
-    
+
     [DllImport("__Internal")]
     private static extern bool IsMobilePlatform();
 
