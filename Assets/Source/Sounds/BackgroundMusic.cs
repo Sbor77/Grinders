@@ -6,7 +6,7 @@ public class BackgroundMusic : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private List<AudioClip> _playList;    
-
+    
     public static BackgroundMusic Instance { get; private set; }
 
     public bool IsPlaying { get; private set; }
@@ -31,38 +31,32 @@ public class BackgroundMusic : MonoBehaviour
     {
         IsPlaying = true;
 
-        int clipIndex = DataHandler.Instance.GetSavedLevel();
+        int clipIndex = DataHandler.Instance.GetSavedLevel();        
 
         StartCoroutine(PlayMusicFrom(clipIndex));
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-
-        }
-    }
-
     private IEnumerator PlayMusicFrom (int clipIndex)
     {
-        bool firstCycle = true;
-
         yield return null;
 
         while (IsPlaying)
         {
+            bool isFirstCycle = true;
+
             for (int i = 0; i < _playList.Count; i++)
             {
-                if (i == clipIndex && firstCycle)
+                if (isFirstCycle)
                 {
-                    _audioSource.clip = _playList[clipIndex];
+                    _audioSource.clip = _playList[clipIndex];                    
 
-                    firstCycle = false;
+                    i = clipIndex;
+
+                    isFirstCycle = false;
                 }
                 else
                 {
-                    _audioSource.clip = _playList[i];
+                    _audioSource.clip = _playList[i];                    
                 }
                 
                 _audioSource.Play();
