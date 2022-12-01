@@ -20023,8 +20023,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3564541852509824602}
   - component: {fileID: 7464689140943141920}
-  - component: {fileID: 5349558373231175460}
   - component: {fileID: 555171125842504268}
+  - component: {fileID: 5349558373231175460}
   - component: {fileID: 6948732013236413756}
   - component: {fileID: 8321077868292399479}
   - component: {fileID: 4342994289562833424}
@@ -20081,6 +20081,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &555171125842504268
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196258919920450784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &5349558373231175460
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20103,20 +20117,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &555171125842504268
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4196258919920450784}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6948732013236413756
 MonoBehaviour:
   m_ObjectHideFlags: 0

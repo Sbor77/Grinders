@@ -145,7 +145,7 @@ public class Box : MonoBehaviour
 
     public void ShowActiveBox()
     {
-        _boxCollider.enabled = false;
+        _boxCollider.enabled = true;
 
         _meshRenderer.material = _defaultMaterial;     
     }

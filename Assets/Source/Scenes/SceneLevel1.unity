@@ -5449,7 +5449,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh338018
+  m_Name: pb_Mesh346038
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8423,7 +8423,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0412\u0410\u0428\u0410 \u0426\u0415\u041B\u042C - \u0441\u043E\u0431\u0440\u0430\u0442\u044C
     \u043C\u043E\u043D\u0435\u0442\u043A\u0438 \u0438\u0437 \u044F\u0449\u0438\u043A\u043E\u0432
-    \u0438 \u0443\u0431\u0438\u0442\u044C \u043D\u0430\u0439\u0437\u043B\u0438\u0432\u044B\u0445
+    \u0438 \u0443\u0431\u0438\u0442\u044C \u043D\u0430\u0437\u043E\u0439\u043B\u0438\u0432\u044B\u0445
     \u0432\u0440\u0430\u0433\u043E\u0432"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -12345,6 +12345,13 @@ PrefabInstance:
     - target: {fileID: 3603230577937597144, guid: 6423c7acbe949884baf39e3e746e023e, type: 3}
       propertyPath: m_Name
       value: TargetGuides
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603230577937597146, guid: 6423c7acbe949884baf39e3e746e023e, type: 3}
+      propertyPath: entries.Array.data[0].Text
+      value: "\u0412\u0410\u0428\u0410 \u0426\u0415\u041B\u042C - \u0441\u043E\u0431\u0440\u0430\u0442\u044C
+        \u043C\u043E\u043D\u0435\u0442\u043A\u0438 \u0438\u0437 \u044F\u0449\u0438\u043A\u043E\u0432
+        \u0438 \u0443\u0431\u0438\u0442\u044C \u043D\u0430\u0437\u043E\u0439\u043B\u0438\u0432\u044B\u0445
+        \u0432\u0440\u0430\u0433\u043E\u0432"
       objectReference: {fileID: 0}
     - target: {fileID: 3603230577937597147, guid: 6423c7acbe949884baf39e3e746e023e, type: 3}
       propertyPath: m_RootOrder
