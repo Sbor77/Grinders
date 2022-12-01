@@ -116,8 +116,10 @@ public class AreaAttack : MonoBehaviour
             _decalEffect.transform.localScale = Vector3.one * _radius;
             _decalEffect.gameObject.SetActive(true);
         });
+        animation.AppendInterval(_explosionEffect.main.duration);
+        animation.AppendCallback(() => StunTargets());
 
-        animation.AppendInterval(_chargeDuration + _explosionEffect.main.duration);
+        animation.AppendInterval(_chargeDuration );
         animation.AppendCallback(() =>
         {
             _explosionEffect.gameObject.SetActive(false);

@@ -18,16 +18,14 @@ public class DataHandler : MonoBehaviour
     private string _masterVolume = "MasterVolume";
     private string _musicVolume = "MusicVolume";
     private string _effectsVolume = "EffectsVolume";
-
     
-
     public static DataHandler Instance { get; private set; }
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
