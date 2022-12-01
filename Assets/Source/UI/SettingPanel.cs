@@ -14,9 +14,9 @@ public class SettingPanel : MonoBehaviour
     private const string Master = "MasterVolume";
     private const string Music = "MusicVolume";
     private const string Effects = "EffectsVolume";
-    private const int multiplier = 20;
-    private float maxVolume = 1;
-    private float minVolume = -80;
+    private const int Multiplier = 20;
+    private const float MaxVolume = 0;
+    private const float MinVolume = -80;
 
     private void OnEnable()
     {
@@ -45,11 +45,11 @@ public class SettingPanel : MonoBehaviour
 
     private void OnMasterVolumeChanged(bool value)
     {        
-        float volume = minVolume;
+        float volume = MinVolume;
 
         if (value)
         {
-            volume = maxVolume;
+            volume = MaxVolume;
 
             ActivateSlider(_musicVolumeSlider);
 
@@ -69,7 +69,7 @@ public class SettingPanel : MonoBehaviour
 
     private void OnMusicVolumeChanged(float value)
     {
-        float volumeValue = Mathf.Log10(value) * multiplier;
+        float volumeValue = Mathf.Log10(value) * Multiplier;
 
         _audio.SetFloat(Music, volumeValue);
 
@@ -78,7 +78,7 @@ public class SettingPanel : MonoBehaviour
 
     private void OnEffectsVolumeChanged(float value)
     {
-        float volumeValue = Mathf.Log10(value) * multiplier;
+        float volumeValue = Mathf.Log10(value) * Multiplier;
 
         _audio.SetFloat(Effects, volumeValue);
 

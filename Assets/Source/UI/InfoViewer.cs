@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class InfoViewer : MonoBehaviour
@@ -13,33 +14,40 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private TMP_Text _bigBoxText;
     [SerializeField] private TMP_Text _KillsText;
-    [SerializeField] private Image _attackCooldownTimer;
+//    [SerializeField] private Image _attackCooldownTimer;
     [SerializeField] private Image _massKillButtonCooldown;
+    [SerializeField] private Image _soundImage;
+    [SerializeField] private Sprite _volumeOn;
+    [SerializeField] private Sprite _volumeOff;
+    [SerializeField] private AudioMixer _audio;
 
     private Movement _movement;
+    private Button _soundButton;
     private int _questCoinCollected;
     private int _questEnemyKills;
     private bool _questbigBoxDestroyed;
     private float _maxHealth;
     private float _currentHealth;
     private QuestInfo _missonConditions;
-    private Coroutine _cooldownCoroutine;
+//    private Coroutine _cooldownCoroutine;
 
     public event Action IsCurrentConditionsChanged;
 
     public QuestInfo MissionConditions => _missonConditions;
-
     public float CurrentHealth { get; private set; }
-
     public int CurrentKills { get; private set; }
-
     public int CurrentCoins { get; private set; }
-
     public bool IsBigboxDestroyed { get; private set; }
+
+    private const string Master = "MasterVolume";
+    private const float MaxValue = 0f;
+    private const float MinValue = -80f;
+
 
     private void Awake()
     {
         _movement = _player.GetComponent<Movement>();
+        _soundButton = _soundImage.GetComponent<Button>();
     }
 
     private void OnEnable()
@@ -51,10 +59,10 @@ public class InfoViewer : MonoBehaviour
         _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
 
         _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
+        _soundButton.onClick.AddListener(OnChangedSoundVolume);
+        //_movement.StartAttackCooldown += OnStartCooldown;
 
-        _movement.StartAttackCooldown += OnStartCooldown;
-
-        _movement.ChangedState += OnStartAttack;
+        //_movement.ChangedState += OnStartAttack;
         _movement.ChangedMassAttackCooldown += OnChangedMassCooldown;
     }
 
@@ -63,6 +71,8 @@ public class InfoViewer : MonoBehaviour
         _maxHealth = _player.MaxHealth;
 
         _currentHealth = _maxHealth; // load in PlayerPrefs
+
+        SetSoundIcon(DataHandler.Instance.GetSavedMasterVolume());
 
         _healthBarSlider.maxValue = _maxHealth;
 
@@ -78,12 +88,11 @@ public class InfoViewer : MonoBehaviour
         _player.ChangedCoin -= OnChangedPlayerCoins;
 
         _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
+        _soundButton.onClick.RemoveListener(OnChangedSoundVolume);
+        //_movement.StartAttackCooldown -= OnStartCooldown;
 
-        _movement.StartAttackCooldown -= OnStartCooldown;
-
-        _movement.ChangedState -= OnStartAttack;
+        //_movement.ChangedState -= OnStartAttack;
         _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
-
     }
 
     public void SetQuestCollected(QuestInfo conditions)
@@ -99,6 +108,28 @@ public class InfoViewer : MonoBehaviour
         _missonConditions = conditions;
     }
 
+    private void OnChangedSoundVolume()
+    {
+        _audio.GetFloat(Master, out float volume);
+
+        if (volume == MaxValue)
+            volume = MinValue;
+        else
+            volume = MaxValue;
+
+        SetSoundIcon(volume);
+        _audio.SetFloat(Master, volume);
+        DataHandler.Instance.SaveMasterVolume(volume);
+    }
+
+    private void SetSoundIcon(float volume)
+    {
+        if (volume == MaxValue)
+            _soundImage.sprite = _volumeOn;
+        else
+            _soundImage.sprite = _volumeOff;
+    }
+
     private void OnChangedMassCooldown(float current, int max)
     {
         float value;
@@ -106,29 +137,29 @@ public class InfoViewer : MonoBehaviour
         _massKillButtonCooldown.fillAmount = 1 - value / max;
     }
 
-    private void OnStartAttack(State state, bool mass)
-    {
-        if (state == State.Attack)
-            _attackCooldownTimer.fillAmount = 0;
-    }
+    //private void OnStartAttack(State state, bool mass)
+    //{
+    //    if (state == State.Attack)
+    //        _attackCooldownTimer.fillAmount = 0;
+    //}
 
-    private void OnStartCooldown(float delay)
-    {
-        _cooldownCoroutine = StartCoroutine(Cooldown(delay));
+    //private void OnStartCooldown(float delay)
+    //{
+    //    _cooldownCoroutine = StartCoroutine(Cooldown(delay));
 
-    }
+    //}
 
-    private IEnumerator Cooldown(float maxValue)
-    {
-        float value = 0;
-        while (value < maxValue)
-        {
-            value = Mathf.Clamp(value + Time.deltaTime, 0, maxValue);
-            _attackCooldownTimer.fillAmount = value / maxValue;
-            yield return null;
-        }
-        yield return null;
-    }
+    //private IEnumerator Cooldown(float maxValue)
+    //{
+    //    float value = 0;
+    //    while (value < maxValue)
+    //    {
+    //        value = Mathf.Clamp(value + Time.deltaTime, 0, maxValue);
+    //        _attackCooldownTimer.fillAmount = value / maxValue;
+    //        yield return null;
+    //    }
+    //    yield return null;
+    //}
 
     private void SetStartConditionsText()
     {

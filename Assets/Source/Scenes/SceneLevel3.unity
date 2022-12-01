@@ -5476,6 +5476,7 @@ GameObject:
   - component: {fileID: 754505199}
   - component: {fileID: 754505198}
   - component: {fileID: 754505197}
+  - component: {fileID: 754505200}
   m_Layer: 7
   m_Name: wall (15)
   m_TagString: Untagged
@@ -5561,6 +5562,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754505195}
   m_Mesh: {fileID: 4300018, guid: 9969846f978fd1b4e9627fd7200715ee, type: 3}
+--- !u!208 &754505200
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754505195}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.97400004, y: 0.049000002, z: 0.47200003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0.47200003}
+  m_TimeToStationary: 0.5
 --- !u!1001 &757133118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11940,6 +11957,7 @@ GameObject:
   - component: {fileID: 1484537059}
   - component: {fileID: 1484537058}
   - component: {fileID: 1484537057}
+  - component: {fileID: 1484537060}
   m_Layer: 7
   m_Name: wall (16)
   m_TagString: Untagged
@@ -12025,6 +12043,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484537055}
   m_Mesh: {fileID: 4300018, guid: 9969846f978fd1b4e9627fd7200715ee, type: 3}
+--- !u!208 &1484537060
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484537055}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.97400004, y: 0.049000002, z: 0.47200003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0.47200003}
+  m_TimeToStationary: 0.5
 --- !u!1 &1486103555
 GameObject:
   m_ObjectHideFlags: 0
@@ -13122,7 +13156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 402300681, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6802292
+      value: 1.6802368
       objectReference: {fileID: 0}
     - target: {fileID: 632391246, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -14996,6 +15030,7 @@ GameObject:
   - component: {fileID: 1827403971}
   - component: {fileID: 1827403970}
   - component: {fileID: 1827403969}
+  - component: {fileID: 1827403973}
   m_Layer: 7
   m_Name: wall_ zone2door
   m_TagString: Untagged
@@ -15096,6 +15131,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827403967}
   m_Mesh: {fileID: 4300018, guid: 9969846f978fd1b4e9627fd7200715ee, type: 3}
+--- !u!208 &1827403973
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827403967}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.97400004, y: 0.049000002, z: 0.47200003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0.47200003}
+  m_TimeToStationary: 0.5
 --- !u!1 &1830680223
 GameObject:
   m_ObjectHideFlags: 0
