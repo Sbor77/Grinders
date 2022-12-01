@@ -34,7 +34,7 @@ public class SettingPanel : MonoBehaviour
 
     public void Start()
     {
-        _masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == maxVolume ? true : false;
+        _masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == MaxVolume ? true : false;
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
         _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
         
