@@ -116,7 +116,11 @@ public class Level : MonoBehaviour
 
             _boxSpawner.StopSpawn();
 
-            DOVirtual.DelayedCall(doorOpenDelay, () => _bigboxDoor.Open());
+            DOVirtual.DelayedCall(doorOpenDelay, () => 
+            {
+                _bigboxDoor.Open();
+                _boxSpawner.UnshadeBigbox();
+            });
 
             _isBigboxDoorOpened = true;
         }
