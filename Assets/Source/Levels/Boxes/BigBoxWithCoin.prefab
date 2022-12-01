@@ -251,6 +251,7 @@ MonoBehaviour:
   _item: {fileID: 4204835653532769748}
   _fogEffect: {fileID: 7979696654551037911}
   _burstEffect: {fileID: 7979696654551037911}
+  _outline: {fileID: 0}
 --- !u!114 &8702084055989934639
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14575,7 +14575,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b44f80c94b4119841b7c1746c42b7aa7, type: 2}
+  - {fileID: 2100000, guid: e87f26fd96c9584499f7209e2647ed4e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14705,6 +14705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91d9afaa8b41d045b76e9563dfd83d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultMaterial: {fileID: 0}
+  _shadedMaterial: {fileID: 0}
   _pieces:
   - {fileID: 6108084464405132487}
   - {fileID: 6108084464405132481}
@@ -14726,6 +14728,7 @@ MonoBehaviour:
   _item: {fileID: 1675968225667557870}
   _fogEffect: {fileID: 3810957938891232438}
   _burstEffect: {fileID: 5082561632401323646}
+  _outline: {fileID: 0}
 --- !u!114 &824449181478657152
 MonoBehaviour:
   m_ObjectHideFlags: 0

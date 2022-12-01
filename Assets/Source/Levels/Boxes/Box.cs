@@ -16,18 +16,12 @@ public class Box : MonoBehaviour
     [SerializeField] private AudioSource _confettiAudio;
     [SerializeField] private BoxItem _item;
     [SerializeField] private ParticleSystem _fogEffect;
-    [SerializeField] private ParticleSystem _burstEffect;
+    [SerializeField] private ParticleSystem _burstEffect;    
 
     private MeshRenderer _meshRenderer;
-    private Color _defaultColor;
-
     private List<Vector3> _piecesDefaultPositions = new();    
     private bool _isItemCollectable;    
-    private float _boxDeactivationDelay = 3f;
-    private int _cellExtraEnabledIndex = 11;
-    private string _cellExtraEnabled = "_CelExtraEnabled";
-    private string _cellColorHex = "#3A3129";
-    private string _cellColorProperty = "_ColorDimExtra";
+    private float _boxDeactivationDelay = 3f;    
     private bool _isBigbox;
         
     public event Action IsItemCollected;
@@ -129,7 +123,7 @@ public class Box : MonoBehaviour
 
             GenerateRotationY();
 
-            SaveDefaultPiecesPositions();        
+            SaveDefaultPiecesPositions();            
         });
 
         if (isBigbox)
