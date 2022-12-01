@@ -212,6 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91d9afaa8b41d045b76e9563dfd83d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultMaterial: {fileID: 2100000, guid: e87f26fd96c9584499f7209e2647ed4e, type: 2}
+  _shadedMaterial: {fileID: 2100000, guid: 741ed5b341bf0544bbcd586b9e63d90d, type: 2}
   _pieces:
   - {fileID: 4250450508748718787}
   - {fileID: 4250450508748718789}
@@ -273,7 +275,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -5688734842909005866, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4d107fdd64e81934ba569a2d27a8677e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0

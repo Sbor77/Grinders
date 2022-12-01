@@ -84,6 +84,11 @@ public class BoxSpawner : MonoBehaviour
         SpawnBox();
     }
 
+    public void UnshadeBigbox()
+    {
+        _bigBox.ShowActiveBox();
+    }
+
     public void StopSpawn()
     {
         _isStopped = true;
@@ -131,15 +136,7 @@ public class BoxSpawner : MonoBehaviour
         }
 
         return index;
-    }
-
-    /*private void CalculateMaxBoxesCount()
-    {
-        foreach (var count in _maxCounts)
-        {
-            _maxBoxesCount += count;
-        }        
-    }*/
+    }    
 
     private void GenerateAllBoxes()
     {        
@@ -149,14 +146,6 @@ public class BoxSpawner : MonoBehaviour
         {
             _boxArray[i] = new();
         }
-
-        //CalculateMaxBoxesCount();
-
-        /*int boxWithCrossCount = Mathf.CeilToInt(GetMaxBoxCount() * _boxWithCrossChanceRatio);
-
-        int count = Mathf.CeilToInt(GetMaxBoxCount() * countMultiplier < GetMaxBoxCount() + countAdditive ? 
-            GetMaxBoxCount() * countMultiplier : GetMaxBoxCount() + countAdditive);*/
-
 
         for (int i = 0; i < _zones.Count; i++)
         {
@@ -216,7 +205,7 @@ public class BoxSpawner : MonoBehaviour
         {
             _bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
 
-            _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount);
+            _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount, true);            
         }
     }
 

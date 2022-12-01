@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class Box : MonoBehaviour
 {
+    [SerializeField] private Material _defaultMaterial;
+    [SerializeField] private Material _shadedMaterial;
     [SerializeField] private List<GameObject> _pieces;
     [SerializeField] private MeshRenderer _wholeBoxRenderer;
     [SerializeField] private BoxCollider _boxCollider;
@@ -15,15 +18,30 @@ public class Box : MonoBehaviour
     [SerializeField] private ParticleSystem _fogEffect;
     [SerializeField] private ParticleSystem _burstEffect;
 
+    private MeshRenderer _meshRenderer;
+    private Color _defaultColor;
+
     private List<Vector3> _piecesDefaultPositions = new();    
     private bool _isItemCollectable;    
     private float _boxDeactivationDelay = 3f;
+    private int _cellExtraEnabledIndex = 11;
+    private string _cellExtraEnabled = "_CelExtraEnabled";
+    private string _cellColorHex = "#3A3129";
+    private string _cellColorProperty = "_ColorDimExtra";
+    private bool _isBigbox;
         
-    public event Action IsItemCollected;    
+    public event Action IsItemCollected;
+
+    public bool IsBigbox => _isBigbox;
+
+    private void Awake()
+    {
+        _meshRenderer = GetComponent<MeshRenderer>();        
+    }
 
     private void Start()
     {
-        SaveDefaultPiecesPositions();
+        SaveDefaultPiecesPositions();        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,10 +63,7 @@ public class Box : MonoBehaviour
                 IsItemCollected?.Invoke();
 
                 DOVirtual.DelayedCall(_boxDeactivationDelay, DeactivateWholeBox);                
-            }
-
-            //if (player.CurrentState == State.Attack && _wholeBoxRenderer.enabled)            
-            //    Crush();                            
+            }                         
         }
     }    
 
@@ -86,9 +101,9 @@ public class Box : MonoBehaviour
             _isItemCollectable = true;
             RestoreDefaultPiecesPositions();
         });
-    }    
+    }
 
-    public void ActivateWholeBox(int minValue, int maxValue)
+    public void ActivateWholeBox(int minValue, int maxValue, bool isBigbox = false)
     {
         float fogDelay = 0.75f;
 
@@ -116,11 +131,34 @@ public class Box : MonoBehaviour
 
             SaveDefaultPiecesPositions();        
         });
+
+        if (isBigbox)
+        {
+            //_isBigbox = true;
+
+            _boxCollider.enabled = false;
+
+            SetShadedMaterial();
+
+            //DOVirtual.DelayedCall(3f, () => SetShadedMaterial());
+        }
     }
 
     public void DeactivateWholeBox()
     {
         gameObject.SetActive(false);        
+    }
+
+    public void ShowActiveBox()
+    {
+        _boxCollider.enabled = false;
+
+        _meshRenderer.material = _defaultMaterial;     
+    }
+
+    private void SetShadedMaterial()
+    {
+        _meshRenderer.material = _shadedMaterial;
     }
 
     private void DeactivateCrushedBox()
