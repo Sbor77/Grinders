@@ -51,7 +51,7 @@ public class QuestPanel : MonoBehaviour
 
         if (_tutorialPanel != null)
         {
-            DeactivateInfopanel();
+            DeactivateInfoPanel();
 
             _tutorialPanel.gameObject.SetActive(true);
         }
@@ -75,7 +75,7 @@ public class QuestPanel : MonoBehaviour
 
     private void ShowMissionTargets()
     {
-        ActivateInfopanel();
+        ActivateInfoPanel();
 
         if (_needCoinCollected > 0)
         {
@@ -97,18 +97,18 @@ public class QuestPanel : MonoBehaviour
 
     private void StartGame()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1;        
 
         gameObject.SetActive(false);
 
         _cameraHandler.ActivateStartScenario();
     }
-    private void ActivateInfopanel()
+    private void ActivateInfoPanel()
     {
         _infoPanel.gameObject.SetActive(true);
     }
 
-    private void DeactivateInfopanel()
+    private void DeactivateInfoPanel()
     {
         _infoPanel.gameObject.SetActive(false);
     }

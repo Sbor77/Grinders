@@ -3786,20 +3786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor:
-    r: 0.6415094
-    g: 0.08775366
-    b: 0.08775366
-    a: 1
-  outlineWidth: 10
-  precomputeOutline: 1
-  bakeKeys: []
-  bakeValues: []
-  renderers: []
-  outlineMaskMaterial: {fileID: 0}
-  outlineFillMaterial: {fileID: 0}
-  needsUpdate: 1
 --- !u!1 &2064191909
 GameObject:
   m_ObjectHideFlags: 0

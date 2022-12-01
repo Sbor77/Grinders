@@ -39,15 +39,15 @@ public class InfoViewer : MonoBehaviour
     public int CurrentCoins { get; private set; }
     public bool IsBigboxDestroyed { get; private set; }
 
-    private const string Master = "MasterVolume";
-    private const float MaxValue = 0f;
-    private const float MinValue = -80f;
+    private const string Master = "MasterVolume";                                  
+    private const float MaxVolume = 0;
+    private const float MinVolume = -80;
 
 
     private void Awake()
     {
         _movement = _player.GetComponent<Movement>();
-        _soundButton = _soundImage.GetComponent<Button>();
+        _soundButton = _soundImage.GetComponent<Button>();        
     }
 
     private void OnEnable()
@@ -59,9 +59,9 @@ public class InfoViewer : MonoBehaviour
         _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
 
         _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
+
         _soundButton.onClick.AddListener(OnChangedSoundVolume);
         //_movement.StartAttackCooldown += OnStartCooldown;
-
         //_movement.ChangedState += OnStartAttack;
         _movement.ChangedMassAttackCooldown += OnChangedMassCooldown;
     }
@@ -70,9 +70,9 @@ public class InfoViewer : MonoBehaviour
     {
         _maxHealth = _player.MaxHealth;
 
-        _currentHealth = _maxHealth; // load in PlayerPrefs
+        _currentHealth = _maxHealth; // load in PlayerPrefs        
 
-        SetSoundIcon(DataHandler.Instance.GetSavedMasterVolume());
+        SetSoundIcon(DataHandler.Instance.GetSavedMasterVolume());        
 
         _healthBarSlider.maxValue = _maxHealth;
 
@@ -88,9 +88,9 @@ public class InfoViewer : MonoBehaviour
         _player.ChangedCoin -= OnChangedPlayerCoins;
 
         _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
+
         _soundButton.onClick.RemoveListener(OnChangedSoundVolume);
         //_movement.StartAttackCooldown -= OnStartCooldown;
-
         //_movement.ChangedState -= OnStartAttack;
         _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
     }
@@ -110,21 +110,23 @@ public class InfoViewer : MonoBehaviour
 
     private void OnChangedSoundVolume()
     {
-        _audio.GetFloat(Master, out float volume);
+        _audio.GetFloat(Master, out float volume);        
 
-        if (volume == MaxValue)
-            volume = MinValue;
+        if (volume == MaxVolume)
+            volume = MinVolume;
         else
-            volume = MaxValue;
+            volume = MaxVolume;
 
         SetSoundIcon(volume);
+
         _audio.SetFloat(Master, volume);
+
         DataHandler.Instance.SaveMasterVolume(volume);
     }
 
     private void SetSoundIcon(float volume)
     {
-        if (volume == MaxValue)
+        if (volume == MaxVolume)
             _soundImage.sprite = _volumeOn;
         else
             _soundImage.sprite = _volumeOff;
@@ -173,7 +175,6 @@ public class InfoViewer : MonoBehaviour
         _healthBarSlider.value = health;
 
         CurrentHealth = health;
-
     }
 
     private void OnChangedPlayerCoins(int value)
