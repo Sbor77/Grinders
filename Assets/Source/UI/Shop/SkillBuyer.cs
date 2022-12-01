@@ -49,9 +49,9 @@ public class SkillBuyer : MonoBehaviour
             _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedSpeedSkill()].ToString();
 
         if (DataHandler.Instance.GetSavedRadiusSkill() >= _radiusLevelPrices.Length)
-            _movePriceText.text = "MAX!";
+            _radiusPriceText.text = "MAX!";
         else
-            _movePriceText.text = _radiusLevelPrices[DataHandler.Instance.GetSavedRadiusSkill()].ToString();
+            _radiusPriceText.text = _radiusLevelPrices[DataHandler.Instance.GetSavedRadiusSkill()].ToString();
 
         ButtonIsValid();
     }
@@ -65,7 +65,7 @@ public class SkillBuyer : MonoBehaviour
             _buyMoveButton.interactable = false;
 
         if (DataHandler.Instance.GetSavedRadiusSkill() >= _radiusLevelPrices.Length)
-            _buyMoveButton.interactable = false;
+            _buyRadiusButton.interactable = false;
     }
 
     private void OnHealthBuy()
@@ -108,7 +108,7 @@ public class SkillBuyer : MonoBehaviour
         if (TryBuying(price))
         {
             _buySFX.Play();
-            DataHandler.Instance.SaveSpeedSkill(radius + 1);
+            DataHandler.Instance.SaveRadiusSkill(radius + 1);
 
             IsStatBought?.Invoke();
         }
