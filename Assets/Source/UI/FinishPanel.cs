@@ -32,7 +32,7 @@ public class FinishPanel : MonoBehaviour
 
         _levelScoreCount.text = GetCurrentScore().ToString();
 
-        _totalScoreCount.text = GetTotalScore().ToString();
+        _totalScoreCount.text = GetTotalScore().ToString();        
     }
 
     public void Activate()
@@ -47,12 +47,25 @@ public class FinishPanel : MonoBehaviour
 
     private int GetTotalScore()
     {
-        return 0;
+        int value = DataHandler.Instance.GetSavedTotalScore() + GetCurrentScore();
+
+        DataHandler.Instance.SaveTotalScore(value);
+
+        return value;
     }
 
     private int GetCurrentScore()
     {
-        return 0;
+        int coinMultiplier = 50;
+        int killMultiplier = 10;
+
+        /*int healthLevelMultiplier = 50;
+        int speedLevelMultiplier = 50;
+        int radiusLevelMultiplier = 100;*/
+
+        int value = _infoViewer.CurrentCoins * coinMultiplier + _infoViewer.CurrentCoins * killMultiplier;
+
+        return value;
     }
 
     private void LoadShopScene()

@@ -74,18 +74,24 @@ public class Level : MonoBehaviour
 
     private void SaveDefaultStats()
     {
+        int defaultTotalScore = 0;
         int defaultLevel = 1;
         int defaultHealthSkill = 1;
         int defaultSpeedSkill = 1;
+        int defaultRadiusSkill = 1;
         int defaultKills = 0;
         int defaultTotalMoney = 0;
         int defaultLevelMoney = 0;
+
+        DataHandler.Instance.SaveTotalScore(defaultTotalScore);
 
         DataHandler.Instance.SaveLevel(defaultLevel);
 
         DataHandler.Instance.SaveHealthSkill(defaultHealthSkill);
 
         DataHandler.Instance.SaveSpeedSkill(defaultSpeedSkill);
+
+        DataHandler.Instance.SaveRadiusSkill(defaultRadiusSkill);
 
         DataHandler.Instance.SaveKills(defaultKills);
 

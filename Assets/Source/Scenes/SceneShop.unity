@@ -3805,10 +3805,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthPriceText: {fileID: 899472306}
   _movePriceText: {fileID: 105732797}
+  _radiusPriceText: {fileID: 5945524043444001732}
   _buyMoveButton: {fileID: 1240869883}
   _buyHealthButton: {fileID: 2039647907}
+  _buyRadiusButton: {fileID: 5945524043444001731}
   _moveLevelPrices: 000000000a000000140000001e000000320000004b000000
   _healthLevelPrices: 000000000a000000140000001e000000320000004b000000
+  _radiusLevelPrices: 0000000090010000f4010000f4010000f4010000bc020000
   _buySFX: {fileID: 1340263732}
 --- !u!82 &1340263732
 AudioSource:
@@ -5776,6 +5779,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2d559b85e2580d49b94e7304e562657, type: 3}
+--- !u!114 &5945524043444001731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 464171292546440550, guid: c2d559b85e2580d49b94e7304e562657, type: 3}
+  m_PrefabInstance: {fileID: 5945524043444001730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5945524043444001732 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 464171292402959724, guid: c2d559b85e2580d49b94e7304e562657, type: 3}
+  m_PrefabInstance: {fileID: 5945524043444001730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6121429596829163435 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 464171293258187881, guid: c2d559b85e2580d49b94e7304e562657, type: 3}

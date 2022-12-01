@@ -7,10 +7,13 @@ public class SkillBuyer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _healthPriceText;
     [SerializeField] private TMP_Text _movePriceText;
+    [SerializeField] private TMP_Text _radiusPriceText;
     [SerializeField] private Button _buyMoveButton;
     [SerializeField] private Button _buyHealthButton;
+    [SerializeField] private Button _buyRadiusButton;
     [SerializeField] private int[] _moveLevelPrices;
     [SerializeField] private int[] _healthLevelPrices;
+    [SerializeField] private int[] _radiusLevelPrices;
     [SerializeField] private AudioSource _buySFX;
 
     public event Action IsStatBought;
@@ -20,6 +23,8 @@ public class SkillBuyer : MonoBehaviour
         _buyHealthButton.onClick.AddListener(OnHealthBuy);
 
         _buyMoveButton.onClick.AddListener(OnMoveSpeedBuy);
+
+        _buyRadiusButton.onClick.AddListener(OnRadiusBuy);
     }
 
     private void OnDisable()
@@ -27,6 +32,8 @@ public class SkillBuyer : MonoBehaviour
         _buyHealthButton.onClick.RemoveListener(OnHealthBuy);
 
         _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
+
+        _buyRadiusButton.onClick.RemoveListener(OnRadiusBuy);
     }
 
     public void Init()
@@ -41,6 +48,11 @@ public class SkillBuyer : MonoBehaviour
         else
             _movePriceText.text = _moveLevelPrices[DataHandler.Instance.GetSavedSpeedSkill()].ToString();
 
+        if (DataHandler.Instance.GetSavedRadiusSkill() >= _radiusLevelPrices.Length)
+            _movePriceText.text = "MAX!";
+        else
+            _movePriceText.text = _radiusLevelPrices[DataHandler.Instance.GetSavedRadiusSkill()].ToString();
+
         ButtonIsValid();
     }
 
@@ -50,6 +62,9 @@ public class SkillBuyer : MonoBehaviour
             _buyHealthButton.interactable = false;
 
         if (DataHandler.Instance.GetSavedSpeedSkill() >= _moveLevelPrices.Length)
+            _buyMoveButton.interactable = false;
+
+        if (DataHandler.Instance.GetSavedRadiusSkill() >= _radiusLevelPrices.Length)
             _buyMoveButton.interactable = false;
     }
 
@@ -79,6 +94,21 @@ public class SkillBuyer : MonoBehaviour
         {
             _buySFX.Play();
             DataHandler.Instance.SaveSpeedSkill(moveSpeed + 1);
+
+            IsStatBought?.Invoke();
+        }
+    }
+
+    private void OnRadiusBuy()
+    {
+        int radius = DataHandler.Instance.GetSavedRadiusSkill();
+
+        int price = _radiusLevelPrices[radius];
+
+        if (TryBuying(price))
+        {
+            _buySFX.Play();
+            DataHandler.Instance.SaveSpeedSkill(radius + 1);
 
             IsStatBought?.Invoke();
         }

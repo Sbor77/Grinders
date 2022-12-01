@@ -7,12 +7,14 @@ using UnityEngine;
 
 public class DataHandler : MonoBehaviour
 {
+    private string _totalScore = "TotalScore";
     private string _levelKey = "Level";
     private string _totalMoneyKey = "TotalMoney";
     private string _levelMoneyKey = "LevelMoney";
     private string _killsKey = "Kills";
     private string _healthSkillKey = "HealthSkill";    
     private string _speedSkillKey = "SpeedSkill";
+    private string _radiusSkillKey = "RadiusSkill";
     private string _masterVolume = "MasterVolume";
     private string _musicVolume = "MusicVolume";
     private string _effectsVolume = "EffectsVolume";
@@ -51,6 +53,14 @@ public class DataHandler : MonoBehaviour
         Time.timeScale = inBackground ? 0f : 1f;
     }
     #endregion
+
+    public void SaveTotalScore(int score)
+    {
+        if (score <= 0)
+            PlayerPrefs.SetInt(_levelKey, 0);
+        else
+            PlayerPrefs.SetInt(_levelKey, score);
+    }
 
     public void SaveLevel (int level)
     {
@@ -94,6 +104,14 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_speedSkillKey, speedSkill);
     }
 
+    public void SaveRadiusSkill(int radiusSkill)
+    {
+        if (radiusSkill <= 0)
+            PlayerPrefs.SetInt(_speedSkillKey, 1);
+        else
+            PlayerPrefs.SetInt(_speedSkillKey, radiusSkill);
+    }
+
     public void SaveMasterVolume(float value)
     {
         if (value >= 0 && value <= 1)
@@ -128,6 +146,11 @@ public class DataHandler : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
+    public int GetSavedTotalScore()
+    {
+        return PlayerPrefs.GetInt(_totalScore);
+    }
+
     public int GetSavedTotalMoney()
     {
         return PlayerPrefs.GetInt(_totalMoneyKey);
@@ -158,6 +181,11 @@ public class DataHandler : MonoBehaviour
         return PlayerPrefs.GetInt(_speedSkillKey);
     }
 
+    public int GetSavedRadiusSkill()
+    {
+        return PlayerPrefs.GetInt(_radiusSkillKey);
+    }
+
     public float GetSavedMasterVolume()
     {
         if (PlayerPrefs.HasKey(_masterVolume))
@@ -181,7 +209,6 @@ public class DataHandler : MonoBehaviour
         else
             return 1;
     }
-
 
     #region Import WebGL for check mobile platform
 
