@@ -63,7 +63,7 @@ public class SettingPanel : MonoBehaviour
         }
 
         _audio.SetFloat(Master, volume);
-        
+
         DataHandler.Instance.SaveMasterVolume(volume);
     }
 
