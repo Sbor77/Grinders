@@ -19,6 +19,6 @@ public class StatsViewer : MonoBehaviour
 
         _speedLevel.text = DataHandler.Instance.GetSavedSpeedSkill().ToString();
 
-        //_radiusLevel.text = DataHandler.Instance.GetSavedSpeedSkill().ToString();
+        _radiusLevel.text = DataHandler.Instance.GetSavedRadiusSkill().ToString();
     }
 }

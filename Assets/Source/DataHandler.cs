@@ -57,9 +57,9 @@ public class DataHandler : MonoBehaviour
     public void SaveTotalScore(int score)
     {
         if (score <= 0)
-            PlayerPrefs.SetInt(_levelKey, 0);
+            PlayerPrefs.SetInt(_totalScore, 0);
         else
-            PlayerPrefs.SetInt(_levelKey, score);
+            PlayerPrefs.SetInt(_totalScore, score);
     }
 
     public void SaveLevel (int level)
@@ -107,9 +107,9 @@ public class DataHandler : MonoBehaviour
     public void SaveRadiusSkill(int radiusSkill)
     {
         if (radiusSkill <= 0)
-            PlayerPrefs.SetInt(_speedSkillKey, 1);
+            PlayerPrefs.SetInt(_radiusSkillKey, 1);
         else
-            PlayerPrefs.SetInt(_speedSkillKey, radiusSkill);
+            PlayerPrefs.SetInt(_radiusSkillKey, radiusSkill);
     }
 
     public void SaveMasterVolume(float value)
