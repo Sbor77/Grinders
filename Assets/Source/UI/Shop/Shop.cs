@@ -1,8 +1,10 @@
+using Lean.Localization;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
+    [SerializeField] private LeanLocalization _leanLocalization;
     [SerializeField] private SkillBuyer _skillBuyer;
     [SerializeField] private StatsViewer _statsViewer;
     [SerializeField] private Button _exitButton;
@@ -13,6 +15,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
+        _leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
         OnStatBought();
         GamesSdk.Instance.InterstitialAdShow();
     }

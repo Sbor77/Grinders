@@ -1,3 +1,4 @@
+using Lean.Localization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
+    [SerializeField] private LeanLocalization _leanLocalization;
     [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _leaderboardButton;
@@ -21,6 +23,8 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
+        _leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
+
         if (DataHandler.Instance.GetSavedLevel() <= 1)
             _continueButton.interactable = false;
     }

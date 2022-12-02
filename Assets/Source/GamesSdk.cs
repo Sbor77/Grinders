@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Agava.YandexGames;
 using System;
+using Lean.Localization;
 
 public class GamesSdk : MonoBehaviour
 {
+    [SerializeField] private LeanLocalization _leanLocalization;
+
     private List<Leader> _leaders;
     private string _leaderboardName = "LeaderBoard";
     private int _playerScore = 100;
@@ -50,13 +53,37 @@ public class GamesSdk : MonoBehaviour
     #region language
     public string GetLanguage()
     {
-        string lang = "default";
+        string lang = "ru";
 
         if (_isInitialize)
             lang = YandexGamesSdk.Environment.i18n.lang;
 
         return lang;
     }
+
+    private void LoadLocalization()
+    {
+        string lang;
+        switch (GetLanguage())
+        {
+            case "ru":
+                lang = "Russian";
+                break;
+            case "tr":
+                lang = "Turkish";
+                break;
+            case "en":
+                lang = "English";
+                break;
+            default:
+                lang = "Russian";
+                break;
+        }
+
+        _leanLocalization.SetCurrentLanguage(lang);
+        DataHandler.Instance.SaveLanguage(lang);
+    }
+
     #endregion
 
     #region Ad
@@ -148,6 +175,7 @@ public class GamesSdk : MonoBehaviour
     private void OnInitialized()
     {
         _isInitialize = true;
+        LoadLocalization();
     }
 
     private void OnVideoOpenCallback()

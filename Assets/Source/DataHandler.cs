@@ -18,6 +18,8 @@ public class DataHandler : MonoBehaviour
     private string _masterVolume = "MasterVolume";
     private string _musicVolume = "MusicVolume";
     private string _effectsVolume = "EffectsVolume";
+    private string _language = "Languagu";
+    private string _ru = "Russian";
     
     public static DataHandler Instance { get; private set; }
 
@@ -53,6 +55,12 @@ public class DataHandler : MonoBehaviour
         Time.timeScale = inBackground ? 0f : 1f;
     }
     #endregion
+
+    public void SaveLanguage(string lang)
+    {
+        PlayerPrefs.SetString(_language, lang);
+        PlayerPrefs.Save();
+    }
 
     public void SaveTotalScore(int score)
     {
@@ -147,6 +155,14 @@ public class DataHandler : MonoBehaviour
     public void DeleteAllStats()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public string GetSavedLanguage()
+    {
+        if (PlayerPrefs.HasKey(_language))
+            return PlayerPrefs.GetString(_language);
+
+        return _ru;
     }
 
     public int GetSavedTotalScore()

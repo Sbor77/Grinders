@@ -5973,6 +5973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9547ebbc4c181604f9717336921a4254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leanLocalization: {fileID: 1028976462}
   _player: {fileID: 1344807238}
   _infoViewer: {fileID: 989412322}
   _finalEffects: {fileID: 758781974}
@@ -8463,7 +8464,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh203654
+  m_Name: pb_Mesh38116
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13160,7 +13161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 402300681, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6802368
+      value: 1.6802292
       objectReference: {fileID: 0}
     - target: {fileID: 632391246, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.x
