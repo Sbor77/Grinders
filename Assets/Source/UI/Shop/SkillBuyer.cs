@@ -8,13 +8,16 @@ public class SkillBuyer : MonoBehaviour
     [SerializeField] private TMP_Text _healthPriceText;
     [SerializeField] private TMP_Text _movePriceText;
     [SerializeField] private TMP_Text _radiusPriceText;
+    [SerializeField] private TMP_Text _rewardedCoinsText;
     [SerializeField] private Button _buyMoveButton;
     [SerializeField] private Button _buyHealthButton;
     [SerializeField] private Button _buyRadiusButton;
+    [SerializeField] private Button _buyCoinsButton;
     [SerializeField] private int[] _moveLevelPrices;
     [SerializeField] private int[] _healthLevelPrices;
     [SerializeField] private int[] _radiusLevelPrices;
-    [SerializeField] private AudioSource _buySFX;
+    [SerializeField] private int _rewardedCoins = 50;
+    [SerializeField] private AudioSource _buySFX;    
 
     public event Action IsStatBought;
 
@@ -25,6 +28,8 @@ public class SkillBuyer : MonoBehaviour
         _buyMoveButton.onClick.AddListener(OnMoveSpeedBuy);
 
         _buyRadiusButton.onClick.AddListener(OnRadiusBuy);
+
+        _buyCoinsButton.onClick.AddListener(OnRewardedCoinsBuy);
     }
 
     private void OnDisable()
@@ -34,10 +39,14 @@ public class SkillBuyer : MonoBehaviour
         _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
 
         _buyRadiusButton.onClick.RemoveListener(OnRadiusBuy);
+
+        _buyCoinsButton.onClick.RemoveListener(OnRewardedCoinsBuy);
     }
 
     public void Init()
     {
+        _rewardedCoinsText.text = $"+{_rewardedCoins}";
+
         if (DataHandler.Instance.GetSavedHealthSkill() >= _healthLevelPrices.Length)        
             _healthPriceText.text = "MAX!";
         else
@@ -113,6 +122,16 @@ public class SkillBuyer : MonoBehaviour
             IsStatBought?.Invoke();
         }
     }
+
+    private void OnRewardedCoinsBuy()
+    {
+        int playerMoneyWithReward = DataHandler.Instance.GetSavedTotalMoney() + _rewardedCoins;
+
+        DataHandler.Instance.SaveTotalMoney(playerMoneyWithReward);
+
+        IsStatBought?.Invoke();
+    }
+
 
     private bool TryBuying(int statPrice)
     {
