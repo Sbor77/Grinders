@@ -29,7 +29,9 @@ public class SkillBuyer : MonoBehaviour
 
         _buyRadiusButton.onClick.AddListener(OnRadiusBuy);
 
-        _buyCoinsButton.onClick.AddListener(OnRewardedCoinsBuy);
+        _buyCoinsButton.onClick.AddListener(OnVideoAdBuyCoin);
+
+        GamesSdk.Instance.Rewarded += OnRewardedCoinsBuy;
     }
 
     private void OnDisable()
@@ -40,7 +42,9 @@ public class SkillBuyer : MonoBehaviour
 
         _buyRadiusButton.onClick.RemoveListener(OnRadiusBuy);
 
-        _buyCoinsButton.onClick.RemoveListener(OnRewardedCoinsBuy);
+        _buyCoinsButton.onClick.RemoveListener(OnVideoAdBuyCoin);
+
+        GamesSdk.Instance.Rewarded -= OnRewardedCoinsBuy;
     }
 
     public void Init()
@@ -123,6 +127,11 @@ public class SkillBuyer : MonoBehaviour
         }
     }
 
+    private void OnVideoAdBuyCoin()
+    {
+        GamesSdk.Instance.VideoAdShow();
+    }
+
     private void OnRewardedCoinsBuy()
     {
         int playerMoneyWithReward = DataHandler.Instance.GetSavedTotalMoney() + _rewardedCoins;
@@ -131,7 +140,6 @@ public class SkillBuyer : MonoBehaviour
 
         IsStatBought?.Invoke();
     }
-
 
     private bool TryBuying(int statPrice)
     {
