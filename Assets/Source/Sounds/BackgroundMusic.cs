@@ -34,15 +34,27 @@ public class BackgroundMusic : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
-        _sdk.AdVideoOpened += OnPlayAd;
-        _sdk.AdVideoClosed += OnStopAd;
-        _sdk.InterstitialAdOpened += OnPlayAd;
-        _sdk.InterstitialAdClosed += OnStopAd;
+
+        if (_sdk != null)
+        {
+            _sdk.AdVideoOpened += OnPlayAd;
+            _sdk.AdVideoClosed += OnStopAd;
+            _sdk.InterstitialAdOpened += OnPlayAd;
+            _sdk.InterstitialAdClosed += OnStopAd;
+        }
     }
 
     private void OnDisable()
     {
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+
+        if (_sdk != null)
+        {
+            _sdk.AdVideoOpened -= OnPlayAd;
+            _sdk.AdVideoClosed -= OnStopAd;
+            _sdk.InterstitialAdOpened -= OnPlayAd;
+            _sdk.InterstitialAdClosed -= OnStopAd;
+        }
     }
 
     private void Start()
