@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,10 @@ public class BackgroundMusic : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        GamesSdk.Instance.AdVideoOpened += OnPlayAd;
+        GamesSdk.Instance.AdVideoClosed += OnStopAd;
+        GamesSdk.Instance.InterstitialAdOpened += OnPlayAd;
+        GamesSdk.Instance.InterstitialAdClosed += OnStopAd;
     }
 
     private void OnDisable()
@@ -54,6 +59,28 @@ public class BackgroundMusic : MonoBehaviour
 
             ActivatePlayCoroutine();
         }
+    }
+
+    private void OnPlayAd()
+    {
+        StopActionGamePlay(true);
+    }
+
+    private void OnStopAd()
+    {
+        StopActionGamePlay(false);
+    }
+
+    private void StopActionGamePlay(bool stopGame)
+    {
+        if (stopGame)
+            _audioSource.Pause();
+        else
+            _audioSource.UnPause();
+
+        AudioListener.pause = stopGame;
+        AudioListener.volume = stopGame ? 0f : 1f;
+        Time.timeScale = stopGame ? 0f : 1f;
     }
 
     private void ActivatePlayCoroutine()

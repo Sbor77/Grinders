@@ -14,6 +14,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         OnStatBought();
+        GamesSdk.Instance.InterstitialAdShow();
     }
 
     private void OnEnable()

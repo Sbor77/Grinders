@@ -12,8 +12,10 @@ public class GamesSdk : MonoBehaviour
     private bool _isInitialize;
 
     public event Action Rewarded;
-    public event Action VideoOpened;
-    public event Action VideoClosed;
+    public event Action AdVideoOpened;
+    public event Action AdVideoClosed;
+    public event Action InterstitialAdOpened;
+    public event Action InterstitialAdClosed;
 
     public static GamesSdk Instance { get; private set; }
 
@@ -29,7 +31,6 @@ public class GamesSdk : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
-
 
     private IEnumerator Start()
     {
@@ -59,18 +60,23 @@ public class GamesSdk : MonoBehaviour
     #endregion
 
     #region Ad
-    public void InterestialAdShow()
+    public void InterstitialAdShow()
     {
         if (!_isInitialize)
             return;
 
-#if YANDEX_GAMES
-        InterstitialAd.Show();
+#if UNITY_EDITOR
+        OnCloseCallback(false);
+        return;
 #endif
 
-//#if VK_GAMES
-//        Interstitial.Show();
-//#endif
+#if YANDEX_GAMES
+        InterstitialAd.Show(OnOpenCallback, OnCloseCallback);
+#endif
+
+        //#if VK_GAMES
+        //        Interstitial.Show();
+        //#endif
     }
 
     public void VideoAdShow()
@@ -87,7 +93,7 @@ public class GamesSdk : MonoBehaviour
 #if YANDEX_GAMES
         Agava.YandexGames.VideoAd.Show(OnVideoOpenCallback, OnRewardedCallback, OnVideoCloseCallback, OnVideoErrorCallback);
 #endif
-
+        
 #if VK_GAMES
         Agava.VKGames.VideoAd.Show(OnRewardedCallback);
 #endif
@@ -146,12 +152,22 @@ public class GamesSdk : MonoBehaviour
 
     private void OnVideoOpenCallback()
     {
-        VideoOpened?.Invoke();
+        AdVideoOpened?.Invoke();
     }
 
     private void OnVideoCloseCallback()
     {
-        VideoClosed?.Invoke();
+        AdVideoClosed?.Invoke();
+    }
+
+    private void OnOpenCallback()
+    {
+        InterstitialAdOpened?.Invoke();
+    }
+
+    private void OnCloseCallback(bool wasShown)
+    {
+        InterstitialAdClosed?.Invoke();
     }
 
     private void OnRewardedCallback()

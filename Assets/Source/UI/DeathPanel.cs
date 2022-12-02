@@ -9,9 +9,12 @@ public class DeathPanel : MonoBehaviour
     [SerializeField] private Button _dieButton;
     [SerializeField] private Button _continueButton;
 
+    private bool _rewarded;
+
     public void Activate()
     {
         gameObject.SetActive(true);
+        _rewarded = false;
     }
 
     public void Deactivate()
@@ -23,18 +26,32 @@ public class DeathPanel : MonoBehaviour
     {
         _dieButton.onClick.AddListener(OnDieClick);
         _continueButton.onClick.AddListener(OnContinueClick);
+        GamesSdk.Instance.Rewarded += OnRewarded;
+        GamesSdk.Instance.AdVideoClosed += OnContinueWithRewarded;
     }
 
     private void OnDisable()
     {
         _dieButton.onClick.RemoveListener(OnDieClick);
         _continueButton.onClick.RemoveListener(OnContinueClick);
+        GamesSdk.Instance.Rewarded -= OnRewarded;
+        GamesSdk.Instance.AdVideoClosed -= OnContinueWithRewarded;
     }
 
     private void OnContinueClick()
     {
-        //something to do with advertising
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GamesSdk.Instance.VideoAdShow();
+    }
+
+    private void OnRewarded()
+    {
+        _rewarded = true;
+    }
+
+    private void OnContinueWithRewarded()
+    {
+        if (_rewarded)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnDieClick()
