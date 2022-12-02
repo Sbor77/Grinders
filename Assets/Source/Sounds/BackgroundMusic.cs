@@ -34,10 +34,10 @@ public class BackgroundMusic : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
-        //GamesSdk.Instance.AdVideoOpened += OnPlayAd;
-        //GamesSdk.Instance.AdVideoClosed += OnStopAd;
-        //GamesSdk.Instance.InterstitialAdOpened += OnPlayAd;
-        //GamesSdk.Instance.InterstitialAdClosed += OnStopAd;
+        _sdk.AdVideoOpened += OnPlayAd;
+        _sdk.AdVideoClosed += OnStopAd;
+        _sdk.InterstitialAdOpened += OnPlayAd;
+        _sdk.InterstitialAdClosed += OnStopAd;
     }
 
     private void OnDisable()
