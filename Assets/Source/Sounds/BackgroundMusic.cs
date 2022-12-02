@@ -8,6 +8,7 @@ public class BackgroundMusic : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private List<AudioClip> _playList;
+    [SerializeField] private GamesSdk _sdk;
     
     private int _shopSceneIndex = 5;    
     private int _currentSceneIndex;
@@ -33,10 +34,10 @@ public class BackgroundMusic : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
-        GamesSdk.Instance.AdVideoOpened += OnPlayAd;
-        GamesSdk.Instance.AdVideoClosed += OnStopAd;
-        GamesSdk.Instance.InterstitialAdOpened += OnPlayAd;
-        GamesSdk.Instance.InterstitialAdClosed += OnStopAd;
+        //GamesSdk.Instance.AdVideoOpened += OnPlayAd;
+        //GamesSdk.Instance.AdVideoClosed += OnStopAd;
+        //GamesSdk.Instance.InterstitialAdOpened += OnPlayAd;
+        //GamesSdk.Instance.InterstitialAdClosed += OnStopAd;
     }
 
     private void OnDisable()
