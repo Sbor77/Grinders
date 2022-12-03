@@ -2989,8 +2989,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Grinders
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7659f6d6ec9b642db8be29bc45fe97cc, type: 2}
-  m_sharedMaterial: {fileID: 8690591861142563998, guid: 7659f6d6ec9b642db8be29bc45fe97cc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5c5ee151f9307453bad78be36b51a077, type: 2}
+  m_sharedMaterial: {fileID: 2517202264660172603, guid: 5c5ee151f9307453bad78be36b51a077, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4391,6 +4391,14 @@ PrefabInstance:
     - target: {fileID: 7522368328775105483, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.39208984
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994650238946151870, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c5ee151f9307453bad78be36b51a077, type: 2}
+    - target: {fileID: 7994650238946151870, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
