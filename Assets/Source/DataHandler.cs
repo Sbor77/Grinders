@@ -133,10 +133,13 @@ public class DataHandler : MonoBehaviour
 
     public void SaveMusicVolume(float value)
     {
-        if (value >= 0 && value <= 1)
+        PlayerPrefs.SetFloat(_musicVolume, value);
+
+
+        /*if (value >= 0 && value <= 1)
             PlayerPrefs.SetFloat(_musicVolume, value);
         else
-            PlayerPrefs.SetFloat(_musicVolume, 1);
+            PlayerPrefs.SetFloat(_musicVolume, 1);*/
     }
 
     public void SaveEffectsVolume(float value)
@@ -210,7 +213,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_masterVolume))
             return PlayerPrefs.GetFloat(_masterVolume);
         else
-            return -33;
+            return -40;
     }
 
     public float GetSavedMusicVolume()
@@ -218,7 +221,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_musicVolume))
             return PlayerPrefs.GetFloat(_musicVolume);
         else
-            return 0.5f;
+            return -40;
     }
 
     public float GetSavedEffectsVolume()
@@ -226,7 +229,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_effectsVolume))
             return PlayerPrefs.GetFloat(_effectsVolume);
         else
-            return 0.5f;
+            return -40;
     }
 
     #region Import WebGL for check mobile platform
