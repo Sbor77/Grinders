@@ -968,7 +968,12 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6462836, guid: 6fd3e7b86edd3754199b33b36e8712d3, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6462836, guid: 6fd3e7b86edd3754199b33b36e8712d3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6fd3e7b86edd3754199b33b36e8712d3, type: 3}
 --- !u!4 &41586648 stripped
 Transform:
@@ -996,6 +1001,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0.25, z: 0.001}
   m_TimeToStationary: 0.5
+--- !u!65 &41586654
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41586649}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5054284, y: 1.0965159, z: 0.44076037}
+  m_Center: {x: -3.4384575e-18, y: -0.07742922, z: 0.0005454421}
 --- !u!1001 &64583485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1474,7 +1492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78114138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.17, y: 0, z: -75.66}
+  m_LocalPosition: {x: -22.64, y: 0, z: -75.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4489,7 +4507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431084477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.25, y: -0.45, z: -1.2500076}
+  m_LocalPosition: {x: 23.25, y: -0.4, z: -1.2500076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20989,7 +21007,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh50346
+  m_Name: pb_Mesh242180
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

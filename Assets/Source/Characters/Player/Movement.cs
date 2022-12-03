@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _spinAttackCooldown = 1f;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
-    [SerializeField] private LayerMask _ceilLayerMask;
+    //[SerializeField] private LayerMask _ceilLayerMask;
     [SerializeField] private AreaAttack _areaAttack;
 
     private CharacterController _controller;
@@ -215,13 +215,13 @@ public class Movement : MonoBehaviour
         {
             point = startPosition + _attackDirection * distance;
 
-            if (CeilCheck(point) == false)
-                return startPosition;
+            /*if (CeilCheck(point) == false)
+                return startPosition;*/
         }
 
         return point;
     }
-    private bool CeilCheck(Vector3 position)
+    /*private bool CeilCheck(Vector3 position)
     {
         bool result = false;
 
@@ -234,15 +234,8 @@ public class Movement : MonoBehaviour
             Debug.DrawRay(position, _direction * distance, Color.red);
 
             result = true;
-        }
-
-        /*if (result == false) 
-            print("не под потолком!!!");
-        else
-            print("все ок");*/
-
-        return result;
-    }   
+        }        
+    }   */
 
     private void SetChangeMoving(bool activate)
     {

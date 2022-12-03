@@ -4576,7 +4576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.4789906, y: 0, z: 0, w: 0.8778201}
-  m_LocalPosition: {x: 16.37, y: 19.979872, z: -46.13}
+  m_LocalPosition: {x: 3, y: 13.5, z: -9.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6687,7 +6687,7 @@ MonoBehaviour:
   _maxMoneyAmount: 1
   _minHealthAmount: 3
   _maxHealthAmount: 5
-  _finalBoxMoneyAmount: 100
+  _finalBoxMoneyAmount: 50
 --- !u!1 &1371967087
 GameObject:
   m_ObjectHideFlags: 0
@@ -9059,14 +9059,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1785197915}
     - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _beforeMassAttack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _spinAttackCooldown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: _ceilLayerMask.m_Bits
       value: 1024
       objectReference: {fileID: 0}
@@ -10037,6 +10029,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628560659}
     m_Modifications:
+    - target: {fileID: 1153522078416828715, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Size.y
+      value: 2.2110949
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153522078416828715, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Center.y
+      value: 0.0028777719
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153522078416828715, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Center.z
+      value: 0.00022107363
+      objectReference: {fileID: 0}
     - target: {fileID: 5325134720385733122, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -13384,6 +13388,22 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 6039438986973098888, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
+      propertyPath: m_Size.y
+      value: 0.11808382
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039438986973098888, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
+      propertyPath: m_Size.z
+      value: 0.02434598
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039438986973098888, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
+      propertyPath: m_Center.x
+      value: -0.00038050217
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039438986973098888, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
+      propertyPath: m_Center.y
+      value: -0.016897192
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf0bc540adc03d45bb3e8cfbf9239e7, type: 3}
 --- !u!4 &5887441082870479391
@@ -13816,6 +13836,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628560659}
     m_Modifications:
+    - target: {fileID: 1153522078416828715, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Size.y
+      value: 3.436625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153522078416828715, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Center.x
+      value: 3.2780092e-19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153522078416828715, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5528462
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153522078416828715, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
+      propertyPath: m_Center.z
+      value: 0.00022107363
+      objectReference: {fileID: 0}
     - target: {fileID: 5325134720387801924, guid: 3d137a14b23e4d647864d582a3dc6778, type: 3}
       propertyPath: m_Name
       value: Bin
@@ -14650,6 +14686,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5021614823269797244}
     m_Modifications:
+    - target: {fileID: 3230183354561228247, guid: 89176a071232de0488e7392c6054b3db, type: 3}
+      propertyPath: m_Size.x
+      value: 0.012266197
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230183354561228247, guid: 89176a071232de0488e7392c6054b3db, type: 3}
+      propertyPath: m_Size.y
+      value: 0.10010203
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230183354561228247, guid: 89176a071232de0488e7392c6054b3db, type: 3}
+      propertyPath: m_Size.z
+      value: 0.031613454
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230183354561228247, guid: 89176a071232de0488e7392c6054b3db, type: 3}
+      propertyPath: m_Center.x
+      value: -0.000000007947286
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230183354561228247, guid: 89176a071232de0488e7392c6054b3db, type: 3}
+      propertyPath: m_Center.y
+      value: -0.014601591
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230183354561228247, guid: 89176a071232de0488e7392c6054b3db, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000071292125
+      objectReference: {fileID: 0}
     - target: {fileID: 3604328574607764772, guid: 89176a071232de0488e7392c6054b3db, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
