@@ -162,12 +162,29 @@ public class GamesSdk : MonoBehaviour
         if (!_isInitialize)
             return;
 
-        if (YandexGamesSdk.IsInitialized)
+        if (PlayerAccount.IsAuthorized)
         {
             Leaderboard.GetPlayerEntry(_leaderboardName, OnPlayerEntrySuccessCallback);
         }
     }
 
+    public Leader GetLeaderboardPlayerEntry()
+    {
+        Leader player = null;
+
+        if (!PlayerAccount.IsAuthorized)
+            return player;
+
+        Leaderboard.GetPlayerEntry("PlaytestBoard", (result) =>
+        {
+            if (result == null)
+                Debug.Log("Player is not present in the leaderboard.");
+            else
+                player = new Leader(result.rank, result.score, "");
+        });
+
+        return player;
+    }
 
     #endregion
 

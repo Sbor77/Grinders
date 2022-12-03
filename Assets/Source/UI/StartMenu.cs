@@ -12,6 +12,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _leaderboardButton;
     [SerializeField] private SceneLevelLoader _loaderPanel;
+    [SerializeField] private LeadersPlanel _leadersPlanel;
 
     private int _indexLevel = 1;
 
@@ -19,6 +20,7 @@ public class StartMenu : MonoBehaviour
     {
         _newGameButton.onClick.AddListener(StartNewGame);
         _continueButton.onClick.AddListener(ContinueGame);
+        _leaderboardButton.onClick.AddListener(ShowLeaderboard);
     }
 
     private void Start()
@@ -33,6 +35,7 @@ public class StartMenu : MonoBehaviour
     {
         _newGameButton.onClick.RemoveListener(StartNewGame);
         _continueButton.onClick.RemoveListener(ContinueGame);
+        _leaderboardButton.onClick.RemoveListener(ShowLeaderboard);
     }
 
     private void StartNewGame()
@@ -70,5 +73,10 @@ public class StartMenu : MonoBehaviour
     {
         int currentLevel = DataHandler.Instance.GetSavedLevel();
         _loaderPanel.LoadLevel(currentLevel);
+    }
+
+    private void ShowLeaderboard()
+    {
+        _leadersPlanel.ShowLeaderboard();
     }
 }
