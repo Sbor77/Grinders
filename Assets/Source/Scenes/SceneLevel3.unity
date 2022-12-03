@@ -11512,7 +11512,7 @@ MonoBehaviour:
   _maxMoneyAmount: 1
   _minHealthAmount: 5
   _maxHealthAmount: 10
-  _finalBoxMoneyAmount: 50
+  _finalBoxMoneyAmount: 120
 --- !u!1001 &1386108375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13456,7 +13456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 402300681, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6802216
+      value: 1.6802368
       objectReference: {fileID: 0}
     - target: {fileID: 632391246, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -17498,6 +17498,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2116984364}
     m_Modifications:
+    - target: {fileID: 1664775343, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
+      propertyPath: m_Size.y
+      value: 3.2067635
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664775343, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
+      propertyPath: m_Center.x
+      value: -0.00000035762787
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664775343, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
+      propertyPath: m_Center.y
+      value: 1.1935848
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664775343, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
+      propertyPath: m_Center.z
+      value: -0.00000011920929
+      objectReference: {fileID: 0}
     - target: {fileID: 2497717446144171796, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
       propertyPath: m_Name
       value: WC
