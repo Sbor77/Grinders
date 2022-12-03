@@ -15,6 +15,7 @@ public class SettingPanel : MonoBehaviour
     private const string Music = "MusicVolume";
     private const string Effects = "EffectsVolume";
     private const int Multiplier = 20;
+    private const float MusicVolumeOffset = 20f;
     private const float MaxVolume = 0;
     private const float MinVolume = -80;
 
@@ -34,6 +35,7 @@ public class SettingPanel : MonoBehaviour
 
     public void Start()
     {
+
         _masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == MaxVolume ? true : false;
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
         _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
@@ -41,6 +43,9 @@ public class SettingPanel : MonoBehaviour
         OnMasterVolumeChanged(_masterVolumeToggle.isOn);
         OnMusicVolumeChanged(_musicVolumeSlider.value);
         OnEffectsVolumeChanged(_effectsVolumeSlider.value);
+
+        _musicVolumeSlider.value = 0.5f;
+        _effectsVolumeSlider.value = 0.5f;
     }
 
     private void OnMasterVolumeChanged(bool value)
@@ -69,11 +74,11 @@ public class SettingPanel : MonoBehaviour
 
     private void OnMusicVolumeChanged(float value)
     {
-        float volumeValue = Mathf.Log10(value) * Multiplier;
+        float volumeValue = Mathf.Log10(value) * Multiplier - MusicVolumeOffset;
 
         _audio.SetFloat(Music, volumeValue);
 
-        DataHandler.Instance.SaveMusicVolume(value);
+        DataHandler.Instance.SaveMusicVolume(volumeValue);
     }
 
     private void OnEffectsVolumeChanged(float value)
