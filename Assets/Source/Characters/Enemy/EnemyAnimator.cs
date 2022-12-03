@@ -105,6 +105,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private void OnTakeDamage()
     {
-        _animator.SetTrigger(TakeDamage);
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName(TakeDamage))
+            _animator.SetTrigger(TakeDamage);
     }
 }
