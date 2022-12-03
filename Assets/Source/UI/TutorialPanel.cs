@@ -31,17 +31,7 @@ public class TutorialPanel : MonoBehaviour
 
     public event Action IsEnded;
 
-    private void Start()
-    {
-        DOVirtual.DelayedCall(0.5f, () =>
-        {
-            //Time.timeScale = 0;
-            _playerGuides.SetActive(true);
-            Fade(_targetGuides, 1, 1);
-            FadeOut(_missionPad);
-            DOVirtual.DelayedCall(_textPause, () => Fade(_bigboxGuides, 1, _textFadeDuration));
-        });
-    }
+    
 
     private void OnEnable()
     {
@@ -53,16 +43,42 @@ public class TutorialPanel : MonoBehaviour
         _nextButton.onClick.RemoveListener(OnClickButton);
     }
 
+    private void Start()
+    {
+        DOVirtual.DelayedCall(0.5f, () =>
+        {            
+            _playerGuides.SetActive(true);
+            Fade(_targetGuides, 1, 1);
+            FadeOut(_missionPad);
+            DOVirtual.DelayedCall(_textPause, () => Fade(_bigboxGuides, 1, _textFadeDuration));
+        });
+    }
+
     public void Activate()
     {
         gameObject.SetActive(true);
     }
 
     private void OnClickButton()
-    {        
+    {
+        //_nextButton.interactable = false;
+        
+        Fade(_targetGuides, 0.1f, 0);
+
+        Fade(_bigboxGuides, 0.1f, 0);
+
         _targetGuides.gameObject.SetActive(false);            
 
         _bigboxGuides.gameObject.SetActive(false);
+        
+
+
+        if (_clickCounts >= 1)
+        {
+            IsEnded?.Invoke();
+
+            Deactivate();            
+        }        
 
         if (_clickCounts == 0)
         {
@@ -88,16 +104,10 @@ public class TutorialPanel : MonoBehaviour
             DOVirtual.DelayedCall(_textPause + _textPause, () => Fade(_attackGuidesCommon, 1, _textFadeDuration));
 
             _clickCounts++;
+
+            //DOVirtual.DelayedCall(_textPause + _textPause, () => _nextButton.interactable = true);
         }
 
-        else if (_clickCounts >= 1)
-        {
-            IsEnded?.Invoke();
-
-            Deactivate();
-
-            //_infoPanel.gameObject.SetActive(true);
-        }        
     }
 
     private void FadeOut(Image image)
