@@ -236,10 +236,10 @@ public class Movement : MonoBehaviour
             result = true;
         }
 
-        if (result == false) 
+        /*if (result == false) 
             print("не под потолком!!!");
         else
-            print("все ок");
+            print("все ок");*/
 
         return result;
     }   

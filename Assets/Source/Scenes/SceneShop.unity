@@ -365,6 +365,10 @@ PrefabInstance:
       propertyPath: translationName
       value: MoveSpeed
       objectReference: {fileID: 0}
+    - target: {fileID: 1935570374, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
+      propertyPath: FallbackText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2759470592554527895, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 16.095764
@@ -495,6 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1851282963, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
+    - {fileID: 1686186408, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
 --- !u!224 &231398306 stripped
 RectTransform:
@@ -826,7 +831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0414\u0430\u043B\u044C\u0448\u0435"
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -916,7 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: Next
-  FallbackText: Next
+  FallbackText: "\u0414\u0430\u043B\u044C\u0448\u0435"
 --- !u!1 &346954697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,7 +1392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u043A\u0438\u043B\u043B \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
+  m_text: Health level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -1477,7 +1482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: HealthLevel
-  FallbackText: 'Health level: 0'
+  FallbackText: "\u0421\u043A\u0438\u043B\u043B \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
 --- !u!1001 &483538014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1680,7 +1685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413824239390305880, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1277243761830930347, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1688,11 +1693,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545962857274251645, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5222222
       objectReference: {fileID: 0}
     - target: {fileID: 1545962857274251645, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3474037442746823776, guid: 236ca55cc14be1c4da0d201385ea81ff, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1942,7 +1947,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041C\u043E\u043D\u0435\u0442"
+  m_text: Coins
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -2032,7 +2037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: Coins
-  FallbackText: 'Gold: 0'
+  FallbackText: "\u041C\u043E\u043D\u0435\u0442"
 --- !u!1 &803464299
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2242,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u043A\u0438\u043B\u043B \u0440\u0430\u0434\u0438\u0443\u0441\u0430"
+  m_text: Radius level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -2327,7 +2332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: RadiusLevel
-  FallbackText: 'Radius level: 0'
+  FallbackText: "\u0421\u043A\u0438\u043B\u043B \u0440\u0430\u0434\u0438\u0443\u0441\u0430"
 --- !u!1 &873964548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,7 +3269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C"
+  m_text: Level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -3519,7 +3524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u043A\u0438\u043B\u043B \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
+  m_text: Speed level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -3609,7 +3614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: SpeedLevel
-  FallbackText: 'Speed level: 0'
+  FallbackText: "\u0421\u043A\u0438\u043B\u043B \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
 --- !u!1 &1332339329
 GameObject:
   m_ObjectHideFlags: 0
@@ -4517,7 +4522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: Loading
-  FallbackText: Loading...
+  FallbackText: 
 --- !u!1 &1756099802
 GameObject:
   m_ObjectHideFlags: 0
@@ -4577,7 +4582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041C\u0430\u0433\u0430\u0437\u0438\u043D"
+  m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -4743,10 +4748,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806f0696300aeac44a0e17efee222854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLanguage: Russian
+  currentLanguage: English
   detectLanguage: 0
-  defaultLanguage: English
-  saveLoad: 1
+  defaultLanguage: Turkish
+  saveLoad: 0
   prefabs: []
 --- !u!4 &1954641615
 Transform:
@@ -4934,7 +4939,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412\u044B\u0445\u043E\u0434"
+  m_text: Exit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -5024,7 +5029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationName: Exit
-  FallbackText: Exit
+  FallbackText: "\u0412\u044B\u0445\u043E\u0434"
 --- !u!1 &2059295460
 GameObject:
   m_ObjectHideFlags: 0
@@ -5453,6 +5458,10 @@ PrefabInstance:
       propertyPath: FallbackText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1935570374, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
+      propertyPath: FallbackText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1370529146538268447, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
       propertyPath: m_text
       value: 
@@ -5595,6 +5604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1851282963, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
+    - {fileID: 1686186408, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 035c418c5974cac4c8c44c7ed9180793, type: 3}
 --- !u!224 &2622315814641957874 stripped
 RectTransform:
@@ -5608,6 +5618,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1014918310}
     m_Modifications:
+    - target: {fileID: 464171291354925624, guid: c2d559b85e2580d49b94e7304e562657, type: 3}
+      propertyPath: FallbackText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 464171291354925627, guid: c2d559b85e2580d49b94e7304e562657, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.89116395
@@ -5864,6 +5878,10 @@ PrefabInstance:
     - target: {fileID: 7131749540771983554, guid: a930491f2f33df749be2bf67aca2f6c8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 3.2496338
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764345964512919436, guid: a930491f2f33df749be2bf67aca2f6c8, type: 3}
+      propertyPath: FallbackText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8764345964512919436, guid: a930491f2f33df749be2bf67aca2f6c8, type: 3}
       propertyPath: translationName
