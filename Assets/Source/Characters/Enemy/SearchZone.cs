@@ -56,12 +56,12 @@ public class SearchZone : MonoBehaviour
         while (_enemy.CanSee(target.transform) == false)
         {
             yield return _delay;
-            print($"не вижу плеера");
+            //print($"не вижу плеера");
         }
         
         ChangedTarget?.Invoke(target);
         _isAcquireTarget = true;
-        print($"Вижу плеера");
+        //print($"Вижу плеера");
         StopCoroutine();
     }
 

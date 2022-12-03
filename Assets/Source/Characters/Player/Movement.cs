@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _spinAttackCooldown = 1f;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
+    [SerializeField] private LayerMask _ceilLayerMask;
     [SerializeField] private AreaAttack _areaAttack;
 
     private CharacterController _controller;
@@ -28,7 +29,7 @@ public class Movement : MonoBehaviour
 
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
-    private const int _maxPointCount = 50;
+    private const int _maxPointCount = 10;
 
     public event Action<State,bool> ChangedState;
     public event Action<float> ChangedMoveSpeed;
@@ -70,7 +71,7 @@ public class Movement : MonoBehaviour
             _controller.Move(_speed * Time.deltaTime * transform.forward);
             float currentSpeed = _controller.velocity.magnitude / _speed;
             ChangedMoveSpeed?.Invoke(currentSpeed);
-        }
+        }        
     }
 
     public void OnDied()
@@ -213,10 +214,35 @@ public class Movement : MonoBehaviour
         else
         {
             point = startPosition + _attackDirection * distance;
+
+            if (CeilCheck(point) == false)
+                return startPosition;
         }
 
         return point;
     }
+    private bool CeilCheck(Vector3 position)
+    {
+        bool result = false;
+
+        Vector3 _direction = Vector3.down;
+
+        float distance = 20;
+
+        if (Physics.Raycast(position, _direction, out _, distance, _ceilLayerMask))
+        {
+            Debug.DrawRay(position, _direction * distance, Color.red);
+
+            result = true;
+        }
+
+        if (result == false) 
+            print("не под потолком!!!");
+        else
+            print("все ок");
+
+        return result;
+    }   
 
     private void SetChangeMoving(bool activate)
     {
@@ -259,6 +285,7 @@ public class Movement : MonoBehaviour
         while (Vector3.Distance(transform.position, pointPosition) >= stoppingDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointPosition, _speedInAttack * Time.deltaTime);
+            
             yield return null;
         }
     }
