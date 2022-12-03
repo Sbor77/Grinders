@@ -48,6 +48,7 @@ public class GamesSdk : MonoBehaviour
         //#if VK_GAMES
         //        yield return Agava.VKGames.VKGamesSdk.Initialize(OnVKSDKInitialize);
         //#endif
+        yield return null;
     }
 
     #region language
