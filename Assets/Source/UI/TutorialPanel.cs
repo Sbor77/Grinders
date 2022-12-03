@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,12 +43,17 @@ public class TutorialPanel : MonoBehaviour
 
     private void Start()
     {
+        _nextButton.interactable = false;
+
         DOVirtual.DelayedCall(0.5f, () =>
         {            
             _playerGuides.SetActive(true);
             Fade(_targetGuides, 1, 1);
             FadeOut(_missionPad);
-            DOVirtual.DelayedCall(_textPause, () => Fade(_bigboxGuides, 1, _textFadeDuration));
+
+            Fade(_bigboxGuides, 1, _textFadeDuration);
+
+            DOVirtual.DelayedCall(_textPause, () => _nextButton.interactable = true);            
         });
     }
 
@@ -61,17 +64,10 @@ public class TutorialPanel : MonoBehaviour
 
     private void OnClickButton()
     {
-        //_nextButton.interactable = false;
-        
-        Fade(_targetGuides, 0.1f, 0);
-
-        Fade(_bigboxGuides, 0.1f, 0);
-
         _targetGuides.gameObject.SetActive(false);            
 
         _bigboxGuides.gameObject.SetActive(false);
         
-
 
         if (_clickCounts >= 1)
         {
@@ -82,7 +78,7 @@ public class TutorialPanel : MonoBehaviour
 
         if (_clickCounts == 0)
         {
-            _missionPad.gameObject.SetActive(false);            
+            _targetGuides.gameObject.SetActive(false);                   
 
             if (DataHandler.Instance.IsMobile())            
             {
@@ -103,11 +99,8 @@ public class TutorialPanel : MonoBehaviour
 
             DOVirtual.DelayedCall(_textPause + _textPause, () => Fade(_attackGuidesCommon, 1, _textFadeDuration));
 
-            _clickCounts++;
-
-            //DOVirtual.DelayedCall(_textPause + _textPause, () => _nextButton.interactable = true);
+            _clickCounts++;            
         }
-
     }
 
     private void FadeOut(Image image)
