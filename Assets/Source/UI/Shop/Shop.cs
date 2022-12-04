@@ -16,6 +16,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         _leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
+        GamesSdk.Instance.SetLeaderboardScore(DataHandler.Instance.GetSavedTotalScore());
         OnStatBought();
         GamesSdk.Instance.InterstitialAdShow();
     }

@@ -11,7 +11,7 @@ public class GamesSdk : MonoBehaviour
 
     private List<Leader> _leaders;
     private string _leaderboardName = "LeaderBoard";
-    private int _playerScore = 100;
+    private int _playerScore = 0;
     private bool _isInitialize;
 
     public event Action Rewarded;
@@ -158,10 +158,12 @@ public class GamesSdk : MonoBehaviour
         return _leaders;
     }
 
-    public void SetLeaderboardScore()
+    public void SetLeaderboardScore(int playerScore)
     {
         if (!_isInitialize)
             return;
+
+        _playerScore = playerScore;
 
         if (PlayerAccount.IsAuthorized)
         {
@@ -194,6 +196,7 @@ public class GamesSdk : MonoBehaviour
     {
         _isInitialize = true;
         LoadLocalization();
+        Debug.Log("Initialization succeeded");
     }
 
     private void OnVideoOpenCallback()
