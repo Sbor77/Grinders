@@ -18,7 +18,7 @@ public class DataHandler : MonoBehaviour
     private string _masterVolume = "MasterVolume";
     private string _musicVolume = "MusicVolume";
     private string _effectsVolume = "EffectsVolume";
-    private string _language = "Languagu";
+    private string _language = "Language";
     private string _ru = "Russian";
     
     public static DataHandler Instance { get; private set; }
