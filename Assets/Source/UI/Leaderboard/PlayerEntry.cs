@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PlayerEntry : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _positionText;
-    [SerializeField] private TextMeshProUGUI _nameText;
-    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _name;
+    [SerializeField] private TextMeshProUGUI _score;
+    [SerializeField] private TextMeshProUGUI _place;
 
-    public void SetPlayer(Leader player)
+    public void Render(string name, string score, string place)
     {
-        _positionText.text = player.Ranks.ToString();
-        _nameText.text = player.Names;
-        _scoreText.text = player.Scores.ToString();
+        _name.text = name;
+        _score.text = score;
+        _place.text = place;
     }
 }
