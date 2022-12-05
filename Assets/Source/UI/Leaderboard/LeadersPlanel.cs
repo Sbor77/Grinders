@@ -16,7 +16,6 @@ public class LeadersPlanel : MonoBehaviour
     {
         _okButton.onClick.AddListener(HideLeaderboard);
         _liderCount = ShowLeaders();
-        Debug.Log(_liderCount);
     }
 
     private void OnDisable()
@@ -45,7 +44,8 @@ public class LeadersPlanel : MonoBehaviour
 
         Leaderboard.GetEntries("LeaderBoard", (result) =>
         {
-            Debug.Log($"My rank = {result.userRank}");
+            print($"My rank = {result.userRank}");
+            
             foreach (var entry in result.entries)
             {
                 string name = entry.player.publicName;
@@ -57,7 +57,7 @@ public class LeadersPlanel : MonoBehaviour
                 int place = entry.rank;
 
                 leaders.Add(new Leader(entry.rank, entry.score, name));
-                Debug.Log(name + " " + entry.score);
+                print(name + " " + entry.score);
             }
         });
 
