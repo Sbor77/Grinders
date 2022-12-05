@@ -20,6 +20,7 @@ public class GamesSdk : MonoBehaviour
     public event Action InterstitialAdOpened;
     public event Action InterstitialAdClosed;
 
+    private const float WaitTime = .25f;
     public static GamesSdk Instance { get; private set; }
 
     private void Awake()
@@ -41,14 +42,22 @@ public class GamesSdk : MonoBehaviour
         yield break;
 #endif
 
-#if YANDEX_GAMES
+#if UNITY_WEBGL
         yield return YandexGamesSdk.Initialize(OnInitialized);
 #endif
 
         //#if VK_GAMES
         //        yield return Agava.VKGames.VKGamesSdk.Initialize(OnVKSDKInitialize);
         //#endif
-        yield return null;
+        while (!YandexGamesSdk.IsInitialized)
+        {
+            yield return new WaitForSeconds(WaitTime);
+
+            if (YandexGamesSdk.IsInitialized)
+            {
+                LoadLocalization();
+            }
+        }
     }
 
     #region language
