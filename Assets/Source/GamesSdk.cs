@@ -56,6 +56,7 @@ public class GamesSdk : MonoBehaviour
             if (YandexGamesSdk.IsInitialized)
             {
                 LoadLocalization();
+                Debug.Log("Yandex SDK initialized");
             }
         }
     }
