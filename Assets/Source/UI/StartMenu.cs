@@ -47,7 +47,8 @@ public class StartMenu : MonoBehaviour
         float masterVolume = DataHandler.Instance.GetSavedMasterVolume();
         float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
         float effectsVolume = DataHandler.Instance.GetSavedEffectsVolume();
-        
+        string language = DataHandler.Instance.GetSavedLanguage();
+
         DataHandler.Instance.DeleteAllStats();
 
         int defaultLevel = 1;
@@ -68,6 +69,7 @@ public class StartMenu : MonoBehaviour
         DataHandler.Instance.SaveMasterVolume(masterVolume);
         DataHandler.Instance.SaveMusicVolume(musicVolume);
         DataHandler.Instance.SaveEffectsVolume(effectsVolume);
+        DataHandler.Instance.SaveLanguage(language);
         DataHandler.Instance.SaveAllStats();
         
         _loaderPanel.LoadLevel(_indexLevel);

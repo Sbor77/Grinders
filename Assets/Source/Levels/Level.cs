@@ -37,6 +37,8 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
+        LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());
+
         //_leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
 
         _missionConditions = _infoViewer.MissionConditions;
