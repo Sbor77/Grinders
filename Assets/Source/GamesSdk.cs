@@ -43,7 +43,7 @@ public class GamesSdk : MonoBehaviour
 #endif
 
 #if UNITY_WEBGL
-        yield return YandexGamesSdk.Initialize(OnInitialized);
+        yield return YandexGamesSdk.Initialize();
 #endif
 
         //#if VK_GAMES
