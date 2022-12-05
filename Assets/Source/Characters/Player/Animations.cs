@@ -98,8 +98,7 @@ public class Animations : MonoBehaviour
 
     private void MassAttack()
     {
-        _animator.SetTrigger(AreaAttack);
-        print("Массовая атака запущена");
+        _animator.SetTrigger(AreaAttack);        
     }
 
     private void StateAttackSpin(State state)
