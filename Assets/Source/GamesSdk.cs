@@ -7,8 +7,6 @@ using Lean.Localization;
 
 public class GamesSdk : MonoBehaviour
 {
-    [SerializeField] private LeanLocalization _leanLocalization;
-
     private List<Leader> _leaders;
     private string _leaderboardName = "LeaderBoard";
     private bool _isInitialize;
@@ -116,9 +114,7 @@ public class GamesSdk : MonoBehaviour
                 break;
         }
 
-        LeanLocalization.SetCurrentLanguageAll(lang);
-
-        //_leanLocalization.SetCurrentLanguage(lang);
+        LeanLocalization.SetCurrentLanguageAll(lang);        
 
         DataHandler.Instance.SaveLanguage(lang);
     }

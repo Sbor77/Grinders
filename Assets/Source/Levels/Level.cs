@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 using Lean.Localization;
 
 public class Level : MonoBehaviour
-{
-    //[SerializeField] private LeanLocalization _leanLocalization;
+{    
     [SerializeField] private Player _player;
     [SerializeField] private InfoViewer _infoViewer;
     [SerializeField] private EffectHandler _finalEffects;
@@ -37,9 +36,7 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());
-
-        //_leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
+        LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());        
 
         _missionConditions = _infoViewer.MissionConditions;
 

@@ -52,7 +52,7 @@ public class DataHandler : MonoBehaviour
     {
         AudioListener.pause = inBackground;
         AudioListener.volume = inBackground ? 0f : 1f;
-        Time.timeScale = inBackground ? 0f : 1f;
+        //Time.timeScale = inBackground ? 0f : 1f;
     }
     #endregion
 

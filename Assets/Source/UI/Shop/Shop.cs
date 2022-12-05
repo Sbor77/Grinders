@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
-{
-    [SerializeField] private LeanLocalization _leanLocalization;
+{    
     [SerializeField] private SkillBuyer _skillBuyer;
     [SerializeField] private StatsViewer _statsViewer;
     [SerializeField] private Button _exitButton;
@@ -14,8 +13,7 @@ public class Shop : MonoBehaviour
     private int _introSceneIndex = 0;
 
     private void Start()
-    {
-        //_leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
+    {        
         GamesSdk.Instance.SetLeaderboardScore(DataHandler.Instance.GetSavedTotalScore());
         OnStatBought();
         GamesSdk.Instance.InterstitialAdShow();
