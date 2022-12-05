@@ -7,7 +7,7 @@ using Lean.Localization;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] private LeanLocalization _leanLocalization;
+    //[SerializeField] private LeanLocalization _leanLocalization;
     [SerializeField] private Player _player;
     [SerializeField] private InfoViewer _infoViewer;
     [SerializeField] private EffectHandler _finalEffects;
