@@ -34,6 +34,8 @@ public class GamesSdk : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        YandexGamesSdk.CallbackLogging = true;
     }
 
     private IEnumerator Start()
@@ -66,6 +68,7 @@ public class GamesSdk : MonoBehaviour
         if (_isInitialize)
             lang = YandexGamesSdk.Environment.i18n.lang;
 
+        Debug.Log("Select language = " + lang);
         return lang;
     }
 
@@ -128,7 +131,7 @@ public class GamesSdk : MonoBehaviour
 #if YANDEX_GAMES
         Agava.YandexGames.VideoAd.Show(OnVideoOpenCallback, OnRewardedCallback, OnVideoCloseCallback, OnVideoErrorCallback);
 #endif
-        
+
 #if VK_GAMES
         Agava.VKGames.VideoAd.Show(OnRewardedCallback);
 #endif
