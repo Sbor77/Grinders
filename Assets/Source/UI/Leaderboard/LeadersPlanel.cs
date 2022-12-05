@@ -44,7 +44,7 @@ public class LeadersPlanel : MonoBehaviour
 
         Leaderboard.GetEntries("LeaderBoard", (result) =>
         {
-            print($"My rank = {result.userRank}");
+            print($"Leader counts = {result.entries.Length}");
             
             foreach (var entry in result.entries)
             {

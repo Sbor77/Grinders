@@ -47,12 +47,11 @@ public class GamesSdk : MonoBehaviour
         // Always wait for it if invoking something immediately in the first scene.
         yield return YandexGamesSdk.Initialize();
 
-        //if (YandexGamesSdk.IsInitialized)
-        //{
-        //    Debug.Log("SDK started!");
-        //    _isInitialize = true;
-        //    LoadLocalization();
-        //}
+        if (YandexGamesSdk.IsInitialized)
+        {
+            ShowInitializationResult();
+            NextStep();
+        }
 
         while (!YandexGamesSdk.IsInitialized)
         {
@@ -60,20 +59,30 @@ public class GamesSdk : MonoBehaviour
 
             if (YandexGamesSdk.IsInitialized)
             {
-                Debug.Log("SDK started!");
-                Debug.Log("Player autorize stat: " + PlayerAccount.IsAuthorized);
-                
-                Leaderboard.GetPlayerEntry(_leaderboardName, (result) =>
-                {
-                    string name = result.player.publicName;
-                    if (string.IsNullOrEmpty(name))
-                        Debug.Log("LeaderBoadr is initialized!");
-                });
-                
-                _isInitialize = true;
-                LoadLocalization();
+                ShowInitializationResult();
+                NextStep();
             }
         }
+    }
+
+    private void ShowInitializationResult()
+    {
+        Debug.Log("SDK started!");
+        Debug.Log("Player autorize stat: " + PlayerAccount.IsAuthorized);
+
+        Leaderboard.GetPlayerEntry(_leaderboardName, (result) =>
+        {
+            string name = result.player.publicName;
+            if (string.IsNullOrEmpty(name))
+                Debug.Log("LeaderBoadr is initialized!");
+        });
+    }
+
+    private void NextStep()
+    {
+        _isInitialize = true;
+        LoadLocalization();
+
     }
 
     #region language
