@@ -11,7 +11,6 @@ public class GamesSdk : MonoBehaviour
 
     private List<Leader> _leaders;
     private string _leaderboardName = "LeaderBoard";
-    private int _playerScore = 0;
     private bool _isInitialize;
 
     public event Action Rewarded;
@@ -21,6 +20,7 @@ public class GamesSdk : MonoBehaviour
     public event Action InterstitialAdClosed;
 
     private const float WaitTime = .25f;
+
     public static GamesSdk Instance { get; private set; }
 
     private void Awake()
@@ -40,14 +40,19 @@ public class GamesSdk : MonoBehaviour
 
     private IEnumerator Start()
     {
-#if !UNITY_WEBGL && UNITY_EDITOR
+#if !UNITY_WEBGL || UNITY_EDITOR
         yield break;
 #endif
 
+        // Always wait for it if invoking something immediately in the first scene.
         yield return YandexGamesSdk.Initialize();
 
-        if (YandexGamesSdk.IsInitialized)
-            Debug.Log("SDK started!");
+        //if (YandexGamesSdk.IsInitialized)
+        //{
+        //    Debug.Log("SDK started!");
+        //    _isInitialize = true;
+        //    LoadLocalization();
+        //}
 
         while (!YandexGamesSdk.IsInitialized)
         {
@@ -55,6 +60,17 @@ public class GamesSdk : MonoBehaviour
 
             if (YandexGamesSdk.IsInitialized)
             {
+                Debug.Log("SDK started!");
+                Debug.Log("Player autorize stat: " + PlayerAccount.IsAuthorized);
+                
+                Leaderboard.GetPlayerEntry(_leaderboardName, (result) =>
+                {
+                    string name = result.player.publicName;
+                    if (string.IsNullOrEmpty(name))
+                        Debug.Log("LeaderBoadr is initialized!");
+                });
+                
+                _isInitialize = true;
                 LoadLocalization();
             }
         }
@@ -173,11 +189,13 @@ public class GamesSdk : MonoBehaviour
         if (!_isInitialize)
             return;
 
-        _playerScore = playerScore;
-
         if (PlayerAccount.IsAuthorized)
         {
-            Leaderboard.GetPlayerEntry(_leaderboardName, OnPlayerEntrySuccessCallback);
+            Leaderboard.GetPlayerEntry(_leaderboardName, (result) =>
+            {
+                if (result == null || playerScore > result.score)
+                    Leaderboard.SetScore(_leaderboardName, playerScore);
+            });
         }
     }
 
@@ -202,13 +220,6 @@ public class GamesSdk : MonoBehaviour
     #endregion
 
     #region events
-    private void OnInitialized()
-    {
-        _isInitialize = true;
-        LoadLocalization();
-        Debug.Log("Initialization succeeded");
-    }
-
     private void OnVideoOpenCallback()
     {
         AdVideoOpened?.Invoke();

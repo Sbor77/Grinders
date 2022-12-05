@@ -1,11 +1,10 @@
 {
-    "name": "WebUtility",
+    "name": "Agava.WebUtility.Samples.Playtesting",
     "rootNamespace": "",
-    "references": [],
-    "includePlatforms": [
-        "Editor",
-        "WebGL"
+    "references": [
+        "GUID:8f22d867f50f3884892cfde18442bbf9"
     ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

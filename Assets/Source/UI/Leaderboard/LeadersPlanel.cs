@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Agava.YandexGames;
 
 public class LeadersPlanel : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class LeadersPlanel : MonoBehaviour
     [SerializeField] private LeadersViewer _leaders;
     [SerializeField] private PlayerViewer _player;
 
+    private int _liderCount = 0;
+
     private void OnEnable()
     {
         _okButton.onClick.AddListener(HideLeaderboard);
+        _liderCount = ShowLeaders();
+        Debug.Log(_liderCount);
     }
 
     private void OnDisable()
@@ -20,29 +25,44 @@ public class LeadersPlanel : MonoBehaviour
     }
 
     public void ShowLeaderboard()
-    {
-        ViewLeaders();
+    { 
         gameObject.SetActive(true);
-    }
-
-    private void ViewLeaders()
-    {
-#if YANDEX_GAMES
-        List<Leader> leaders = GamesSdk.Instance.GetYandexLeaderboard();
-        Leader player = GamesSdk.Instance.GetLeaderboardPlayerEntry();
-
-        _leaders.SetLeaders(leaders);
-        _player.SetPlayerStats(player.Ranks, player.Scores);
-#endif
-
-#if UNITY_EDITOR
-        print("Будет работать только на YandexGames");
-        _player.SetPlayerStats(1, DataHandler.Instance.GetSavedTotalScore());
-#endif
     }
 
     private void HideLeaderboard()
     {
         gameObject.SetActive(false);
+    }
+
+    public int ShowLeaders()
+    {
+        List<Leader> leaders = new List<Leader>();
+
+        if (!PlayerAccount.IsAuthorized)
+        {
+            PlayerAccount.Authorize();
+        }
+
+        Leaderboard.GetEntries("LeaderBoard", (result) =>
+        {
+            Debug.Log($"My rank = {result.userRank}");
+            foreach (var entry in result.entries)
+            {
+                string name = entry.player.publicName;
+
+                if (string.IsNullOrEmpty(name))
+                    name = "Anonymous";
+                
+                int score = entry.score;
+                int place = entry.rank;
+
+                leaders.Add(new Leader(entry.rank, entry.score, name));
+                Debug.Log(name + " " + entry.score);
+            }
+        });
+
+        _leaders.SetLeaders(leaders);
+
+        return leaders.Count;
     }
 }
