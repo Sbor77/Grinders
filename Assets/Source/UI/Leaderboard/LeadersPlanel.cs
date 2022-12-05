@@ -20,11 +20,6 @@ public class LeadersPlanel : MonoBehaviour
         _okButton.onClick.AddListener(HideLeaderboard);
     }
 
-    private void Start()
-    {
-        ShowLeaders();
-    }
-
     private void OnDisable()
     {
         _okButton.onClick.RemoveListener(HideLeaderboard);
@@ -40,7 +35,7 @@ public class LeadersPlanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void ShowLeaders()
+    public void ShowLeaders()
     {
          _leaderList = new List<Leader>();
 
