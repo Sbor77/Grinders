@@ -61,6 +61,7 @@ public class LeadersPlanel : MonoBehaviour
             }
         });
 
+        print("leaders count = " + leaders.Count);
         _leaders.SetLeaders(leaders);
 
         return leaders.Count;

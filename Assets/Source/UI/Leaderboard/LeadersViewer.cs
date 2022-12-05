@@ -16,7 +16,10 @@ public class LeadersViewer : MonoBehaviour
             leaderCount = _maxPlayerViews;
 
         for (int i = 0; i < leaderCount; i++)
+        {
+            print($"view result: {leaders[i].Names} {leaders[i].Scores}");
             SetPlayerEntry(i, leaders[i]);
+        }
     }
 
     private void SetPlayerEntry(int leaderIndex, Leader currentLeader)
