@@ -39,7 +39,7 @@ public class LeadersPanel : MonoBehaviour
             PlayerAccount.Authorize();
         }
 
-        Leaderboard.GetEntries("PlaytestBoard", (result) =>
+        Leaderboard.GetEntries("LeaderBoard", (result) =>
         {
             Debug.Log($"My rank = {result.userRank}");
 
