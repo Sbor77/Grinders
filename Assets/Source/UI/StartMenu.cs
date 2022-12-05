@@ -83,6 +83,7 @@ public class StartMenu : MonoBehaviour
 
     private void ShowLeaderboard()
     {
+        _leadersPlanel.ShowLeaders();
         _leadersPlanel.ShowLeaderboard();
     }
 }
