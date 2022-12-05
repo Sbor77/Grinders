@@ -12,7 +12,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _leaderboardButton;
     [SerializeField] private SceneLevelLoader _loaderPanel;
-    [SerializeField] private LeadersPlanel _leadersPlanel;
+    [SerializeField] private LeadersPanel _leadersPlanel;
 
     private int _indexLevel = 1;
     private List<Leader> leaders;
@@ -83,7 +83,7 @@ public class StartMenu : MonoBehaviour
 
     private void ShowLeaderboard()
     {
-        _leadersPlanel.ShowLeaders();
-        _leadersPlanel.ShowLeaderboard();
+        //_leadersPlanel.ShowLeaders();
+        _leadersPlanel.gameObject.SetActive(true);
     }
 }
