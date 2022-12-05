@@ -2742,7 +2742,7 @@ MonoBehaviour:
   currentLanguage: Russian
   detectLanguage: 0
   defaultLanguage: Russian
-  saveLoad: 1
+  saveLoad: 0
   prefabs: []
 --- !u!4 &1221453242
 Transform:
