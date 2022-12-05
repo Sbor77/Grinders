@@ -250,13 +250,13 @@ public class GamesSdk : MonoBehaviour
         Debug.LogError(message);
     }
 
-    private void OnPlayerEntrySuccessCallback(LeaderboardEntryResponse result)
-    {
-        if (result == null || _playerScore > result.score)
-        {
-            Leaderboard.SetScore(_leaderboardName, _playerScore);
-        }
-    }
+    //private void OnPlayerEntrySuccessCallback(LeaderboardEntryResponse result)
+    //{
+    //    if (result == null || _playerScore > result.score)
+    //    {
+    //        Leaderboard.SetScore(_leaderboardName, _playerScore);
+    //    }
+    //}
     #endregion
 }
 
