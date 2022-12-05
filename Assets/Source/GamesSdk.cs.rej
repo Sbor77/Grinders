@@ -1,0 +1,10 @@
+diff a/Assets/Source/GamesSdk.cs b/Assets/Source/GamesSdk.cs	(rejected hunks)
+@@ -43,7 +43,7 @@
+ #endif
+ 
+ #if UNITY_WEBGL
+-        yield return YandexGamesSdk.Initialize(OnInitialized);
++        yield return YandexGamesSdk.Initialize();
+ #endif
+ 
+         //#if VK_GAMES
