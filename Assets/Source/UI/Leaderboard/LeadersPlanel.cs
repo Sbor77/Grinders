@@ -7,15 +7,21 @@ using Agava.YandexGames;
 public class LeadersPlanel : MonoBehaviour
 {
     [SerializeField] private Button _okButton;
-    [SerializeField] private LeadersViewer _leaders;
+    [SerializeField] private LeadersViewer _leaderViewers;
     [SerializeField] private PlayerViewer _player;
 
     private int _liderCount = 0;
+    private List<Leader> _leaderList;
 
     private void OnEnable()
     {
         _okButton.onClick.AddListener(HideLeaderboard);
+    }
+
+    private void Start()
+    {
         _liderCount = ShowLeaders();
+        print("leaders count = " + _leaderList.Count);
     }
 
     private void OnDisable()
@@ -33,9 +39,9 @@ public class LeadersPlanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public int ShowLeaders()
+    private int ShowLeaders()
     {
-        List<Leader> leaders = new List<Leader>();
+         _leaderList = new List<Leader>();
 
         if (!PlayerAccount.IsAuthorized)
         {
@@ -44,8 +50,6 @@ public class LeadersPlanel : MonoBehaviour
 
         Leaderboard.GetEntries("LeaderBoard", (result) =>
         {
-            print($"Leader counts = {result.entries.Length}");
-            
             foreach (var entry in result.entries)
             {
                 string name = entry.player.publicName;
@@ -53,17 +57,12 @@ public class LeadersPlanel : MonoBehaviour
                 if (string.IsNullOrEmpty(name))
                     name = "Anonymous";
                 
-                int score = entry.score;
-                int place = entry.rank;
-
-                leaders.Add(new Leader(entry.rank, entry.score, name));
-                print(name + " " + entry.score);
+                _leaderList.Add(new Leader(entry.rank, entry.score, name));
             }
         });
 
-        print("leaders count = " + leaders.Count);
-        _leaders.SetLeaders(leaders);
+        _leaderViewers.SetLeaders(_leaderList);
 
-        return leaders.Count;
+        return _leaderList.Count;
     }
 }
