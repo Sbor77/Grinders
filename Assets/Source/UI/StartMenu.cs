@@ -29,7 +29,7 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
-        _leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
+        //_leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
 
         if (DataHandler.Instance.GetSavedLevel() <= 1)
             _continueButton.interactable = false;
