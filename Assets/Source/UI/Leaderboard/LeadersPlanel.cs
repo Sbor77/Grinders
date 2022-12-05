@@ -9,8 +9,10 @@ public class LeadersPlanel : MonoBehaviour
     [SerializeField] private Button _okButton;
     [SerializeField] private LeadersViewer _leaderViewers;
     [SerializeField] private PlayerViewer _player;
+    [SerializeField] private List<PlayerEntry> _playerEntries;
 
-    private int _liderCount = 0;
+    private int _maxPlayerViews;
+    private int _currentPlayerIndex = 0;
     private List<Leader> _leaderList;
 
     private void OnEnable()
@@ -20,8 +22,7 @@ public class LeadersPlanel : MonoBehaviour
 
     private void Start()
     {
-        _liderCount = ShowLeaders();
-        print("leaders count = " + _leaderList.Count);
+        ShowLeaders();
     }
 
     private void OnDisable()
@@ -39,7 +40,7 @@ public class LeadersPlanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private int ShowLeaders()
+    private void ShowLeaders()
     {
          _leaderList = new List<Leader>();
 
@@ -61,8 +62,22 @@ public class LeadersPlanel : MonoBehaviour
             }
         });
 
-        _leaderViewers.SetLeaders(_leaderList);
-
-        return _leaderList.Count;
+        //_leaderViewers.SetLeaders(_leaderList);
     }
+
+
+    public void SetLeaders(Leader leaders)
+    {
+        if (_currentPlayerIndex < _maxPlayerViews)
+        {
+            _currentPlayerIndex++;
+            SetPlayerEntry(_currentPlayerIndex, leaders);
+        }
+    }
+
+    private void SetPlayerEntry(int leaderIndex, Leader currentLeader)
+    {
+        _playerEntries[leaderIndex].SetPlayer(currentLeader);
+    }
+
 }

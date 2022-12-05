@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PlayerEntry : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _positionText;
-    [SerializeField] private TMP_Text _nameText;
-    [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private TextMeshProUGUI _positionText;
+    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TextMeshProUGUI _scoreText;
 
     public void SetPlayer(Leader player)
     {
