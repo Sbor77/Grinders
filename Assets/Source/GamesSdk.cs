@@ -107,7 +107,10 @@ public class GamesSdk : MonoBehaviour
                 break;
         }
 
-        _leanLocalization.SetCurrentLanguage(lang);
+        Lean.Localization.LeanLocalization.SetCurrentLanguageAll(lang);
+
+        //_leanLocalization.SetCurrentLanguage(lang);
+
         DataHandler.Instance.SaveLanguage(lang);
     }
 
