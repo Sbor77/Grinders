@@ -38,17 +38,15 @@ public class GamesSdk : MonoBehaviour
 
     private IEnumerator Start()
     {
-#if UNITY_EDITOR
+#if !UNITY_WEBGL && UNITY_EDITOR
         yield break;
 #endif
 
-#if UNITY_WEBGL
         yield return YandexGamesSdk.Initialize();
-#endif
 
-        //#if VK_GAMES
-        //        yield return Agava.VKGames.VKGamesSdk.Initialize(OnVKSDKInitialize);
-        //#endif
+        if (YandexGamesSdk.IsInitialized)
+            Debug.Log("SDK started!");
+
         while (!YandexGamesSdk.IsInitialized)
         {
             yield return new WaitForSeconds(WaitTime);
@@ -56,7 +54,6 @@ public class GamesSdk : MonoBehaviour
             if (YandexGamesSdk.IsInitialized)
             {
                 LoadLocalization();
-                Debug.Log("Yandex SDK initialized");
             }
         }
     }
