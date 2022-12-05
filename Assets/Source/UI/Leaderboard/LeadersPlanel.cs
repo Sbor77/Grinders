@@ -58,7 +58,9 @@ public class LeadersPlanel : MonoBehaviour
                 if (string.IsNullOrEmpty(name))
                     name = "Anonymous";
                 
-                _leaderList.Add(new Leader(entry.rank, entry.score, name));
+                //_leaderList.Add(new Leader(entry.rank, entry.score, name));
+                print(entry.rank);
+                SetLeaders(new Leader(entry.rank, entry.score, name));
             }
         });
 
