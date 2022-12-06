@@ -1,4 +1,5 @@
 using Lean.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private Button _gameEndButton;
+    [SerializeField] private TMP_Text _totalScore;
 
     private int _lastLevelIndex = 4;
     private int _introSceneIndex = 0;
@@ -63,6 +65,8 @@ public class Shop : MonoBehaviour
         if (nextLevel >= _lastLevelIndex)
         {
             _gameEndPanel.SetActive(true);
+
+            _totalScore.text = DataHandler.Instance.GetSavedTotalScore().ToString();
 
             _shopPanel.SetActive(false);
         }
