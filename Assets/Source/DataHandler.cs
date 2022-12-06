@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
+
 public class DataHandler : MonoBehaviour
 {
     private string _totalScore = "TotalScore";
@@ -38,7 +39,7 @@ public class DataHandler : MonoBehaviour
     }
 
     #region Event OnInBackground
-    private void OnEnable()
+   /* private void OnEnable()
     {
         WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
     }
@@ -53,7 +54,7 @@ public class DataHandler : MonoBehaviour
         AudioListener.pause = inBackground;
         AudioListener.volume = inBackground ? 0f : 1f;
         //Time.timeScale = inBackground ? 0f : 1f;
-    }
+    }*/
     #endregion
 
     public void SaveLanguage(string lang)
