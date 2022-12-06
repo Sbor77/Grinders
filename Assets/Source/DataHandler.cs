@@ -214,7 +214,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_masterVolume))
             return PlayerPrefs.GetFloat(_masterVolume);
         else
-            return -40;
+            return 0;
     }
 
     public float GetSavedMusicVolume()

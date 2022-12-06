@@ -132,6 +132,7 @@ public class BackgroundMusic : MonoBehaviour
                     _audioSource.clip = _playList[i];
                 }
 
+                _audioSource.volume = 0.25f;
                 _audioSource.Play();
 
                 while (_audioSource.isPlaying)

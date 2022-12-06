@@ -21,6 +21,8 @@ namespace Agava.WebUtility.Samples
             //AudioListener.pause = inBackground;
             //AudioListener.volume = inBackground ? 0f : 1f;
 
+            Time.timeScale = inBackground ? 0f : 1f;
+
             Debug.Log("Sound is paused in OnInBackgroundChange event");
         }
     }

@@ -35,12 +35,11 @@ public class SettingPanel : MonoBehaviour
 
     public void Start()
     {
-
-        _masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == MaxVolume ? true : false;
+        //_masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == MaxVolume ? true : false;
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
         _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
         
-        OnMasterVolumeChanged(_masterVolumeToggle.isOn);
+        OnMasterVolumeChanged(true);
         OnMusicVolumeChanged(_musicVolumeSlider.value);
         OnEffectsVolumeChanged(_effectsVolumeSlider.value);
 
@@ -67,7 +66,7 @@ public class SettingPanel : MonoBehaviour
             DeactivateSlider(_effectsVolumeSlider);
         }
 
-        _audio.SetFloat(Master, volume);
+        _audio.SetFloat(Master, volume);        
 
         DataHandler.Instance.SaveMasterVolume(volume);
     }
