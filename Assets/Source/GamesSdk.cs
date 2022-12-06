@@ -8,7 +8,6 @@ using Lean.Localization;
 public class GamesSdk : MonoBehaviour
 {
     private string _leaderboardName = "LeaderBoard";
-    private bool _isLeadersEmpty;
 
     public string LeaderboardName => _leaderboardName;
 
@@ -48,33 +47,15 @@ public class GamesSdk : MonoBehaviour
         yield return YandexGamesSdk.Initialize();
 
         if (YandexGamesSdk.IsInitialized)
-            NextStep();
+            LoadLocalization();
 
         while (!YandexGamesSdk.IsInitialized)
         {
             yield return new WaitForSeconds(WaitTime);
 
             if (YandexGamesSdk.IsInitialized)
-                NextStep();
+                LoadLocalization();
         }
-    }
-
-    private void TestLeaderboard()
-    {
-        Leaderboard.GetEntries(_leaderboardName, (result) =>
-        {
-            if (result.entries.Length > 0)
-                _isLeadersEmpty = false;
-        });
-
-        ChangedLeaders?.Invoke(_isLeadersEmpty);
-    }
-
-    private void NextStep()
-    {
-        _isLeadersEmpty = true;
-        LoadLocalization();
-        TestLeaderboard();
     }
 
     #region language
@@ -157,8 +138,6 @@ public class GamesSdk : MonoBehaviour
             {
                 if (result == null || playerScore > result.score)
                     Leaderboard.SetScore(_leaderboardName, playerScore);
-                _isLeadersEmpty = false;
-                ChangedLeaders?.Invoke(_isLeadersEmpty);
             });
         }
     }

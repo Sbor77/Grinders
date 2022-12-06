@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using Lean.Localization;
 using System;
 using System.Collections;
@@ -29,10 +30,10 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
-        GamesSdk.Instance.ChangedLeaders += OnChangedLeaders;
-
         if (DataHandler.Instance.GetSavedLevel() <= 1)
             _continueButton.interactable = false;
+
+        ActivateLeaderboard();
     }
 
     private void OnDisable()
@@ -40,12 +41,20 @@ public class StartMenu : MonoBehaviour
         _newGameButton.onClick.RemoveListener(StartNewGame);
         _continueButton.onClick.RemoveListener(ContinueGame);
         _leaderboardButton.onClick.RemoveListener(ShowLeaderboard);
-        GamesSdk.Instance.ChangedLeaders += OnChangedLeaders;
     }
 
-    private void OnChangedLeaders(bool isEmpty)
+    private void ActivateLeaderboard()
     {
-        _leaderboardButton.interactable = !isEmpty;
+        if (YandexGamesSdk.IsInitialized)
+        {
+            Leaderboard.GetEntries(GamesSdk.Instance.LeaderboardName, (result) =>
+            {
+                if (result.entries.Length > 0)
+                    _leaderboardButton.interactable = true;
+                else
+                    _leaderboardButton.interactable = false;
+            });
+        }
     }
 
     private void StartNewGame()
