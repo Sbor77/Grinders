@@ -5366,6 +5366,7 @@ MonoBehaviour:
   _shopPanel: {fileID: 1537015380}
   _gameEndPanel: {fileID: 3182195197473006740}
   _gameEndButton: {fileID: 3182195197453215742}
+  _totalScore: {fileID: 896815806511471295}
 --- !u!1 &2070509816
 GameObject:
   m_ObjectHideFlags: 0
