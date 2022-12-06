@@ -9584,7 +9584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9547ebbc4c181604f9717336921a4254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leanLocalization: {fileID: 695784405}
   _player: {fileID: 1224325715}
   _infoViewer: {fileID: 996515736}
   _finalEffects: {fileID: 1478274575}

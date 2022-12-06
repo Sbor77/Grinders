@@ -9,6 +9,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _nextButton;
     [SerializeField] private SceneLevelLoader _levelLoader;
+    [SerializeField] private GameObject _gameEndPanel;
+    [SerializeField] private Button _gameEndButton;
+
 
     private int _introSceneIndex = 0;
 
@@ -26,6 +29,8 @@ public class Shop : MonoBehaviour
         _exitButton.onClick.AddListener(CloseShop);
 
         _nextButton.onClick.AddListener(NextLevel);
+
+        _gameEndButton.onClick.AddListener(MainMenu);
     }
 
     private void OnDisable()
@@ -35,6 +40,8 @@ public class Shop : MonoBehaviour
         _exitButton.onClick.RemoveListener(CloseShop);
 
         _nextButton.onClick.RemoveListener(NextLevel);
+
+        _gameEndButton.onClick.RemoveListener(MainMenu);
     }
 
     private void CloseShop()
@@ -45,6 +52,11 @@ public class Shop : MonoBehaviour
     private void NextLevel()
     {
         _levelLoader.LoadLevel(DataHandler.Instance.GetSavedLevel());
+    }
+
+    private void MainMenu()
+    {
+        _levelLoader.LoadLevel(_introSceneIndex);
     }
 
     private void OnStatBought()
