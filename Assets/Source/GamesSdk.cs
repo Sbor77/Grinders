@@ -7,15 +7,17 @@ using Lean.Localization;
 
 public class GamesSdk : MonoBehaviour
 {
-    private List<Leader> _leaders;
     private string _leaderboardName = "LeaderBoard";
-    private bool _isInitialize;
+    private bool _isLeadersEmpty;
+
+    public string LeaderboardName => _leaderboardName;
 
     public event Action Rewarded;
     public event Action AdVideoOpened;
     public event Action AdVideoClosed;
     public event Action InterstitialAdOpened;
     public event Action InterstitialAdClosed;
+    public event Action<bool> ChangedLeaders;
 
     private const float WaitTime = .25f;
 
@@ -46,41 +48,33 @@ public class GamesSdk : MonoBehaviour
         yield return YandexGamesSdk.Initialize();
 
         if (YandexGamesSdk.IsInitialized)
-        {
-            ShowInitializationResult();
             NextStep();
-        }
 
         while (!YandexGamesSdk.IsInitialized)
         {
             yield return new WaitForSeconds(WaitTime);
 
             if (YandexGamesSdk.IsInitialized)
-            {
-                ShowInitializationResult();
                 NextStep();
-            }
         }
     }
 
-    private void ShowInitializationResult()
+    private void TestLeaderboard()
     {
-        Debug.Log("SDK started!");
-        Debug.Log("Player autorize stat: " + PlayerAccount.IsAuthorized);
-
-        Leaderboard.GetPlayerEntry(_leaderboardName, (result) =>
+        Leaderboard.GetEntries(_leaderboardName, (result) =>
         {
-            string name = result.player.publicName;
-            if (string.IsNullOrEmpty(name))
-                Debug.Log("LeaderBoadr is initialized!");
+            if (result.entries.Length > 0)
+                _isLeadersEmpty = false;
         });
+
+        ChangedLeaders?.Invoke(_isLeadersEmpty);
     }
 
     private void NextStep()
     {
-        _isInitialize = true;
+        _isLeadersEmpty = true;
         LoadLocalization();
-
+        TestLeaderboard();
     }
 
     #region language
@@ -88,10 +82,9 @@ public class GamesSdk : MonoBehaviour
     {
         string lang = "ru";
 
-        if (_isInitialize)
+        if (YandexGamesSdk.IsInitialized)
             lang = YandexGamesSdk.Environment.i18n.lang;
 
-        Debug.Log("Select language = " + lang);
         return lang;
     }
 
@@ -114,8 +107,7 @@ public class GamesSdk : MonoBehaviour
                 break;
         }
 
-        LeanLocalization.SetCurrentLanguageAll(lang);        
-
+        LeanLocalization.SetCurrentLanguageAll(lang);
         DataHandler.Instance.SaveLanguage(lang);
     }
 
@@ -124,27 +116,20 @@ public class GamesSdk : MonoBehaviour
     #region Ad
     public void InterstitialAdShow()
     {
-        if (!_isInitialize)
-            return;
 
 #if UNITY_EDITOR
         OnCloseCallback(false);
         return;
 #endif
 
-#if YANDEX_GAMES
-        InterstitialAd.Show(OnOpenCallback, OnCloseCallback);
+#if UNITY_WEBGL || !UNITY_EDITOR
+        if (YandexGamesSdk.IsInitialized)
+            InterstitialAd.Show(OnOpenCallback, OnCloseCallback);
 #endif
-
-        //#if VK_GAMES
-        //        Interstitial.Show();
-        //#endif
     }
 
     public void VideoAdShow()
     {
-        if (!_isInitialize)
-            return;
 
 #if UNITY_EDITOR
         OnRewardedCallback();
@@ -152,49 +137,18 @@ public class GamesSdk : MonoBehaviour
         return;
 #endif
 
-#if YANDEX_GAMES
-        Agava.YandexGames.VideoAd.Show(OnVideoOpenCallback, OnRewardedCallback, OnVideoCloseCallback, OnVideoErrorCallback);
-#endif
-
-#if VK_GAMES
-        Agava.VKGames.VideoAd.Show(OnRewardedCallback);
+#if UNITY_WEBGL || !UNITY_EDITOR
+        if (YandexGamesSdk.IsInitialized)
+            VideoAd.Show(OnVideoOpenCallback, OnRewardedCallback, OnVideoCloseCallback, OnVideoErrorCallback);
 #endif
     }
     #endregion
 
     #region LeaderBoard
 
-    public List<Leader> GetYandexLeaderboard()
-    {
-        if (_isInitialize)
-            return null;
-
-        PlayerAccount.RequestPersonalProfileDataPermission();
-
-        if (!PlayerAccount.IsAuthorized)
-            PlayerAccount.Authorize();
-
-        Leaderboard.GetEntries(_leaderboardName, (result) =>
-        {
-            int leadersNumber = result.entries.Length >= _leaders.Count ? _leaders.Count : result.entries.Length;
-
-            for (int i = 0; i < leadersNumber; i++)
-            {
-                string name = result.entries[i].player.publicName;
-
-                if (string.IsNullOrEmpty(name))
-                    name = "Anonimus";
-
-                _leaders.Add(new Leader(result.entries[i].rank, result.entries[i].score, name));
-            }
-        });
-
-        return _leaders;
-    }
-
     public void SetLeaderboardScore(int playerScore)
     {
-        if (!_isInitialize)
+        if (!YandexGamesSdk.IsInitialized)
             return;
 
         if (PlayerAccount.IsAuthorized)
@@ -203,6 +157,8 @@ public class GamesSdk : MonoBehaviour
             {
                 if (result == null || playerScore > result.score)
                     Leaderboard.SetScore(_leaderboardName, playerScore);
+                _isLeadersEmpty = false;
+                ChangedLeaders?.Invoke(_isLeadersEmpty);
             });
         }
     }

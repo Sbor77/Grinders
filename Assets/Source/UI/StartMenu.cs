@@ -29,7 +29,7 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
-        //_leanLocalization.SetCurrentLanguage(DataHandler.Instance.GetSavedLanguage());
+        GamesSdk.Instance.ChangedLeaders += OnChangedLeaders;
 
         if (DataHandler.Instance.GetSavedLevel() <= 1)
             _continueButton.interactable = false;
@@ -40,6 +40,12 @@ public class StartMenu : MonoBehaviour
         _newGameButton.onClick.RemoveListener(StartNewGame);
         _continueButton.onClick.RemoveListener(ContinueGame);
         _leaderboardButton.onClick.RemoveListener(ShowLeaderboard);
+        GamesSdk.Instance.ChangedLeaders += OnChangedLeaders;
+    }
+
+    private void OnChangedLeaders(bool isEmpty)
+    {
+        _leaderboardButton.interactable = !isEmpty;
     }
 
     private void StartNewGame()

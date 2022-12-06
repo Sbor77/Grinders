@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Agava.YandexGames;
+using TMPro;
 
 public class LeadersPanel : MonoBehaviour
 {
     [SerializeField] private Button _okButton;
-    //[SerializeField] private PlayerViewer _player;
     [SerializeField] private GameObject _content;
     [SerializeField] private PlayerEntry _template;
+    [SerializeField] private TextMeshProUGUI _playerScore;
+    [SerializeField] private TextMeshProUGUI _playerPlace;
 
     private const int MaxViews = 5;
 
@@ -39,10 +41,8 @@ public class LeadersPanel : MonoBehaviour
             PlayerAccount.Authorize();
         }
 
-        Leaderboard.GetEntries("LeaderBoard", (result) =>
+        Leaderboard.GetEntries(GamesSdk.Instance.LeaderboardName, (result) =>
         {
-            Debug.Log($"My rank = {result.userRank}");
-
             foreach (var entry in result.entries)
             {
                 string name = entry.player.publicName;
@@ -57,9 +57,24 @@ public class LeadersPanel : MonoBehaviour
                     break;
 
                 AddLeader(name, score, place);
-                Debug.Log(name + " " + entry.score);
             }
         });
+
+        Leaderboard.GetPlayerEntry(GamesSdk.Instance.LeaderboardName, (result) =>
+        {
+            if (result == null)
+            {
+                Debug.Log("Player is not present in the leaderboard.");
+                _playerPlace.text = "0";
+                _playerScore.text = "0";
+            }
+            else
+            {
+                _playerPlace.text = result.rank.ToString();
+                _playerScore.text = result.score.ToString();
+            }
+        });
+
     }
 
     private void HideLeaderboard()

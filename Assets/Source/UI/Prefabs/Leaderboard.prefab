@@ -1605,6 +1605,8 @@ MonoBehaviour:
   _okButton: {fileID: 4596775748412563766}
   _content: {fileID: 4596775748413391677}
   _template: {fileID: 5841716144728629426, guid: f73d19d711b52aa4dbf5f7e68396c4ab, type: 3}
+  _playerScore: {fileID: 4596775748699409142}
+  _playerPlace: {fileID: 4596775747702219958}
 --- !u!1 &4596775749356458209
 GameObject:
   m_ObjectHideFlags: 0
