@@ -9,16 +9,23 @@ public class Shop : MonoBehaviour
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _nextButton;
     [SerializeField] private SceneLevelLoader _levelLoader;
+    [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private Button _gameEndButton;
 
-
+    private int _lastLevelIndex = 4;
     private int _introSceneIndex = 0;
 
     private void Start()
-    {        
+    {
+        _shopPanel.SetActive(true);
+
+        _gameEndPanel.SetActive(false);
+
         GamesSdk.Instance.SetLeaderboardScore(DataHandler.Instance.GetSavedTotalScore());
+
         OnStatBought();
+
         GamesSdk.Instance.InterstitialAdShow();
     }
 
@@ -28,9 +35,9 @@ public class Shop : MonoBehaviour
 
         _exitButton.onClick.AddListener(CloseShop);
 
-        _nextButton.onClick.AddListener(NextLevel);
+        _nextButton.onClick.AddListener(LoadNextLevel);
 
-        _gameEndButton.onClick.AddListener(MainMenu);
+        _gameEndButton.onClick.AddListener(LoadMainMenu);
     }
 
     private void OnDisable()
@@ -39,9 +46,9 @@ public class Shop : MonoBehaviour
 
         _exitButton.onClick.RemoveListener(CloseShop);
 
-        _nextButton.onClick.RemoveListener(NextLevel);
+        _nextButton.onClick.RemoveListener(LoadNextLevel);
 
-        _gameEndButton.onClick.RemoveListener(MainMenu);
+        _gameEndButton.onClick.RemoveListener(LoadMainMenu);
     }
 
     private void CloseShop()
@@ -49,12 +56,23 @@ public class Shop : MonoBehaviour
         _levelLoader.LoadLevel(_introSceneIndex);
     }
 
-    private void NextLevel()
+    private void LoadNextLevel()
     {
-        _levelLoader.LoadLevel(DataHandler.Instance.GetSavedLevel());
+        int nextLevel = DataHandler.Instance.GetSavedLevel();
+
+        if (nextLevel >= _lastLevelIndex)
+        {
+            _gameEndPanel.SetActive(true);
+
+            _shopPanel.SetActive(false);
+        }
+        else
+        {
+            _levelLoader.LoadLevel(DataHandler.Instance.GetSavedLevel());
+        }
     }
 
-    private void MainMenu()
+    private void LoadMainMenu()
     {
         _levelLoader.LoadLevel(_introSceneIndex);
     }
