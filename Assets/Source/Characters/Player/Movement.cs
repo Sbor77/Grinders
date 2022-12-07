@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
     private Vector3 _attackDirection = Vector3.forward;
     private Vector3 _moveDirection = Vector3.forward;
     private bool _isMoving = false;
-    private bool _cooldown = false;
+    private bool _isTakingDamage = false;
     private bool _massAttack = false;
     private float _halfRotation => _rotationSpeed / 2f;
     private int _currentAttacksCount;
@@ -38,7 +38,6 @@ public class Movement : MonoBehaviour
     public event Action<float,int> ChangedMassAttackCooldown;
 
     public float Speed => _speed;
-
     //public float AttackCooldown => _spinAttackCooldown;
 
     private void Awake()
@@ -71,7 +70,7 @@ public class Movement : MonoBehaviour
             _controller.Move(_speed * Time.deltaTime * transform.forward);
             float currentSpeed = _controller.velocity.magnitude / _speed;
             ChangedMoveSpeed?.Invoke(currentSpeed);
-        }        
+        }
     }
 
     public void OnDied()
@@ -103,6 +102,11 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void ChangedHitDamage(bool isTakingDamage = false)
+    {
+        _isTakingDamage = isTakingDamage;
+    }
+
     private float LoadBoostSpeed(int speedLevel)
     {
         return (speedLevel - 1) * AddBoostMoveSpeed;
@@ -121,8 +125,12 @@ public class Movement : MonoBehaviour
     {
         //_currentAttacksCount = 0;
         //ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
-        _massAttack = true;
-        StartMassAttack();
+
+        if (!_isTakingDamage)
+        {
+            _massAttack = true;
+            StartMassAttack();
+        }
     }
 
     private void TurnDirection()
@@ -140,10 +148,7 @@ public class Movement : MonoBehaviour
 
     private void StartAttack()
     {
-        if (_cooldown)
-            return;
-
-       StartMoveingAttack();       
+       StartMoveingAttack();
     }
 
     private void StartMassAttack()
@@ -178,8 +183,8 @@ public class Movement : MonoBehaviour
         }
         else
         { 
-            SetChangeMoving(true); 
-        }            
+            SetChangeMoving(true);
+        }
     }
 
     private List<Vector3> GetMovePoints()
@@ -234,7 +239,7 @@ public class Movement : MonoBehaviour
             Debug.DrawRay(position, _direction * distance, Color.red);
 
             result = true;
-        }        
+        }
     }   */
 
     private void SetChangeMoving(bool activate)
