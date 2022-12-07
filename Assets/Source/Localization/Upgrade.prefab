@@ -47,7 +47,7 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u041F\u0440\u043E\u043A\u0430\u0447\u0430\u0442\u044C\u0441\u044F"
+    Text: "\u041F\u0440\u043E\u043A\u0430\u0447\u043A\u0430"
     Object: {fileID: 0}
   - Language: English
     Text: Upgrade
