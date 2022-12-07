@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -66,7 +66,7 @@ public class SettingPanel : MonoBehaviour
             DeactivateSlider(_effectsVolumeSlider);
         }
 
-        _audio.SetFloat(Master, volume);        
+        _audio.SetFloat(Master, volume);
 
         DataHandler.Instance.SaveMasterVolume(volume);
     }
@@ -91,7 +91,7 @@ public class SettingPanel : MonoBehaviour
 
     private void DeactivateSlider(Slider slider)
     {
-        slider.interactable = false;        
+        slider.interactable = false;
     }
 
     private void ActivateSlider(Slider slider)

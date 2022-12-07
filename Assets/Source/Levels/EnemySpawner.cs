@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<int> _maxCounts;
     [SerializeField] private List<Enemy> _enemyPrefabs;
     [SerializeField] private Transform _enemyParent;
-    [SerializeField] private LayerMask _enemyLayer;    
+    [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _respawnTime;
     [Space]
     [SerializeField] private ParticleSystem _burstPrefab;
@@ -27,8 +27,8 @@ public class EnemySpawner : MonoBehaviour
 
     List<Enemy>[] _enemyArray;
     private LevelZone _currentZone;
-    private int _currentZoneIndex;      
-    private int _playerKills;    
+    private int _currentZoneIndex;
+    private int _playerKills;
     private float _spawnRadiusModifier = 1;
     private bool _isDeactivated;
 
@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 enemy.IsDeactivated -= OnEnemyDeactivated;
             }
-        }        
+        }
     }
 
     public void SetZoneIndex(int index)
@@ -83,7 +83,7 @@ public class EnemySpawner : MonoBehaviour
 
         DeactivateEnemiesInRestZones();
 
-        SpawnEnemy();        
+        SpawnEnemy();
     }
 
     public void Deactivate()
@@ -103,9 +103,9 @@ public class EnemySpawner : MonoBehaviour
     {
         _playerKills++;
 
-        IsPLayerKillsIncreased?.Invoke(_playerKills);                
+        IsPLayerKillsIncreased?.Invoke(_playerKills);
 
-        if (GetCurrentEnemyCount() < GetMaxEnemyCount())                    
+        if (GetCurrentEnemyCount() < GetMaxEnemyCount())
             DOVirtual.DelayedCall(_respawnTime - (_trailDuration + _burstDuration), SpawnEnemy);
 
         DeactivateEnemiesInRestZones();
@@ -115,7 +115,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _zones.Count; i++)
         {
-            _enemyArray[i] = new();            
+            _enemyArray[i] = new();
         }
 
         for (int i = 0; i < _zones.Count; i++)
@@ -135,7 +135,7 @@ public class EnemySpawner : MonoBehaviour
                 _enemyArray[i].Add(newEnemy);
             }
         }
-    }    
+    }
 
     private void SpawnEnemy()
     {
@@ -149,20 +149,20 @@ public class EnemySpawner : MonoBehaviour
 
             Vector3 spawnPosition = freePoint  + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
-            inactiveEnemy.transform.position = spawnPosition;            
+            inactiveEnemy.transform.position = spawnPosition;
 
             ShowSpawnEffects(spawnPosition);
 
-            DOVirtual.DelayedCall(_burstDuration + _trailDuration, () => 
+            DOVirtual.DelayedCall(_burstDuration + _trailDuration, () =>
             { 
-                inactiveEnemy.gameObject.SetActive(true);              
-                inactiveEnemy.Restore();            
+                inactiveEnemy.gameObject.SetActive(true);
+                inactiveEnemy.Restore();
 
                 if (GetCurrentEnemyCount() < GetMaxEnemyCount())
                     SpawnEnemy();
             });
 
-        }        
+        }
     }
 
     private void DeactivateEnemiesInRestZones()
@@ -175,7 +175,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     enemy.gameObject.SetActive(false);
                 }
-            }            
+            }
         }
     }
 
@@ -199,18 +199,18 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetFreePointToSpawn(LevelZone zone)
     {
-        Vector3 freePosition = GetRandomPosition(zone.EnemyPoints);     
+        Vector3 freePosition = GetRandomPosition(zone.EnemyPoints);
                 
-        List<Vector3> freePositions = new();                
+        List<Vector3> freePositions = new();
 
         foreach (var point in zone.EnemyPoints)
         {
-            if (Physics.CheckSphere(point.position, 0.5f, _enemyLayer) == false)            
-                freePositions.Add(point.position);            
+            if (Physics.CheckSphere(point.position, 0.5f, _enemyLayer) == false)
+                freePositions.Add(point.position);
         }
 
-        if (freePositions.Count > 0)        
-            freePosition = freePositions[UnityEngine.Random.Range(0, freePositions.Count)];        
+        if (freePositions.Count > 0)
+            freePosition = freePositions[UnityEngine.Random.Range(0, freePositions.Count)];
 
         return freePosition;
     }
@@ -262,8 +262,8 @@ public class EnemySpawner : MonoBehaviour
 
             newEffect.gameObject.SetActive(false);
 
-            sourceList.Add(newEffect);            
-        }        
+            sourceList.Add(newEffect);
+        }
     }
 
     private void ShowSpawnEffects(Vector3 position)

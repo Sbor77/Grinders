@@ -1,4 +1,4 @@
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -127,7 +127,7 @@ public class BackgroundMusic : MonoBehaviour
                 {
                     _audioSource.clip = _playList[i];
                 }
-                                
+
                 _audioSource.Play();
 
                 while (_audioSource.isPlaying)
@@ -146,5 +146,5 @@ public class BackgroundMusic : MonoBehaviour
                     i = -1;
             }
         }
-    }    
+    }
 }

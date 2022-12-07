@@ -1,4 +1,4 @@
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -20,14 +20,14 @@ public class Level : MonoBehaviour
 
     private QuestInfo _missionConditions;
     private int _currentZoneIndex;
-    private int _shopSceneIndex = 5;
-    private int _introSceneIndex = 0;
+    //private int _shopSceneIndex = 5;
+    //private int _introSceneIndex = 0;
     private int _levelOneSceneIndex = 1;
-    private int _levelTwoSceneIndex = 2;
-    private int _levelThreeSceneIndex = 3;
-    private int _levelFourSceneIndex = 4;
+    //private int _levelTwoSceneIndex = 2;
+    //private int _levelThreeSceneIndex = 3;
+    //private int _levelFourSceneIndex = 4;
     private int _currentCoins;
-    private int _currentKills;    
+    private int _currentKills;
     
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
@@ -36,7 +36,7 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());        
+        LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());
 
         _missionConditions = _infoViewer.MissionConditions;
 
@@ -163,7 +163,7 @@ public class Level : MonoBehaviour
             _finishPanel.Init();
 
             _finishPanel.Activate();
-        });        
+        });
     }
 
     private void InitZones()
@@ -175,14 +175,14 @@ public class Level : MonoBehaviour
 
         for (int i = 0; i < _zones.Count; i++)
         {
-            int accumulatedMoney = zoneMoney + (zoneMoney * i);            
+            int accumulatedMoney = zoneMoney + (zoneMoney * i);
             int accumulatedKills = zoneKills + (zoneKills * i);
 
             if (i == _zones.Count - 1)
-                _zones[i].Init(targetMoney, targetKills);                            
+                _zones[i].Init(targetMoney, targetKills);
             else
-                _zones[i].Init(accumulatedMoney, accumulatedKills);            
-        }        
+                _zones[i].Init(accumulatedMoney, accumulatedKills);
+        }
 
         _currentZoneIndex = 0;
 
@@ -220,9 +220,9 @@ public class Level : MonoBehaviour
     private bool IsZoneCompleted (int zoneIndex)
     {
         if (_currentKills >= _zones[zoneIndex].TargetKills && _currentCoins >= _zones[zoneIndex].TargetMoney || _isCheated)        
-            return true;        
-        else        
-            return false;        
+            return true;
+        else
+            return false;
     }
 
     private void SaveProgress()

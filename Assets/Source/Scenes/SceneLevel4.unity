@@ -12029,6 +12029,10 @@ PrefabInstance:
       propertyPath: _enemySpawner
       value: 
       objectReference: {fileID: 1025256720}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _massKillButtonCooldown
+      value: 
+      objectReference: {fileID: 1386809883}
     - target: {fileID: 8453041983040492525, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -16275,6 +16279,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2701210816371816794, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
   m_PrefabInstance: {fileID: 1386809880}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1386809883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4459971426109589225, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+  m_PrefabInstance: {fileID: 1386809880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1388401417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16776,7 +16791,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 402300681, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6802368
+      value: 1.6801987
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _infoViewer
@@ -20545,7 +20560,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh242180
+  m_Name: pb_Mesh79658
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23678,6 +23693,10 @@ PrefabInstance:
     - target: {fileID: 1664775343, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
       propertyPath: m_Size.z
       value: 1.5505804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664775343, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1664775343, guid: 2ef76bf8212813140a0e50e21ede0922, type: 3}
       propertyPath: m_Center.x

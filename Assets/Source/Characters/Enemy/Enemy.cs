@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
@@ -17,7 +17,7 @@ public class Enemy : Characters
 
     private Mover _mover;
     private float _currentHealth;
-    private Vector3 _defaultPosition;
+    //private Vector3 _defaultPosition;
     private bool _isDead = false;
 
     public float StanEffectDuration => _stunEffectDuration;

@@ -1,15 +1,15 @@
 using Cinemachine;
 using DG.Tweening;
-using System.Collections;
+//using System.Collections;
 using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera _bigboxCamera;
     [SerializeField] private CinemachineVirtualCamera _playCamera;
-    [SerializeField] private Joystick _josytick;    
+    [SerializeField] private Joystick _josytick;
     [SerializeField] private Transform _startBigboxCameraPoint;
-    [SerializeField] private Transform _targetBigboxCameraPoint;        
+    [SerializeField] private Transform _targetBigboxCameraPoint;
     
     public void ActivateStartScenario()
     {
@@ -41,7 +41,7 @@ public class CameraHandler : MonoBehaviour
     }
 
     public void ZoomInOutBigboxCamera()
-    {        
+    {
         float defaultFieldOfView = _bigboxCamera.m_Lens.FieldOfView;
         float targetFieldOfView = 45;
         float zoomTime = 1f;
@@ -60,19 +60,19 @@ public class CameraHandler : MonoBehaviour
         sequence.AppendInterval(waitingTime);
         sequence.AppendCallback(() => DOVirtual.Float(defaultFieldOfView, targetFieldOfView, zoomTime, f => _bigboxCamera.m_Lens.FieldOfView = f));
         sequence.AppendInterval(waitingTime + zoomTime);
-        sequence.AppendCallback(() => DOVirtual.Float(targetFieldOfView, defaultFieldOfView, zoomTime, f => _bigboxCamera.m_Lens.FieldOfView = f));        
+        sequence.AppendCallback(() => DOVirtual.Float(targetFieldOfView, defaultFieldOfView, zoomTime, f => _bigboxCamera.m_Lens.FieldOfView = f));
         sequence.AppendCallback(() =>
             {
-                Deactivate(_bigboxCamera);            
-                Activate(_playCamera);            
+                Deactivate(_bigboxCamera);
+                Activate(_playCamera);
             });
         sequence.AppendInterval(2);
-        sequence.AppendCallback(() => SetJoystickActive(true));        
+        sequence.AppendCallback(() => SetJoystickActive(true));
     }
 
     private void Activate (CinemachineVirtualCamera camera)
     {
-        camera.Priority = 1;        
+        camera.Priority = 1;
     }
 
     private void SetJoystickActive(bool active)
@@ -96,12 +96,12 @@ public class CameraHandler : MonoBehaviour
             {
                 _bigboxCamera.transform.position = _startBigboxCameraPoint.position;
                 SetJoystickActive(true);
-            });            
+            });
         });
     }
 
     private void Deactivate(CinemachineVirtualCamera camera, float delay = 0)
     {
-        DOVirtual.DelayedCall(delay, () => camera.Priority = 0);        
+        DOVirtual.DelayedCall(delay, () => camera.Priority = 0);
     }
 }

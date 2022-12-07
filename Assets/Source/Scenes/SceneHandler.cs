@@ -1,17 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-
-
-    private void Start()
-    {
-        
-    }
-
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
@@ -31,6 +24,4 @@ public class SceneHandler : MonoBehaviour
     {
         print($"Перешли из сцены c индексом: {current.buildIndex} в сцену с индексом: {next.buildIndex}");
     }
-
-
 }

@@ -1,7 +1,7 @@
-using Agava.WebUtility;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
+//using Agava.WebUtility;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class DataHandler : MonoBehaviour
     private string _totalMoneyKey = "TotalMoney";
     private string _levelMoneyKey = "LevelMoney";
     private string _killsKey = "Kills";
-    private string _healthSkillKey = "HealthSkill";    
+    private string _healthSkillKey = "HealthSkill";
     private string _speedSkillKey = "SpeedSkill";
     private string _radiusSkillKey = "RadiusSkill";
     private string _masterVolume = "MasterVolume";
@@ -37,7 +37,7 @@ public class DataHandler : MonoBehaviour
             Instance = this;
 
             DontDestroyOnLoad(this);
-        }        
+        }
     }
 
     #region Event OnInBackground
@@ -77,7 +77,7 @@ public class DataHandler : MonoBehaviour
     {
         if (level <= 0)
             PlayerPrefs.SetInt(_levelKey, 1);
-        else        
+        else
             PlayerPrefs.SetInt(_levelKey, level);
     }
 
@@ -127,7 +127,6 @@ public class DataHandler : MonoBehaviour
     {
         PlayerPrefs.SetFloat(_masterVolume, value);
 
-
       /*  if (value >= maxVolume)
             PlayerPrefs.SetFloat(_masterVolume, maxVolume);
         else
@@ -137,7 +136,6 @@ public class DataHandler : MonoBehaviour
     public void SaveMusicVolume(float value)
     {
         PlayerPrefs.SetFloat(_musicVolume, value);
-
 
         /*if (value >= 0 && value <= 1)
             PlayerPrefs.SetFloat(_musicVolume, value);

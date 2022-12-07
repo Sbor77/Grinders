@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System;
-using System.Collections;
+//using System.Collections;
 
 [RequireComponent(typeof(Animator),typeof(Movement),typeof(Player))]
 public class Animations : MonoBehaviour

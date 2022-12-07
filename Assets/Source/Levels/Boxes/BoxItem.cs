@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -8,22 +8,22 @@ public class BoxItem : MonoBehaviour
     [SerializeField] private AudioSource _collectEffect;
 
     private int _value;
-    private Tweener _endlessRotation;    
+    private Tweener _endlessRotation;
     private Sequence _collectingSequence;
-    private Vector3 _defaultScale;        
+    private Vector3 _defaultScale;
     private Vector3 _defaultLocalPosition;
     private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
-    private float _defaultHeight;    
+    private float _defaultHeight;
 
     public int Value => _value;
 
     private void Start()
     {
-        _defaultScale = transform.localScale;        
+        _defaultScale = transform.localScale;
 
-        _defaultHeight = transform.position.y;        
+        _defaultHeight = transform.position.y;
 
-        _defaultLocalPosition = transform.localPosition;        
+        _defaultLocalPosition = transform.localPosition;
     }
 
     public void AnimateCollection()
@@ -45,12 +45,12 @@ public class BoxItem : MonoBehaviour
         _collectingSequence = DOTween.Sequence();
 
         _collectingSequence.AppendCallback(_collectEffect.Play);
-        _collectingSequence.Append(transform.DOMoveY(_defaultHeight + heightOffset, liftTime).SetEase(Ease.InQuart));        
-        _collectingSequence.Append(transform.DOScale(_defaultScale * increaseScaleRatio, scaleTime));        
+        _collectingSequence.Append(transform.DOMoveY(_defaultHeight + heightOffset, liftTime).SetEase(Ease.InQuart));
+        _collectingSequence.Append(transform.DOScale(_defaultScale * increaseScaleRatio, scaleTime));
         _collectingSequence.Append(transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(rotationLoops).SetEase(Ease.Linear));
         _collectingSequence.Append(transform.DOScale(_defaultScale * decreaseScaleRatio, scaleTime));
         _collectingSequence.AppendCallback(() =>
-        {             
+        {
             Deactivate();
             transform.localScale = _defaultScale;
             transform.localPosition = _defaultLocalPosition;
@@ -59,12 +59,12 @@ public class BoxItem : MonoBehaviour
 
     public void Deactivate()
     {
-        gameObject.SetActive(false);        
+        gameObject.SetActive(false);
     }
 
     public void Activate()
     {
-        gameObject.SetActive(true);        
+        gameObject.SetActive(true);
 
         RotateOnY();
     }
@@ -80,6 +80,6 @@ public class BoxItem : MonoBehaviour
 
         transform.eulerAngles = Vector3.zero;
 
-        _endlessRotation = transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);        
+        _endlessRotation = transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
     }
 }

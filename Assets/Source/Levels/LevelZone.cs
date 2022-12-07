@@ -1,4 +1,4 @@
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,24 +7,16 @@ public class LevelZone : MonoBehaviour
     [SerializeField] private List<DoorOpener> _doors;
     [SerializeField] private List<Transform> _boxPoints;    
     [SerializeField] private List<Transform> _enemyPoints;
-    
 
     private int _targetMoney;
-
     private int _targetKills;
-
     private bool _isActive;
 
     public bool IsActive => _isActive;
-
     public int TargetMoney => _targetMoney;
-
     public int TargetKills => _targetKills;
-
     public List<Transform> BoxPoints => _boxPoints;
-
     public List<Transform> EnemyPoints => _enemyPoints;
-        
 
     private void OnTriggerEnter(Collider other)
     {
@@ -54,7 +46,7 @@ public class LevelZone : MonoBehaviour
     }
 
     public void Deactivate()
-    {     
+    {
         _isActive = false;
     }
 
@@ -77,6 +69,6 @@ public class LevelZone : MonoBehaviour
             {
                 door.Close();
             }
-        }        
-    }    
+        }
+    }
 }

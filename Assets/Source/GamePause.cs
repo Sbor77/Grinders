@@ -8,7 +8,7 @@ namespace Agava.WebUtility.Samples
         [SerializeField] private AudioMixer _audio;
 
         private const float MaxVolume = 0f;
-        private const float MinVolume = -80f;        
+        private const float MinVolume = -80f;
 
         private void OnEnable()
         {

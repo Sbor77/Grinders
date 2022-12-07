@@ -16,10 +16,10 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private LeadersPanel _leadersPlanel;
 
     private int _indexLevel = 1;
-    private List<Leader> leaders;
-    private Leader player;
-    private const int MaxDelay = 100;
-    private const float WaitDelay = 0.25f;
+    //private List<Leader> leaders;
+    //private Leader player;
+    //private const int MaxDelay = 100;
+    //private const float WaitDelay = 0.25f;
 
     private void OnEnable()
     {
@@ -98,7 +98,6 @@ public class StartMenu : MonoBehaviour
 
     private void ShowLeaderboard()
     {
-        //_leadersPlanel.ShowLeaders();
         _leadersPlanel.gameObject.SetActive(true);
     }
 }

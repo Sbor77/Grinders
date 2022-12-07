@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using UnityEngine;
 using Agava.YandexGames;
 using System;
@@ -142,23 +142,23 @@ public class GamesSdk : MonoBehaviour
         }
     }
 
-    public Leader GetLeaderboardPlayerEntry()
-    {
-        Leader player = null;
+    //public Leader GetLeaderboardPlayerEntry()
+    //{
+    //    Leader player = null;
 
-        if (!PlayerAccount.IsAuthorized)
-            return player;
+    //    if (!PlayerAccount.IsAuthorized)
+    //        return player;
 
-        Leaderboard.GetPlayerEntry("PlaytestBoard", (result) =>
-        {
-            if (result == null)
-                Debug.Log("Player is not present in the leaderboard.");
-            else
-                player = new Leader(result.rank, result.score, "");
-        });
+    //    Leaderboard.GetPlayerEntry("PlaytestBoard", (result) =>
+    //    {
+    //        if (result == null)
+    //            Debug.Log("Player is not present in the leaderboard.");
+    //        else
+    //            player = new Leader(result.rank, result.score, "");
+    //    });
 
-        return player;
-    }
+    //    return player;
+    //}
 
     #endregion
 
@@ -203,17 +203,16 @@ public class GamesSdk : MonoBehaviour
     #endregion
 }
 
+//public class Leader
+//{
+//    public readonly int Ranks;
+//    public readonly int Scores;
+//    public readonly string Names;
 
-public class Leader
-{
-    public readonly int Ranks;
-    public readonly int Scores;
-    public readonly string Names;
-
-    public Leader(int ranks, int scores, string names)
-    {
-        Ranks = ranks;
-        Scores = scores;
-        Names = names;
-    }
-}
+//    public Leader(int ranks, int scores, string names)
+//    {
+//        Ranks = ranks;
+//        Scores = scores;
+//        Names = names;
+//    }
+//}

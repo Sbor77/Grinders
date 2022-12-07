@@ -1,6 +1,6 @@
 using DG.Tweening;
 using System;
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,13 +8,13 @@ public class BoxSpawner : MonoBehaviour
 {
     [SerializeField] private List<LevelZone> _zones;
     [SerializeField] private List<int> _maxCounts;
-    [SerializeField] private Transform _spawnBoxParent;    
+    [SerializeField] private Transform _spawnBoxParent;
     [SerializeField] private Transform _bigBoxPoint;
     [SerializeField] private Box _boxWithCoinPrefab;
     [SerializeField] private Box _boxWithCrossPrefab;
     [SerializeField] private Box _bigBoxPrefab;
     [SerializeField] private float _boxWithCrossChanceRatio;
-    [SerializeField] private LayerMask _boxLayer;    
+    [SerializeField] private LayerMask _boxLayer;
     [SerializeField] private int _minMoneyAmount;
     [SerializeField] private int _maxMoneyAmount;
     [SerializeField] private int _minHealthAmount;
@@ -25,7 +25,7 @@ public class BoxSpawner : MonoBehaviour
     private LevelZone _currentZone;
     private int _currentZoneIndex;
 
-    private Box _bigBox;        
+    private Box _bigBox;
     private Vector3 _tempPosition = new Vector3(0, 5, 0);
     private float _respawnDelay = 2f;
     private float _circleOffsetModifier = 1;
@@ -38,7 +38,7 @@ public class BoxSpawner : MonoBehaviour
     {
         _currentZoneIndex = 0;
 
-        _currentZone = _zones[_currentZoneIndex];        
+        _currentZone = _zones[_currentZoneIndex];
 
         _boxArray = new List<Box>[_zones.Count];
         
@@ -46,7 +46,7 @@ public class BoxSpawner : MonoBehaviour
 
         SpawnBox();
 
-        SpawnBigBox();        
+        SpawnBigBox();
     }
 
     private void OnEnable()
@@ -57,7 +57,7 @@ public class BoxSpawner : MonoBehaviour
             {
                 box.IsItemCollected += OnItemCollected;
             }
-        }    
+        }
 
         _bigBox.IsItemCollected += OnBigboxCollected;
     }
@@ -98,13 +98,13 @@ public class BoxSpawner : MonoBehaviour
     {
         int bigboxCount = 1;
 
-        IsBigBoxCollected?.Invoke(bigboxCount);        
+        IsBigBoxCollected?.Invoke(bigboxCount);
     }
 
     private void OnItemCollected()
     {
         if (GetMaxBoxCount() > GetCurrentBoxCount())
-            DOVirtual.DelayedCall(_respawnDelay, () => SpawnBox());        
+            DOVirtual.DelayedCall(_respawnDelay, () => SpawnBox());
     }
 
     private int GetCurrentBoxCount()
@@ -136,10 +136,10 @@ public class BoxSpawner : MonoBehaviour
         }
 
         return index;
-    }    
+    }
 
     private void GenerateAllBoxes()
-    {        
+    {
         int additive = 10;
 
         for (int i = 0; i < _zones.Count; i++)
@@ -192,7 +192,7 @@ public class BoxSpawner : MonoBehaviour
                 inactiveBox.ActivateWholeBox(_minMoneyAmount, _maxMoneyAmount);
 
             if (inactiveBox.GetComponentInChildren<Cross>(true))
-                inactiveBox.ActivateWholeBox(_minHealthAmount, _maxHealthAmount);            
+                inactiveBox.ActivateWholeBox(_minHealthAmount, _maxHealthAmount);
 
             if (GetMaxBoxCount() > GetCurrentBoxCount())
                 SpawnBox();
@@ -205,7 +205,7 @@ public class BoxSpawner : MonoBehaviour
         {
             _bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
 
-            _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount, true);            
+            _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount, true);
         }
     }
 
@@ -227,7 +227,7 @@ public class BoxSpawner : MonoBehaviour
         {
             int randomIndex = UnityEngine.Random.Range(0, freePoints.Count);
 
-            freePoint = freePoints[randomIndex];        
+            freePoint = freePoints[randomIndex];
         }
 
         return freePoints.Count > 0;
@@ -237,21 +237,21 @@ public class BoxSpawner : MonoBehaviour
     {
         List<Box> inactiveBoxes = new ();
 
-        inactiveBox = null;        
+        inactiveBox = null;
 
         foreach (var box in boxes)
         {
-            if (box.gameObject.activeSelf == false)            
-                inactiveBoxes.Add(box);            
-        }      
+            if (box.gameObject.activeSelf == false)
+                inactiveBoxes.Add(box);
+        }
 
         if (inactiveBoxes.Count > 0)
         {
             int randomIndex = UnityEngine.Random.Range(0, inactiveBoxes.Count);
 
-            inactiveBox = inactiveBoxes[randomIndex];            
-        }        
+            inactiveBox = inactiveBoxes[randomIndex];
+        }
 
         return inactiveBox != null;
-    }   
+    }
 }

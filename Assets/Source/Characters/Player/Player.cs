@@ -133,9 +133,10 @@ public class Player : Characters
                 Attack(damageable);
 
                 if (other.GetComponent<Enemy>())
+                {
                     ActivateEffect(_weaponEffect, _effectDuration);
-
-                _isKilledPerAttack = true;
+                    _isKilledPerAttack = true;
+                }
             }
         }
     }
@@ -151,10 +152,4 @@ public enum State
 {
     Move,
     Attack
-}
-
-public enum AttackType
-{
-    Low,
-    Strong
 }

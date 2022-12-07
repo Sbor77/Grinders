@@ -70,7 +70,7 @@ public class QuestPanel : MonoBehaviour
     {
         QuestInfo conditions = new QuestInfo(_needCoinCollected, _needEnemyKilled, _needDestroyBigBox);
 
-        _infoViewer.SetQuestCollected(conditions);        
+        _infoViewer.SetQuestCollected(conditions);
     }
 
     private void ShowMissionTargets()
@@ -97,7 +97,7 @@ public class QuestPanel : MonoBehaviour
 
     private void StartGame()
     {
-        Time.timeScale = 1;        
+        Time.timeScale = 1;
 
         gameObject.SetActive(false);
 
@@ -112,10 +112,7 @@ public class QuestPanel : MonoBehaviour
     {
         _infoPanel.gameObject.SetActive(false);
     }
-
 }
-
-
 
 public class QuestInfo
 {

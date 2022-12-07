@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Agava.YandexGames;
@@ -74,7 +74,6 @@ public class LeadersPanel : MonoBehaviour
                 _playerScore.text = result.score.ToString();
             }
         });
-
     }
 
     private void HideLeaderboard()

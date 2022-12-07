@@ -47,7 +47,7 @@ public class AreaAttack : MonoBehaviour
 
         _chargeRotator.transform.DORotate(_rotationAroundY, _chargeDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
 
-        DOVirtual.DelayedCall(effectLiveTime, () => _chargeEffect.gameObject.SetActive(false));     
+        DOVirtual.DelayedCall(effectLiveTime, () => _chargeEffect.gameObject.SetActive(false));
     }
 
     private void DamageTargets(float radius, float damage)

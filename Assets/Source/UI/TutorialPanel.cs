@@ -5,13 +5,13 @@ using DG.Tweening;
 using System;
 
 public class TutorialPanel : MonoBehaviour
-{    
+{
     [SerializeField] private Image _missionPad;
-    [SerializeField] private Image _attackPad;    
+    [SerializeField] private Image _attackPad;
     [Space]
     [SerializeField] private TMP_Text _targetGuides;
     [SerializeField] private TMP_Text _bigboxGuides;
-    [Space]    
+    [Space]
     [SerializeField] private GameObject _playerGuides;
     [SerializeField] private TMP_Text _walkGuides;
     [SerializeField] private TMP_Text _walkGuidesMobile;
@@ -19,7 +19,7 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private TMP_Text _attackGuidesMobile;
     [SerializeField] private TMP_Text _attackGuidesCommon;
     [Space]
-    [SerializeField] private Button _nextButton;    
+    [SerializeField] private Button _nextButton;
 
     private float _hintDuration = 0.5f;
     private int _hintLoops = -1;
@@ -28,8 +28,6 @@ public class TutorialPanel : MonoBehaviour
     private float _textPause = 1.5f;
 
     public event Action IsEnded;
-
-    
 
     private void OnEnable()
     {
@@ -46,14 +44,14 @@ public class TutorialPanel : MonoBehaviour
         _nextButton.interactable = false;
 
         DOVirtual.DelayedCall(0.5f, () =>
-        {            
+        {
             _playerGuides.SetActive(true);
             Fade(_targetGuides, 1, 1);
             FadeOut(_missionPad);
 
             Fade(_bigboxGuides, 1, _textFadeDuration);
 
-            DOVirtual.DelayedCall(_textPause, () => _nextButton.interactable = true);            
+            DOVirtual.DelayedCall(_textPause, () => _nextButton.interactable = true);
         });
     }
 
@@ -64,7 +62,7 @@ public class TutorialPanel : MonoBehaviour
 
     private void OnClickButton()
     {
-        _targetGuides.gameObject.SetActive(false);            
+        _targetGuides.gameObject.SetActive(false);
 
         _bigboxGuides.gameObject.SetActive(false);
         
@@ -73,33 +71,33 @@ public class TutorialPanel : MonoBehaviour
         {
             IsEnded?.Invoke();
 
-            Deactivate();            
-        }        
+            Deactivate();
+        }
 
         if (_clickCounts == 0)
         {
-            _targetGuides.gameObject.SetActive(false);                   
+            _targetGuides.gameObject.SetActive(false);
 
-            if (DataHandler.Instance.IsMobile())            
+            if (DataHandler.Instance.IsMobile())
             {
                 Fade(_walkGuidesMobile, 1, _textFadeDuration);
 
                 DOVirtual.DelayedCall(_textPause, () => Fade(_attackGuidesMobile, 1, _textFadeDuration));
             }
             else
-            {                
+            {
                 Fade(_walkGuides, 1, _textFadeDuration);
 
-                DOVirtual.DelayedCall(_textPause, () => 
+                DOVirtual.DelayedCall(_textPause, () =>
                 {
                     Fade(_attackGuides, 1, _textFadeDuration);
                     FadeOut(_attackPad);
                 });
-            }            
+            }
 
             DOVirtual.DelayedCall(_textPause + _textPause, () => Fade(_attackGuidesCommon, 1, _textFadeDuration));
 
-            _clickCounts++;            
+            _clickCounts++;
         }
     }
 

@@ -57,7 +57,7 @@ public class FinishPanel : MonoBehaviour
     private int GetCurrentScore()
     {
         int coinMultiplier = 50;
-        int killMultiplier = 10;        
+        int killMultiplier = 10;
 
         int value = _infoViewer.CurrentCoins * coinMultiplier + _infoViewer.CurrentCoins * killMultiplier;
 

@@ -7,11 +7,11 @@ public class EffectHandler : MonoBehaviour
     [SerializeField] private List<ParticleSystem> _effects;
     [SerializeField] private AudioSource _effectSFX;
         
-    private WaitForSeconds _waitDelay;        
+    private WaitForSeconds _waitDelay;
     private int _cycles = 2;
     private float _delay = 0.92f;
 
-    public float Duration { get; private set; } 
+    public float Duration { get; private set; }
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class EffectHandler : MonoBehaviour
 
         _waitDelay = new WaitForSeconds(_delay);
 
-        Duration = _effects.Count * _cycles * _delay;        
+        Duration = _effects.Count * _cycles * _delay;
     }
 
     private void StopAllEffects()
@@ -38,7 +38,7 @@ public class EffectHandler : MonoBehaviour
 
     private IEnumerator StartEffectsWithDelay(int cycle)
     {
-        int i = 0;        
+        int i = 0;
 
         while (i < cycle)
         {
@@ -49,7 +49,7 @@ public class EffectHandler : MonoBehaviour
                 yield return _waitDelay;
             }
 
-            i++;                
-        }        
+            i++;
+        }
     }
 }

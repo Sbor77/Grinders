@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+//using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -39,7 +39,7 @@ public class InfoViewer : MonoBehaviour
     public int CurrentCoins { get; private set; }
     public bool IsBigboxDestroyed { get; private set; }
 
-    private const string Master = "MasterVolume";                                  
+    private const string Master = "MasterVolume";
     private const float MaxVolume = 0;
     private const float MinVolume = -80;
 
@@ -47,7 +47,7 @@ public class InfoViewer : MonoBehaviour
     private void Awake()
     {
         _movement = _player.GetComponent<Movement>();
-        _soundButton = _soundImage.GetComponent<Button>();        
+        _soundButton = _soundImage.GetComponent<Button>();
     }
 
     private void OnEnable()
@@ -70,9 +70,9 @@ public class InfoViewer : MonoBehaviour
     {
         _maxHealth = _player.MaxHealth;
 
-        _currentHealth = _maxHealth; // load in PlayerPrefs        
+        _currentHealth = _maxHealth; // load in PlayerPrefs
 
-        SetSoundIcon(DataHandler.Instance.GetSavedMasterVolume());        
+        SetSoundIcon(DataHandler.Instance.GetSavedMasterVolume());
 
         _healthBarSlider.maxValue = _maxHealth;
 
@@ -110,7 +110,7 @@ public class InfoViewer : MonoBehaviour
 
     private void OnChangedSoundVolume()
     {
-        _audio.GetFloat(Master, out float volume);        
+        _audio.GetFloat(Master, out float volume);
 
         if (volume == MaxVolume)
             volume = MinVolume;

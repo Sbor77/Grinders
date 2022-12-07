@@ -16,12 +16,12 @@ public class Box : MonoBehaviour
     [SerializeField] private AudioSource _confettiAudio;
     [SerializeField] private BoxItem _item;
     [SerializeField] private ParticleSystem _fogEffect;
-    [SerializeField] private ParticleSystem _burstEffect;    
+    [SerializeField] private ParticleSystem _burstEffect;
 
     private MeshRenderer _meshRenderer;
-    private List<Vector3> _piecesDefaultPositions = new();    
-    private bool _isItemCollectable;    
-    private float _boxDeactivationDelay = 3f;    
+    private List<Vector3> _piecesDefaultPositions = new();
+    private bool _isItemCollectable;
+    private float _boxDeactivationDelay = 3f;
     private bool _isBigbox;
         
     public event Action IsItemCollected;
@@ -30,12 +30,12 @@ public class Box : MonoBehaviour
 
     private void Awake()
     {
-        _meshRenderer = GetComponent<MeshRenderer>();        
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void Start()
     {
-        SaveDefaultPiecesPositions();        
+        SaveDefaultPiecesPositions();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,20 +46,20 @@ public class Box : MonoBehaviour
             {
                 _item.AnimateCollection();
 
-                if (GetComponentInChildren<Coin>())                    
-                    player.AddMoney(_item.Value);                
+                if (GetComponentInChildren<Coin>())
+                    player.AddMoney(_item.Value);
 
-                if (GetComponentInChildren<Cross>())                
+                if (GetComponentInChildren<Cross>())
                     player.Heal(_item.Value);
 
                 _isItemCollectable = false;
 
                 IsItemCollected?.Invoke();
 
-                DOVirtual.DelayedCall(_boxDeactivationDelay, DeactivateWholeBox);                
-            }                         
+                DOVirtual.DelayedCall(_boxDeactivationDelay, DeactivateWholeBox);
+            }
         }
-    }    
+    }
 
     public void Crush()
     {
@@ -77,7 +77,7 @@ public class Box : MonoBehaviour
 
         _burstEffect.gameObject.SetActive(true);
 
-        DOVirtual.DelayedCall(pieceColliderDeactivationDelay, () => 
+        DOVirtual.DelayedCall(pieceColliderDeactivationDelay, () =>
         {
             DeactivatePiecesColliders();
             _burstEffect.gameObject.SetActive(false);
@@ -123,7 +123,7 @@ public class Box : MonoBehaviour
 
             GenerateRotationY();
 
-            SaveDefaultPiecesPositions();            
+            SaveDefaultPiecesPositions();
         });
 
         if (isBigbox)
@@ -140,14 +140,14 @@ public class Box : MonoBehaviour
 
     public void DeactivateWholeBox()
     {
-        gameObject.SetActive(false);        
+        gameObject.SetActive(false);
     }
 
     public void ShowActiveBox()
     {
         _boxCollider.enabled = true;
 
-        _meshRenderer.material = _defaultMaterial;     
+        _meshRenderer.material = _defaultMaterial;
     }
 
     private void SetShadedMaterial()
@@ -175,7 +175,7 @@ public class Box : MonoBehaviour
         {
             _pieces[i].gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
-            _pieces[i].gameObject.GetComponent<MeshCollider>().enabled = false;           
+            _pieces[i].gameObject.GetComponent<MeshCollider>().enabled = false;
         }
     }
 

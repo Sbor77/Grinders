@@ -1,13 +1,13 @@
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class draft_Spawner : MonoBehaviour
 {
     [SerializeField] protected List<SpawnedObject> _spawnedPrefabs;
-    [SerializeField] protected List<Transform> _spawnPoints;    
+    [SerializeField] protected List<Transform> _spawnPoints;
     [SerializeField] protected Transform _spawnParent;
-    [SerializeField] protected LayerMask _objectLayer;    
+    [SerializeField] protected LayerMask _objectLayer;
     //[SerializeField] protected float _respawnTime;
     [SerializeField] protected int _spawnObjectsCount;
 
@@ -65,7 +65,7 @@ public abstract class draft_Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (TryGetInactiveObject(out SpawnedObject inactiveObject) && _currentSpawnedObjects < _spawnObjectsCount)         
+        if (TryGetInactiveObject(out SpawnedObject inactiveObject) && _currentSpawnedObjects < _spawnObjectsCount)
         {
             Vector2 randomOffsetPosition = Random.insideUnitCircle * _spawnRadiusModifier;
 
@@ -75,26 +75,26 @@ public abstract class draft_Spawner : MonoBehaviour
 
             //inactiveObject.gameObject.SetActive(true);
 
-            _currentSpawnedObjects++;            
+            _currentSpawnedObjects++;
 
             if (_currentSpawnedObjects < _spawnObjectsCount)
                 Spawn();
         }
     }
 
-    private void OnActiveStateChanged()
-    {
-        print("Изменилось состояние объекта спаунера!");
+    //private void OnActiveStateChanged()
+    //{
+    //    print("Изменилось состояние объекта спаунера!");
 
-        int activeObjectsCount = GetActiveObjectsCount();
+    //    int activeObjectsCount = GetActiveObjectsCount();
 
-        int inactiveObjectsCount = _spawnedObjects.Count - activeObjectsCount;
+    //    int inactiveObjectsCount = _spawnedObjects.Count - activeObjectsCount;
 
-        if (_currentSpawnedObjects < activeObjectsCount)
-        {
-            Spawn();
-        }        
-    }
+    //    if (_currentSpawnedObjects < activeObjectsCount)
+    //    {
+    //        Spawn();
+    //    }
+    //}
 
 
     /*
@@ -128,11 +128,11 @@ public abstract class draft_Spawner : MonoBehaviour
 
         inactiveObject = null;
 
-        foreach (var spawnedObject in _spawnedObjects)
-        {            
-          /*  if (spawnedObject.IsActive() == false)
-                inactiveObjects.Add(spawnedObject);*/
-        }
+        //foreach (var spawnedObject in _spawnedObjects)
+        //{
+        //  /*  if (spawnedObject.IsActive() == false)
+        //        inactiveObjects.Add(spawnedObject);*/
+        //}
 
         if (inactiveObjects.Count > 0)
         {
@@ -147,16 +147,16 @@ public abstract class draft_Spawner : MonoBehaviour
         return sourceObjects[Random.Range(0, sourceObjects.Count)];
     }
 
-    private int GetActiveObjectsCount()
-    {
-        int count = 0;
+    //private int GetActiveObjectsCount()
+    //{
+    //    int count = 0;
 
-        foreach (var spawnedObject in _spawnedObjects)
-        {
-            /*if (spawnedObject.IsActive() == true)
-                count++;*/
-        }
+    //    //foreach (var spawnedObject in _spawnedObjects)
+    //    //{
+    //    //    /*if (spawnedObject.IsActive() == true)
+    //    //        count++;*/
+    //    //}
 
-        return count;
-    }
+    //    return count;
+    //}
 }
