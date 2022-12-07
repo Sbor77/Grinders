@@ -46,24 +46,34 @@ public class GamePause : MonoBehaviour
         float volume = inBackground ? MinVolume : MaxVolume;
         _audio.SetFloat(Master, volume);*/
 
-        SetActive(inBackground);
+        if (inBackground)
+            Activate();
+        else
+            Resume();
 
         Debug.Log("Sound is paused in OnInBackgroundChange event");
     }
 
     private void OnPlayAd()
     {
-        SetActive(true);
+        Activate();
     }
 
     private void OnStopAd()
     {
-        SetActive(false);
+        Resume();
     }
-    private void SetActive(bool isPaused)
+    private void Activate()
     {
-        Time.timeScale = isPaused ? 0f : 1f;
+        Time.timeScale = 0;
 
-        _audio.SetFloat(DataHandler.Instance.MasterVolume, isPaused ? MinVolume : MaxVolume);
+        _audio.SetFloat(DataHandler.Instance.MasterVolume, MinVolume);
+    }
+
+    private void Resume()
+    {
+        Time.timeScale = 1;
+
+        _audio.SetFloat(DataHandler.Instance.MasterVolume, DataHandler.Instance.GetSavedMasterVolume());
     }
 }
