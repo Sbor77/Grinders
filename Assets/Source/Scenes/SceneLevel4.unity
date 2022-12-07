@@ -1156,6 +1156,7 @@ GameObject:
   - component: {fileID: 69498417}
   - component: {fileID: 69498416}
   - component: {fileID: 69498415}
+  - component: {fileID: 69498418}
   m_Layer: 7
   m_Name: wall (17)
   m_TagString: Untagged
@@ -1241,6 +1242,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69498413}
   m_Mesh: {fileID: 4300018, guid: 9969846f978fd1b4e9627fd7200715ee, type: 3}
+--- !u!208 &69498418
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69498413}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.97400004, y: 0.049000002, z: 0.47200003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.47200003}
+  m_TimeToStationary: 0.5
 --- !u!1001 &75857312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16791,7 +16808,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 402300681, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6801987
+      value: 1.6801682
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _infoViewer
@@ -20560,7 +20577,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh79658
+  m_Name: pb_Mesh102142
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21051,6 +21068,7 @@ GameObject:
   - component: {fileID: 1883434231}
   - component: {fileID: 1883434230}
   - component: {fileID: 1883434229}
+  - component: {fileID: 1883434232}
   m_Layer: 7
   m_Name: wall (18)
   m_TagString: Untagged
@@ -21136,6 +21154,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883434227}
   m_Mesh: {fileID: 4300018, guid: 9969846f978fd1b4e9627fd7200715ee, type: 3}
+--- !u!208 &1883434232
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883434227}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.97400004, y: 0.049000002, z: 0.47200003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.47200003}
+  m_TimeToStationary: 0.5
 --- !u!1 &1889644910
 GameObject:
   m_ObjectHideFlags: 0
