@@ -80,6 +80,7 @@ public class Player : Characters
         {
             _takeDamageSFX.Play();
             _currentHealth = ChangeHealth(-damage);
+            _movement.ChangedHitDamage(true);
             TakedDamage?.Invoke();
             ActivateEffect(_damageEffect, _effectDuration);
             ActivateEffect(_woundEffect, _effectDuration);
