@@ -66,7 +66,7 @@ public class Shop : MonoBehaviour
     {
         int nextLevel = DataHandler.Instance.GetSavedLevel();
 
-        if (nextLevel >= _lastLevelIndex)
+        if (nextLevel > _lastLevelIndex)
         {
             _gameEndPanel.SetActive(true);
 
