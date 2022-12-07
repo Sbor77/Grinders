@@ -26,6 +26,7 @@ public class Movement : MonoBehaviour
     private bool _massAttack = false;
     private float _halfRotation => _rotationSpeed / 2f;
     private int _currentAttacksCount;
+    private float _delayMassAttack = 3f;
 
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
@@ -163,7 +164,7 @@ public class Movement : MonoBehaviour
         SetChangeMoving(false);
         _currentAttacksCount = 0;
         ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
-        Invoke(nameof(EndMassAttack), 1f);
+        Invoke(nameof(EndMassAttack), _delayMassAttack);
         _areaAttack.Apply();
     }
 
