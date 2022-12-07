@@ -61,7 +61,14 @@ public class Animations : MonoBehaviour
     private void OnTakedDamage()
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(TakedDamage) == false)
+        {
             _animator.SetTrigger(TakedDamage);
+
+            float takeDamageDuration = _animator.GetCurrentAnimatorStateInfo(0).length;
+
+            DOVirtual.DelayedCall(takeDamageDuration, () => _mover.ChangedHitDamage());
+        }
+
     }
 
     private void OnDying() => _animator.SetTrigger(Died);

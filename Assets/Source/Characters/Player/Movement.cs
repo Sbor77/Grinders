@@ -52,6 +52,8 @@ public class Movement : MonoBehaviour
         _joystick.ReleasedTouch += OnReleasedTouch;
         _joystick.ChangedClickStatus += StartAttack;
         _joystick.SkillButtonClick += UseMassAttack;
+
+        
     }
 
     private void OnDisable()
@@ -96,15 +98,19 @@ public class Movement : MonoBehaviour
         {
             _currentAttacksCount++;
             ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
-
-            if (_currentAttacksCount >= _beforeMassAttack)
-                _joystick.ButtonActivate();
         }
+
+        if (_currentAttacksCount >= _beforeMassAttack)
+            _joystick.ButtonActivate();
+        
     }
 
     public void ChangedHitDamage(bool isTakingDamage = false)
     {
         _isTakingDamage = isTakingDamage;
+
+        if (_currentAttacksCount >= _beforeMassAttack)
+            _joystick.ButtonActivate();
     }
 
     private float LoadBoostSpeed(int speedLevel)
