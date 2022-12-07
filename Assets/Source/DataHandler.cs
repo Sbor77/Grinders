@@ -21,7 +21,9 @@ public class DataHandler : MonoBehaviour
     private string _effectsVolume = "EffectsVolume";
     private string _language = "Language";
     private string _ru = "Russian";
-    
+
+    public string MasterVolume => _masterVolume;
+
     public static DataHandler Instance { get; private set; }
 
     private void Awake()

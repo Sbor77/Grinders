@@ -8,14 +8,14 @@ public class BackgroundMusic : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private List<AudioClip> _playList;
-    [SerializeField] private GamesSdk _sdk;
+    //[SerializeField] private GamesSdk _sdk;
     
     private int _shopSceneIndex = 5;    
     private int _currentSceneIndex;
     private Coroutine _playJob;
     public bool _isPlaying;
 
-    public static BackgroundMusic Instance { get; private set; }
+  /*  public static BackgroundMusic Instance { get; private set; }
     
     private void Awake()
     {
@@ -29,32 +29,32 @@ public class BackgroundMusic : MonoBehaviour
 
             DontDestroyOnLoad(this);
         }
-    }
+    }*/
 
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
 
-        if (_sdk != null)
+        /*if (_sdk != null)
         {
             _sdk.AdVideoOpened += OnPlayAd;
             _sdk.AdVideoClosed += OnStopAd;
             _sdk.InterstitialAdOpened += OnPlayAd;
             _sdk.InterstitialAdClosed += OnStopAd;
-        }
+        }*/
     }
 
     private void OnDisable()
     {
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
 
-        if (_sdk != null)
+       /* if (_sdk != null)
         {
             _sdk.AdVideoOpened -= OnPlayAd;
             _sdk.AdVideoClosed -= OnStopAd;
             _sdk.InterstitialAdOpened -= OnPlayAd;
             _sdk.InterstitialAdClosed -= OnStopAd;
-        }
+        }*/
     }
 
     private void Start()
@@ -73,7 +73,7 @@ public class BackgroundMusic : MonoBehaviour
             ActivatePlayCoroutine();
         }
     }
-
+/*
     private void OnPlayAd()
     {
         StopActionGamePlay(true);
@@ -94,17 +94,13 @@ public class BackgroundMusic : MonoBehaviour
         AudioListener.pause = stopGame;
         AudioListener.volume = stopGame ? 0f : 1f;
         Time.timeScale = stopGame ? 0f : 1f;
-    }
+    }*/
 
     private void ActivatePlayCoroutine()
     {
         _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         _isPlaying = true;
-
-        //int startClipIndex = _currentSceneIndex;
-
-        //_playJob = StartCoroutine(PlayMusicFrom(startClipIndex));
 
         _playJob = StartCoroutine(PlayMusicFromCurrentSceneIndex());
     }
@@ -131,8 +127,7 @@ public class BackgroundMusic : MonoBehaviour
                 {
                     _audioSource.clip = _playList[i];
                 }
-
-                _audioSource.volume = 0.25f;
+                                
                 _audioSource.Play();
 
                 while (_audioSource.isPlaying)
@@ -151,51 +146,5 @@ public class BackgroundMusic : MonoBehaviour
                     i = -1;
             }
         }
-    }
-
-
-    /*private IEnumerator PlayMusicFrom (int clipIndex)
-    {
-        yield return null;
-
-        while (_isPlaying)
-        {
-            bool isFirstCycle = true;
-
-            for (int i = 0; i < _playList.Count; i++)
-            {
-                if (isFirstCycle)
-                {
-                    clipIndex = _currentSceneIndex;
-
-                    _audioSource.clip = _playList[clipIndex];                    
-
-                    i = clipIndex;
-
-                    isFirstCycle = false;                    
-                }
-                else
-                {
-                    _audioSource.clip = _playList[i];                    
-                }
-                
-                _audioSource.Play();
-
-                while(_audioSource.isPlaying)
-                {
-                    yield return null;
-                }                
-
-                if (_currentSceneIndex != SceneManager.GetActiveScene().buildIndex || _currentSceneIndex != _shopSceneIndex)
-                {
-                    _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-                    isFirstCycle = true;
-                }                
-
-                if (i == _playList.Count - 1)
-                    i = -1;
-            }
-        }
-    }*/
+    }    
 }

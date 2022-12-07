@@ -24,11 +24,15 @@ public class Shop : MonoBehaviour
 
         _gameEndPanel.SetActive(false);
 
-        GamesSdk.Instance.SetLeaderboardScore(DataHandler.Instance.GetSavedTotalScore());
-
         OnStatBought();
 
-        GamesSdk.Instance.InterstitialAdShow();
+        if (GamesSdk.Instance != null)
+        {
+            GamesSdk.Instance.SetLeaderboardScore(DataHandler.Instance.GetSavedTotalScore());
+
+            GamesSdk.Instance.InterstitialAdShow();
+        }
+        
     }
 
     private void OnEnable()

@@ -27,6 +27,13 @@ public class AreaAttack : MonoBehaviour
     
     private float _stunRadius => _radius * 2f;
 
+    public void Apply()
+    {
+        Animate();
+
+        DamageTargets(_radius, 0);
+    }
+
     private void SetChargeEffectPosition()
     {
         _chargeEffect.transform.localPosition = new Vector3(0, _effectHeiht, - (_radius + _radiusOffset));
@@ -62,13 +69,6 @@ public class AreaAttack : MonoBehaviour
             if (_target.TryGetComponent(out IDamageable damageable))
                 damageable.TakeDamage(damage);
         }
-    }
-
-    public void Apply()
-    {
-        Animate();
-
-        DamageTargets(_radius, 0);
     }
 
     private void OnDrawGizmos()
