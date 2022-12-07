@@ -34650,7 +34650,6 @@ MonoBehaviour:
   _speedInAttack: 15
   _beforeMassAttack: 4
   _attackDistance: 15
-  _spinAttackCooldown: 0
   _joystick: {fileID: 0}
   _wallLayerMask:
     serializedVersion: 2
@@ -34669,6 +34668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _secondsPerSpin: 0.2
+  _takeDamageClip: {fileID: -203655887218126122, guid: cb70d46b33ea9234d8ac0d536ea619a6, type: 3}
   _attackVFX: {fileID: 6475615425885104099}
   _moveSFX: {fileID: 7174414731611085008}
   _spinAttackSound: {fileID: 8300000, guid: 3a6649f44ee794b4dbc8f5ea24bfed71, type: 3}

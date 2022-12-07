@@ -7,6 +7,7 @@ using System;
 public class Animations : MonoBehaviour
 {
     [SerializeField] private float _secondsPerSpin;
+    [SerializeField] private AnimationClip _takeDamageClip;
     [SerializeField] private ParticleSystem _attackVFX;
     [SerializeField] private AudioSource _moveSFX;
     [SerializeField] private AudioClip _spinAttackSound;
@@ -64,9 +65,9 @@ public class Animations : MonoBehaviour
         {
             _animator.SetTrigger(TakedDamage);
 
-            float takeDamageDuration = _animator.GetCurrentAnimatorStateInfo(0).length;
+            float takeDamageDuration = _takeDamageClip.length;
 
-            DOVirtual.DelayedCall(takeDamageDuration, () => _mover.ChangedHitDamage());
+            DOVirtual.DelayedCall(takeDamageDuration, () => _mover.ChangedHitDamage(false));
         }
 
     }
