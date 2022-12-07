@@ -27,7 +27,7 @@ public class DeathPanel : MonoBehaviour
         _dieButton.onClick.AddListener(OnDieClick);
         _continueButton.onClick.AddListener(OnContinueClick);
 
-        if (GamesSdk.Instance != null)
+        //if (GamesSdk.Instance != null)
         {
             GamesSdk.Instance.Rewarded += OnRewarded;
             GamesSdk.Instance.AdVideoClosed += OnContinueWithRewarded;
@@ -39,7 +39,7 @@ public class DeathPanel : MonoBehaviour
         _dieButton.onClick.RemoveListener(OnDieClick);
         _continueButton.onClick.RemoveListener(OnContinueClick);
 
-        if (GamesSdk.Instance != null)
+        //if (GamesSdk.Instance != null)
         {
             GamesSdk.Instance.Rewarded -= OnRewarded;
             GamesSdk.Instance.AdVideoClosed -= OnContinueWithRewarded;

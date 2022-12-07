@@ -31,7 +31,7 @@ public class SkillBuyer : MonoBehaviour
 
         _buyCoinsButton.onClick.AddListener(OnVideoAdBuyCoin);
 
-        if (GamesSdk.Instance != null)        
+        //if (GamesSdk.Instance != null)        
             GamesSdk.Instance.Rewarded += OnRewardedCoinsBuy;
         
     }
@@ -46,7 +46,7 @@ public class SkillBuyer : MonoBehaviour
 
         _buyCoinsButton.onClick.RemoveListener(OnVideoAdBuyCoin);
 
-        if (GamesSdk.Instance != null)
+        //if (GamesSdk.Instance != null)
             GamesSdk.Instance.Rewarded -= OnRewardedCoinsBuy;
     }
 

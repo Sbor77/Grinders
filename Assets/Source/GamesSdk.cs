@@ -7,6 +7,7 @@ using Lean.Localization;
 
 public class GamesSdk : MonoBehaviour
 {
+    [SerializeField] private GamePause _gamePause;
     private string _leaderboardName = "LeaderBoard";
 
     public string LeaderboardName => _leaderboardName;
@@ -47,14 +48,20 @@ public class GamesSdk : MonoBehaviour
         yield return YandexGamesSdk.Initialize();
 
         if (YandexGamesSdk.IsInitialized)
+        {
             LoadLocalization();
+            _gamePause.gameObject.SetActive(true);
+        }
 
         while (!YandexGamesSdk.IsInitialized)
         {
             yield return new WaitForSeconds(WaitTime);
 
             if (YandexGamesSdk.IsInitialized)
+            { 
                 LoadLocalization();
+                _gamePause.gameObject.SetActive(true);
+            }
         }
     }
 

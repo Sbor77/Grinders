@@ -1,71 +1,69 @@
 using UnityEngine;
+using Agava.WebUtility;
 using UnityEngine.Audio;
 
-namespace Agava.WebUtility.Samples
+public class GamePause : MonoBehaviour
 {
-    public class GamePause : MonoBehaviour
+    [SerializeField] private AudioMixer _audio;
+
+    private const float MaxVolume = 0f;
+    private const float MinVolume = -80f;
+
+    private void Start()
     {
-        [SerializeField] private AudioMixer _audio;
+        WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
 
-        private const float MaxVolume = 0f;
-        private const float MinVolume = -80f;
+        //if (GamesSdk.Instance != null)
+        //{
+        GamesSdk.Instance.AdVideoOpened += OnPlayAd;
+        GamesSdk.Instance.AdVideoClosed += OnStopAd;
+        GamesSdk.Instance.InterstitialAdOpened += OnPlayAd;
+        GamesSdk.Instance.InterstitialAdClosed += OnStopAd;
+        //}
+    }
 
-        private void OnEnable()
-        {
-            WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
+    private void OnDisable()
+    {
+        WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
 
-            if (GamesSdk.Instance != null)
-            {
-                GamesSdk.Instance.AdVideoOpened += OnPlayAd;
-                GamesSdk.Instance.AdVideoClosed += OnStopAd;
-                GamesSdk.Instance.InterstitialAdOpened += OnPlayAd;
-                GamesSdk.Instance.InterstitialAdClosed += OnStopAd;
-            }
-        }
+        //if (GamesSdk.Instance != null)
+        //{
+        GamesSdk.Instance.AdVideoOpened -= OnPlayAd;
+        GamesSdk.Instance.AdVideoClosed -= OnStopAd;
+        GamesSdk.Instance.InterstitialAdOpened -= OnPlayAd;
+        GamesSdk.Instance.InterstitialAdClosed -= OnStopAd;
+        //}
+    }
 
-        private void OnDisable()
-        {
-            WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
+    private void OnInBackgroundChange(bool inBackground)
+    {
+        // Use both pause and volume muting methods at the same time.
+        // They're both broken in Web, but work perfect together. Trust me on this.
+        //AudioListener.pause = inBackground;
+        //AudioListener.volume = inBackground ? 0f : 1f;
 
-            if (GamesSdk.Instance != null)
-            {
-                GamesSdk.Instance.AdVideoOpened -= OnPlayAd;
-                GamesSdk.Instance.AdVideoClosed -= OnStopAd;
-                GamesSdk.Instance.InterstitialAdOpened -= OnPlayAd;
-                GamesSdk.Instance.InterstitialAdClosed -= OnStopAd;
-            }
-        }
+        /*Time.timeScale = inBackground ? 0f : 1f;
+        float volume = inBackground ? MinVolume : MaxVolume;
+        _audio.SetFloat(Master, volume);*/
 
-        private void OnInBackgroundChange(bool inBackground)
-        {
-            // Use both pause and volume muting methods at the same time.
-            // They're both broken in Web, but work perfect together. Trust me on this.
-            //AudioListener.pause = inBackground;
-            //AudioListener.volume = inBackground ? 0f : 1f;
+        SetActive(inBackground);
 
-            /*Time.timeScale = inBackground ? 0f : 1f;
-            float volume = inBackground ? MinVolume : MaxVolume;
-            _audio.SetFloat(Master, volume);*/
+        Debug.Log("Sound is paused in OnInBackgroundChange event");
+    }
 
-            SetActive(inBackground);
+    private void OnPlayAd()
+    {
+        SetActive(true);
+    }
 
-            Debug.Log("Sound is paused in OnInBackgroundChange event");
-        }
+    private void OnStopAd()
+    {
+        SetActive(false);
+    }
+    private void SetActive(bool isPaused)
+    {
+        Time.timeScale = isPaused ? 0f : 1f;
 
-        private void OnPlayAd()
-        {
-            SetActive(true);
-        }
-
-        private void OnStopAd()
-        {
-            SetActive(false);
-        }
-        private void SetActive (bool isPaused)
-        {
-            Time.timeScale = isPaused ? 0f : 1f;
-            
-            _audio.SetFloat(DataHandler.Instance.MasterVolume, isPaused ? MinVolume : MaxVolume);
-        }
+        _audio.SetFloat(DataHandler.Instance.MasterVolume, isPaused ? MinVolume : MaxVolume);
     }
 }
