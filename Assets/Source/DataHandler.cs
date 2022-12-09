@@ -181,19 +181,23 @@ public class DataHandler : MonoBehaviour
     }
 
     public float GetSavedTotalVolume()
-    {        
+    {
+        float defaultVolume = 1;
+
         if (PlayerPrefs.HasKey(_totalVolume))
             return PlayerPrefs.GetFloat(_totalVolume);
         else
-            return -33;
+            return defaultVolume;
     }
 
     public float GetSavedMusicVolume()
     {
+        float defaultVolume = 1;
+
         if (PlayerPrefs.HasKey(_musicVolume))
             return PlayerPrefs.GetFloat(_musicVolume);
         else
-            return -22;
+            return defaultVolume;
     }
 
     #region Import WebGL for check mobile platform
