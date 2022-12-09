@@ -94,7 +94,7 @@ AudioSource:
   m_GameObject: {fileID: 1058724317675621355}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 6322163235761381678, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79b6bd1d1a17e4a47be0743495985a9c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -105,7 +105,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
+  MinDistance: 20
   MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
@@ -141,7 +141,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -14606,10 +14606,10 @@ AudioSource:
   m_GameObject: {fileID: 3464886730387448702}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 6322163235761381678, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 77244f0b8396f6941946d5ac598aabe7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -14617,7 +14617,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
+  MinDistance: 0
   MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
@@ -14653,7 +14653,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -14728,7 +14728,6 @@ MonoBehaviour:
   _item: {fileID: 1675968225667557870}
   _fogEffect: {fileID: 3810957938891232438}
   _burstEffect: {fileID: 5082561632401323646}
-  _outline: {fileID: 0}
 --- !u!114 &824449181478657152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14763,7 +14762,7 @@ AudioSource:
   m_GameObject: {fileID: 3464886730387448702}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -5688734842909005866, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4d107fdd64e81934ba569a2d27a8677e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -14774,7 +14773,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
+  MinDistance: 20
   MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
