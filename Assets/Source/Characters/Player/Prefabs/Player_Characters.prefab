@@ -34646,7 +34646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 6
-  _rotationSpeed: 360
+  _rotationSpeed: 720
   _speedInAttack: 15
   _beforeMassAttack: 4
   _attackDistance: 15
