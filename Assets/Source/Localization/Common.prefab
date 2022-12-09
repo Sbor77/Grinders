@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2631835792577473823}
   - component: {fileID: 2672866020633249284}
   m_Layer: 0
-  m_Name: Effects
+  m_Name: Common
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,11 +47,11 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u042D\u0444\u0444\u0435\u043A\u0442\u044B"
+    Text: "\u041E\u0431\u0449\u0438\u0439"
     Object: {fileID: 0}
   - Language: English
-    Text: Effects
+    Text: Volume
     Object: {fileID: 0}
   - Language: Turkish
-    Text: Etkileri
+    Text: "G\xFCr\xFClt\xFC"
     Object: {fileID: 0}

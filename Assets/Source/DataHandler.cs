@@ -1,10 +1,5 @@
-//using Agava.WebUtility;
-//using System.Collections;
-//using System.Collections.Generic;
-//using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine;
-
 
 public class DataHandler : MonoBehaviour
 {
@@ -16,13 +11,13 @@ public class DataHandler : MonoBehaviour
     private string _healthSkillKey = "HealthSkill";
     private string _speedSkillKey = "SpeedSkill";
     private string _radiusSkillKey = "RadiusSkill";
-    private string _masterVolume = "MasterVolume";
-    private string _musicVolume = "MusicVolume";
-    private string _effectsVolume = "EffectsVolume";
+    private string _mute = "Mute";
+    private string _totalVolume = "TotalVol";
+    private string _musicVolume = "MusicVol";
     private string _language = "Language";
     private string _ru = "Russian";
 
-    public string MasterVolume => _masterVolume;
+    public string MasterVolume => _totalVolume;
 
     public static DataHandler Instance { get; private set; }
 
@@ -38,26 +33,7 @@ public class DataHandler : MonoBehaviour
 
             DontDestroyOnLoad(this);
         }
-    }
-
-    #region Event OnInBackground
-   /* private void OnEnable()
-    {
-        WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
-    }
-
-    private void OnDisable()
-    {
-        WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
-    }
-
-    private void OnInBackgroundChange(bool inBackground)
-    {
-        AudioListener.pause = inBackground;
-        AudioListener.volume = inBackground ? 0f : 1f;
-        //Time.timeScale = inBackground ? 0f : 1f;
-    }*/
-    #endregion
+    }   
 
     public void SaveLanguage(string lang)
     {
@@ -123,32 +99,19 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_radiusSkillKey, radiusSkill);
     }
 
-    public void SaveMasterVolume(float value)
-    {
-        PlayerPrefs.SetFloat(_masterVolume, value);
+    public void SaveMuteState(float value)
+    {        
+        PlayerPrefs.SetFloat(_mute, value);        
+    }
 
-      /*  if (value >= maxVolume)
-            PlayerPrefs.SetFloat(_masterVolume, maxVolume);
-        else
-            PlayerPrefs.SetFloat(_masterVolume, minVolume);*/
+    public void SaveTotalVolume(float value)
+    {
+        PlayerPrefs.SetFloat(_totalVolume, value);      
     }
 
     public void SaveMusicVolume(float value)
     {
         PlayerPrefs.SetFloat(_musicVolume, value);
-
-        /*if (value >= 0 && value <= 1)
-            PlayerPrefs.SetFloat(_musicVolume, value);
-        else
-            PlayerPrefs.SetFloat(_musicVolume, 1);*/
-    }
-
-    public void SaveEffectsVolume(float value)
-    {
-        if (value >= 0 && value <= 1)
-            PlayerPrefs.SetFloat(_effectsVolume, value);
-        else
-            PlayerPrefs.SetFloat(_effectsVolume, 1);
     }
 
     public void SaveAllStats()
@@ -209,10 +172,18 @@ public class DataHandler : MonoBehaviour
         return PlayerPrefs.GetInt(_radiusSkillKey);
     }
 
-    public float GetSavedMasterVolume()
+    public float GetSavedMuteState()
+    {
+        if (PlayerPrefs.HasKey(_mute))
+            return PlayerPrefs.GetFloat(_mute);
+        else
+            return 1;
+    }
+
+    public float GetSavedTotalVolume()
     {        
-        if (PlayerPrefs.HasKey(_masterVolume))
-            return PlayerPrefs.GetFloat(_masterVolume);
+        if (PlayerPrefs.HasKey(_totalVolume))
+            return PlayerPrefs.GetFloat(_totalVolume);
         else
             return 0;
     }
@@ -222,15 +193,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_musicVolume))
             return PlayerPrefs.GetFloat(_musicVolume);
         else
-            return -40;
-    }
-
-    public float GetSavedEffectsVolume()
-    {
-        if (PlayerPrefs.HasKey(_effectsVolume))
-            return PlayerPrefs.GetFloat(_effectsVolume);
-        else
-            return -40;
+            return 0;
     }
 
     #region Import WebGL for check mobile platform

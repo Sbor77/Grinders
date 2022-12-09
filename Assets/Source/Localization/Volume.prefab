@@ -50,7 +50,7 @@ MonoBehaviour:
     Text: "\u0417\u0432\u0443\u043A"
     Object: {fileID: 0}
   - Language: English
-    Text: Volume
+    Text: Mute
     Object: {fileID: 0}
   - Language: Turkish
     Text: Ses

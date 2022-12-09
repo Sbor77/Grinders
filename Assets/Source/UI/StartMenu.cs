@@ -1,25 +1,16 @@
 using Agava.YandexGames;
-using Lean.Localization;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
-{
-    [SerializeField] private LeanLocalization _leanLocalization;
+{    
     [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _leaderboardButton;
-    [SerializeField] private SceneLevelLoader _loaderPanel;
+    [SerializeField] private SceneLevelLoader _levelLoaderPanel;
     [SerializeField] private LeadersPanel _leadersPlanel;
 
-    private int _indexLevel = 1;
-    //private List<Leader> leaders;
-    //private Leader player;
-    //private const int MaxDelay = 100;
-    //private const float WaitDelay = 0.25f;
+    private int _startLevelIndex = 1;    
 
     private void OnEnable()
     {
@@ -28,19 +19,19 @@ public class StartMenu : MonoBehaviour
         _leaderboardButton.onClick.AddListener(ShowLeaderboard);
     }
 
-    private void Start()
-    {
-        if (DataHandler.Instance.GetSavedLevel() <= 1)
-            _continueButton.interactable = false;
-
-        ActivateLeaderboard();
-    }
-
     private void OnDisable()
     {
         _newGameButton.onClick.RemoveListener(StartNewGame);
         _continueButton.onClick.RemoveListener(ContinueGame);
         _leaderboardButton.onClick.RemoveListener(ShowLeaderboard);
+    }
+
+    private void Start()
+    {
+        if (DataHandler.Instance.GetSavedLevel() <= _startLevelIndex)
+            _continueButton.interactable = false;
+
+        ActivateLeaderboard();
     }
 
     private void ActivateLeaderboard()
@@ -59,9 +50,9 @@ public class StartMenu : MonoBehaviour
 
     private void StartNewGame()
     {
-        float masterVolume = DataHandler.Instance.GetSavedMasterVolume();
+        float muteState = DataHandler.Instance.GetSavedMuteState();
+        float totalVolume = DataHandler.Instance.GetSavedTotalVolume();
         float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
-        float effectsVolume = DataHandler.Instance.GetSavedEffectsVolume();
         string language = DataHandler.Instance.GetSavedLanguage();
 
         DataHandler.Instance.DeleteAllStats();
@@ -81,19 +72,19 @@ public class StartMenu : MonoBehaviour
         DataHandler.Instance.SaveKills(defaultKills);
         DataHandler.Instance.SaveTotalMoney(defaultTotalMoney);
         DataHandler.Instance.SaveLevelMoney(defaultLevelMoney);
-        DataHandler.Instance.SaveMasterVolume(masterVolume);
+        DataHandler.Instance.SaveMuteState(muteState);
+        DataHandler.Instance.SaveTotalVolume(totalVolume);
         DataHandler.Instance.SaveMusicVolume(musicVolume);
-        DataHandler.Instance.SaveEffectsVolume(effectsVolume);
         DataHandler.Instance.SaveLanguage(language);
         DataHandler.Instance.SaveAllStats();
         
-        _loaderPanel.LoadLevel(_indexLevel);
+        _levelLoaderPanel.Load(_startLevelIndex);
     }
 
     private void ContinueGame()
     {
         int currentLevel = DataHandler.Instance.GetSavedLevel();
-        _loaderPanel.LoadLevel(currentLevel);
+        _levelLoaderPanel.Load(currentLevel);
     }
 
     private void ShowLeaderboard()

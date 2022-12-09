@@ -37,7 +37,7 @@ public class SettingPanel : MonoBehaviour
     {
         //_masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == MaxVolume ? true : false;
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
-        _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
+        _effectsVolumeSlider.value = DataHandler.Instance.GetSavedMuteState();
         
         OnMasterVolumeChanged(true);
         OnMusicVolumeChanged(_musicVolumeSlider.value);
@@ -68,7 +68,7 @@ public class SettingPanel : MonoBehaviour
 
         _audio.SetFloat(Master, volume);
 
-        DataHandler.Instance.SaveMasterVolume(volume);
+        DataHandler.Instance.SaveTotalVolume(volume);
     }
 
     private void OnMusicVolumeChanged(float value)
@@ -86,7 +86,7 @@ public class SettingPanel : MonoBehaviour
 
         _audio.SetFloat(Effects, volumeValue);
 
-        DataHandler.Instance.SaveEffectsVolume(value);
+        DataHandler.Instance.SaveMuteState(value);
     }
 
     private void DeactivateSlider(Slider slider)
