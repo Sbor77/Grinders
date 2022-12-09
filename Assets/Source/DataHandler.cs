@@ -18,7 +18,7 @@ public class DataHandler : MonoBehaviour
     private string _radiusSkillKey = "RadiusSkill";
     private string _masterVolume = "MasterVolume";
     private string _musicVolume = "MusicVolume";
-    private string _effectsVolume = "EffectsVolume";
+    private string _muteVolume = "Mute";
     private string _language = "Language";
     private string _ru = "Russian";
 
@@ -143,12 +143,10 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetFloat(_musicVolume, 1);*/
     }
 
-    public void SaveEffectsVolume(float value)
+    public void SaveMuteVolume(bool value)
     {
-        if (value >= 0 && value <= 1)
-            PlayerPrefs.SetFloat(_effectsVolume, value);
-        else
-            PlayerPrefs.SetFloat(_effectsVolume, 1);
+        float mute = value == true ? 1 : 0;
+        PlayerPrefs.SetFloat(_muteVolume, mute);
     }
 
     public void SaveAllStats()
@@ -214,7 +212,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_masterVolume))
             return PlayerPrefs.GetFloat(_masterVolume);
         else
-            return 0;
+            return 1;
     }
 
     public float GetSavedMusicVolume()
@@ -222,15 +220,15 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_musicVolume))
             return PlayerPrefs.GetFloat(_musicVolume);
         else
-            return -40;
+            return 1;
     }
 
-    public float GetSavedEffectsVolume()
+    public bool GetSavedMuteVolume()
     {
-        if (PlayerPrefs.HasKey(_effectsVolume))
-            return PlayerPrefs.GetFloat(_effectsVolume);
+        if (PlayerPrefs.HasKey(_muteVolume))
+            return PlayerPrefs.GetFloat(_muteVolume) == 1 ? true : false;
         else
-            return -40;
+            return true;
     }
 
     #region Import WebGL for check mobile platform

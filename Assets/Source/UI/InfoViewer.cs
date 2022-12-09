@@ -72,7 +72,8 @@ public class InfoViewer : MonoBehaviour
 
         _currentHealth = _maxHealth; // load in PlayerPrefs
 
-        SetSoundIcon(DataHandler.Instance.GetSavedMasterVolume());
+        SetSoundIcon(DataHandler.Instance.GetSavedMuteVolume());
+        AudioListener.volume = DataHandler.Instance.GetSavedMasterVolume();
 
         _healthBarSlider.maxValue = _maxHealth;
 
@@ -110,23 +111,43 @@ public class InfoViewer : MonoBehaviour
 
     private void OnChangedSoundVolume()
     {
-        _audio.GetFloat(Master, out float volume);
+        //_audio.GetFloat(Master, out float volume);
 
-        if (volume == MaxVolume)
-            volume = MinVolume;
+        //if (volume == MaxVolume)
+        //    volume = MinVolume;
+        //else
+        //    volume = MaxVolume;
+
+        //SetSoundIcon(volume);
+
+        //_audio.SetFloat(Master, volume);
+
+        //DataHandler.Instance.SaveMasterVolume(volume);
+
+        float volume;
+        bool value = DataHandler.Instance.GetSavedMuteVolume();
+
+        if (value == false)
+        {
+            volume = DataHandler.Instance.GetSavedMasterVolume();
+            value = true;
+            print(volume);
+        }
         else
-            volume = MaxVolume;
+        {
+            value = false;
+            volume = 0;
+            print(volume);
+        }
 
-        SetSoundIcon(volume);
-
-        _audio.SetFloat(Master, volume);
-
-        DataHandler.Instance.SaveMasterVolume(volume);
+        AudioListener.volume = volume;
+        SetSoundIcon(value);
+        DataHandler.Instance.SaveMuteVolume(value);
     }
 
-    private void SetSoundIcon(float volume)
+    private void SetSoundIcon(bool volume)
     {
-        if (volume == MaxVolume)
+        if (volume == true)
             _soundImage.sprite = _volumeOn;
         else
             _soundImage.sprite = _volumeOff;
