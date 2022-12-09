@@ -1,5 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,55 +9,28 @@ public class DeathPanel : MonoBehaviour
 
     private bool _rewarded;
 
-    public void Activate()
-    {
-        gameObject.SetActive(true);
-        _rewarded = false;
-    }
-
-    public void Deactivate()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void OnEnable()
     {
         _dieButton.onClick.AddListener(OnDieClick);
         _continueButton.onClick.AddListener(OnContinueClick);
-
-        //if (GamesSdk.Instance != null)
-        {
-            GamesSdk.Instance.Rewarded += OnRewarded;
-            GamesSdk.Instance.AdVideoClosed += OnContinueWithRewarded;
-        }
+        
+        GamesSdk.Instance.Rewarded += OnRewarded;
+        GamesSdk.Instance.AdVideoClosed += OnContinueWithReward;        
     }
 
     private void OnDisable()
     {
         _dieButton.onClick.RemoveListener(OnDieClick);
         _continueButton.onClick.RemoveListener(OnContinueClick);
-
-        //if (GamesSdk.Instance != null)
-        {
-            GamesSdk.Instance.Rewarded -= OnRewarded;
-            GamesSdk.Instance.AdVideoClosed -= OnContinueWithRewarded;
-        }
+        
+        GamesSdk.Instance.Rewarded -= OnRewarded;
+        GamesSdk.Instance.AdVideoClosed -= OnContinueWithReward;        
     }
 
-    private void OnContinueClick()
+    public void Activate()
     {
-        GamesSdk.Instance.VideoAdShow();
-    }
-
-    private void OnRewarded()
-    {
-        _rewarded = true;
-    }
-
-    private void OnContinueWithRewarded()
-    {
-        if (_rewarded)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameObject.SetActive(true);
+        _rewarded = false;
     }
 
     private void OnDieClick()
@@ -72,5 +43,21 @@ public class DeathPanel : MonoBehaviour
         DataHandler.Instance.SaveAllStats();
 
         SceneManager.LoadScene(0);
+    }
+
+    private void OnContinueClick()
+    {
+        GamesSdk.Instance.VideoAdShow();
+    }
+
+    private void OnRewarded()
+    {
+        _rewarded = true;
+    }
+
+    private void OnContinueWithReward()
+    {
+        if (_rewarded)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

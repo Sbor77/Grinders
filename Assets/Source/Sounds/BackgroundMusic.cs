@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class BackgroundMusic : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private List<AudioClip> _playList;    
+    [SerializeField] private List<AudioClip> _playList;
     
     private Coroutine _playJob;
     private int _shopSceneIndex = 5;    
@@ -25,6 +25,7 @@ public class BackgroundMusic : MonoBehaviour
 
     private void Start()
     {
+        SetVolume(DataHandler.Instance.GetSavedMusicVolume());
         ActivatePlayCoroutine();
     }
 
@@ -38,9 +39,7 @@ public class BackgroundMusic : MonoBehaviour
         if (_playJob != null && newScene.buildIndex != _shopSceneIndex)
         {
             StopCoroutine(_playJob);
-
             _playJob = null;
-
             ActivatePlayCoroutine();
         }
     }
@@ -48,9 +47,7 @@ public class BackgroundMusic : MonoBehaviour
     private void ActivatePlayCoroutine()
     {
         _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
         _isPlaying = true;
-
         _playJob = StartCoroutine(PlayMusicFromCurrentSceneIndex());
     }
 
@@ -67,9 +64,7 @@ public class BackgroundMusic : MonoBehaviour
                 if (isFirstCycle)
                 {
                     _audioSource.clip = _playList[_currentSceneIndex];
-
                     i = _currentSceneIndex;
-
                     isFirstCycle = false;
                 }
                 else
@@ -87,7 +82,6 @@ public class BackgroundMusic : MonoBehaviour
                 if (_currentSceneIndex != SceneManager.GetActiveScene().buildIndex || _currentSceneIndex != _shopSceneIndex)
                 {
                     _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
                     isFirstCycle = true;
                 }
 

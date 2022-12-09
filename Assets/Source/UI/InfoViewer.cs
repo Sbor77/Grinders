@@ -1,8 +1,6 @@
 using System;
-//using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class InfoViewer : MonoBehaviour
@@ -14,35 +12,30 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private TMP_Text _bigBoxText;
     [SerializeField] private TMP_Text _KillsText;
-//    [SerializeField] private Image _attackCooldownTimer;
     [SerializeField] private Image _massKillButtonCooldown;
     [SerializeField] private Image _soundImage;
     [SerializeField] private Sprite _volumeOn;
-    [SerializeField] private Sprite _volumeOff;
-    [SerializeField] private AudioMixer _audio;
-
-    private Movement _movement;
-    private Button _soundButton;
-    private int _questCoinCollected;
-    private int _questEnemyKills;
-    private bool _questbigBoxDestroyed;
-    private float _maxHealth;
-    private float _currentHealth;
-    private QuestInfo _missonConditions;
-//    private Coroutine _cooldownCoroutine;
+    [SerializeField] private Sprite _volumeOff;    
 
     public event Action IsCurrentConditionsChanged;
+
+    private const int MaxVolume = 1;
+    private const int MinVolume = 0;
+    private Movement _movement;
+    private Button _soundButton;
+    private QuestInfo _missonConditions;
+    private int _questCoinCollected;
+    private int _questEnemyKills;
+    private int _questBigboxCount = 1;
+    private bool _questBigbox;
+    private float _maxHealth;
+    private float _currentHealth;
 
     public QuestInfo MissionConditions => _missonConditions;
     public float CurrentHealth { get; private set; }
     public int CurrentKills { get; private set; }
     public int CurrentCoins { get; private set; }
-    public bool IsBigboxDestroyed { get; private set; }
-
-    private const string Master = "MasterVolume";
-    private const float MaxVolume = 0;
-    private const float MinVolume = -80;
-
+    public bool IsBigboxDestroyed { get; private set; }        
 
     private void Awake()
     {
@@ -52,84 +45,56 @@ public class InfoViewer : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.ChangedHealth += OnChangedHealth;
-
-        _player.ChangedCoin += OnChangedPlayerCoins;
-
         _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
-
+        _player.ChangedHealth += OnChangedHealth;
+        _player.ChangedCoin += OnChangedPlayerCoins;
         _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
-
-        _soundButton.onClick.AddListener(OnChangedSoundVolume);
-        //_movement.StartAttackCooldown += OnStartCooldown;
-        //_movement.ChangedState += OnStartAttack;
+        _soundButton.onClick.AddListener(OnMuteToggled);        
         _movement.ChangedMassAttackCooldown += OnChangedMassCooldown;
+    }
+
+    private void OnDisable()
+    {
+        _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;         
+        _player.ChangedHealth -= OnChangedHealth;
+        _player.ChangedCoin -= OnChangedPlayerCoins;
+        _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
+        _soundButton.onClick.RemoveListener(OnMuteToggled);        
+        _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
     }
 
     void Start()
     {
         _maxHealth = _player.MaxHealth;
-
-        _currentHealth = _maxHealth; // load in PlayerPrefs
-
-        SetSoundIcon(DataHandler.Instance.GetSavedTotalVolume());
-
+        _currentHealth = _maxHealth;
         _healthBarSlider.maxValue = _maxHealth;
-
         _healthBarSlider.value = _currentHealth;
-    }
 
-    private void OnDisable()
-    {
-        _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills; 
-        
-        _player.ChangedHealth -= OnChangedHealth;
-
-        _player.ChangedCoin -= OnChangedPlayerCoins;
-
-        _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
-
-        _soundButton.onClick.RemoveListener(OnChangedSoundVolume);
-        //_movement.StartAttackCooldown -= OnStartCooldown;
-        //_movement.ChangedState -= OnStartAttack;
-        _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
+        ToggleSoundIcon(DataHandler.Instance.GetSavedMuteValue());
     }
 
     public void SetQuestCollected(QuestInfo conditions)
     {
+        _missonConditions = conditions;
         _questCoinCollected = conditions.NeedCoinCollected;
-
-        _questbigBoxDestroyed = conditions.NeedDestroyBigBox;
-
+        _questBigbox = conditions.NeedDestroyBigBox;
         _questEnemyKills = conditions.NeedEnemyKilled;
 
         SetStartConditionsText();
-
-        _missonConditions = conditions;
     }
 
-    private void OnChangedSoundVolume()
+    private void OnMuteToggled()
     {
-        _audio.GetFloat(Master, out float volume);
+        int muteValue = DataHandler.Instance.GetSavedMuteValue() == MaxVolume ? MinVolume : MaxVolume;
 
-        if (volume == MaxVolume)
-            volume = MinVolume;
-        else
-            volume = MaxVolume;
-
-        SetSoundIcon(volume);
-
-        _audio.SetFloat(Master, volume);
-
-        DataHandler.Instance.SaveTotalVolume(volume);
+        DataHandler.Instance.SaveMuteValue(muteValue);        
+        AudioListener.volume = muteValue == MaxVolume ? DataHandler.Instance.GetSavedTotalVolume() : MinVolume;        
+        ToggleSoundIcon(muteValue);
     }
 
-    private void SetSoundIcon(float volume)
+    private void ToggleSoundIcon(float volume)
     {
-        if (volume == MaxVolume)
-            _soundImage.sprite = _volumeOn;
-        else
-            _soundImage.sprite = _volumeOff;
+        _soundImage.sprite = volume == MaxVolume ? _volumeOn : _volumeOff;
     }
 
     private void OnChangedMassCooldown(float current, int max)
@@ -139,68 +104,37 @@ public class InfoViewer : MonoBehaviour
         _massKillButtonCooldown.fillAmount = 1 - value / max;
     }
 
-    //private void OnStartAttack(State state, bool mass)
-    //{
-    //    if (state == State.Attack)
-    //        _attackCooldownTimer.fillAmount = 0;
-    //}
-
-    //private void OnStartCooldown(float delay)
-    //{
-    //    _cooldownCoroutine = StartCoroutine(Cooldown(delay));
-
-    //}
-
-    //private IEnumerator Cooldown(float maxValue)
-    //{
-    //    float value = 0;
-    //    while (value < maxValue)
-    //    {
-    //        value = Mathf.Clamp(value + Time.deltaTime, 0, maxValue);
-    //        _attackCooldownTimer.fillAmount = value / maxValue;
-    //        yield return null;
-    //    }
-    //    yield return null;
-    //}
-
     private void SetStartConditionsText()
     {
         ChangeViewText(_goldText, 0, _questCoinCollected);
         ChangeViewText(_KillsText, 0, _questEnemyKills);
-        ChangeViewText(_bigBoxText, 0, 1);
+        ChangeViewText(_bigBoxText, 0, _questBigbox ? _questBigboxCount : 0);
     }
 
     private void OnChangedHealth(float health)
     {
         _healthBarSlider.value = health;
-
         CurrentHealth = health;
     }
 
     private void OnChangedPlayerCoins(int value)
     {
         ChangeViewText(_goldText, value, _questCoinCollected);
-
         CurrentCoins = value;
-
         IsCurrentConditionsChanged?.Invoke();
     }
 
     private void OnChangedPlayerKills(int value)
     {
         ChangeViewText(_KillsText, value, _questEnemyKills);
-
         CurrentKills = value;
-
         IsCurrentConditionsChanged?.Invoke();
     }
 
     private void OnDestroyBigBox(int count)
     {
-        ChangeViewText(_bigBoxText, count, 1);
-
-        IsBigboxDestroyed = count == 1;
-
+        ChangeViewText(_bigBoxText, count, _questBigboxCount);
+        IsBigboxDestroyed = count == _questBigboxCount;
         IsCurrentConditionsChanged?.Invoke();
     }
 
@@ -209,6 +143,6 @@ public class InfoViewer : MonoBehaviour
         if (questValue == 0)
             textField.text = currentValue.ToString();
         else
-            textField.text = $"{currentValue.ToString()}/{questValue.ToString()}";
+            textField.text = $"{currentValue}/{questValue}";
     }
 }

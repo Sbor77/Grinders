@@ -1,5 +1,4 @@
 using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using Agava.YandexGames;
 using System;
@@ -7,20 +6,19 @@ using Lean.Localization;
 
 public class GamesSdk : MonoBehaviour
 {
-    [SerializeField] private GamePause _gamePause;
-    private string _leaderboardName = "LeaderBoard";
-
-    public string LeaderboardName => _leaderboardName;
-
+    [SerializeField] private GameFocus _gameFocus;
+    
     public event Action Rewarded;
     public event Action AdVideoOpened;
     public event Action AdVideoClosed;
     public event Action InterstitialAdOpened;
     public event Action InterstitialAdClosed;
     public event Action<bool> ChangedLeaders;
+    
+    private const float WaitTime = .25f;    
+    private string _leaderboardName = "LeaderBoard";    
 
-    private const float WaitTime = .25f;
-
+    public string LeaderboardName => _leaderboardName;
     public static GamesSdk Instance { get; private set; }
 
     private void Awake()
@@ -50,7 +48,7 @@ public class GamesSdk : MonoBehaviour
         if (YandexGamesSdk.IsInitialized)
         {
             LoadLocalization();
-            _gamePause.gameObject.SetActive(true);
+            _gameFocus.gameObject.SetActive(true);
         }
 
         while (!YandexGamesSdk.IsInitialized)
@@ -60,7 +58,7 @@ public class GamesSdk : MonoBehaviour
             if (YandexGamesSdk.IsInitialized)
             { 
                 LoadLocalization();
-                _gamePause.gameObject.SetActive(true);
+                _gameFocus.gameObject.SetActive(true);
             }
         }
     }
@@ -209,17 +207,3 @@ public class GamesSdk : MonoBehaviour
     //}
     #endregion
 }
-
-//public class Leader
-//{
-//    public readonly int Ranks;
-//    public readonly int Scores;
-//    public readonly string Names;
-
-//    public Leader(int ranks, int scores, string names)
-//    {
-//        Ranks = ranks;
-//        Scores = scores;
-//        Names = names;
-//    }
-//}

@@ -16,9 +16,7 @@ public class DataHandler : MonoBehaviour
     private string _musicVolume = "MusicVol";
     private string _language = "Language";
     private string _ru = "Russian";
-
-    public string MasterVolume => _totalVolume;    
-
+    
     public static DataHandler Instance { get; private set; }
 
     private void Awake()

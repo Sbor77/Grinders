@@ -8,8 +8,8 @@ public class VolumePanel : MonoBehaviour
     [SerializeField] private Slider _musicVolumeSlider;
     [SerializeField] private BackgroundMusic _backgroundMusic;
         
-    private int _maxVolume = 1;
-    private int _minVolume = 0;
+    private const int MaxVolume = 1;
+    private const int MinVolume = 0;
 
     private void OnEnable()
     {
@@ -27,7 +27,7 @@ public class VolumePanel : MonoBehaviour
 
     public void Start()
     {
-        _muteStateToggle.isOn = DataHandler.Instance.GetSavedMuteValue() == _maxVolume ? true : false;
+        _muteStateToggle.isOn = DataHandler.Instance.GetSavedMuteValue() == MaxVolume ? true : false;
         _totalVolumeSlider.value = DataHandler.Instance.GetSavedTotalVolume();
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
 
@@ -39,7 +39,7 @@ public class VolumePanel : MonoBehaviour
 
     private void OnMuteStateChanged(bool unmute)
     {        
-        int muteVolume = unmute ? _maxVolume : _minVolume;        
+        int muteVolume = unmute ? MaxVolume : MinVolume;        
 
         _musicVolumeSlider.interactable = unmute;
         _totalVolumeSlider.interactable = unmute;
@@ -51,19 +51,17 @@ public class VolumePanel : MonoBehaviour
     private void OnMusicVolumeChanged(float value)
     {
         DataHandler.Instance.SaveMusicVolume(value);
-
         _backgroundMusic.SetVolume(value);
     }
 
     private void SetTotalVolume()
     {
-        AudioListener.volume = _muteStateToggle.isOn ? DataHandler.Instance.GetSavedTotalVolume() : _minVolume;
+        AudioListener.volume = _muteStateToggle.isOn ? DataHandler.Instance.GetSavedTotalVolume() : MinVolume;
     }
 
     private void OnTotalVolumeChanged(float value)
     {
         DataHandler.Instance.SaveTotalVolume(value);
-
         AudioListener.volume = value;
     }
 }
