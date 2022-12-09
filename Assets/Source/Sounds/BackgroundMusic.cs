@@ -10,7 +10,7 @@ public class BackgroundMusic : MonoBehaviour
     [SerializeField] private List<AudioClip> _playList;
     //[SerializeField] private GamesSdk _sdk;
     
-    private int _shopSceneIndex = 5;
+    private int _shopSceneIndex = 5;    
     private int _currentSceneIndex;
     private Coroutine _playJob;
     public bool _isPlaying;
@@ -59,10 +59,7 @@ public class BackgroundMusic : MonoBehaviour
 
     private void Start()
     {
-        _audioSource.volume = DataHandler.Instance.GetSavedMusicVolume();
         ActivatePlayCoroutine();
-
-        print(_audioSource.volume);
     }
 
     private void OnActiveSceneChanged(Scene replacedScene, Scene newScene)

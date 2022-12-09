@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 148567065}
   - component: {fileID: 148567066}
   m_Layer: 5
-  m_Name: MasterVolumeSlider
+  m_Name: EffectsVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1569794844}
   m_HandleRect: {fileID: 1311407084}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.0001
@@ -1195,11 +1195,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &412576274 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3708075983456283555, guid: e88ed05d5396ff146a7e2783317a0972, type: 3}
-  m_PrefabInstance: {fileID: 236666687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &423154369
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,7 +2714,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 124084816}
   m_HandleRect: {fileID: 1548210156}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.0001
@@ -3262,7 +3257,7 @@ GameObject:
   - component: {fileID: 1574662717}
   - component: {fileID: 1574662719}
   m_Layer: 5
-  m_Name: All
+  m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3618,8 +3613,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _masterVolumeToggle: {fileID: 2077354454}
   _musicVolumeSlider: {fileID: 1213370295}
-  _masterVolumeSlider: {fileID: 148567066}
-  _backgroundMusicSource: {fileID: 412576274}
+  _effectsVolumeSlider: {fileID: 148567066}
+  _audio: {fileID: 24100000, guid: 800026ea2061d1547821486c87afa3c9, type: 2}
 --- !u!1 &1773549115
 GameObject:
   m_ObjectHideFlags: 0

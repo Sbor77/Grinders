@@ -85,8 +85,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     {
         ReleasedJoystick();
 
-        if (_isTouchDown)
-            ChangedClickStatus?.Invoke();
+        //if (_isTouchDown)
+        ChangedClickStatus?.Invoke();
     }
 
     public void ButtonActivate()

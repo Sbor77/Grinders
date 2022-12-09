@@ -60,8 +60,8 @@ public class StartMenu : MonoBehaviour
     private void StartNewGame()
     {
         float masterVolume = DataHandler.Instance.GetSavedMasterVolume();
-        //float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
-        //float effectsVolume = DataHandler.Instance.GetSavedEffectsVolume();
+        float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
+        float effectsVolume = DataHandler.Instance.GetSavedEffectsVolume();
         string language = DataHandler.Instance.GetSavedLanguage();
 
         DataHandler.Instance.DeleteAllStats();
@@ -82,8 +82,8 @@ public class StartMenu : MonoBehaviour
         DataHandler.Instance.SaveTotalMoney(defaultTotalMoney);
         DataHandler.Instance.SaveLevelMoney(defaultLevelMoney);
         DataHandler.Instance.SaveMasterVolume(masterVolume);
-        //DataHandler.Instance.SaveMusicVolume(musicVolume);
-        //DataHandler.Instance.SaveEffectsVolume(effectsVolume);
+        DataHandler.Instance.SaveMusicVolume(musicVolume);
+        DataHandler.Instance.SaveEffectsVolume(effectsVolume);
         DataHandler.Instance.SaveLanguage(language);
         DataHandler.Instance.SaveAllStats();
         

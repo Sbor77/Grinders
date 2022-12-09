@@ -8,97 +8,85 @@ public class SettingPanel : MonoBehaviour
 {
     [SerializeField] private Toggle _masterVolumeToggle;
     [SerializeField] private Slider _musicVolumeSlider;
-    [SerializeField] private Slider _masterVolumeSlider;
-    [SerializeField] private AudioSource _backgroundMusicSource;
+    [SerializeField] private Slider _effectsVolumeSlider;
+    [SerializeField] private AudioMixer _audio;
 
-    //private const string Master = "MasterVolume";
-    //private const string Music = "MusicVolume";
-    //private const string Effects = "EffectsVolume";
-    //private const int Multiplier = 20;
-    //private const float MusicVolumeOffset = 20f;
-    //private const float MaxVolume = 1;
-    //private const float MinVolume = -80;
+    private const string Master = "MasterVolume";
+    private const string Music = "MusicVolume";
+    private const string Effects = "EffectsVolume";
+    private const int Multiplier = 20;
+    private const float MusicVolumeOffset = 20f;
+    private const float MaxVolume = 0;
+    private const float MinVolume = -80;
 
     private void OnEnable()
     {
-        _masterVolumeToggle.onValueChanged.AddListener(OnMasterToggleChanged);
+        _masterVolumeToggle.onValueChanged.AddListener(OnMasterVolumeChanged);
         _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
-        _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+        _effectsVolumeSlider.onValueChanged.AddListener(OnEffectsVolumeChanged);
     }
 
     private void OnDisable()
     {
-        _masterVolumeToggle.onValueChanged.RemoveListener(OnMasterToggleChanged);
+        _masterVolumeToggle.onValueChanged.RemoveListener(OnMasterVolumeChanged);
         _musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);
-        _masterVolumeSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
-        DataHandler.Instance.SaveAllStats();
+        _effectsVolumeSlider.onValueChanged.RemoveListener(OnEffectsVolumeChanged);
     }
 
     public void Start()
     {
-        _masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMuteVolume();
+        //_masterVolumeToggle.isOn = DataHandler.Instance.GetSavedMasterVolume() == MaxVolume ? true : false;
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
-        _masterVolumeSlider.value = DataHandler.Instance.GetSavedMasterVolume();
+        _effectsVolumeSlider.value = DataHandler.Instance.GetSavedEffectsVolume();
+        
+        OnMasterVolumeChanged(true);
+        OnMusicVolumeChanged(_musicVolumeSlider.value);
+        OnEffectsVolumeChanged(_effectsVolumeSlider.value);
 
-        //OnMasterVolumeChanged(true);
-        //OnMusicVolumeChanged(_musicVolumeSlider.value);
-        //OnEffectsVolumeChanged(_effectsVolumeSlider.value);
-
-        //_musicVolumeSlider.value = 0.5f;
-        //_effectsVolumeSlider.value = 0.5f;
+        _musicVolumeSlider.value = 0.5f;
+        _effectsVolumeSlider.value = 0.5f;
     }
 
-    private void OnMasterToggleChanged(bool value)
-    {
-        float volume;
+    private void OnMasterVolumeChanged(bool value)
+    {        
+        float volume = MinVolume;
 
         if (value)
         {
-            volume = DataHandler.Instance.GetSavedMasterVolume();
-            print(volume);
+            volume = MaxVolume;
+
+            ActivateSlider(_musicVolumeSlider);
+
+            ActivateSlider(_effectsVolumeSlider);
         }
         else
         {
-            //DataHandler.Instance.SaveMasterVolume(volume);
-            volume = 0;
-            print(volume);
+            DeactivateSlider(_musicVolumeSlider);
+
+            DeactivateSlider(_effectsVolumeSlider);
         }
 
-        AudioListener.volume = volume;
-        DataHandler.Instance.SaveMuteVolume(value);
-        //{
-        //    //volume = MaxVolume;
+        _audio.SetFloat(Master, volume);
 
-        //    ActivateSlider(_musicVolumeSlider);
-
-        //    ActivateSlider(_effectsVolumeSlider);
-        //}
-        //else
-        //{
-        //    DeactivateSlider(_musicVolumeSlider);
-
-        //    DeactivateSlider(_effectsVolumeSlider);
-        //}
-
-        //_audio.SetFloat(Master, volume);
-
-        //DataHandler.Instance.SaveMasterVolume(value == true ? 1 : 0);
+        DataHandler.Instance.SaveMasterVolume(volume);
     }
 
     private void OnMusicVolumeChanged(float value)
     {
-        _backgroundMusicSource.volume = value;
-        //float volumeValue = Mathf.Log10(value) * Multiplier - MusicVolumeOffset;
-        //_audio.SetFloat(Music, volumeValue);
-        DataHandler.Instance.SaveMusicVolume(value);
+        float volumeValue = Mathf.Log10(value) * Multiplier - MusicVolumeOffset;
+
+        _audio.SetFloat(Music, volumeValue);
+
+        DataHandler.Instance.SaveMusicVolume(volumeValue);
     }
 
-    private void OnMasterVolumeChanged(float value)
+    private void OnEffectsVolumeChanged(float value)
     {
-        AudioListener.volume = value;
-        //    float volumeValue = Mathf.Log10(value) * Multiplier;
-        //    _audio.SetFloat(Effects, volumeValue);
-        DataHandler.Instance.SaveMasterVolume(value);
+        float volumeValue = Mathf.Log10(value) * Multiplier;
+
+        _audio.SetFloat(Effects, volumeValue);
+
+        DataHandler.Instance.SaveEffectsVolume(value);
     }
 
     private void DeactivateSlider(Slider slider)
