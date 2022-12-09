@@ -11,13 +11,13 @@ public class DataHandler : MonoBehaviour
     private string _healthSkillKey = "HealthSkill";
     private string _speedSkillKey = "SpeedSkill";
     private string _radiusSkillKey = "RadiusSkill";
-    private string _mute = "Mute";
+    private string _muteValue = "MuteStateValue";    
     private string _totalVolume = "TotalVol";
     private string _musicVolume = "MusicVol";
     private string _language = "Language";
     private string _ru = "Russian";
 
-    public string MasterVolume => _totalVolume;
+    public string MasterVolume => _totalVolume;    
 
     public static DataHandler Instance { get; private set; }
 
@@ -99,9 +99,9 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_radiusSkillKey, radiusSkill);
     }
 
-    public void SaveMuteState(float value)
+    public void SaveMuteValue(int value)
     {        
-        PlayerPrefs.SetFloat(_mute, value);        
+        PlayerPrefs.SetInt(_muteValue, value);        
     }
 
     public void SaveTotalVolume(float value)
@@ -172,12 +172,14 @@ public class DataHandler : MonoBehaviour
         return PlayerPrefs.GetInt(_radiusSkillKey);
     }
 
-    public float GetSavedMuteState()
+    public int GetSavedMuteValue()
     {
-        if (PlayerPrefs.HasKey(_mute))
-            return PlayerPrefs.GetFloat(_mute);
+        int unmuteValue = 1;
+
+        if (PlayerPrefs.HasKey(_muteValue))
+            return PlayerPrefs.GetInt(_muteValue);
         else
-            return 1;
+            return unmuteValue;
     }
 
     public float GetSavedTotalVolume()
@@ -185,7 +187,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_totalVolume))
             return PlayerPrefs.GetFloat(_totalVolume);
         else
-            return 0;
+            return -33;
     }
 
     public float GetSavedMusicVolume()
@@ -193,7 +195,7 @@ public class DataHandler : MonoBehaviour
         if (PlayerPrefs.HasKey(_musicVolume))
             return PlayerPrefs.GetFloat(_musicVolume);
         else
-            return 0;
+            return -22;
     }
 
     #region Import WebGL for check mobile platform

@@ -28,6 +28,11 @@ public class BackgroundMusic : MonoBehaviour
         ActivatePlayCoroutine();
     }
 
+    public void SetVolume(float value)
+    {
+        _audioSource.volume = value;
+    }
+
     private void OnActiveSceneChanged(Scene replacedScene, Scene newScene)
     {
         if (_playJob != null && newScene.buildIndex != _shopSceneIndex)

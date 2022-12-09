@@ -50,7 +50,7 @@ public class StartMenu : MonoBehaviour
 
     private void StartNewGame()
     {
-        float muteState = DataHandler.Instance.GetSavedMuteState();
+        int muteState = DataHandler.Instance.GetSavedMuteValue();
         float totalVolume = DataHandler.Instance.GetSavedTotalVolume();
         float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
         string language = DataHandler.Instance.GetSavedLanguage();
@@ -72,7 +72,7 @@ public class StartMenu : MonoBehaviour
         DataHandler.Instance.SaveKills(defaultKills);
         DataHandler.Instance.SaveTotalMoney(defaultTotalMoney);
         DataHandler.Instance.SaveLevelMoney(defaultLevelMoney);
-        DataHandler.Instance.SaveMuteState(muteState);
+        DataHandler.Instance.SaveMuteValue(muteState);
         DataHandler.Instance.SaveTotalVolume(totalVolume);
         DataHandler.Instance.SaveMusicVolume(musicVolume);
         DataHandler.Instance.SaveLanguage(language);
