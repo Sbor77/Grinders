@@ -1,5 +1,4 @@
 using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,14 +9,14 @@ public class SceneLevelLoader : MonoBehaviour
 
     private AsyncOperation _asyncLoad;
 
-    public void LoadLevel(int levelIndex)
+    public void Load(int levelIndex)
     {
         gameObject.SetActive(true);
 
-        StartCoroutine(Loader(levelIndex));
+        StartCoroutine(LoadScene(levelIndex));
     }
 
-    private IEnumerator Loader(int index)
+    private IEnumerator LoadScene(int index)
     {
         _asyncLoad = SceneManager.LoadSceneAsync(index);
 

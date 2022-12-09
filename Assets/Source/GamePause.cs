@@ -74,6 +74,6 @@ public class GamePause : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        _audio.SetFloat(DataHandler.Instance.MasterVolume, DataHandler.Instance.GetSavedMasterVolume());
+        _audio.SetFloat(DataHandler.Instance.MasterVolume, DataHandler.Instance.GetSavedTotalVolume());
     }
 }

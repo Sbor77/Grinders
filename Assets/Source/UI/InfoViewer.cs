@@ -72,7 +72,7 @@ public class InfoViewer : MonoBehaviour
 
         _currentHealth = _maxHealth; // load in PlayerPrefs
 
-        SetSoundIcon(DataHandler.Instance.GetSavedMasterVolume());
+        SetSoundIcon(DataHandler.Instance.GetSavedTotalVolume());
 
         _healthBarSlider.maxValue = _maxHealth;
 
@@ -121,7 +121,7 @@ public class InfoViewer : MonoBehaviour
 
         _audio.SetFloat(Master, volume);
 
-        DataHandler.Instance.SaveMasterVolume(volume);
+        DataHandler.Instance.SaveTotalVolume(volume);
     }
 
     private void SetSoundIcon(float volume)

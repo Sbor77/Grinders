@@ -59,7 +59,7 @@ public class Shop : MonoBehaviour
 
     private void CloseShop()
     {
-        _levelLoader.LoadLevel(_introSceneIndex);
+        _levelLoader.Load(_introSceneIndex);
     }
 
     private void LoadNextLevel()
@@ -76,13 +76,13 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            _levelLoader.LoadLevel(DataHandler.Instance.GetSavedLevel());
+            _levelLoader.Load(DataHandler.Instance.GetSavedLevel());
         }
     }
 
     private void LoadMainMenu()
     {
-        _levelLoader.LoadLevel(_introSceneIndex);
+        _levelLoader.Load(_introSceneIndex);
     }
 
     private void OnStatBought()

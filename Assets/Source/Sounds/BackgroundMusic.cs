@@ -1,4 +1,3 @@
-//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,54 +6,21 @@ using UnityEngine.SceneManagement;
 public class BackgroundMusic : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private List<AudioClip> _playList;
-    //[SerializeField] private GamesSdk _sdk;
+    [SerializeField] private List<AudioClip> _playList;    
     
+    private Coroutine _playJob;
     private int _shopSceneIndex = 5;    
     private int _currentSceneIndex;
-    private Coroutine _playJob;
-    public bool _isPlaying;
-
-  /*  public static BackgroundMusic Instance { get; private set; }
-    
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-
-            DontDestroyOnLoad(this);
-        }
-    }*/
+    private bool _isPlaying; 
 
     private void OnEnable()
     {
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
-
-        /*if (_sdk != null)
-        {
-            _sdk.AdVideoOpened += OnPlayAd;
-            _sdk.AdVideoClosed += OnStopAd;
-            _sdk.InterstitialAdOpened += OnPlayAd;
-            _sdk.InterstitialAdClosed += OnStopAd;
-        }*/
     }
 
     private void OnDisable()
     {
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
-
-       /* if (_sdk != null)
-        {
-            _sdk.AdVideoOpened -= OnPlayAd;
-            _sdk.AdVideoClosed -= OnStopAd;
-            _sdk.InterstitialAdOpened -= OnPlayAd;
-            _sdk.InterstitialAdClosed -= OnStopAd;
-        }*/
     }
 
     private void Start()
@@ -73,28 +39,6 @@ public class BackgroundMusic : MonoBehaviour
             ActivatePlayCoroutine();
         }
     }
-/*
-    private void OnPlayAd()
-    {
-        StopActionGamePlay(true);
-    }
-
-    private void OnStopAd()
-    {
-        StopActionGamePlay(false);
-    }
-
-    private void StopActionGamePlay(bool stopGame)
-    {
-        if (stopGame)
-            _audioSource.Pause();
-        else
-            _audioSource.UnPause();
-
-        AudioListener.pause = stopGame;
-        AudioListener.volume = stopGame ? 0f : 1f;
-        Time.timeScale = stopGame ? 0f : 1f;
-    }*/
 
     private void ActivatePlayCoroutine()
     {
