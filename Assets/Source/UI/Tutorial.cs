@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-    [SerializeField] private Image _handImage;
+    [SerializeField] private JoystickTutorial _joystick;
+    [SerializeField] private Image _mouseImage;
+    [SerializeField] private Sprite _mouseSprite;
+    [SerializeField] private Sprite _mouseLeftButtonSprite;
+    [SerializeField] private Sprite _mouseRightButtonSprite;
     [SerializeField] private TMP_Text _moveText;
     [SerializeField] private TMP_Text _attackText;
 
@@ -17,22 +21,33 @@ public class Tutorial : MonoBehaviour
     {
         if (!DataHandler.Instance.IsMobile())
         {
-            Sequence animation = DOTween.Sequence();
-
-            animation.AppendInterval(0.5f);
-            animation.Append(_handImage.transform.DOScale(_clickSize, .3f).SetEase(Ease.Linear));
-            animation.Append(_handImage.transform.DOLocalMoveY(100f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
-            animation.Append(_handImage.transform.DOLocalMoveY(-100f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
-            animation.Append(_handImage.transform.DOLocalMoveX(100f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
-            animation.Append(_handImage.transform.DOLocalMoveX(-100f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
-            animation.AppendCallback(() => { ChangeText(); });
-            animation.AppendInterval(0.5f);
-            animation.Append(_handImage.transform.DOScale(_startSize, .3f).SetEase(Ease.Linear));
-            animation.AppendInterval(.5f);
-            animation.AppendCallback(() => { HideTutorial(); });
+            StartPCMoveAnimation();
         }
     }
 
+    private void StartPCMoveAnimation()
+    {
+        Sequence animation = DOTween.Sequence();
+        animation.AppendCallback(() => { _mouseImage.sprite = _mouseSprite; });
+        animation.AppendInterval(0.5f);
+        animation.AppendCallback(() => { _mouseImage.sprite = _mouseLeftButtonSprite; });
+        animation.AppendInterval(0.5f);
+        animation.AppendCallback(() => { _mouseImage.sprite = _mouseSprite; });
+        animation.AppendInterval(0.5f);
+        animation.AppendCallback(() => { _mouseImage.sprite = _mouseLeftButtonSprite; });
+        animation.Append(_mouseImage.transform.DOLocalMoveY(200f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
+        animation.Append(_mouseImage.transform.DOLocalMoveY(-200f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
+        animation.Append(_mouseImage.transform.DOLocalMoveX(200f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
+        animation.Append(_mouseImage.transform.DOLocalMoveX(-200f, .5f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
+        animation.AppendInterval(0.5f);
+        animation.AppendCallback(() => { _mouseImage.sprite = _mouseSprite; });
+        animation.AppendInterval(1f);
+        animation.AppendCallback(() =>
+        {
+            _joystick.AllowToMove();
+            _mouseImage.enabled = false;
+        });
+    }
     private void ChangeText()
     {
         _moveText.gameObject.SetActive(false);

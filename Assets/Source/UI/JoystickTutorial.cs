@@ -1,17 +1,23 @@
 using System;
 using UnityEngine;
+//using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Joystick : Joysticks
+public class JoystickTutorial : Joysticks
 {
-    [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .3f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
     [SerializeField] private Button _skillButton;
+
+    [SerializeField] private bool _canMove = false;
+    [SerializeField] private bool _canAttack = false;
+    [SerializeField] private bool _canMassAttack = false;
 
     public event Action<Vector2> ChangedDirection;
     public event Action ChangedClickStatus;
     public event Action SkillButtonClick;
+
+    private const float Half = .5f;
 
     private void OnEnable()
     {
@@ -35,15 +41,7 @@ public class Joystick : Joysticks
 
     private void Update()
     {
-        //if (_isTouchDown)
-        //{
-        //    if (_currentDownTime < _clickTimeDelta)
-        //        _currentDownTime += Time.deltaTime;
-        //    else
-        //        _isTouchDown = false;
-        //}
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _canMassAttack)
             OnSkillButtonClick();
     }
 
@@ -57,27 +55,27 @@ public class Joystick : Joysticks
     {
         if (!DataHandler.Instance.IsMobile())
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && _canMove)
             {
-                //_isTouchDown = true;
-                //_currentDownTime = 0;
-
                 if (_moveToTouchDownPosition)
                     _joystickBackground.transform.position = eventData.position;
 
                 OnDrag(eventData);
             }
+
         }
     }
 
     public override void OnDrag(PointerEventData eventData)
     {
-        if (Input.GetMouseButton(0))
+        if (!DataHandler.Instance.IsMobile())
         {
-            Vector2 inputVector;
-            CalculateJoystickInnerPosition(eventData.position);
-            inputVector = CalculateInputVector();
-            ChangedDirection?.Invoke(inputVector.normalized);
+            if (Input.GetMouseButtonDown(0) && _canMove)
+            {
+                CalculateJoystickInnerPosition(eventData.position);
+                CalculateInputVector();
+                ChangedDirection?.Invoke(_inputVector.normalized);
+            }
         }
     }
 
@@ -85,14 +83,14 @@ public class Joystick : Joysticks
     {
         if (!DataHandler.Instance.IsMobile())
         {
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && _canMove)
             {
                 ReleasedJoystick();
             }
             else
             {
-                //if (_isTouchDown)
-                ChangedClickStatus?.Invoke();
+                if (_canAttack)
+                    ChangedClickStatus?.Invoke();
             }
         }
     }
@@ -102,12 +100,30 @@ public class Joystick : Joysticks
         _skillButton.interactable = true;
     }
 
+    public void AllowToMove()
+    {
+        _canMove = true;
+    }
+
+    public void AllowToAttack()
+    {
+        _canAttack = true;
+    }
+
+    public void AllowToMassAttack()
+    {
+        _canMassAttack = true;
+    }
+
     private void OnSkillButtonClick()
     {
-        if (_skillButton.interactable)
+        if (_canMassAttack)
         {
-            SkillButtonClick?.Invoke();
-            _skillButton.interactable = false;
+            if (_skillButton.interactable)
+            {
+                SkillButtonClick?.Invoke();
+                _skillButton.interactable = false;
+            }
         }
     }
 }
