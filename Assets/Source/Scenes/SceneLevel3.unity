@@ -875,7 +875,6 @@ GameObject:
   - component: {fileID: 163928390}
   - component: {fileID: 163928393}
   - component: {fileID: 163928392}
-  - component: {fileID: 163928391}
   m_Layer: 0
   m_Name: Building02A2 (16)
   m_TagString: Untagged
@@ -898,20 +897,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &163928391
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163928389}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &163928392
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -973,7 +958,6 @@ GameObject:
   - component: {fileID: 176956390}
   - component: {fileID: 176956393}
   - component: {fileID: 176956392}
-  - component: {fileID: 176956391}
   m_Layer: 0
   m_Name: Building02A2 (23)
   m_TagString: Untagged
@@ -996,20 +980,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &176956391
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176956389}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &176956392
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1137,7 +1107,6 @@ GameObject:
   - component: {fileID: 197385670}
   - component: {fileID: 197385673}
   - component: {fileID: 197385672}
-  - component: {fileID: 197385671}
   m_Layer: 0
   m_Name: Building02A2 (19)
   m_TagString: Untagged
@@ -1160,20 +1129,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &197385671
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197385669}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &197385672
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1903,7 +1858,6 @@ GameObject:
   - component: {fileID: 270174220}
   - component: {fileID: 270174223}
   - component: {fileID: 270174222}
-  - component: {fileID: 270174221}
   m_Layer: 0
   m_Name: Building01A1 (1)
   m_TagString: Untagged
@@ -1926,20 +1880,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!64 &270174221
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270174219}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300056, guid: 7f342c90ca3c80e459c77aee4f227502, type: 3}
 --- !u!23 &270174222
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2101,7 +2041,6 @@ GameObject:
   - component: {fileID: 311542877}
   - component: {fileID: 311542880}
   - component: {fileID: 311542879}
-  - component: {fileID: 311542878}
   m_Layer: 0
   m_Name: Building02A2 (8)
   m_TagString: Untagged
@@ -2124,20 +2063,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &311542878
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311542876}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &311542879
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2327,7 +2252,6 @@ GameObject:
   - component: {fileID: 346087660}
   - component: {fileID: 346087663}
   - component: {fileID: 346087662}
-  - component: {fileID: 346087661}
   m_Layer: 0
   m_Name: Building02A2 (21)
   m_TagString: Untagged
@@ -2350,20 +2274,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &346087661
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 346087659}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &346087662
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2970,7 +2880,6 @@ GameObject:
   - component: {fileID: 426761640}
   - component: {fileID: 426761643}
   - component: {fileID: 426761642}
-  - component: {fileID: 426761641}
   m_Layer: 0
   m_Name: Building02A2 (22)
   m_TagString: Untagged
@@ -2993,20 +2902,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &426761641
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426761639}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &426761642
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5180,7 +5075,6 @@ GameObject:
   - component: {fileID: 722201736}
   - component: {fileID: 722201739}
   - component: {fileID: 722201738}
-  - component: {fileID: 722201737}
   m_Layer: 0
   m_Name: Building02A2 (24)
   m_TagString: Untagged
@@ -5203,20 +5097,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &722201737
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722201735}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &722201738
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6860,7 +6740,6 @@ GameObject:
   - component: {fileID: 865437538}
   - component: {fileID: 865437541}
   - component: {fileID: 865437540}
-  - component: {fileID: 865437539}
   m_Layer: 0
   m_Name: Building02A2 (25)
   m_TagString: Untagged
@@ -6883,20 +6762,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &865437539
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865437537}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &865437540
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7117,7 +6982,6 @@ GameObject:
   - component: {fileID: 892925556}
   - component: {fileID: 892925559}
   - component: {fileID: 892925558}
-  - component: {fileID: 892925557}
   m_Layer: 0
   m_Name: Building02A2 (18)
   m_TagString: Untagged
@@ -7140,20 +7004,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &892925557
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 892925555}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &892925558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7374,7 +7224,6 @@ GameObject:
   - component: {fileID: 915395618}
   - component: {fileID: 915395621}
   - component: {fileID: 915395620}
-  - component: {fileID: 915395619}
   m_Layer: 0
   m_Name: Building02A2 (7)
   m_TagString: Untagged
@@ -7397,20 +7246,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &915395619
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915395617}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &915395620
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9573,7 +9408,6 @@ GameObject:
   - component: {fileID: 1171249918}
   - component: {fileID: 1171249921}
   - component: {fileID: 1171249920}
-  - component: {fileID: 1171249919}
   m_Layer: 0
   m_Name: Building02A2 (17)
   m_TagString: Untagged
@@ -9596,20 +9430,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1171249919
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171249917}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1171249920
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9957,7 +9777,6 @@ GameObject:
   - component: {fileID: 1224021921}
   - component: {fileID: 1224021924}
   - component: {fileID: 1224021923}
-  - component: {fileID: 1224021922}
   m_Layer: 0
   m_Name: Building02A2 (12)
   m_TagString: Untagged
@@ -9980,20 +9799,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1224021922
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224021920}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1224021923
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11011,7 +10816,6 @@ GameObject:
   - component: {fileID: 1346277512}
   - component: {fileID: 1346277515}
   - component: {fileID: 1346277514}
-  - component: {fileID: 1346277513}
   m_Layer: 0
   m_Name: Building02A2 (11)
   m_TagString: Untagged
@@ -11034,20 +10838,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1346277513
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346277511}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1346277514
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11109,7 +10899,6 @@ GameObject:
   - component: {fileID: 1358582832}
   - component: {fileID: 1358582835}
   - component: {fileID: 1358582834}
-  - component: {fileID: 1358582833}
   m_Layer: 0
   m_Name: Building02A2 (14)
   m_TagString: Untagged
@@ -11132,20 +10921,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &1358582833
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358582831}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1358582834
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11486,7 +11261,6 @@ GameObject:
   - component: {fileID: 1390931332}
   - component: {fileID: 1390931335}
   - component: {fileID: 1390931334}
-  - component: {fileID: 1390931333}
   m_Layer: 0
   m_Name: Building02A2 (10)
   m_TagString: Untagged
@@ -11509,20 +11283,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1390931333
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1390931331}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1390931334
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11584,7 +11344,6 @@ GameObject:
   - component: {fileID: 1391268344}
   - component: {fileID: 1391268347}
   - component: {fileID: 1391268346}
-  - component: {fileID: 1391268345}
   m_Layer: 0
   m_Name: Building02A2 (28)
   m_TagString: Untagged
@@ -11607,20 +11366,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1391268345
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391268343}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1391268346
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11909,7 +11654,6 @@ GameObject:
   - component: {fileID: 1457584093}
   - component: {fileID: 1457584096}
   - component: {fileID: 1457584095}
-  - component: {fileID: 1457584094}
   m_Layer: 0
   m_Name: Building02A2 (26)
   m_TagString: Untagged
@@ -11932,20 +11676,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1457584094
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1457584092}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1457584095
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12285,7 +12015,6 @@ GameObject:
   - component: {fileID: 1530428773}
   - component: {fileID: 1530428776}
   - component: {fileID: 1530428775}
-  - component: {fileID: 1530428774}
   m_Layer: 0
   m_Name: Building02A2 (15)
   m_TagString: Untagged
@@ -12308,20 +12037,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &1530428774
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530428772}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1530428775
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12849,7 +12564,6 @@ GameObject:
   - component: {fileID: 1614498093}
   - component: {fileID: 1614498096}
   - component: {fileID: 1614498095}
-  - component: {fileID: 1614498094}
   m_Layer: 0
   m_Name: Building02A2 (20)
   m_TagString: Untagged
@@ -12872,20 +12586,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1614498094
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614498092}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1614498095
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14873,7 +14573,6 @@ GameObject:
   - component: {fileID: 1755833940}
   - component: {fileID: 1755833943}
   - component: {fileID: 1755833942}
-  - component: {fileID: 1755833941}
   m_Layer: 0
   m_Name: Building1
   m_TagString: Untagged
@@ -14896,20 +14595,6 @@ Transform:
   m_Father: {fileID: 2717984533153881636}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1755833941
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1755833939}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300056, guid: 7f342c90ca3c80e459c77aee4f227502, type: 3}
 --- !u!23 &1755833942
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15069,7 +14754,6 @@ GameObject:
   - component: {fileID: 1801024768}
   - component: {fileID: 1801024771}
   - component: {fileID: 1801024770}
-  - component: {fileID: 1801024769}
   m_Layer: 0
   m_Name: Building02A2 (13)
   m_TagString: Untagged
@@ -15092,20 +14776,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &1801024769
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801024767}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1801024770
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15796,7 +15466,6 @@ GameObject:
   - component: {fileID: 1916372397}
   - component: {fileID: 1916372400}
   - component: {fileID: 1916372399}
-  - component: {fileID: 1916372398}
   m_Layer: 0
   m_Name: Building02A2 (9)
   m_TagString: Untagged
@@ -15819,20 +15488,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &1916372398
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916372396}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &1916372399
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16385,7 +16040,6 @@ GameObject:
   - component: {fileID: 2065608554}
   - component: {fileID: 2065608557}
   - component: {fileID: 2065608556}
-  - component: {fileID: 2065608555}
   m_Layer: 0
   m_Name: Building02A2 (27)
   m_TagString: Untagged
@@ -16408,20 +16062,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &2065608555
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2065608553}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &2065608556
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16964,20 +16604,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4817071556348007646}
   m_Mesh: {fileID: 4300056, guid: 7f342c90ca3c80e459c77aee4f227502, type: 3}
---- !u!64 &778262046404451101
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6423303439010338058}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &855604060284279019
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17031,7 +16657,6 @@ GameObject:
   - component: {fileID: 4260193404900882448}
   - component: {fileID: 5063235565157810726}
   - component: {fileID: 1547180539420671711}
-  - component: {fileID: 6822038415347303444}
   m_Layer: 0
   m_Name: Building01A1
   m_TagString: Untagged
@@ -17039,20 +16664,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!64 &991323749934496084
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6785019141319980867}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!33 &1307300727942044975
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17206,20 +16817,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d9efcbbdb2df874fba81913df0fae02, type: 3}
---- !u!64 &2060081042106979896
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5728079050184267823}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!1 &2212396180476155995
 GameObject:
   m_ObjectHideFlags: 0
@@ -17231,7 +16828,6 @@ GameObject:
   - component: {fileID: 2949676621455469128}
   - component: {fileID: 6175664331564224638}
   - component: {fileID: 470859901806341255}
-  - component: {fileID: 5574572183485470284}
   m_Layer: 0
   m_Name: Building02A2 (1)
   m_TagString: Untagged
@@ -17353,7 +16949,6 @@ GameObject:
   - component: {fileID: 1434098084072626106}
   - component: {fileID: 7979804753225362828}
   - component: {fileID: 4431963488276140405}
-  - component: {fileID: 8526844632808287166}
   m_Layer: 0
   m_Name: Building02A2
   m_TagString: Untagged
@@ -17394,20 +16989,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2923443499692079578, guid: 1d9efcbbdb2df874fba81913df0fae02, type: 3}
   m_PrefabInstance: {fileID: 1732129146283969190}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &3749216895728174619
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7489272463333771276}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!4 &4019201321637501298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4256524106418513, guid: 1f265601b52d476459704bb7aeadb389, type: 3}
@@ -17489,20 +17070,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &4267556787933132975
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7553012727645812408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!23 &4431963488276140405
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17686,20 +17253,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956001774035192323}
   m_Mesh: {fileID: 4300056, guid: 7f342c90ca3c80e459c77aee4f227502, type: 3}
---- !u!64 &5574572183485470284
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2212396180476155995}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!1 &5691297309860911046
 GameObject:
   m_ObjectHideFlags: 0
@@ -17727,7 +17280,6 @@ GameObject:
   - component: {fileID: 8729489369976662588}
   - component: {fileID: 323809386458697738}
   - component: {fileID: 6287851365247298803}
-  - component: {fileID: 2060081042106979896}
   m_Layer: 0
   m_Name: Building02A2 (4)
   m_TagString: Untagged
@@ -17819,7 +17371,6 @@ GameObject:
   - component: {fileID: 8034265239393888025}
   - component: {fileID: 1307300727942044975}
   - component: {fileID: 4690778831765873110}
-  - component: {fileID: 778262046404451101}
   m_Layer: 0
   m_Name: Building02A2 (6)
   m_TagString: Untagged
@@ -17880,7 +17431,6 @@ GameObject:
   - component: {fileID: 7526186972466677072}
   - component: {fileID: 1524861627013513062}
   - component: {fileID: 5050203112783496095}
-  - component: {fileID: 991323749934496084}
   m_Layer: 0
   m_Name: Building02A2 (3)
   m_TagString: Untagged
@@ -17903,20 +17453,6 @@ Transform:
   m_Father: {fileID: 1542044807}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &6822038415347303444
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956001774035192323}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300056, guid: 7f342c90ca3c80e459c77aee4f227502, type: 3}
 --- !u!1001 &6982959244325330525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18042,7 +17578,6 @@ GameObject:
   - component: {fileID: 5887441082870479391}
   - component: {fileID: 3237915267602710569}
   - component: {fileID: 9210964789395586256}
-  - component: {fileID: 3749216895728174619}
   m_Layer: 0
   m_Name: Building02A2 (5)
   m_TagString: Untagged
@@ -18081,7 +17616,6 @@ GameObject:
   - component: {fileID: 6812513392318989483}
   - component: {fileID: 2581106196703149725}
   - component: {fileID: 8137273361404723812}
-  - component: {fileID: 4267556787933132975}
   m_Layer: 0
   m_Name: Building02A2 (2)
   m_TagString: Untagged
@@ -18351,20 +17885,6 @@ Transform:
   m_Father: {fileID: 2717984533153881636}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!64 &8526844632808287166
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719515855592449449}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
 --- !u!4 &8729489369976662588
 Transform:
   m_ObjectHideFlags: 0

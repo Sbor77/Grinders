@@ -29,6 +29,15 @@ public class LevelZone : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        foreach (var enemy in _enemyPoints)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(enemy.transform.position, 0.2f);        
+        }
+    }
+
     public void Init (int targetMoney, int targetKills)
     {
         _targetMoney = targetMoney;

@@ -11,6 +11,7 @@ public class BackgroundMusic : MonoBehaviour
     private Coroutine _playJob;
     private int _shopSceneIndex = 5;
     private int _tutorialSceneIndex = 6;
+    private int _metaSceneIndex = 7;
     private int _currentSceneIndex;
     private bool _isPlaying; 
 
@@ -68,7 +69,7 @@ public class BackgroundMusic : MonoBehaviour
             {
                 if (isFirstCycle)
                 {
-                    if (_currentSceneIndex == _tutorialSceneIndex)
+                    if (_currentSceneIndex == _tutorialSceneIndex || _currentSceneIndex == _metaSceneIndex)
                         _currentSceneIndex = 0;
 
                     _audioSource.clip = _playList[_currentSceneIndex];
