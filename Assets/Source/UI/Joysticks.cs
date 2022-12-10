@@ -1,25 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] protected RectTransform _joystickBackground;
-    [SerializeField] protected RectTransform _joystickInner;
-
-    protected Vector2 _inputVector;
-
     private const float Half = .5f;
 
+    [SerializeField] protected RectTransform _joystickBackground;
+    [SerializeField] protected RectTransform _joystickInner;
+    [SerializeField] protected Button _skillButton;
+
+    public event Action SkillButtonClick;
+    public event Action<Vector2> ChangedDirection;
     public event Action ReleasedTouch;
+    public event Action ChangedClickStatus;
 
     public abstract void OnDrag(PointerEventData eventData);
     public abstract void OnPointerDown(PointerEventData eventData);
     public abstract void OnPointerUp(PointerEventData eventData);
 
-    public void CalculateJoystickInnerPosition(Vector2 position)
+    protected void CalculateJoystickInnerPosition(Vector2 position)
     {
         Vector2 directPosition = position - (Vector2)_joystickBackground.position;
         float halfJoySize = _joystickBackground.rect.width * Half;
@@ -30,16 +31,35 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
         _joystickInner.anchoredPosition = directPosition;
     }
 
-    protected Vector2 CalculateInputVector()
+    protected void CalculateInputVector()
     {
-        _inputVector = _joystickInner.anchoredPosition / (_joystickBackground.rect.size * Half);
-        return _inputVector;
+        Vector2 inputVector = _joystickInner.anchoredPosition / (_joystickBackground.rect.size * Half);
+        ChangedDirection?.Invoke(inputVector.normalized);
     }
 
     protected void ReleasedJoystick()
     {
         _joystickInner.anchoredPosition = Vector2.zero;
-        _inputVector = Vector2.zero;
+        //_inputVector = Vector2.zero;
         ReleasedTouch?.Invoke();
+    }
+
+    public virtual void ButtonActivate()
+    {
+        _skillButton.interactable = true;
+    }
+
+    protected void OnJoystickClick()
+    {
+        ChangedClickStatus?.Invoke();
+    }
+
+    protected void OnSkillButtonClick()
+    {
+        if (_skillButton.interactable)
+        {
+            SkillButtonClick?.Invoke();
+            _skillButton.interactable = false;
+        }
     }
 }

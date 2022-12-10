@@ -7,11 +7,6 @@ public class Joystick : Joysticks
 {
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .3f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
-    [SerializeField] private Button _skillButton;
-
-    public event Action<Vector2> ChangedDirection;
-    public event Action ChangedClickStatus;
-    public event Action SkillButtonClick;
 
     private void OnEnable()
     {
@@ -74,10 +69,9 @@ public class Joystick : Joysticks
     {
         if (Input.GetMouseButton(0))
         {
-            Vector2 inputVector;
             CalculateJoystickInnerPosition(eventData.position);
-            inputVector = CalculateInputVector();
-            ChangedDirection?.Invoke(inputVector.normalized);
+            CalculateInputVector();
+            //ChangedDirection?.Invoke(inputVector.normalized);
         }
     }
 
@@ -92,22 +86,8 @@ public class Joystick : Joysticks
             else
             {
                 //if (_isTouchDown)
-                ChangedClickStatus?.Invoke();
+                OnJoystickClick();
             }
-        }
-    }
-
-    public void ButtonActivate()
-    {
-        _skillButton.interactable = true;
-    }
-
-    private void OnSkillButtonClick()
-    {
-        if (_skillButton.interactable)
-        {
-            SkillButtonClick?.Invoke();
-            _skillButton.interactable = false;
         }
     }
 }

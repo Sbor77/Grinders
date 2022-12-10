@@ -11,10 +11,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _speedInAttack;
     [SerializeField] private int _beforeMassAttack = 2;
     [SerializeField] private float _attackDistance = 15f;
-    //[SerializeField] private float _spinAttackCooldown = 1f;
-    [SerializeField] private Joystick _joystick;
+    [SerializeField] private Joysticks _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
-    //[SerializeField] private LayerMask _ceilLayerMask;
     [SerializeField] private AreaAttack _areaAttack;
 
     private CharacterController _controller;
@@ -35,11 +33,9 @@ public class Movement : MonoBehaviour
     public event Action<State,bool> ChangedState;
     public event Action<float> ChangedMoveSpeed;
     public event Action ChangedBoostSpeed;
-    //public event Action<float> StartAttackCooldown;
     public event Action<int, int> ChangedMassAttackCooldown;
 
     public float Speed => _speed;
-    //public float AttackCooldown => _spinAttackCooldown;
 
     private void Awake()
     {
@@ -127,9 +123,6 @@ public class Movement : MonoBehaviour
 
     private void UseMassAttack()
     {
-        //_currentAttacksCount = 0;
-        //ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
-
         if (!_isTakingDamage)
         {
             _massAttack = true;
@@ -222,27 +215,10 @@ public class Movement : MonoBehaviour
         else
         {
             point = startPosition + _attackDirection * distance;
-            /*if (CeilCheck(point) == false)
-                return startPosition;*/
         }
 
         return point;
     }
-    /*private bool CeilCheck(Vector3 position)
-    {
-        bool result = false;
-
-        Vector3 _direction = Vector3.down;
-
-        float distance = 20;
-
-        if (Physics.Raycast(position, _direction, out _, distance, _ceilLayerMask))
-        {
-            Debug.DrawRay(position, _direction * distance, Color.red);
-
-            result = true;
-        }
-    }   */
 
     private void SetChangeMoving(bool activate)
     {
@@ -260,20 +236,7 @@ public class Movement : MonoBehaviour
 
         ChangedState?.Invoke(State.Move, false);
         SetChangeMoving(true);
-        //StartCooldown(_spinAttackCooldown);
     }
-
-    //private void StartCooldown(float delay)
-    //{
-    //    StartAttackCooldown?.Invoke(delay);
-    //    _cooldown = true;
-    //    Invoke(nameof(EndCooldown), delay);
-    //}
-
-    //private void EndCooldown()
-    //{
-    //    _cooldown = false;
-    //}
 
     private Coroutine StartMove(Vector3 point)
     {
@@ -287,5 +250,11 @@ public class Movement : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, pointPosition, _speedInAttack * Time.deltaTime);
             yield return null;
         }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.TryGetComponent(out Point point))
+            _collider.enabled = true;
     }
 }
