@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
     public event Action<float> ChangedMoveSpeed;
     public event Action ChangedBoostSpeed;
     //public event Action<float> StartAttackCooldown;
-    public event Action<float,int> ChangedMassAttackCooldown;
+    public event Action<int, int> ChangedMassAttackCooldown;
 
     public float Speed => _speed;
     //public float AttackCooldown => _spinAttackCooldown;
@@ -53,8 +53,6 @@ public class Movement : MonoBehaviour
         _joystick.ReleasedTouch += OnReleasedTouch;
         _joystick.ChangedClickStatus += StartAttack;
         _joystick.SkillButtonClick += UseMassAttack;
-
-        
     }
 
     private void OnDisable()
@@ -103,7 +101,6 @@ public class Movement : MonoBehaviour
 
         if (_currentAttacksCount >= _beforeMassAttack)
             _joystick.ButtonActivate();
-        
     }
 
     public void ChangedHitDamage(bool isTakingDamage = false)
@@ -184,7 +181,6 @@ public class Movement : MonoBehaviour
 
         if (movePoints != null)
         {
-
             StartCoroutine(Move(movePoints));
             ChangedState?.Invoke(State.Attack, false);
         }
@@ -226,7 +222,6 @@ public class Movement : MonoBehaviour
         else
         {
             point = startPosition + _attackDirection * distance;
-
             /*if (CeilCheck(point) == false)
                 return startPosition;*/
         }
@@ -290,7 +285,6 @@ public class Movement : MonoBehaviour
         while (Vector3.Distance(transform.position, pointPosition) >= stoppingDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointPosition, _speedInAttack * Time.deltaTime);
-            
             yield return null;
         }
     }

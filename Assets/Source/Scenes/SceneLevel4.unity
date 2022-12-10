@@ -6906,6 +6906,7 @@ MonoBehaviour:
   _josytick: {fileID: 1386809881}
   _startBigboxCameraPoint: {fileID: 1190354070}
   _targetBigboxCameraPoint: {fileID: 1179124702}
+  _tutorial: {fileID: 0}
 --- !u!4 &558514150
 Transform:
   m_ObjectHideFlags: 0
@@ -16298,13 +16299,13 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1386809883 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4459971426109589225, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 82776909, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
   m_PrefabInstance: {fileID: 1386809880}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: fef5b2bc676839b43bc9fd39f38179f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1388401417
@@ -16808,7 +16809,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 402300681, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6801376
+      value: 1.68013
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _infoViewer

@@ -10,6 +10,7 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] private Joystick _josytick;
     [SerializeField] private Transform _startBigboxCameraPoint;
     [SerializeField] private Transform _targetBigboxCameraPoint;
+    [SerializeField] private Tutorial _tutorial;
     
     public void ActivateStartScenario()
     {
@@ -80,6 +81,8 @@ public class CameraHandler : MonoBehaviour
         _josytick.gameObject.SetActive(active);
     }
 
+    private void ShowTutorial() => _tutorial.gameObject.SetActive(true);
+
     private void MoveBigboxCamera()
     {
         float distance = Vector3.Distance(_targetBigboxCameraPoint.position, _startBigboxCameraPoint.position);
@@ -95,6 +98,7 @@ public class CameraHandler : MonoBehaviour
             DOVirtual.DelayedCall(joystickDelay, () =>
             {
                 _bigboxCamera.transform.position = _startBigboxCameraPoint.position;
+                ShowTutorial();
                 SetJoystickActive(true);
             });
         });

@@ -12,10 +12,10 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private TMP_Text _bigBoxText;
     [SerializeField] private TMP_Text _KillsText;
-    [SerializeField] private Image _massKillButtonCooldown;
+    [SerializeField] private MassAttackView _massKillButtonCooldown;
     [SerializeField] private Image _soundImage;
     [SerializeField] private Sprite _volumeOn;
-    [SerializeField] private Sprite _volumeOff;    
+    [SerializeField] private Sprite _volumeOff;
 
     public event Action IsCurrentConditionsChanged;
 
@@ -35,7 +35,7 @@ public class InfoViewer : MonoBehaviour
     public float CurrentHealth { get; private set; }
     public int CurrentKills { get; private set; }
     public int CurrentCoins { get; private set; }
-    public bool IsBigboxDestroyed { get; private set; }        
+    public bool IsBigboxDestroyed { get; private set; }
 
     private void Awake()
     {
@@ -49,17 +49,17 @@ public class InfoViewer : MonoBehaviour
         _player.ChangedHealth += OnChangedHealth;
         _player.ChangedCoin += OnChangedPlayerCoins;
         _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
-        _soundButton.onClick.AddListener(OnMuteToggled);        
+        _soundButton.onClick.AddListener(OnMuteToggled);
         _movement.ChangedMassAttackCooldown += OnChangedMassCooldown;
     }
 
     private void OnDisable()
     {
-        _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;         
+        _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;
         _player.ChangedHealth -= OnChangedHealth;
         _player.ChangedCoin -= OnChangedPlayerCoins;
         _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
-        _soundButton.onClick.RemoveListener(OnMuteToggled);        
+        _soundButton.onClick.RemoveListener(OnMuteToggled);
         _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
     }
 
@@ -87,7 +87,7 @@ public class InfoViewer : MonoBehaviour
     {
         int muteValue = DataHandler.Instance.GetSavedMuteValue() == MaxVolume ? MinVolume : MaxVolume;
 
-        DataHandler.Instance.SaveMuteValue(muteValue);        
+        DataHandler.Instance.SaveMuteValue(muteValue);
         AudioListener.volume = muteValue == MaxVolume ? DataHandler.Instance.GetSavedTotalVolume() : MinVolume;        
         ToggleSoundIcon(muteValue);
     }
@@ -97,11 +97,11 @@ public class InfoViewer : MonoBehaviour
         _soundImage.sprite = volume == MaxVolume ? _volumeOn : _volumeOff;
     }
 
-    private void OnChangedMassCooldown(float current, int max)
+    private void OnChangedMassCooldown(int current, int max)
     {
         float value;
         value = Mathf.Clamp(current, 0, max);
-        _massKillButtonCooldown.fillAmount = 1 - value / max;
+        _massKillButtonCooldown.ChangedMassAttackCooldown(current);
     }
 
     private void SetStartConditionsText()

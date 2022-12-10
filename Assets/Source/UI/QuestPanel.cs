@@ -33,32 +33,32 @@ public class QuestPanel : MonoBehaviour
 
         _continueButton.onClick.AddListener(StartGame);
 
-        if (_tutorialPanel != null)
-            _tutorialPanel.IsEnded += OnTutorialIsEnded;        
+        //if (_tutorialPanel != null)
+        //    _tutorialPanel.IsEnded += OnTutorialIsEnded;        
     }
 
     private void OnDisable()
     {
         _continueButton.onClick.RemoveListener(StartGame);
 
-        if (_tutorialPanel != null)
-            _tutorialPanel.IsEnded += OnTutorialIsEnded;
+        //if (_tutorialPanel != null)
+        //    _tutorialPanel.IsEnded += OnTutorialIsEnded;
     }
 
     private void Start()
     {
         Time.timeScale = 0;
 
-        if (_tutorialPanel != null)
-        {
-            DeactivateInfoPanel();
+        //if (_tutorialPanel != null)
+        //{
+        //    DeactivateInfoPanel();
 
-            _tutorialPanel.gameObject.SetActive(true);
-        }
-        else
-        {
+        //    _tutorialPanel.gameObject.SetActive(true);
+        //}
+        //else
+        //{
             ShowMissionTargets();
-        }
+        //}
     }
 
     private void OnTutorialIsEnded()
