@@ -18,8 +18,7 @@ public class QuestPanel : MonoBehaviour
     [SerializeField] private TMP_Text _enemiesToKill;
     [SerializeField] private TMP_Text _enemiesCount;
     [SerializeField] private TMP_Text _bigboxToCrush;
-    [Space]
-    [SerializeField] private TutorialPanel _tutorialPanel;
+    [Space]    
     [SerializeField] private GameObject _infoPanel;
 
     public int NeedCoinCollected => _needCoinCollected;
