@@ -28,9 +28,7 @@ public class BackgroundMusic : MonoBehaviour
     private void Start()
     {
         SetVolume(DataHandler.Instance.GetSavedMusicVolume());
-        ActivatePlayCoroutine();
-
-        
+        ActivatePlayCoroutine();        
     }
 
     public void SetVolume(float value)
@@ -50,8 +48,6 @@ public class BackgroundMusic : MonoBehaviour
 
     private void ActivatePlayCoroutine()
     {
-        
-
         _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         _isPlaying = true;
         _playJob = StartCoroutine(PlayMusicFromCurrentSceneIndex());

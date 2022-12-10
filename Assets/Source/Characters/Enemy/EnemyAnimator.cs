@@ -1,5 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,13 +6,15 @@ public class EnemyAnimator : MonoBehaviour
 {
     [SerializeField] private AnimationClip _attackAnimation;
     [SerializeField] private AnimationClip _dancingAnimation;
+    [SerializeField] private AnimationClip _walkAnimation;
     [SerializeField] private AudioSource _moveSFX;
 
     private NavMeshAgent _agent;
     private Animator _animator;
     private Enemy _enemy;
-    private float _attackLenght;
-    private float _attackMultiplie = 1.5f;
+    private float _attackLength;
+    private float _attackMultiplier = 1.5f;
+    private float _minSpeed = 0.1f;
     private bool _isMoveing;
     private const string Speed = "Speed";
     private const string Attack = "Attack";
@@ -27,74 +27,68 @@ public class EnemyAnimator : MonoBehaviour
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-
         _animator = GetComponent<Animator>();
-
         _enemy = GetComponent<Enemy>();
     }
 
     private void OnEnable()
     {
         _enemy.Dying += OnDying;
-
         _enemy.TakedDamage += OnTakeDamage;
-    }
-
-    private void Start()
-    {
-        _animator.SetFloat(AttackSpeed, _attackMultiplie);
-
-        _attackLenght = _attackAnimation.length / _attackMultiplie;
     }
 
     private void OnDisable()
     {
         _enemy.Dying -= OnDying;
-
         _enemy.TakedDamage -= OnTakeDamage;
+    }
+
+    private void Start()
+    {
+        _animator.SetFloat(AttackSpeed, _attackMultiplier);
+        _attackLength = _attackAnimation.length / _attackMultiplier;
     }
 
     private void FixedUpdate()
     {
         float currentSpeed = _agent.velocity.magnitude;
-
         _animator.SetFloat(Speed, currentSpeed / _agent.speed);
 
-        if (currentSpeed / _agent.speed > 0.1f)
+        if (currentSpeed / _agent.speed > _minSpeed)
         {
-            if (!_isMoveing)
+            if (_isMoveing == false)
             {
                 _isMoveing = true;
-
                 _moveSFX.Play();
             }
         }
         else
         {
             _isMoveing = false;
-
             _moveSFX.Stop();
         }
+    }
+
+    public void ChangeSpeedModifier(float value)
+    {        
+        _agent.speed *= value;
     }
 
     public float StartAttack()
     {
         _animator.SetTrigger(Attack);
-
-        return _attackLenght;
+        return _attackLength;
     }
 
     public float StartWin()
     {
         _animator.SetTrigger(Dancing);
-
         return _dancingAnimation.length;
     }
 
     public void ResetState()
     {
-        _animator.SetTrigger(Reset);
-        
+        _animator.SetTrigger(Reset);        
         _animator.ResetTrigger(Reset);
     }
 

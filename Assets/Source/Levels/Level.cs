@@ -143,7 +143,6 @@ public class Level : MonoBehaviour
         DOVirtual.DelayedCall(openShopDelay + _finalEffects.Duration, () =>
         {
             _finishPanel.Init();
-
             _finishPanel.Activate();
         });
     }

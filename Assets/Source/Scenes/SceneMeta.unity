@@ -255,7 +255,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh166932
+  m_Name: pb_Mesh26216
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2096,12 +2096,17 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  _respawnTime: 3
+  _respawnTime: 2.5
   _burstPrefab: {fileID: 1610654186925766909, guid: f89a28d1b01fd234bb41e474da9709f2, type: 3}
   _trailPrefab: {fileID: 5462477971218697376, guid: ab86e10db032865499a0a5d51c94bc1e, type: 3}
   _effectsParent: {fileID: 1962825450}
   _effectsCount: 5
   _trailSound: {fileID: 565920107}
+  _enableSpeedIncrease: 1
+  _startSpeedModifier: 1
+  _maxSpeedModifier: 3
+  _enemyCount: 10
+  _speedModifierIncrease: 0.5
 --- !u!1 &602114697
 GameObject:
   m_ObjectHideFlags: 0
@@ -5148,18 +5153,18 @@ Transform:
   - {fileID: 475567161}
   - {fileID: 956226736}
   - {fileID: 393781136}
-  - {fileID: 7221741830775262247}
   - {fileID: 1203987972}
-  - {fileID: 1995461537}
-  - {fileID: 1674074797}
   - {fileID: 1812215030}
+  - {fileID: 1674074797}
   - {fileID: 1160665283}
   - {fileID: 2044922396}
+  - {fileID: 6964075545679040920}
+  - {fileID: 7221741830775262247}
   - {fileID: 2018708631}
   - {fileID: 1190215122}
   - {fileID: 9166137086099944755}
   - {fileID: 1868620215421617254}
-  - {fileID: 6964075545679040920}
+  - {fileID: 1995461537}
   - {fileID: 6410139769374326692}
   - {fileID: 6410139768038249999}
   - {fileID: 6410139767962398465}
@@ -6335,6 +6340,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _health
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: _wallMask.m_Bits
       value: 128
@@ -10751,6 +10760,10 @@ PrefabInstance:
     - target: {fileID: 7210498082390844080, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210498082390844087, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.6015625
       objectReference: {fileID: 0}
     - target: {fileID: 7210498082820554294, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_AnchoredPosition.y

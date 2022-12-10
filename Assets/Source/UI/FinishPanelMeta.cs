@@ -33,7 +33,6 @@ public class FinishPanelMeta : MonoBehaviour
     public void Activate()
     {
         Init();
-
         gameObject.SetActive(true);        
     }
 
@@ -51,7 +50,6 @@ public class FinishPanelMeta : MonoBehaviour
     private int GetCurrentCoinsEarned()
     {        
         int killToCoinIndex = 1;
-
         int value = _infoViewer.CurrentKills * killToCoinIndex;
         return value;
     }

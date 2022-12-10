@@ -713,6 +713,7 @@ MonoBehaviour:
   _delayDieHiding: 3
   _delayStartStunEffect: 0.5
   _stunEffectDuration: 3
+  _agent: {fileID: 2680337137859435393}
   _takeDamageSFX: {fileID: 1271577971735776327}
   _dieEffect: {fileID: 7471081969589503160}
   _stunEffect: {fileID: 7980130428426059046}
@@ -752,6 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackAnimation: {fileID: -203655887218126122, guid: 3f855dc027f718e449ff113899b6c45b, type: 3}
   _dancingAnimation: {fileID: -203655887218126122, guid: 0eaf8984709fb62499df339914cfc1dd, type: 3}
+  _walkAnimation: {fileID: -203655887218126122, guid: 8b8ed8fd7b1c2dd478b643dd07765f24, type: 3}
   _moveSFX: {fileID: -6896446907327884770}
 --- !u!82 &1271577971735776327
 AudioSource:

@@ -3,22 +3,24 @@
 using UnityEngine;
 using DG.Tweening;
 using System;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(Mover))]
+[RequireComponent(typeof(Mover), typeof(EnemyAnimator))]
 public class Enemy : Characters
 {
     [SerializeField] private float _health;
     [SerializeField] private float _delayDieHiding = 3f;
     [SerializeField] private float _delayStartStunEffect = 1.5f;
     [SerializeField] private float _stunEffectDuration = 3f;
+    [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private AudioSource _takeDamageSFX;
     [SerializeField] private ParticleSystem _dieEffect;
     [SerializeField] private ParticleSystem _stunEffect;
 
     private Mover _mover;
-    private float _currentHealth;
-    //private Vector3 _defaultPosition;
-    private bool _isDead = false;
+    private EnemyAnimator _animator;
+    private float _currentHealth;    
+    private bool _isDead = false;       
 
     public float StanEffectDuration => _stunEffectDuration;
 
@@ -29,11 +31,27 @@ public class Enemy : Characters
     private void Awake()
     {
         _mover = GetComponent<Mover>();
+        _animator = GetComponent<EnemyAnimator>();
     }
 
     private void Start()
     {
         _currentHealth = _health;
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void ChangeSpeed(float value)
+    {
+        _animator.ChangeSpeedModifier(value);
     }
 
     public override void TakeDamage(float damage)
@@ -81,10 +99,5 @@ public class Enemy : Characters
             DOVirtual.DelayedCall(_delayStartStunEffect, () => _stunEffect.gameObject.SetActive(true));
             DOVirtual.DelayedCall(_stunEffectDuration, () => _stunEffect.gameObject.SetActive(false));
         }
-    }
-
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
     }
 }
