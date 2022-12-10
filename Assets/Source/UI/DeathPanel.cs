@@ -9,6 +9,9 @@ public class DeathPanel : MonoBehaviour
 
     private bool _rewarded;
 
+    private int _dieSceneIndex;
+
+
     private void OnEnable()
     {
         _dieButton.onClick.AddListener(OnDieClick);
@@ -27,8 +30,9 @@ public class DeathPanel : MonoBehaviour
         GamesSdk.Instance.AdVideoClosed -= OnContinueWithReward;        
     }
 
-    public void Activate()
+    public void Activate(int dieSceneIndex = 0)
     {
+        _dieSceneIndex = dieSceneIndex;
         gameObject.SetActive(true);
         _rewarded = false;
     }
@@ -42,7 +46,7 @@ public class DeathPanel : MonoBehaviour
         DataHandler.Instance.SaveSpeedSkill(1);
         DataHandler.Instance.SaveAllStats();
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(_dieSceneIndex);
     }
 
     private void OnContinueClick()

@@ -1,4 +1,3 @@
-//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -19,13 +18,8 @@ public class Level : MonoBehaviour
     [SerializeField] private List<LevelZone> _zones;
 
     private QuestInfo _missionConditions;
-    private int _currentZoneIndex;
-    //private int _shopSceneIndex = 5;
-    //private int _introSceneIndex = 0;
-    private int _levelOneSceneIndex = 1;
-    //private int _levelTwoSceneIndex = 2;
-    //private int _levelThreeSceneIndex = 3;
-    //private int _levelFourSceneIndex = 4;
+    private int _currentZoneIndex;    
+    private int _levelOneSceneIndex = 1;    
     private int _currentCoins;
     private int _currentKills;
     
@@ -59,14 +53,12 @@ public class Level : MonoBehaviour
     private void OnEnable()
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
-
         _player.IsDied += OnDyingPlayerScreen;
     }
 
     private void OnDisable()
     {
         _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
-
         _player.IsDied -= OnDyingPlayerScreen;
     }
 
@@ -87,19 +79,12 @@ public class Level : MonoBehaviour
         int defaultLevelMoney = 0;
 
         DataHandler.Instance.SaveTotalScore(defaultTotalScore);
-
         DataHandler.Instance.SaveLevel(defaultLevel);
-
         DataHandler.Instance.SaveHealthSkill(defaultHealthSkill);
-
         DataHandler.Instance.SaveSpeedSkill(defaultSpeedSkill);
-
         DataHandler.Instance.SaveRadiusSkill(defaultRadiusSkill);
-
         DataHandler.Instance.SaveKills(defaultKills);
-
         DataHandler.Instance.SaveTotalMoney(defaultTotalMoney);
-
         DataHandler.Instance.SaveLevelMoney(defaultLevelMoney);
     }
 
@@ -120,9 +105,7 @@ public class Level : MonoBehaviour
             float doorOpenDelay = 3f;
 
             _cameraHandler.ZoomInOutBigboxCamera();
-
             _enemySpawner.Deactivate();
-
             _boxSpawner.StopSpawn();
 
             DOVirtual.DelayedCall(doorOpenDelay, () => 
@@ -153,7 +136,6 @@ public class Level : MonoBehaviour
         float openShopDelay = 3f;
 
         SaveProgress();
-
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
@@ -192,14 +174,12 @@ public class Level : MonoBehaviour
     private void ActivateZone(int zoneIndex)
     {
         LevelZone activatedZone = _zones[zoneIndex];
-
         activatedZone.Activate();
     }
 
     private void DeactivateZone(int zoneIndex)
     {
         LevelZone deactivatedZone = _zones[zoneIndex];
-
         deactivatedZone.Deactivate();
     }
 
@@ -208,11 +188,8 @@ public class Level : MonoBehaviour
         if (IsZoneCompleted(_currentZoneIndex) && _currentZoneIndex < _zones.Count - 1)
         {
             DeactivateZone(_currentZoneIndex);
-
             ActivateZone(++_currentZoneIndex);
-
             _boxSpawner.SetZoneIndex(_currentZoneIndex);
-
             _enemySpawner.SetZoneIndex(_currentZoneIndex);
         }
     }
@@ -228,21 +205,14 @@ public class Level : MonoBehaviour
     private void SaveProgress()
     {
         int level = SceneManager.GetActiveScene().buildIndex + 1;
-
         int levelMoney = DataHandler.Instance.GetSavedLevelMoney();
-
         int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + levelMoney;
-
         int kills = DataHandler.Instance.GetSavedKills();
 
         DataHandler.Instance.SaveLevel(level);
-
         DataHandler.Instance.SaveLevelMoney(levelMoney);
-
         DataHandler.Instance.SaveTotalMoney(totalMoney);
-
         DataHandler.Instance.SaveKills(kills);
-
         DataHandler.Instance.SaveAllStats();
     }
 }

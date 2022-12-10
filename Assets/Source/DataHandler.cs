@@ -137,17 +137,26 @@ public class DataHandler : MonoBehaviour
 
     public int GetSavedTotalMoney()
     {
-        return PlayerPrefs.GetInt(_totalMoneyKey);
+        if (PlayerPrefs.HasKey(_totalMoneyKey))
+            return PlayerPrefs.GetInt(_totalMoneyKey);            
+        else
+            return 0;
     }
 
     public int GetSavedLevelMoney()
     {
-        return PlayerPrefs.GetInt(_levelMoneyKey);
+        if (PlayerPrefs.HasKey(_levelMoneyKey))
+            return PlayerPrefs.GetInt(_levelMoneyKey);
+        else
+            return 0;        
     }
 
     public int GetSavedKills()
     {
-        return PlayerPrefs.GetInt(_killsKey);
+        if (PlayerPrefs.HasKey(_killsKey))
+            return PlayerPrefs.GetInt(_killsKey);
+        else
+            return 0;        
     }
 
     public int GetSavedLevel()
