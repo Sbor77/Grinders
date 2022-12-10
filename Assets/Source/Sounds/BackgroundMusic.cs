@@ -9,7 +9,8 @@ public class BackgroundMusic : MonoBehaviour
     [SerializeField] private List<AudioClip> _playList;
     
     private Coroutine _playJob;
-    private int _shopSceneIndex = 5;    
+    private int _shopSceneIndex = 5;
+    private int _tutorialSceneIndex = 6;
     private int _currentSceneIndex;
     private bool _isPlaying; 
 
@@ -27,6 +28,8 @@ public class BackgroundMusic : MonoBehaviour
     {
         SetVolume(DataHandler.Instance.GetSavedMusicVolume());
         ActivatePlayCoroutine();
+
+        
     }
 
     public void SetVolume(float value)
@@ -46,6 +49,8 @@ public class BackgroundMusic : MonoBehaviour
 
     private void ActivatePlayCoroutine()
     {
+        
+
         _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         _isPlaying = true;
         _playJob = StartCoroutine(PlayMusicFromCurrentSceneIndex());
@@ -63,6 +68,9 @@ public class BackgroundMusic : MonoBehaviour
             {
                 if (isFirstCycle)
                 {
+                    if (_currentSceneIndex == _tutorialSceneIndex)
+                        _currentSceneIndex = 0;
+
                     _audioSource.clip = _playList[_currentSceneIndex];
                     i = _currentSceneIndex;
                     isFirstCycle = false;
@@ -79,7 +87,7 @@ public class BackgroundMusic : MonoBehaviour
                     yield return null;
                 }
 
-                if (_currentSceneIndex != SceneManager.GetActiveScene().buildIndex || _currentSceneIndex != _shopSceneIndex)
+                if (_currentSceneIndex != SceneManager.GetActiveScene().buildIndex || _currentSceneIndex != _shopSceneIndex || _currentSceneIndex != _tutorialSceneIndex)
                 {
                     _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
                     isFirstCycle = true;

@@ -45,20 +45,28 @@ public class InfoViewer : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
+        if (_boxSpawner != null)
+            _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
+        
+        if (_enemySpawner != null)
+            _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
+
         _player.ChangedHealth += OnChangedHealth;
         _player.ChangedCoin += OnChangedPlayerCoins;
-        _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
         _soundButton.onClick.AddListener(OnMuteToggled);
         _movement.ChangedMassAttackCooldown += OnChangedMassCooldown;
     }
 
     private void OnDisable()
     {
-        _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;
+        if (_boxSpawner != null)
+            _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
+
+        if (_enemySpawner != null)
+            _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;
+
         _player.ChangedHealth -= OnChangedHealth;
         _player.ChangedCoin -= OnChangedPlayerCoins;
-        _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
         _soundButton.onClick.RemoveListener(OnMuteToggled);
         _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
     }
