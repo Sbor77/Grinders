@@ -5,6 +5,7 @@ public class DataHandler : MonoBehaviour
 {
     private string _totalScore = "TotalScore";
     private string _level = "Level";
+    private string _completedLevel = "_completedLevel";
     private string _currentZone = "CurrentZone";
     private string _totalMoney = "TotalMoney";
     private string _levelMoney = "LevelMoney";
@@ -56,11 +57,17 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_level, level);
     }
 
+    public void SaveCompletedLevel(int completedLevel)
+    {
+        if (completedLevel <= 0)
+            PlayerPrefs.SetInt(_completedLevel, 0);
+        else
+            PlayerPrefs.SetInt(_completedLevel, completedLevel);
+    }
+
     public void SaveCurrentZone(int zone)
     {
-        if (zone <= 0)
-            PlayerPrefs.SetInt(_currentZone, 1);
-        else
+        if (zone >= 0)            
             PlayerPrefs.SetInt(_currentZone, zone);
     }
 
@@ -173,9 +180,17 @@ public class DataHandler : MonoBehaviour
         return PlayerPrefs.GetInt(_level);
     }
 
+    public int GetSavedCompletedLevel()
+    {
+        return PlayerPrefs.GetInt(_completedLevel);
+    }
+
     public int GetSavedCurrentZone()
     {
-        return PlayerPrefs.GetInt(_currentZone);
+        if (PlayerPrefs.HasKey(_currentZone))
+            return PlayerPrefs.GetInt(_currentZone);
+        else
+            return 0;        
     }
 
     public int GetSavedHealthSkill()

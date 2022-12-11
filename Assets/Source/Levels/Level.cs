@@ -16,17 +16,28 @@ public class Level : MonoBehaviour
     [SerializeField] private FinishPanel _finishPanel;
     [SerializeField] private DeathPanel _deathPanel;
     [SerializeField] private List<LevelZone> _zones;
+    [SerializeField] private List<Transform> _playerStartPoints;
 
     private QuestInfo _missionConditions;
     private int _currentZoneIndex;    
     private int _levelOneSceneIndex = 1;    
     private int _currentCoins;
-    private int _currentKills;
-    
+    private int _currentKills;    
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
-
     private bool _isCheated;
+
+    private void OnEnable()
+    {
+        _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
+        _player.IsDied += OnDyingPlayerScreen;
+    }
+
+    private void OnDisable()
+    {
+        _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
+        _player.IsDied -= OnDyingPlayerScreen;
+    }
 
     private void Start()
     {
@@ -40,8 +51,9 @@ public class Level : MonoBehaviour
         _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
 
         InitZones();
-    }
 
+        SetPlayerPosition();
+    }
 
     private void Update()
     {
@@ -49,17 +61,14 @@ public class Level : MonoBehaviour
             _isCheated = true;
     }
 
-
-    private void OnEnable()
+    private void SetPlayerPosition()
     {
-        _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
-        _player.IsDied += OnDyingPlayerScreen;
-    }
+        if (_playerStartPoints != null)
+        {
+            int currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();            
 
-    private void OnDisable()
-    {
-        _infoViewer.IsCurrentConditionsChanged -= OnCurrentConditionsChanged;
-        _player.IsDied -= OnDyingPlayerScreen;
+            _player.transform.position = _playerStartPoints[currentZoneIndex].position;
+        }
     }
 
     private void OnDyingPlayerScreen()
@@ -165,16 +174,27 @@ public class Level : MonoBehaviour
                 _zones[i].Init(accumulatedMoney, accumulatedKills);
         }
 
-        _currentZoneIndex = 0;
+        _currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();
 
         ActivateZone(_currentZoneIndex);
+
+        
     }
 
     private void ActivateZone(int zoneIndex)
     {
         LevelZone activatedZone = _zones[zoneIndex];
         activatedZone.Activate();
-    }
+
+        for (int i = 0; i < _zones.Count; i++)
+        {
+            if (i != zoneIndex)
+                DeactivateZone(i);
+        }
+
+        _boxSpawner.SetZoneIndex(_currentZoneIndex);
+        _enemySpawner.SetZoneIndex(_currentZoneIndex);
+    }    
 
     private void DeactivateZone(int zoneIndex)
     {
@@ -190,7 +210,9 @@ public class Level : MonoBehaviour
             ActivateZone(++_currentZoneIndex);
             _boxSpawner.SetZoneIndex(_currentZoneIndex);
             _enemySpawner.SetZoneIndex(_currentZoneIndex);
-        }
+        }        
+
+        DataHandler.Instance.SaveCurrentZone(_currentZoneIndex);
     }
 
     private bool IsZoneCompleted (int zoneIndex)

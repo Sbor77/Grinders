@@ -10,12 +10,12 @@ public class ShopIcon : MonoBehaviour
 
     private void OnEnable()
     {
-        _button.onClick.AddListener(LoadArenaScene);
+        _button.onClick.AddListener(LoadShopScene);
     }
 
     private void OnDisable()
     {
-        _button.onClick.RemoveListener(LoadArenaScene);
+        _button.onClick.RemoveListener(LoadShopScene);
     }
 
     public void Activate()
@@ -28,8 +28,15 @@ public class ShopIcon : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void LoadArenaScene()
+    private void SavePlaceToComeback()
     {
+        int level = SceneManager.GetActiveScene().buildIndex;
+        DataHandler.Instance.SaveLevel(level);
+    }
+
+    private void LoadShopScene()
+    {
+        SavePlaceToComeback();
         SceneManager.LoadScene(_shopSceneIndex);
     }
 }

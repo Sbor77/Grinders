@@ -1,4 +1,3 @@
-//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,16 +40,13 @@ public class LevelZone : MonoBehaviour
     public void Init (int targetMoney, int targetKills)
     {
         _targetMoney = targetMoney;
-
         _targetKills = targetKills;
-
         _isActive = false;
     }
 
     public void Activate()
     {
         _isActive = true;
-
         OpenDoors();
     }
 
