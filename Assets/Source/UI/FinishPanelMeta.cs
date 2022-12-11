@@ -5,21 +5,24 @@ using UnityEngine.UI;
 
 public class FinishPanelMeta : MonoBehaviour
 {    
+    [SerializeField] private InfoViewer _infoViewer;
     [SerializeField] private TMP_Text _metaKillsCount; 
     [SerializeField] private TMP_Text _metaEarnedCoinsCount;
     [SerializeField] private Button _shopButton;
-    [SerializeField] private InfoViewer _infoViewer;
+    [SerializeField] private Button _againButton;
 
     private int _shopSceneIndex = 5;
 
     private void OnEnable()
     {
-        _shopButton.onClick.AddListener(LoadShopScene);
+        _shopButton.onClick.AddListener(() => SceneManager.LoadScene(_shopSceneIndex));
+        _againButton.onClick.AddListener(ReloadMetaGame);
     }
 
     private void OnDisable()
     {
-        _shopButton.onClick.RemoveListener(LoadShopScene);
+        _shopButton.onClick.RemoveListener(() => SceneManager.LoadScene(_shopSceneIndex));
+        _againButton.onClick.RemoveListener(ReloadMetaGame);
     }
 
     public void Init()
@@ -54,8 +57,9 @@ public class FinishPanelMeta : MonoBehaviour
         return value;
     }
 
-    private void LoadShopScene()
+    private void ReloadMetaGame()
     {
-        SceneManager.LoadScene(_shopSceneIndex);
+        GamesSdk.Instance.InterstitialAdShow();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
