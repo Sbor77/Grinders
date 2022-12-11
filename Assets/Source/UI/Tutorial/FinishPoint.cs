@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FinishPoint : Point
@@ -14,5 +12,4 @@ public class FinishPoint : Point
             Destroy(gameObject);
         }
     }
-
 }

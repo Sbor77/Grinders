@@ -1,7 +1,7 @@
 using DG.Tweening;
-using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
@@ -18,7 +18,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private Box _box;
     [SerializeField] private Transform _wallDoor;
     [SerializeField] private Transform _finishPoint;
-    [SerializeField] private Enemy[] _enemys;
+    [SerializeField] private Enemy[] _enemies;
     [SerializeField] private TMP_Text _moveText;
     [SerializeField] private TMP_Text _attackText;
     [SerializeField] private TMP_Text _massAttackText;
@@ -30,18 +30,32 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private TMP_Text _finishPointComentText;
     [SerializeField] private TMP_Text _massAttackPcComentText;
     [SerializeField] private TMP_Text _massAttackComentText;
+    [Space]
+    [SerializeField] private AreaAttack _massAttack;
+    [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _playButton;
+    [SerializeField] private GameObject _firstPathArrow;
+    [SerializeField] private GameObject _secondPathArrow;
+    [SerializeField] private GameObject _endScreen;
 
     private Vector3 TextScaleSize = new Vector3(0.1f, 0.1f, 0.1f);
     private Vector3 HandScaleSize = new Vector3(0.8f, 0.8f, 1f);
     private int _killedEnemys = 0;
+    private int _levelOneSceneIndex = 1;
+
+    private void OnEnable()
+    {
+        _exitButton.onClick.AddListener(LoadLevelOne);
+        _playButton.onClick.AddListener(LoadLevelOne);
+        _massAttack.IsActivated += OnAreaAttackActivated;
+    }
 
     private void Start()
     {
         if (!DataHandler.Instance.IsMobile())
         {
             _mouseImage.gameObject.SetActive(true);
-            _handImage.gameObject.SetActive(false);
-            Debug.Log(_joystick.MassAttackButtonPosition);
+            _handImage.gameObject.SetActive(false);            
             StartPCMoveAnimation();
         }
         else
@@ -55,14 +69,19 @@ public class Tutorial : MonoBehaviour
 
     private void OnDisable()
     {
-        for (int i = 0; i < _enemys.Length; i++)
+        _exitButton.onClick.RemoveListener(LoadLevelOne);
+        _playButton.onClick.RemoveListener(LoadLevelOne);
+        _massAttack.IsActivated -= OnAreaAttackActivated;
+
+        for (int i = 0; i < _enemies.Length; i++)
         {
-            _enemys[i].Dying -= OnEnemysDead;
+            _enemies[i].Dying -= OnEnemysDead;
         }
     }
 
     public void OnStayMovePoint()
     {
+        _firstPathArrow.SetActive(false);
         _joystick.enabled = false;
         _joystick.AttackButtonClick += OnAttack;
 
@@ -86,10 +105,28 @@ public class Tutorial : MonoBehaviour
     public void OnButtonMassAttackActivate()
     {
         _joystick.NotAllowedToAttack();
+
+        //DOVirtual.DelayedCall(4, () => _endScreen.SetActive(true));
+    }
+
+    private void LoadLevelOne()
+    {
+        SceneManager.LoadScene(_levelOneSceneIndex);
+    }
+
+    private void OnAreaAttackActivated()
+    {
+        _massAttackComentText.gameObject.SetActive(false);
+        _massAttackPcComentText.gameObject.SetActive(false);
+        _attackText.gameObject.SetActive(false);
+
+        float endScreenDelay = 6f;
+        DOVirtual.DelayedCall(endScreenDelay, () => _endScreen.SetActive(true));
     }
 
     private void OnAttack()
     {
+        _attackText.gameObject.SetActive(false);
         ChangeComentText(_coinCollectComentText);
         _box.IsItemCollected += OnItemCollected;
         _joystick.AttackButtonClick -= OnAttack;
@@ -98,12 +135,14 @@ public class Tutorial : MonoBehaviour
     private void OnItemCollected()
     {
         _wallDoor.DOMoveY(0f, 1f).SetEase(Ease.Linear).SetLoops(1);
+        _attackText.gameObject.SetActive(true);
         ChangeComentText(_nextAttackComentText);
+        _secondPathArrow.SetActive(true);
         _box.IsItemCollected -= OnItemCollected;
 
-        for (int i = 0; i < _enemys.Length; i++)
+        for (int i = 0; i < _enemies.Length; i++)
         {
-            _enemys[i].Dying += OnEnemysDead;
+            _enemies[i].Dying += OnEnemysDead;
         }
     }
 
@@ -111,8 +150,10 @@ public class Tutorial : MonoBehaviour
     {
         _killedEnemys++;
 
-        if (_killedEnemys >= _enemys.Length)
+        if (_killedEnemys >= _enemies.Length)
         {
+            _secondPathArrow.SetActive(false);
+
             ChangeTitleText(_massAttackText);
             DOVirtual.DelayedCall(Delay, () => { _finishPoint.gameObject.SetActive(true); });
 
@@ -135,6 +176,7 @@ public class Tutorial : MonoBehaviour
         {
             _mouseImage.sprite = _mouseSprite;
             ChangeComentText(_moveComentText);
+            _firstPathArrow.SetActive(true);
         });
         moveAnimation.AppendInterval(1f);
         moveAnimation.AppendCallback(() =>
@@ -198,7 +240,7 @@ public class Tutorial : MonoBehaviour
             _joystick.AllowToAttack();
             _handImage.enabled = false;
             _joystick.enabled = true;
-        });
+        });        
     }
 
     private void ShowAnimationMouseClick(Sprite clickSprite, float delay, int repeatCount)

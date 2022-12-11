@@ -20,7 +20,7 @@ public class Level : MonoBehaviour
 
     private QuestInfo _missionConditions;
     private int _currentZoneIndex;    
-    private int _levelOneSceneIndex = 1;    
+    private int _levelOneSceneIndex = 1;
     private int _currentCoins;
     private int _currentKills;    
     private bool _isBigboxDestroyed;

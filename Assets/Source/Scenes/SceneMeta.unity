@@ -2144,7 +2144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _zones:
   - {fileID: 1765530376}
-  _maxCounts: 0a000000
+  _maxCounts: 15000000
   _enemyPrefabs:
   - {fileID: 8791151804551881446, guid: e8997b363bdecd2408076cd6c2fb8781, type: 3}
   - {fileID: 4604683557206214305, guid: db7d6da3e7b8e8c4cb7645409ab71f55, type: 3}

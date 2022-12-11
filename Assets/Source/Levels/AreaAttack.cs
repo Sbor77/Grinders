@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class AreaAttack : MonoBehaviour
 {    
@@ -19,6 +20,8 @@ public class AreaAttack : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private float _stunDamage;
     [SerializeField] private float _chargeDuration;
+
+    public event Action IsActivated;
         
     private float _effectHeiht = 0.05f;
     private float _radiusOffset = 2;
@@ -30,8 +33,8 @@ public class AreaAttack : MonoBehaviour
     public void Apply()
     {
         Animate();
-
         DamageTargets(_radius, 0);
+        IsActivated?.Invoke();
     }
 
     private void SetChargeEffectPosition()
