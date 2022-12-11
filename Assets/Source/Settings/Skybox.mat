@@ -68,7 +68,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 1
+    - _Intensity: 0.9
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -80,8 +80,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.47138664, g: 0.5241365, b: 0.9339623, a: 0}
-    - _Color2: {r: 0.07849768, g: 0.08100784, b: 0.26415092, a: 0}
+    - _Color1: {r: 0.48989856, g: 0.5570983, b: 0.9528302, a: 1}
+    - _Color2: {r: 0.42817867, g: 0.4130473, b: 0.735849, a: 1}
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
