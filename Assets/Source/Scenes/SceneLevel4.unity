@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 50524fcadbcf67b4aa05740456d17fc8, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1db44c1b8d8289747a92fadb77a8498f, type: 2}
   m_LightingSettings: {fileID: 991250100}
 --- !u!196 &4
 NavMeshSettings:
@@ -9573,6 +9573,7 @@ MonoBehaviour:
   - {fileID: 754211312}
   - {fileID: 239794931}
   - {fileID: 37925596}
+  _playerStartPoints: []
 --- !u!1 &776511808
 GameObject:
   m_ObjectHideFlags: 0
@@ -12066,6 +12067,11 @@ MonoBehaviour:
   _effectsParent: {fileID: 1340904702}
   _effectsCount: 7
   _trailSound: {fileID: 1025256721}
+  _enableSpeedIncrease: 0
+  _startSpeedModifier: 1
+  _maxSpeedModifier: 3
+  _enemyCount: 5
+  _speedModifierIncrease: 0.5
 --- !u!82 &1025256721
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15947,6 +15953,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 941070089}
     m_Modifications:
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2701210816371816793, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
       propertyPath: m_Name
       value: Joystick
@@ -16037,6 +16059,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2701210816371816794, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -16554,7 +16592,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 402300681, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.68013
+      value: 1.6801453
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542587295032, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: _infoViewer
