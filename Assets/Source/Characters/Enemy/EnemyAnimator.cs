@@ -23,6 +23,7 @@ public class EnemyAnimator : MonoBehaviour
     private const string Died = "Died";
     private const string Reset = "Reset";
     private const string Dancing = "Win";
+    private const string SpeedModifier = "SpeedModifier";
 
     private void Awake()
     {
@@ -72,6 +73,7 @@ public class EnemyAnimator : MonoBehaviour
     public void ChangeSpeedModifier(float value)
     {        
         _agent.speed *= value;
+        _animator.SetFloat(SpeedModifier, value);
     }
 
     public float StartAttack()
