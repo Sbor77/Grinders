@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class Joystick : Joysticks
 {
-    [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .3f;
+    [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .1f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
+
+    private bool _isTouchDown = false;
+    private float _currentDownTime;
 
     private void OnEnable()
     {
         _skillButton.onClick.AddListener(OnSkillButtonClick);
+        _attackButton.onClick.AddListener(OnAttackButtonClick);
     }
 
     private void Start()
@@ -18,6 +22,7 @@ public class Joystick : Joysticks
         if (DataHandler.Instance.IsMobile())
         {
             _moveToTouchDownPosition = true;
+            _attackButton.gameObject.SetActive(false);
             _joystickBackground.GetComponent<Image>().color = Color.white;
             _joystickInner.GetComponent<Image>().color = Color.white;
         }
@@ -30,13 +35,13 @@ public class Joystick : Joysticks
 
     private void Update()
     {
-        //if (_isTouchDown)
-        //{
-        //    if (_currentDownTime < _clickTimeDelta)
-        //        _currentDownTime += Time.deltaTime;
-        //    else
-        //        _isTouchDown = false;
-        //}
+        if (_isTouchDown)
+        {
+            if (_currentDownTime < _clickTimeDelta)
+                _currentDownTime += Time.deltaTime;
+            else
+                _isTouchDown = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
             OnSkillButtonClick();
@@ -46,6 +51,7 @@ public class Joystick : Joysticks
     {
         ReleasedJoystick();
         _skillButton.onClick.RemoveListener(OnSkillButtonClick);
+        _attackButton.onClick.RemoveListener(OnAttackButtonClick);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -54,8 +60,8 @@ public class Joystick : Joysticks
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //_isTouchDown = true;
-                //_currentDownTime = 0;
+                _isTouchDown = true;
+                _currentDownTime = 0;
 
                 if (_moveToTouchDownPosition)
                     _joystickBackground.transform.position = eventData.position;
@@ -71,7 +77,6 @@ public class Joystick : Joysticks
         {
             CalculateJoystickInnerPosition(eventData.position);
             CalculateInputVector();
-            //ChangedDirection?.Invoke(inputVector.normalized);
         }
     }
 
@@ -82,11 +87,13 @@ public class Joystick : Joysticks
             if (Input.GetMouseButtonUp(0))
             {
                 ReleasedJoystick();
+
+                if (_isTouchDown)
+                    OnAttackButtonClick();
             }
             else
             {
-                //if (_isTouchDown)
-                OnJoystickClick();
+                OnAttackButtonClick();
             }
         }
     }

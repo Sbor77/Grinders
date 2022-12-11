@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
     {
         _joystick.ChangedDirection += OnChangedDirection;
         _joystick.ReleasedTouch += OnReleasedTouch;
-        _joystick.ChangedClickStatus += StartAttack;
+        _joystick.AttackButtonClick += StartAttack;
         _joystick.SkillButtonClick += UseMassAttack;
     }
 
@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
     {
         _joystick.ChangedDirection -= OnChangedDirection;
         _joystick.ReleasedTouch -= OnReleasedTouch;
-        _joystick.ChangedClickStatus -= StartAttack;
+        _joystick.AttackButtonClick -= StartAttack;
         _joystick.SkillButtonClick -= UseMassAttack;
     }
 

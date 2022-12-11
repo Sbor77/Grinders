@@ -13,15 +13,20 @@ public class JoystickTutorial : Joysticks
     [SerializeField] private bool _canMassAttack = false;
     [SerializeField] private Tutorial _tutorial;
 
+    public Vector3 MassAttackButtonPosition => _skillButton.transform.position;
+    public Vector3 AttackButtonPosition => _attackButton.transform.position;
+
     private void OnEnable()
     {
         _skillButton.onClick.AddListener(OnSkillButtonClick);
+        _attackButton.onClick.AddListener(OnAttackButtonClick);
     }
 
     private void Start()
     {
         if (DataHandler.Instance.IsMobile())
         {
+            _attackButton.gameObject.SetActive(false);
             _moveToTouchDownPosition = true;
             _joystickBackground.GetComponent<Image>().color = Color.white;
             _joystickInner.GetComponent<Image>().color = Color.white;
@@ -44,6 +49,7 @@ public class JoystickTutorial : Joysticks
     {
         ReleasedJoystick();
         _skillButton.onClick.RemoveListener(OnSkillButtonClick);
+        _attackButton.onClick.RemoveListener(OnAttackButtonClick);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -83,7 +89,7 @@ public class JoystickTutorial : Joysticks
             else
             {
                 if (_canAttack)
-                    OnJoystickClick();
+                    OnAttackButtonClick();
             }
         }
     }

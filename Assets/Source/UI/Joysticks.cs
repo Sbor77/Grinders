@@ -9,12 +9,13 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     [SerializeField] protected RectTransform _joystickBackground;
     [SerializeField] protected RectTransform _joystickInner;
+    [SerializeField] protected Button _attackButton;
     [SerializeField] protected Button _skillButton;
 
     public event Action SkillButtonClick;
     public event Action<Vector2> ChangedDirection;
     public event Action ReleasedTouch;
-    public event Action ChangedClickStatus;
+    public event Action AttackButtonClick;
 
     public abstract void OnDrag(PointerEventData eventData);
     public abstract void OnPointerDown(PointerEventData eventData);
@@ -49,9 +50,9 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
         _skillButton.interactable = true;
     }
 
-    protected void OnJoystickClick()
+    protected void OnAttackButtonClick()
     {
-        ChangedClickStatus?.Invoke();
+        AttackButtonClick?.Invoke();
     }
 
     protected void OnSkillButtonClick()
