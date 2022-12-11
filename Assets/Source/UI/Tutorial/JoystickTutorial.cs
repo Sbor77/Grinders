@@ -26,13 +26,13 @@ public class JoystickTutorial : Joysticks
     {
         if (DataHandler.Instance.IsMobile())
         {
-            _attackButton.gameObject.SetActive(false);
             _moveToTouchDownPosition = true;
             _joystickBackground.GetComponent<Image>().color = Color.white;
             _joystickInner.GetComponent<Image>().color = Color.white;
         }
         else
         {
+            _attackButton.gameObject.SetActive(false);
             _joystickBackground.GetComponent<Image>().color = Color.clear;
             _joystickInner.GetComponent<Image>().color = Color.clear;
         }

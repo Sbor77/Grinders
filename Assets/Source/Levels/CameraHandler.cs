@@ -81,7 +81,7 @@ public class CameraHandler : MonoBehaviour
         _josytick.gameObject.SetActive(active);
     }
 
-    private void ShowTutorial() => _tutorial.gameObject.SetActive(true);
+    //private void ShowTutorial() => _tutorial.gameObject.SetActive(true);
 
     private void MoveBigboxCamera()
     {
@@ -98,7 +98,7 @@ public class CameraHandler : MonoBehaviour
             DOVirtual.DelayedCall(joystickDelay, () =>
             {
                 _bigboxCamera.transform.position = _startBigboxCameraPoint.position;
-                ShowTutorial();
+                //ShowTutorial();
                 SetJoystickActive(true);
             });
         });
