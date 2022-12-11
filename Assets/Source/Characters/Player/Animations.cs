@@ -6,6 +6,15 @@ using System;
 [RequireComponent(typeof(Animator),typeof(Movement),typeof(Player))]
 public class Animations : MonoBehaviour
 {
+    private const float SpeedModifier = 4f;
+    private const float FinishedSpin = 0.1f;
+    private const string Speed = "MoveSpeed";
+    private const string Modifier = "SpeedModifier";
+    private const string Attack = "Attack";
+    private const string AreaAttack = "AreaAttack";
+    private const string Died = "Died";
+    private const string TakedDamage = "TakeDamage";
+
     [SerializeField] private float _secondsPerSpin;
     [SerializeField] private AnimationClip _takeDamageClip;
     [SerializeField] private ParticleSystem _attackVFX;
@@ -19,15 +28,6 @@ public class Animations : MonoBehaviour
     private Vector3 _angleRotate = new Vector3(0, -360, 0);
     private Vector3 _startAngleRotate;
     private bool _isMoving;
-
-    private const float SpeedModifier = 4f;
-    private const float FinishedSpin = 0.1f;
-    private const string Speed = "MoveSpeed";
-    private const string Modifier = "SpeedModifier";
-    private const string Attack = "Attack";
-    private const string AreaAttack = "AreaAttack";
-    private const string Died = "Died";
-    private const string TakedDamage = "TakeDamage";
 
     private void Awake()
     {
@@ -64,9 +64,7 @@ public class Animations : MonoBehaviour
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(TakedDamage) == false)
         {
             _animator.SetTrigger(TakedDamage);
-
             float takeDamageDuration = _takeDamageClip.length;
-
             DOVirtual.DelayedCall(takeDamageDuration, () => _mover.ChangedHitDamage(false));
         }
 
