@@ -9,7 +9,7 @@ public class FinishPanel : MonoBehaviour
     [SerializeField] private TMP_Text _levelKillsCount;
     [SerializeField] private TMP_Text _levelScoreCount;
     [SerializeField] private TMP_Text _totalScoreCount;
-    [SerializeField] private Button _shopButton;
+    [SerializeField] private Button _shopButton;    
     [SerializeField] private InfoViewer _infoViewer;
 
     private int _shopSceneIndex = 5;

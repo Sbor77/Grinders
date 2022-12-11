@@ -4,13 +4,15 @@ using UnityEngine;
 public class DataHandler : MonoBehaviour
 {
     private string _totalScore = "TotalScore";
-    private string _levelKey = "Level";
-    private string _totalMoneyKey = "TotalMoney";
-    private string _levelMoneyKey = "LevelMoney";
-    private string _killsKey = "Kills";
-    private string _healthSkillKey = "HealthSkill";
-    private string _speedSkillKey = "SpeedSkill";
-    private string _radiusSkillKey = "RadiusSkill";
+    private string _level = "Level";
+    private string _completedLevel = "_completedLevel";
+    private string _currentZone = "CurrentZone";
+    private string _totalMoney = "TotalMoney";
+    private string _levelMoney = "LevelMoney";
+    private string _kills = "Kills";
+    private string _healthSkill = "HealthSkill";
+    private string _speedSkill = "SpeedSkill";
+    private string _radiusSkill = "RadiusSkill";
     private string _muteValue = "MuteStateValue";    
     private string _totalVolume = "TotalVol";
     private string _musicVolume = "MusicVol";
@@ -50,51 +52,65 @@ public class DataHandler : MonoBehaviour
     public void SaveLevel (int level)
     {
         if (level <= 0)
-            PlayerPrefs.SetInt(_levelKey, 1);
+            PlayerPrefs.SetInt(_level, 1);
         else
-            PlayerPrefs.SetInt(_levelKey, level);
+            PlayerPrefs.SetInt(_level, level);
+    }
+
+    public void SaveCompletedLevel(int completedLevel)
+    {
+        if (completedLevel <= 0)
+            PlayerPrefs.SetInt(_completedLevel, 0);
+        else
+            PlayerPrefs.SetInt(_completedLevel, completedLevel);
+    }
+
+    public void SaveCurrentZone(int zone)
+    {
+        if (zone >= 0)            
+            PlayerPrefs.SetInt(_currentZone, zone);
     }
 
     public void SaveTotalMoney(int totalMoney)
     {
         if (totalMoney >= 0)
-            PlayerPrefs.SetInt(_totalMoneyKey, totalMoney);
+            PlayerPrefs.SetInt(_totalMoney, totalMoney);
     }
 
     public void SaveLevelMoney (int levelMoney)
     {
         if (levelMoney >= 0)
-            PlayerPrefs.SetInt(_levelMoneyKey, levelMoney);
+            PlayerPrefs.SetInt(_levelMoney, levelMoney);
     }
 
     public void SaveKills(int kills)
     {
         if (kills > 0)
-            PlayerPrefs.SetInt(_killsKey, kills);
+            PlayerPrefs.SetInt(_kills, kills);
     }
 
     public void SaveHealthSkill(int healthSkill)
     {
         if (healthSkill <= 0)
-            PlayerPrefs.SetInt(_healthSkillKey, 1);
+            PlayerPrefs.SetInt(_healthSkill, 1);
         else
-            PlayerPrefs.SetInt(_healthSkillKey, healthSkill);
+            PlayerPrefs.SetInt(_healthSkill, healthSkill);
     }
 
     public void SaveSpeedSkill(int speedSkill)
     {
         if (speedSkill <= 0)
-            PlayerPrefs.SetInt(_speedSkillKey, 1);
+            PlayerPrefs.SetInt(_speedSkill, 1);
         else
-            PlayerPrefs.SetInt(_speedSkillKey, speedSkill);
+            PlayerPrefs.SetInt(_speedSkill, speedSkill);
     }
 
     public void SaveRadiusSkill(int radiusSkill)
     {
         if (radiusSkill <= 0)
-            PlayerPrefs.SetInt(_radiusSkillKey, 1);
+            PlayerPrefs.SetInt(_radiusSkill, 1);
         else
-            PlayerPrefs.SetInt(_radiusSkillKey, radiusSkill);
+            PlayerPrefs.SetInt(_radiusSkill, radiusSkill);
     }
 
     public void SaveMuteValue(int value)
@@ -137,46 +153,59 @@ public class DataHandler : MonoBehaviour
 
     public int GetSavedTotalMoney()
     {
-        if (PlayerPrefs.HasKey(_totalMoneyKey))
-            return PlayerPrefs.GetInt(_totalMoneyKey);            
+        if (PlayerPrefs.HasKey(_totalMoney))
+            return PlayerPrefs.GetInt(_totalMoney);            
         else
             return 0;
     }
 
     public int GetSavedLevelMoney()
     {
-        if (PlayerPrefs.HasKey(_levelMoneyKey))
-            return PlayerPrefs.GetInt(_levelMoneyKey);
+        if (PlayerPrefs.HasKey(_levelMoney))
+            return PlayerPrefs.GetInt(_levelMoney);
         else
             return 0;        
     }
 
     public int GetSavedKills()
     {
-        if (PlayerPrefs.HasKey(_killsKey))
-            return PlayerPrefs.GetInt(_killsKey);
+        if (PlayerPrefs.HasKey(_kills))
+            return PlayerPrefs.GetInt(_kills);
         else
             return 0;        
     }
 
     public int GetSavedLevel()
     {
-        return PlayerPrefs.GetInt(_levelKey);
+        return PlayerPrefs.GetInt(_level);
+    }
+
+    public int GetSavedCompletedLevel()
+    {
+        return PlayerPrefs.GetInt(_completedLevel);
+    }
+
+    public int GetSavedCurrentZone()
+    {
+        if (PlayerPrefs.HasKey(_currentZone))
+            return PlayerPrefs.GetInt(_currentZone);
+        else
+            return 0;        
     }
 
     public int GetSavedHealthSkill()
     {
-        return PlayerPrefs.GetInt(_healthSkillKey);
+        return PlayerPrefs.GetInt(_healthSkill);
     }
 
     public int GetSavedSpeedSkill()
     {
-        return PlayerPrefs.GetInt(_speedSkillKey);
+        return PlayerPrefs.GetInt(_speedSkill);
     }
 
     public int GetSavedRadiusSkill()
     {
-        return PlayerPrefs.GetInt(_radiusSkillKey);
+        return PlayerPrefs.GetInt(_radiusSkill);
     }
 
     public int GetSavedMuteValue()

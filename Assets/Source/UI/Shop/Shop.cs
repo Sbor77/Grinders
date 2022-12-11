@@ -21,7 +21,7 @@ public class Shop : MonoBehaviour
     {
         _skillBuyer.IsStatBought += OnStatBought;
         _exitButton.onClick.AddListener(CloseShop);
-        _nextButton.onClick.AddListener(LoadNextLevel);
+        _nextButton.onClick.AddListener(BackToGame);
         _gameEndButton.onClick.AddListener(LoadMainMenu);
     }
 
@@ -29,7 +29,7 @@ public class Shop : MonoBehaviour
     {
         _skillBuyer.IsStatBought -= OnStatBought;
         _exitButton.onClick.RemoveListener(CloseShop);
-        _nextButton.onClick.RemoveListener(LoadNextLevel);
+        _nextButton.onClick.RemoveListener(BackToGame);
         _gameEndButton.onClick.RemoveListener(LoadMainMenu);
     }
 
@@ -49,11 +49,11 @@ public class Shop : MonoBehaviour
         _levelLoader.Load(_introSceneIndex);
     }
 
-    private void LoadNextLevel()
+    private void BackToGame()
     {
-        int nextLevel = DataHandler.Instance.GetSavedLevel();
+        int levelToLoad = DataHandler.Instance.GetSavedLevel();
 
-        if (nextLevel > _lastLevelIndex)
+        if (levelToLoad > _lastLevelIndex)
         {
             _gameEndPanel.SetActive(true);
             _totalScore.text = DataHandler.Instance.GetSavedTotalScore().ToString();
@@ -61,7 +61,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            _levelLoader.Load(DataHandler.Instance.GetSavedLevel());
+            _levelLoader.Load(levelToLoad);
         }
     }
 

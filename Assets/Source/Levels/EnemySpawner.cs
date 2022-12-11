@@ -30,14 +30,15 @@ public class EnemySpawner : MonoBehaviour
     private float _startBurstHeight = 2.75f;
     private float _trailDuration = 0.3f;
     private float _burstDuration = 0.5f;
+    private float _burstDurationAdd = 1f;
 
     List<Enemy>[] _enemyArray;
-    private LevelZone _currentZone;    
-    private bool _isInitialSpawnEnded;
+    private LevelZone _currentZone;        
     private int _currentZoneIndex;
     private int _playerKills;
     private float _spawnRadiusModifier = 1;
     private bool _isDeactivated;
+    private int _spawnedEnemeiesCount;
 
     public event Action <int> IsPLayerKillsIncreased;
 
@@ -50,8 +51,7 @@ public class EnemySpawner : MonoBehaviour
         _enemyArray = new List<Enemy>[_zones.Count];
 
         GenerateAllEffects();
-        GenerateAllEnemies();
-        //SpawnEnemy();
+        GenerateAllEnemies();        
     }
 
     private void OnEnable()
@@ -106,7 +106,6 @@ public class EnemySpawner : MonoBehaviour
         if (_playerKills % _enemyCount == 0 && _enableSpeedIncrease)
         {
             _startSpeedModifier += _speedModifierIncrease;
-
             _startSpeedModifier = _startSpeedModifier > _maxSpeedModifier ? _maxSpeedModifier : _startSpeedModifier;            
         }
 
@@ -132,12 +131,12 @@ public class EnemySpawner : MonoBehaviour
                 var newEnemy = Instantiate(randomPrefab, position, Quaternion.identity, _enemyParent);
 
                 newEnemy.ChangeSpeed(_startSpeedModifier);
-                //newEnemy.Deactivate();
+                newEnemy.Deactivate();
                 _enemyArray[i].Add(newEnemy);
             }
         }
 
-        _isInitialSpawnEnded = true;
+        SpawnEnemy();        
     }
 
     private void SpawnEnemy()
@@ -153,7 +152,9 @@ public class EnemySpawner : MonoBehaviour
 
             float spawnDelay = 0;
 
-            if (_isInitialSpawnEnded)
+            _spawnedEnemeiesCount++;
+
+            if (_spawnedEnemeiesCount > _maxCounts[0])
             {
                 ShowSpawnEffects(spawnPosition);
                 spawnDelay = _burstDuration + _trailDuration;                
@@ -265,7 +266,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void ShowSpawnEffects(Vector3 position)
-    {
+    {        
         ParticleSystem trail = _trails.Find(x => x.gameObject.activeSelf == false);
         ParticleSystem burst = _bursts.Find(x => x.gameObject.activeSelf == false);
         
@@ -286,7 +287,7 @@ public class EnemySpawner : MonoBehaviour
             trail.gameObject.SetActive(false);
             burst.gameObject.SetActive(true);
         });
-        effectSequence.AppendInterval(_burstDuration + 1);
+        effectSequence.AppendInterval(_burstDuration + _burstDurationAdd);
         effectSequence.AppendCallback(() => burst.gameObject.SetActive(false));
         effectSequence.AppendCallback(() => effectSequence.Kill());
     }
