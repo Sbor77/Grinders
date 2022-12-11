@@ -124,9 +124,7 @@ public class QuestInfo
     public QuestInfo(int coinCollected, int enemyKilled, bool bigBox)
     {
         NeedCoinCollected = coinCollected;
-
         NeedEnemyKilled = enemyKilled;
-
         NeedDestroyBigBox = bigBox;
     }
 }
