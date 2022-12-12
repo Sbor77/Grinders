@@ -874,8 +874,8 @@ MonoBehaviour:
   - {fileID: 852546998}
   - {fileID: 1295080005}
   - {fileID: 579860348}
-  _targetMoney: 0
-  _targetKills: 0
+  _targetMoney: 3
+  _targetKills: 5
 --- !u!1001 &41586647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2835,8 +2835,8 @@ MonoBehaviour:
   - {fileID: 2000632033}
   - {fileID: 449374309}
   - {fileID: 2014212579}
-  _targetMoney: 0
-  _targetKills: 0
+  _targetMoney: 2
+  _targetKills: 4
 --- !u!1 &240094191
 GameObject:
   m_ObjectHideFlags: 0
@@ -9146,8 +9146,8 @@ MonoBehaviour:
   - {fileID: 1086601087}
   - {fileID: 2104164028}
   - {fileID: 1070181371}
-  _targetMoney: 0
-  _targetKills: 0
+  _targetMoney: 3
+  _targetKills: 3
 --- !u!1001 &757133118
 PrefabInstance:
   m_ObjectHideFlags: 0
