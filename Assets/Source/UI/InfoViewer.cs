@@ -81,6 +81,17 @@ public class InfoViewer : MonoBehaviour
         ToggleSoundIcon(DataHandler.Instance.GetSavedMuteValue());
     }
 
+    public void SetCurrentZoneTargets(QuestInfo conditions)
+    {
+        _missonConditions = conditions;
+        _questCoinCollected = conditions.NeedCoinCollected;
+        _questBigbox = conditions.NeedDestroyBigBox;
+        _questEnemyKills = conditions.NeedEnemyKilled;
+
+        SetStartConditionsText();
+    }
+
+
     public void SetQuestCollected(QuestInfo conditions)
     {
         _missonConditions = conditions;

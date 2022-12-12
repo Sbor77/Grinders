@@ -42,7 +42,6 @@ public class Level : MonoBehaviour
     private void Start()
     {
         LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());
-
         _missionConditions = _infoViewer.MissionConditions;
 
         if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)
@@ -51,7 +50,7 @@ public class Level : MonoBehaviour
         _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
 
         InitZones();
-
+        InitInfoViewer();
         SetPlayerPosition();
     }
 
@@ -61,12 +60,22 @@ public class Level : MonoBehaviour
             _isCheated = true;
     }
 
+    private void InitInfoViewer()
+    {
+        int targetCoins = _zones[_currentZoneIndex].TargetMoney;
+        int targetKills = _zones[_currentZoneIndex].TargetKills;
+        bool bigboxActive = _currentZoneIndex == _zones.Count - 1;
+
+        QuestInfo conditions = new QuestInfo(targetCoins, targetKills, bigboxActive);
+
+        _infoViewer.SetCurrentZoneTargets(conditions);
+    }
+
     private void SetPlayerPosition()
     {
         if (_playerStartPoints != null)
         {
-            int currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();            
-
+            int currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();
             _player.transform.position = _playerStartPoints[currentZoneIndex].position;
         }
     }
@@ -157,6 +166,14 @@ public class Level : MonoBehaviour
     }
 
     private void InitZones()
+    {        
+
+        _currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();
+
+        ActivateZone(_currentZoneIndex);
+    }
+
+    /*private void InitZones()
     {
         int targetKills = _missionConditions.NeedEnemyKilled;
         int targetMoney = _missionConditions.NeedCoinCollected;
@@ -175,11 +192,8 @@ public class Level : MonoBehaviour
         }
 
         _currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();
-
-        ActivateZone(_currentZoneIndex);
-
-        
-    }
+        ActivateZone(_currentZoneIndex);        
+    }*/
 
     private void ActivateZone(int zoneIndex)
     {

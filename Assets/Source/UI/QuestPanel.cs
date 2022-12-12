@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +10,7 @@ public class QuestPanel : MonoBehaviour
     [SerializeField] private Button _continueButton;
     [SerializeField] private TMP_Text _conditionsText;
     [Space]
-    [SerializeField] private int _needCoinCollected;
-    [SerializeField] private int _needEnemyKilled;
+    [SerializeField] private List<LevelZone> _levelZones;
     [SerializeField] private bool _needDestroyBigBox;
     [Space]
     [SerializeField] private TMP_Text _coinsToCollect;
@@ -21,6 +21,9 @@ public class QuestPanel : MonoBehaviour
     [Space]    
     [SerializeField] private GameObject _infoPanel;
 
+    private int _needCoinCollected;
+    private int _needEnemyKilled;
+
     public int NeedCoinCollected => _needCoinCollected;
 
     public int NeedEnemyKilled => _needEnemyKilled;
@@ -28,48 +31,34 @@ public class QuestPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        Init();
-
-        _continueButton.onClick.AddListener(StartGame);
-
-        //if (_tutorialPanel != null)
-        //    _tutorialPanel.IsEnded += OnTutorialIsEnded;        
+        _continueButton.onClick.AddListener(StartGame);  
     }
 
     private void OnDisable()
     {
-        _continueButton.onClick.RemoveListener(StartGame);
-
-        //if (_tutorialPanel != null)
-        //    _tutorialPanel.IsEnded += OnTutorialIsEnded;
+        _continueButton.onClick.RemoveListener(StartGame);        
     }
 
     private void Start()
     {
+        Init();
+
         Time.timeScale = 0;
 
-        //if (_tutorialPanel != null)
-        //{
-        //    DeactivateInfoPanel();
-
-        //    _tutorialPanel.gameObject.SetActive(true);
-        //}
-        //else
-        //{
-            ShowMissionTargets();
-        //}
-    }
-
-    private void OnTutorialIsEnded()
-    {
-        ShowMissionTargets();
+        
+        //ShowMissionTargets();
+        
     }
 
     private void Init()
     {
+        
+
         QuestInfo conditions = new QuestInfo(_needCoinCollected, _needEnemyKilled, _needDestroyBigBox);
 
-        _infoViewer.SetQuestCollected(conditions);
+        
+
+        //_infoViewer.SetQuestCollected(conditions);
     }
 
     private void ShowMissionTargets()

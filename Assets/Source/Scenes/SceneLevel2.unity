@@ -5968,6 +5968,8 @@ MonoBehaviour:
   - {fileID: 1607144210}
   - {fileID: 471675756}
   - {fileID: 20872701}
+  _targetMoney: 5
+  _targetKills: 10
 --- !u!1 &870715076
 GameObject:
   m_ObjectHideFlags: 0
@@ -12597,7 +12599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6047048541485562685, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_text
-      value: Start!
+      value: "\u0421\u0442\u0430\u0440\u0442!"
       objectReference: {fileID: 0}
     - target: {fileID: 6047048541485562685, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_fontSize
@@ -12753,7 +12755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542699893295, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_text
-      value: 'Mission:'
+      value: "\u0412\u0430\u0448\u0430 \u0446\u0435\u043B\u044C"
       objectReference: {fileID: 0}
     - target: {fileID: 6047048542699893295, guid: 8ec801202970f604d9458fec2c4f6570, type: 3}
       propertyPath: m_fontSize
@@ -12867,6 +12869,8 @@ MonoBehaviour:
   - {fileID: 1386454498}
   - {fileID: 147943730}
   - {fileID: 734029380}
+  _targetMoney: 7
+  _targetKills: 12
 --- !u!1001 &2006936997
 PrefabInstance:
   m_ObjectHideFlags: 0

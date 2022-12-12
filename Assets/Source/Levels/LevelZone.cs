@@ -6,9 +6,9 @@ public class LevelZone : MonoBehaviour
     [SerializeField] private List<DoorOpener> _doors;
     [SerializeField] private List<Transform> _boxPoints;    
     [SerializeField] private List<Transform> _enemyPoints;
+    [SerializeField] private int _targetMoney;
+    [SerializeField] private int _targetKills;
 
-    private int _targetMoney;
-    private int _targetKills;
     private bool _isActive;
 
     public bool IsActive => _isActive;
@@ -37,12 +37,12 @@ public class LevelZone : MonoBehaviour
         }
     }
 
-    public void Init (int targetMoney, int targetKills)
+    /*public void Init (int targetMoney, int targetKills)
     {
         _targetMoney = targetMoney;
         _targetKills = targetKills;
         _isActive = false;
-    }
+    }*/
 
     public void Activate()
     {
