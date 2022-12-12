@@ -10,7 +10,8 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private SceneLevelLoader _levelLoaderPanel;
     [SerializeField] private LeadersPanel _leadersPlanel;
 
-    private int _startLevelIndex = 1;    
+    private int _tutorialSceneIndex = 6;
+    private int _startLevelIndex = 1;
 
     private void OnEnable()
     {
@@ -78,7 +79,7 @@ public class StartMenu : MonoBehaviour
         DataHandler.Instance.SaveLanguage(language);
         DataHandler.Instance.SaveAllStats();
         
-        _levelLoaderPanel.Load(_startLevelIndex);
+        _levelLoaderPanel.Load(_tutorialSceneIndex);
     }
 
     private void ContinueGame()
