@@ -26,14 +26,12 @@ public class EnemyAnimator : MonoBehaviour
     private float _attackMultiplier = 1.5f;
     private float _minSpeed = 0.1f;
     private bool _isMoveing;
-    private float _baseSpeed;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _enemy = GetComponent<Enemy>();
-        _baseSpeed = _agent.speed;
     }
 
     private void OnEnable()
@@ -77,8 +75,6 @@ public class EnemyAnimator : MonoBehaviour
 
     public void ChangeSpeedModifier(float value)
     {
-        _agent.speed = _baseSpeed * value;
-        Debug.Log($"{gameObject.name} - {value} = {_agent.speed}");
         _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);
     }
 

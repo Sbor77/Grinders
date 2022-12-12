@@ -7,6 +7,7 @@ public class Joystick : Joysticks
 {
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .1f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
+    [SerializeField] private Image _mobileJoyPosition;
 
     private bool _isTouchDown = false;
     private float _currentDownTime;
@@ -21,9 +22,10 @@ public class Joystick : Joysticks
     {
         if (DataHandler.Instance.IsMobile())
         {
-            _moveToTouchDownPosition = true;
-            _joystickBackground.GetComponent<Image>().color = Color.white;
-            _joystickInner.GetComponent<Image>().color = Color.white;
+            //_moveToTouchDownPosition = true;
+            _joystickBackground.transform.position = _mobileJoyPosition.transform.position;
+            _joystickBackground.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
+            _joystickInner.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
         }
         else
         {

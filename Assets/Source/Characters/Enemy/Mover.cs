@@ -24,6 +24,7 @@ public class Mover : MonoBehaviour
     private Vector3 _zeroPoint;
     private Vector3 _movePoint;
     private Player _target;
+    private float _baseSpeed;
     private bool _isAttaking = false;
     private bool _canMove = true;
     private bool _isAlive = true;
@@ -37,6 +38,7 @@ public class Mover : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _enemy = GetComponent<Enemy>();
         _animator = GetComponent<EnemyAnimator>();
+        _baseSpeed = _agent.speed;
     }
 
     private void OnEnable()
@@ -79,6 +81,12 @@ public class Mover : MonoBehaviour
         {
             _agent.destination = transform.position;
         }
+    }
+
+    public void ChangeSpeed(float value)
+    {
+        _agent.speed = _baseSpeed * value;
+        _animator.ChangeSpeedModifier(value);
     }
 
     public void SetDamage()

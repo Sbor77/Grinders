@@ -51,7 +51,7 @@ public class Enemy : Characters
 
     public void ChangeSpeed(float value)
     {
-        _animator.ChangeSpeedModifier(value);
+        _mover.ChangeSpeed(value);
     }
 
     public override void TakeDamage(float damage)
