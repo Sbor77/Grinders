@@ -5005,8 +5005,8 @@ GameObject:
   - component: {fileID: 5653389578346123831}
   - component: {fileID: 2242311541916579216}
   - component: {fileID: 2242311541916579217}
-  - component: {fileID: 7730050197932278253}
-  - component: {fileID: 7730050197932278254}
+  - component: {fileID: 5901970638436765042}
+  - component: {fileID: 2558068916569237841}
   - component: {fileID: 4805656984149085473}
   - component: {fileID: 3137249133435413079}
   - component: {fileID: 1902441028597939214}
@@ -5097,7 +5097,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7730050197932278253
+--- !u!114 &5901970638436765042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5106,22 +5106,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431902403572716279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de776983dc9bdf642b4aaeceea1ef92c, type: 3}
+  m_Script: {fileID: 11500000, guid: e048dcbd6a62dce4691ff137a3a6d117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 15
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 128
+  _takeDamageSFX: {fileID: 3137249133435413079}
   _health: 300
   _delayDieHiding: 3
   _delayStartStunEffect: 0
-  _stunEffectDuration: 0
+  _stunEffectDuration: 0.1
   _agent: {fileID: 2242311541916579217}
-  _takeDamageSFX: {fileID: 3137249133435413079}
   _dieEffect: {fileID: 6738140876576484008}
   _stunEffect: {fileID: 6094263384894264118}
---- !u!114 &7730050197932278254
+  _mover: {fileID: 0}
+--- !u!114 &2558068916569237841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5130,7 +5131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431902403572716279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd6d45d657342d4f9bd4e3bfe59f7c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4520f2aa9c0cf8d429b3737d1287a69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _stoppingDistance: 0.5
@@ -5159,6 +5160,7 @@ MonoBehaviour:
   _dancingAnimation: {fileID: -203655887218126122, guid: 0eaf8984709fb62499df339914cfc1dd, type: 3}
   _walkAnimation: {fileID: -203655887218126122, guid: 8b8ed8fd7b1c2dd478b643dd07765f24, type: 3}
   _moveSFX: {fileID: 1902441028597939214}
+  _enemy: {fileID: 5901970638436765042}
 --- !u!82 &3137249133435413079
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5910,7 +5912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78063136d8a61824b9703c4e1406f428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 7730050197932278253}
+  _enemy: {fileID: 5901970638436765042}
 --- !u!1 &4371562082811437909
 GameObject:
   m_ObjectHideFlags: 0

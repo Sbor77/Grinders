@@ -15,15 +15,16 @@ public class Mover : MonoBehaviour
     [SerializeField] private LayerMask _wallMask;
     [SerializeField] [Range(0.1f,1f)] private float _canAttackDelay = 0.5f;
 
+    protected Enemy _enemy;
+    protected Player _target;
+
     private NavMeshAgent _agent;
-    private Enemy _enemy;
     private EnemyAnimator _animator;
     private Coroutine GetNewPointWithDelay;
     private Coroutine _canAttackCoroutine;
     private WaitForSeconds _delay;
     private Vector3 _zeroPoint;
     private Vector3 _movePoint;
-    private Player _target;
     private float _baseSpeed;
     private bool _isAttaking = false;
     private bool _canMove = true;
@@ -31,7 +32,7 @@ public class Mover : MonoBehaviour
     private bool _isDancing = false;
     private bool _isCanAttack = false;
 
-    private bool _isAcquireTarget => _target != null;
+    protected bool _isAcquireTarget => _target != null;
 
     private void Awake()
     {
@@ -89,7 +90,7 @@ public class Mover : MonoBehaviour
         _animator.ChangeSpeedModifier(value);
     }
 
-    public void SetDamage()
+    public virtual void SetDamage()
     {
         if (_isAlive == false || _target == null || _target.IsDead)
             return;

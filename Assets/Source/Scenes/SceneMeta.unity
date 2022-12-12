@@ -10594,6 +10594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossEnemy_Characters
       objectReference: {fileID: 0}
+    - target: {fileID: 1508748232957161966, guid: 746f003912a3dda4186cb0561a6d4700, type: 3}
+      propertyPath: _enemy
+      value: 
+      objectReference: {fileID: 6680680792527942465}
     - target: {fileID: 1771307781484873805, guid: 746f003912a3dda4186cb0561a6d4700, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10640,6 +10644,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 746f003912a3dda4186cb0561a6d4700, type: 3}
+--- !u!114 &6680680792527942465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5901970638436765042, guid: 746f003912a3dda4186cb0561a6d4700, type: 3}
+  m_PrefabInstance: {fileID: 6680680792527942464}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e048dcbd6a62dce4691ff137a3a6d117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6712635602023557074
 PrefabInstance:
   m_ObjectHideFlags: 0
