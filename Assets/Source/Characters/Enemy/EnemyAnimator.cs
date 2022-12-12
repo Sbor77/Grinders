@@ -21,7 +21,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Animator _animator;
-    private Enemy _enemy;
+    [SerializeField] private Enemy _enemy;
     private float _attackLength;
     private float _attackMultiplier = 1.5f;
     private float _minSpeed = 0.1f;
@@ -49,8 +49,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private void Start()
     {
-        _animator.SetFloat(AttackSpeed, _attackMultiplier);
-        _attackLength = _attackAnimation.length / _attackMultiplier;
+        ChangeAttackSpeedModifier(_attackMultiplier);
     }
 
     private void FixedUpdate()
@@ -78,6 +77,11 @@ public class EnemyAnimator : MonoBehaviour
         _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);
     }
 
+    public void ChangeAttackSpeed(float modifier)
+    {
+        ChangeAttackSpeedModifier(_attackMultiplier * modifier);
+    }
+
     public float StartAttack()
     {
         _animator.SetTrigger(Attack);
@@ -94,6 +98,12 @@ public class EnemyAnimator : MonoBehaviour
     {
         _animator.SetTrigger(Reset);
         _animator.ResetTrigger(Reset);
+    }
+
+    private void ChangeAttackSpeedModifier(float attackSpeed)
+    {
+        _animator.SetFloat(AttackSpeed, attackSpeed);
+        _attackLength = _attackAnimation.length / attackSpeed;
     }
 
     private void OnDying()

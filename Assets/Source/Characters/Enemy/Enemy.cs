@@ -5,22 +5,23 @@ using DG.Tweening;
 using System;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Mover), typeof(EnemyAnimator))]
+[RequireComponent(typeof(Mover))]
 public class Enemy : Characters
 {
+    [SerializeField] protected AudioSource _takeDamageSFX;
+
     [SerializeField] private float _health;
     [SerializeField] private float _delayDieHiding = 3f;
     [SerializeField] private float _delayStartStunEffect = 1.5f;
     [SerializeField] private float _stunEffectDuration = 3f;
     [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private AudioSource _takeDamageSFX;
     [SerializeField] private ParticleSystem _dieEffect;
     [SerializeField] private ParticleSystem _stunEffect;
 
-    private Mover _mover;
-    private EnemyAnimator _animator;
-    private float _currentHealth;    
-    private bool _isDead = false;       
+    protected bool _isDead = false;
+    protected float _currentHealth;
+    
+    [SerializeField] private Mover _mover;
 
     public float StanEffectDuration => _stunEffectDuration;
 
@@ -31,7 +32,6 @@ public class Enemy : Characters
     private void Awake()
     {
         _mover = GetComponent<Mover>();
-        _animator = GetComponent<EnemyAnimator>();
     }
 
     private void Start()
@@ -60,31 +60,24 @@ public class Enemy : Characters
             return;
 
         _takeDamageSFX.Play();
-
         _currentHealth -= damage;
-
         TakedDamage?.Invoke();
-
         IsAlive();
     }
 
     public void Restore()
     {        
         _currentHealth = _health;
-
         _mover.ResetState();
-
         _isDead = false;
     }
 
-    private void IsAlive()
+    protected void IsAlive()
     {
         if (_currentHealth <= 0)
         {
             Dying?.Invoke();
-
             _isDead = true;
-
             _dieEffect.gameObject.SetActive(true);
 
             DOVirtual.DelayedCall(_delayDieHiding, () =>
