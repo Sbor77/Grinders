@@ -24,30 +24,19 @@ public class SkillBuyer : MonoBehaviour
     private void OnEnable()
     {
         _buyHealthButton.onClick.AddListener(OnHealthBuy);
-
         _buyMoveButton.onClick.AddListener(OnMoveSpeedBuy);
-
         _buyRadiusButton.onClick.AddListener(OnRadiusBuy);
-
-        _buyCoinsButton.onClick.AddListener(OnVideoAdBuyCoin);
-
-        //if (GamesSdk.Instance != null)        
-            GamesSdk.Instance.Rewarded += OnRewardedCoinsBuy;
-        
+        _buyCoinsButton.onClick.AddListener(OnVideoAdBuyCoin);        
+        GamesSdk.Instance.Rewarded += OnRewardedCoinsBuy;        
     }
 
     private void OnDisable()
     {
         _buyHealthButton.onClick.RemoveListener(OnHealthBuy);
-
         _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
-
         _buyRadiusButton.onClick.RemoveListener(OnRadiusBuy);
-
         _buyCoinsButton.onClick.RemoveListener(OnVideoAdBuyCoin);
-
-        //if (GamesSdk.Instance != null)
-            GamesSdk.Instance.Rewarded -= OnRewardedCoinsBuy;
+        GamesSdk.Instance.Rewarded -= OnRewardedCoinsBuy;
     }
 
     public void Init()
@@ -87,7 +76,6 @@ public class SkillBuyer : MonoBehaviour
     private void OnHealthBuy()
     {
         int health = DataHandler.Instance.GetSavedHealthSkill();
-
         int price = _healthLevelPrices[health];
 
         if (TryBuying(price))
@@ -95,7 +83,6 @@ public class SkillBuyer : MonoBehaviour
             _buySFX.Play();
             DataHandler.Instance.SaveHealthSkill(health + 1);
             DataHandler.Instance.SaveAllStats();
-
             IsStatBought?.Invoke();
         }
     }
@@ -103,14 +90,12 @@ public class SkillBuyer : MonoBehaviour
     private void OnMoveSpeedBuy()
     {
         int moveSpeed = DataHandler.Instance.GetSavedSpeedSkill();
-
         int price = _moveLevelPrices[moveSpeed];
 
         if (TryBuying(price))
         {
             _buySFX.Play();
             DataHandler.Instance.SaveSpeedSkill(moveSpeed + 1);
-
             IsStatBought?.Invoke();
         }
     }
@@ -118,14 +103,12 @@ public class SkillBuyer : MonoBehaviour
     private void OnRadiusBuy()
     {
         int radius = DataHandler.Instance.GetSavedRadiusSkill();
-
         int price = _radiusLevelPrices[radius];
 
         if (TryBuying(price))
         {
             _buySFX.Play();
             DataHandler.Instance.SaveRadiusSkill(radius + 1);
-
             IsStatBought?.Invoke();
         }
     }
@@ -138,9 +121,7 @@ public class SkillBuyer : MonoBehaviour
     private void OnRewardedCoinsBuy()
     {
         int playerMoneyWithReward = DataHandler.Instance.GetSavedTotalMoney() + _rewardedCoins;
-
         DataHandler.Instance.SaveTotalMoney(playerMoneyWithReward);
-
         IsStatBought?.Invoke();
     }
 

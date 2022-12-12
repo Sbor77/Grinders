@@ -12,12 +12,10 @@ public class DeathPanel : MonoBehaviour
     private bool _rewarded;
     private int _dieSceneIndex;
 
-
     private void OnEnable()
     {
         _dieButton.onClick.AddListener(OnDieClick);
-        _continueButton.onClick.AddListener(OnContinueClick);
-        
+        _continueButton.onClick.AddListener(OnContinueClick);        
         GamesSdk.Instance.Rewarded += OnRewarded;
         GamesSdk.Instance.AdVideoClosed += OnContinueWithReward;        
     }
@@ -25,8 +23,7 @@ public class DeathPanel : MonoBehaviour
     private void OnDisable()
     {
         _dieButton.onClick.RemoveListener(OnDieClick);
-        _continueButton.onClick.RemoveListener(OnContinueClick);
-        
+        _continueButton.onClick.RemoveListener(OnContinueClick);        
         GamesSdk.Instance.Rewarded -= OnRewarded;
         GamesSdk.Instance.AdVideoClosed -= OnContinueWithReward;        
     }
@@ -35,7 +32,6 @@ public class DeathPanel : MonoBehaviour
     {
         _arenaIcon?.Deactivate();
         _shopIcon?.Deactivate();
-
         _dieSceneIndex = dieSceneIndex;
         gameObject.SetActive(true);
         _rewarded = false;
