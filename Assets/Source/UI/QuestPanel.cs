@@ -9,8 +9,7 @@ public class QuestPanel : MonoBehaviour
     [SerializeField] private InfoViewer _infoViewer;
     [SerializeField] private Button _continueButton;
     [SerializeField] private TMP_Text _conditionsText;
-    [Space]
-    [SerializeField] private List<LevelZone> _levelZones;
+    [Space]    
     [SerializeField] private bool _needDestroyBigBox;
     [Space]
     [SerializeField] private TMP_Text _coinsToCollect;
@@ -91,6 +90,7 @@ public class QuestPanel : MonoBehaviour
 
         _cameraHandler.ActivateStartScenario();
     }
+
     private void ActivateInfoPanel()
     {
         _infoPanel.gameObject.SetActive(true);

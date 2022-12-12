@@ -3071,6 +3071,8 @@ MonoBehaviour:
   - {fileID: 1654490536}
   - {fileID: 1849892120}
   - {fileID: 1156662595}
+  _targetMoney: 0
+  _targetKills: 0
 --- !u!1 &433033543
 GameObject:
   m_ObjectHideFlags: 0
@@ -7435,6 +7437,8 @@ MonoBehaviour:
   - {fileID: 84142526}
   - {fileID: 951172468}
   - {fileID: 797027033}
+  _targetMoney: 0
+  _targetKills: 0
 --- !u!65 &918087833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8429,7 +8433,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh75988
+  m_Name: pb_Mesh200886
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9885,6 +9889,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1319896716478603364, guid: c25f598c0adaef542bca0cc300ed616d, type: 3}
   m_PrefabInstance: {fileID: 1201392548}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1201392550 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1319896716478603362, guid: c25f598c0adaef542bca0cc300ed616d, type: 3}
+  m_PrefabInstance: {fileID: 1201392548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027c2fbc2e8daf543b49be8a9417935e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1216480000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9991,6 +10006,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8214000061295346, guid: d7fa39abcda041b40b16b557de6579d1, type: 3}
   m_PrefabInstance: {fileID: 1216480000}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1216480002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8214000061295344, guid: d7fa39abcda041b40b16b557de6579d1, type: 3}
+  m_PrefabInstance: {fileID: 1216480000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759abe792399ace40b4cc8927612a5b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1216685762
 GameObject:
   m_ObjectHideFlags: 0
@@ -12792,6 +12818,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 386824782230901069, guid: 36c47210086b6854db3b94e416bde756, type: 3}
+      propertyPath: _shopIcon
+      value: 
+      objectReference: {fileID: 1216480002}
+    - target: {fileID: 386824782230901069, guid: 36c47210086b6854db3b94e416bde756, type: 3}
+      propertyPath: _arenaIcon
+      value: 
+      objectReference: {fileID: 1201392550}
     - target: {fileID: 1137367153079548918, guid: 36c47210086b6854db3b94e416bde756, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -15978,6 +16012,8 @@ MonoBehaviour:
   - {fileID: 897157593}
   - {fileID: 1466467225}
   - {fileID: 883537214}
+  _targetMoney: 0
+  _targetKills: 0
 --- !u!65 &1952306894
 BoxCollider:
   m_ObjectHideFlags: 0

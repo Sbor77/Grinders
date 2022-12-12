@@ -6,9 +6,10 @@ public class DeathPanel : MonoBehaviour
 {
     [SerializeField] private Button _dieButton;
     [SerializeField] private Button _continueButton;
+    [SerializeField] private ArenaIcon _arenaIcon;
+    [SerializeField] private ShopIcon _shopIcon;
 
     private bool _rewarded;
-
     private int _dieSceneIndex;
 
 
@@ -32,6 +33,9 @@ public class DeathPanel : MonoBehaviour
 
     public void Activate(int dieSceneIndex = 0)
     {
+        _arenaIcon?.Deactivate();
+        _shopIcon?.Deactivate();
+
         _dieSceneIndex = dieSceneIndex;
         gameObject.SetActive(true);
         _rewarded = false;
@@ -39,13 +43,10 @@ public class DeathPanel : MonoBehaviour
 
     private void OnDieClick()
     {
-        DataHandler.Instance.SaveLevel(1);
-        DataHandler.Instance.SaveLevelMoney(0);
-        DataHandler.Instance.SaveKills(0);
-        DataHandler.Instance.SaveHealthSkill(1);
-        DataHandler.Instance.SaveSpeedSkill(1);
-        DataHandler.Instance.SaveAllStats();
+        int totalScore = DataHandler.Instance.GetSavedTotalScore();
 
+        DataHandler.Instance.DeleteAllStatsWithExcludes();
+        DataHandler.Instance.SaveTotalScore(totalScore);
         SceneManager.LoadScene(_dieSceneIndex);
     }
 

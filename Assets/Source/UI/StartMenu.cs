@@ -55,7 +55,7 @@ public class StartMenu : MonoBehaviour
         float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
         string language = DataHandler.Instance.GetSavedLanguage();
 
-        DataHandler.Instance.DeleteAllStats();
+        DataHandler.Instance.DeleteAllStatsWithExcludes();
 
         int defaultLevel = 1;
         int defaultHealthSkill = 1;

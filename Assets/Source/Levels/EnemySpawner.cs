@@ -85,6 +85,11 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemy();
     }
 
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+    }    
+
     public void Deactivate()
     {
         _isDeactivated = true;

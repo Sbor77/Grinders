@@ -42,22 +42,31 @@ public class Level : MonoBehaviour
     private void Start()
     {
         LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());
-        _missionConditions = _infoViewer.MissionConditions;
+
+        SetCurrenZoneIndex();       
+
+
+        InitZones();
+        InitPlayer();
+        InitInfoViewer();
+        InitSpawners();
 
         if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)
             SaveDefaultStats();
+        
 
-        _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
-
-        InitZones();
-        InitInfoViewer();
-        SetPlayerPosition();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
             _isCheated = true;
+    }
+
+    private void SetCurrenZoneIndex()
+    {
+        int savedZoneIndex = DataHandler.Instance.GetSavedCurrentZoneIndex();
+        _currentZoneIndex = _zones.Count - 1 >= savedZoneIndex ? savedZoneIndex : 0;
     }
 
     private void InitInfoViewer()
@@ -67,17 +76,26 @@ public class Level : MonoBehaviour
         bool bigboxActive = _currentZoneIndex == _zones.Count - 1;
 
         QuestInfo conditions = new QuestInfo(targetCoins, targetKills, bigboxActive);
+        _missionConditions = conditions;
+        _infoViewer.SetCurrentZoneTargets(_missionConditions);
+    }
 
-        _infoViewer.SetCurrentZoneTargets(conditions);
+    private void InitPlayer()
+    {
+        _player.Init(DataHandler.Instance.GetSavedHealthSkill(), DataHandler.Instance.GetSavedSpeedSkill());
+        SetPlayerPosition();
+    }
+
+    private void InitSpawners()
+    {        
+        _enemySpawner.SetZoneIndex(_currentZoneIndex);
+        _boxSpawner.SetZoneIndex(_currentZoneIndex);
     }
 
     private void SetPlayerPosition()
     {
-        if (_playerStartPoints != null)
-        {
-            int currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();
-            _player.transform.position = _playerStartPoints[currentZoneIndex].position;
-        }
+        if (_playerStartPoints != null)                    
+            _player.transform.position = _playerStartPoints[_currentZoneIndex].position;        
     }
 
     private void OnDyingPlayerScreen()
@@ -163,13 +181,13 @@ public class Level : MonoBehaviour
             _finishPanel.Init();
             _finishPanel.Activate();
         });
+
+        DataHandler.Instance.SaveCompletedLevel(SceneManager.GetActiveScene().buildIndex);
+        DataHandler.Instance.SaveCurrentZoneIndex(0);
     }
 
     private void InitZones()
     {        
-
-        _currentZoneIndex = DataHandler.Instance.GetSavedCurrentZone();
-
         ActivateZone(_currentZoneIndex);
     }
 
@@ -206,8 +224,8 @@ public class Level : MonoBehaviour
                 DeactivateZone(i);
         }
 
-        _boxSpawner.SetZoneIndex(_currentZoneIndex);
-        _enemySpawner.SetZoneIndex(_currentZoneIndex);
+        //_boxSpawner.SetZoneIndex(_currentZoneIndex);
+        //_enemySpawner.SetZoneIndex(_currentZoneIndex);
     }    
 
     private void DeactivateZone(int zoneIndex)
@@ -226,7 +244,7 @@ public class Level : MonoBehaviour
             _enemySpawner.SetZoneIndex(_currentZoneIndex);
         }        
 
-        DataHandler.Instance.SaveCurrentZone(_currentZoneIndex);
+        DataHandler.Instance.SaveCurrentZoneIndex(_currentZoneIndex);
     }
 
     private bool IsZoneCompleted (int zoneIndex)

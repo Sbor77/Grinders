@@ -65,10 +65,10 @@ public class DataHandler : MonoBehaviour
             PlayerPrefs.SetInt(_completedLevel, completedLevel);
     }
 
-    public void SaveCurrentZone(int zone)
+    public void SaveCurrentZoneIndex(int value)
     {
-        if (zone >= 0)            
-            PlayerPrefs.SetInt(_currentZone, zone);
+        if (value >= 0)            
+            PlayerPrefs.SetInt(_currentZone, value);
     }
 
     public void SaveTotalMoney(int totalMoney)
@@ -133,9 +133,19 @@ public class DataHandler : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void DeleteAllStats()
+    public void DeleteAllStatsWithExcludes()
     {
+        string language = GetSavedLanguage();
+        int muteValue = GetSavedMuteValue();
+        float totalVolume = GetSavedTotalVolume();
+        float musicVolume = GetSavedMusicVolume();
+
         PlayerPrefs.DeleteAll();
+
+        SaveLanguage(language);
+        SaveMuteValue(muteValue);
+        SaveTotalVolume(totalVolume);
+        SaveMusicVolume(musicVolume);        
     }
 
     public string GetSavedLanguage()
@@ -185,7 +195,7 @@ public class DataHandler : MonoBehaviour
         return PlayerPrefs.GetInt(_completedLevel);
     }
 
-    public int GetSavedCurrentZone()
+    public int GetSavedCurrentZoneIndex()
     {
         if (PlayerPrefs.HasKey(_currentZone))
             return PlayerPrefs.GetInt(_currentZone);

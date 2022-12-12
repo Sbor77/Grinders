@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class PlayerStartPosition : MonoBehaviour
 {
     private NavMeshObstacle _startPositionObstacle;
-    private float _time = 5;
+    private float _time = 7;
 
     private void Awake()
     {
