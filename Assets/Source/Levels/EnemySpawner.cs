@@ -82,7 +82,7 @@ public class EnemySpawner : MonoBehaviour
         _currentZone = _zones[_currentZoneIndex];
 
         DeactivateEnemiesInRestZones();
-        SpawnEnemy();
+        SpawnEnemy();        
     }
 
     public void Activate()

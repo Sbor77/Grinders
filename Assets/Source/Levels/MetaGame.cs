@@ -52,7 +52,7 @@ public class MetaGame : MonoBehaviour
 
     private void OnCurrentConditionsChanged()
     {
-        _currentKills = _infoViewer.CurrentKills;
+        _currentKills = _infoViewer.LevelKills;
         DataHandler.Instance.SaveKills(_currentKills);        
     }
 

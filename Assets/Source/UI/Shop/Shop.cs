@@ -53,8 +53,9 @@ public class Shop : MonoBehaviour
     {
         int currentLevel = DataHandler.Instance.GetSavedLevel();
         int completedLevel = DataHandler.Instance.GetSavedCompletedLevel();
-
         int levelToLoad = currentLevel == completedLevel ? currentLevel + 1 : currentLevel;
+                
+        //levelToLoad = currentLevel == _introSceneIndex ? currentLevel : levelToLoad;
 
         if (levelToLoad > _lastLevelIndex)
         {

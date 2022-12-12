@@ -17,12 +17,16 @@ public class Level : MonoBehaviour
     [SerializeField] private DeathPanel _deathPanel;
     [SerializeField] private List<LevelZone> _zones;
     [SerializeField] private List<Transform> _playerStartPoints;
+    [SerializeField] private QuestPanel _questPanel;
 
     private QuestInfo _missionConditions;
     private int _currentZoneIndex;    
     private int _levelOneSceneIndex = 1;
     private int _currentCoins;
-    private int _currentKills;    
+    private int _totalLevelCoins;
+    private int _currentKills;
+    private int _totalLevelKills;
+
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
     private bool _isCheated;
@@ -30,7 +34,7 @@ public class Level : MonoBehaviour
     private void OnEnable()
     {
         _infoViewer.IsCurrentConditionsChanged += OnCurrentConditionsChanged;
-        _player.IsDied += OnDyingPlayerScreen;
+        _player.IsDied += OnDyingPlayerScreen;     
     }
 
     private void OnDisable()
@@ -41,35 +45,39 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
+        _questPanel.SetZonesCount(_zones.Count);
         LeanLocalization.SetCurrentLanguageAll(DataHandler.Instance.GetSavedLanguage());
 
-        SetCurrenZoneIndex();       
-
-
+        SetCurrenZoneIndex();
         InitZones();
-        InitPlayer();
+        UpdateZoneTargetConditions();
         InitInfoViewer();
         InitSpawners();
+        InitPlayer();
 
         if (SceneManager.GetActiveScene().buildIndex == _levelOneSceneIndex)
             SaveDefaultStats();
-        
-
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
             _isCheated = true;
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            print("Prefs cleared!!!");
+            DataHandler.Instance.DeleteAllStatsWithExcludes();
+        }
     }
 
     private void SetCurrenZoneIndex()
     {
         int savedZoneIndex = DataHandler.Instance.GetSavedCurrentZoneIndex();
-        _currentZoneIndex = _zones.Count - 1 >= savedZoneIndex ? savedZoneIndex : 0;
+        _currentZoneIndex = _zones.Count - 1 >= savedZoneIndex ? savedZoneIndex : 0;        
     }
 
-    private void InitInfoViewer()
+    private void UpdateZoneTargetConditions()
     {
         int targetCoins = _zones[_currentZoneIndex].TargetMoney;
         int targetKills = _zones[_currentZoneIndex].TargetKills;
@@ -77,6 +85,10 @@ public class Level : MonoBehaviour
 
         QuestInfo conditions = new QuestInfo(targetCoins, targetKills, bigboxActive);
         _missionConditions = conditions;
+    }
+
+    private void InitInfoViewer()
+    {        
         _infoViewer.SetCurrentZoneTargets(_missionConditions);
     }
 
@@ -126,12 +138,8 @@ public class Level : MonoBehaviour
 
     private void OnCurrentConditionsChanged()
     {
-        _currentCoins = _infoViewer.CurrentCoins;
-        DataHandler.Instance.SaveLevelMoney(_currentCoins);
-
-        _currentKills = _infoViewer.CurrentKills;
-        DataHandler.Instance.SaveKills(_currentKills);
-
+        _currentCoins = _infoViewer.CurrentZoneCoins;
+        _currentKills = _infoViewer.CurrentZoneKills;
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
 
         ActivateNextZone();
@@ -160,6 +168,7 @@ public class Level : MonoBehaviour
     private bool IsBigBoxConditionsFulfilled()
     {
         bool conditions =
+            _currentZoneIndex == _zones.Count - 1 &&
             _currentCoins >= _missionConditions.NeedCoinCollected &&
             _currentKills >= _missionConditions.NeedEnemyKilled || _isCheated;
 
@@ -175,14 +184,16 @@ public class Level : MonoBehaviour
         _cameraHandler.ZoomInPlayCamera();
 
         DOVirtual.DelayedCall(cameraZoomTime, () => _finalEffects.PlayAllEffects());
-
         DOVirtual.DelayedCall(openShopDelay + _finalEffects.Duration, () =>
         {
             _finishPanel.Init();
             _finishPanel.Activate();
         });
 
-        DataHandler.Instance.SaveCompletedLevel(SceneManager.GetActiveScene().buildIndex);
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+
+        DataHandler.Instance.SaveCompletedLevel(currentLevel);
+        DataHandler.Instance.SaveLevel(currentLevel);
         DataHandler.Instance.SaveCurrentZoneIndex(0);
     }
 
@@ -223,9 +234,6 @@ public class Level : MonoBehaviour
             if (i != zoneIndex)
                 DeactivateZone(i);
         }
-
-        //_boxSpawner.SetZoneIndex(_currentZoneIndex);
-        //_enemySpawner.SetZoneIndex(_currentZoneIndex);
     }    
 
     private void DeactivateZone(int zoneIndex)
@@ -242,8 +250,12 @@ public class Level : MonoBehaviour
             ActivateZone(++_currentZoneIndex);
             _boxSpawner.SetZoneIndex(_currentZoneIndex);
             _enemySpawner.SetZoneIndex(_currentZoneIndex);
-        }        
-
+            _totalLevelCoins += _currentKills;
+            _totalLevelKills += _currentKills;            
+            UpdateZoneTargetConditions();
+            InitInfoViewer();
+        }
+        
         DataHandler.Instance.SaveCurrentZoneIndex(_currentZoneIndex);
     }
 
@@ -257,15 +269,14 @@ public class Level : MonoBehaviour
 
     private void SaveProgress()
     {
-        int level = SceneManager.GetActiveScene().buildIndex + 1;
-        int levelMoney = DataHandler.Instance.GetSavedLevelMoney();
-        int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + levelMoney;
-        int kills = DataHandler.Instance.GetSavedKills();
+        int level = SceneManager.GetActiveScene().buildIndex + 1;        
+        int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + _totalLevelCoins;
 
+        DataHandler.Instance.SaveCompletedLevel(level);
         DataHandler.Instance.SaveLevel(level);
-        DataHandler.Instance.SaveLevelMoney(levelMoney);
+        DataHandler.Instance.SaveLevelMoney(_totalLevelCoins);
         DataHandler.Instance.SaveTotalMoney(totalMoney);
-        DataHandler.Instance.SaveKills(kills);
+        DataHandler.Instance.SaveKills(_totalLevelKills);
         DataHandler.Instance.SaveAllStats();
     }
 }

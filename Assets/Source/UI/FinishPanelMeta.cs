@@ -8,26 +8,27 @@ public class FinishPanelMeta : MonoBehaviour
     [SerializeField] private InfoViewer _infoViewer;
     [SerializeField] private TMP_Text _metaKillsCount; 
     [SerializeField] private TMP_Text _metaEarnedCoinsCount;
-    [SerializeField] private Button _shopButton;
+    [SerializeField] private Button _exitButton;
     [SerializeField] private Button _againButton;
 
     private int _shopSceneIndex = 5;
+    private int _introSceneIndex = 0;
 
     private void OnEnable()
     {
-        _shopButton.onClick.AddListener(() => SceneManager.LoadScene(_shopSceneIndex));
+        _exitButton.onClick.AddListener(Exit);
         _againButton.onClick.AddListener(ReloadMetaGame);
     }
 
     private void OnDisable()
     {
-        _shopButton.onClick.RemoveListener(() => SceneManager.LoadScene(_shopSceneIndex));
+        _exitButton.onClick.RemoveListener(Exit);
         _againButton.onClick.RemoveListener(ReloadMetaGame);
     }
 
     public void Init()
     {
-        _metaKillsCount.text = _infoViewer.CurrentKills.ToString();
+        _metaKillsCount.text = _infoViewer.LevelKills.ToString();
         _metaEarnedCoinsCount.text = GetCurrentCoinsEarned().ToString();
 
         SaveEarnedMoney();
@@ -44,6 +45,14 @@ public class FinishPanelMeta : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void Exit()
+    {
+        int currentLevel = DataHandler.Instance.GetSavedLevel();
+        int sceneToLoad = currentLevel == _introSceneIndex ? currentLevel : _shopSceneIndex;
+
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
     private void SaveEarnedMoney()
     {
         int value = DataHandler.Instance.GetSavedTotalMoney() + GetCurrentCoinsEarned();
@@ -53,7 +62,7 @@ public class FinishPanelMeta : MonoBehaviour
     private int GetCurrentCoinsEarned()
     {        
         int killToCoinIndex = 1;
-        int value = _infoViewer.CurrentKills * killToCoinIndex;
+        int value = _infoViewer.LevelKills * killToCoinIndex;
         return value;
     }
 

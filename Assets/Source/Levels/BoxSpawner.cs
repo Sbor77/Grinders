@@ -31,21 +31,17 @@ public class BoxSpawner : MonoBehaviour
     private float _circleOffsetModifier = 1;
     private bool _isStopped;
 
-    public event Action <int> IsPlayerMoneyIncreased;
+    //public event Action <int> IsPlayerMoneyIncreased;
     public event Action <int> IsBigBoxCollected;
 
     private void Awake()
     {
         _currentZoneIndex = 0;
-
         _currentZone = _zones[_currentZoneIndex];
-
         _boxArray = new List<Box>[_zones.Count];
         
         GenerateAllBoxes();
-
         SpawnBox();
-
         SpawnBigBox();
     }
 
@@ -78,10 +74,10 @@ public class BoxSpawner : MonoBehaviour
     public void SetZoneIndex(int index)
     {
         _currentZoneIndex = index;
-
         _currentZone = _zones[_currentZoneIndex];
-
         SpawnBox();
+
+        //_player
     }
 
     public void UnshadeBigbox()
@@ -97,7 +93,6 @@ public class BoxSpawner : MonoBehaviour
     private void OnBigboxCollected()
     {
         int bigboxCount = 1;
-
         IsBigBoxCollected?.Invoke(bigboxCount);
     }
 
@@ -150,7 +145,6 @@ public class BoxSpawner : MonoBehaviour
         for (int i = 0; i < _zones.Count; i++)
         {
             int totalBoxCount = _zones[i].BoxPoints.Count + additive;
-
             int boxWithCrossCount = Mathf.CeilToInt(totalBoxCount * _boxWithCrossChanceRatio);
 
             for (int j = 0; j < totalBoxCount; j++)
@@ -160,7 +154,6 @@ public class BoxSpawner : MonoBehaviour
                 if (boxWithCrossCount > 0)
                 {
                     boxPrefab = _boxWithCrossPrefab;
-
                     boxWithCrossCount--;
                 }
                 else
@@ -169,9 +162,7 @@ public class BoxSpawner : MonoBehaviour
                 }
 
                 var newBox = Instantiate(boxPrefab, _tempPosition, Quaternion.identity, _spawnBoxParent);
-
                 newBox.DeactivateWholeBox();
-
                 _boxArray[i].Add(newBox);
             }
         }   
@@ -204,7 +195,6 @@ public class BoxSpawner : MonoBehaviour
         if (_isStopped == false)
         {
             _bigBox = Instantiate(_bigBoxPrefab, _bigBoxPoint.position, Quaternion.identity, _spawnBoxParent);
-
             _bigBox.ActivateWholeBox(_finalBoxMoneyAmount, _finalBoxMoneyAmount, true);
         }
     }
@@ -212,21 +202,17 @@ public class BoxSpawner : MonoBehaviour
     private bool TryGetFreePointToSpawn(LevelZone zone, out Vector3 freePoint)
     {
         List<Vector3> freePoints = new();
-
         freePoint = _tempPosition;
 
         foreach (var point in zone.BoxPoints)
         {
-            if (Physics.CheckSphere(point.position, 2f, _boxLayer) == false)
-            {
-                freePoints.Add(point.position);
-            }
+            if (Physics.CheckSphere(point.position, 2f, _boxLayer) == false)            
+                freePoints.Add(point.position);            
         }
 
         if (freePoints.Count > 0)
         {
             int randomIndex = UnityEngine.Random.Range(0, freePoints.Count);
-
             freePoint = freePoints[randomIndex];
         }
 
@@ -236,7 +222,6 @@ public class BoxSpawner : MonoBehaviour
     private bool TryGetInactiveBox(List<Box> boxes, out Box inactiveBox)
     {
         List<Box> inactiveBoxes = new ();
-
         inactiveBox = null;
 
         foreach (var box in boxes)
@@ -248,7 +233,6 @@ public class BoxSpawner : MonoBehaviour
         if (inactiveBoxes.Count > 0)
         {
             int randomIndex = UnityEngine.Random.Range(0, inactiveBoxes.Count);
-
             inactiveBox = inactiveBoxes[randomIndex];
         }
 

@@ -30,7 +30,7 @@ public class ShopIcon : MonoBehaviour
 
     private void SavePlaceToComeback()
     {
-        int level = SceneManager.GetActiveScene().buildIndex;
+        int level = SceneManager.GetActiveScene().buildIndex;        
         DataHandler.Instance.SaveLevel(level);
     }
 

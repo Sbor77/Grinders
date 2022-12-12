@@ -52,7 +52,7 @@ public class DataHandler : MonoBehaviour
     public void SaveLevel (int level)
     {
         if (level <= 0)
-            PlayerPrefs.SetInt(_level, 1);
+            PlayerPrefs.SetInt(_level, 0);
         else
             PlayerPrefs.SetInt(_level, level);
     }

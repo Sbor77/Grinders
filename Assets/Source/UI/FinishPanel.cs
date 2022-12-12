@@ -26,9 +26,9 @@ public class FinishPanel : MonoBehaviour
 
     public void Init()
     {
-        _levelCoinsCount.text = _infoViewer.CurrentCoins.ToString();
+        _levelCoinsCount.text = _infoViewer.LevelCoins.ToString();
 
-        _levelKillsCount.text = _infoViewer.CurrentKills.ToString();
+        _levelKillsCount.text = _infoViewer.LevelKills.ToString();
 
         _levelScoreCount.text = GetCurrentScore().ToString();
 
@@ -59,7 +59,7 @@ public class FinishPanel : MonoBehaviour
         int coinMultiplier = 50;
         int killMultiplier = 10;
 
-        int value = _infoViewer.CurrentCoins * coinMultiplier + _infoViewer.CurrentCoins * killMultiplier;
+        int value = _infoViewer.LevelCoins * coinMultiplier + _infoViewer.LevelCoins * killMultiplier;
 
         return value;
     }

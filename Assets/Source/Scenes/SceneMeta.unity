@@ -255,7 +255,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36304
+  m_Name: pb_Mesh241088
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5494,6 +5494,8 @@ MonoBehaviour:
   - {fileID: 59642084}
   - {fileID: 1347986490}
   - {fileID: 57814196}
+  _targetMoney: 0
+  _targetKills: 0
 --- !u!1001 &1766064446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9020,7 +9022,7 @@ MonoBehaviour:
   _infoViewer: {fileID: 1251975579720424105}
   _metaKillsCount: {fileID: 3048554740178487057}
   _metaEarnedCoinsCount: {fileID: 704740053499211411}
-  _shopButton: {fileID: 2998537315598078930}
+  _exitButton: {fileID: 2998537315598078930}
   _againButton: {fileID: 1812190824}
 --- !u!1 &2998537315598078928
 GameObject:
@@ -9035,7 +9037,7 @@ GameObject:
   - component: {fileID: 2998537315598078931}
   - component: {fileID: 2998537315598078930}
   m_Layer: 5
-  m_Name: ShopButton
+  m_Name: EbitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10195,8 +10197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf51be86e70d7941bd40914206e4ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationName: Upgrade
-  FallbackText: Shop
+  translationName: Exit
+  FallbackText: 
 --- !u!64 &5574572183485470284
 MeshCollider:
   m_ObjectHideFlags: 0

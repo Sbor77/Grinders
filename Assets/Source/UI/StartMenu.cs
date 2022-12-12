@@ -6,17 +6,21 @@ public class StartMenu : MonoBehaviour
 {    
     [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _continueButton;
+    [SerializeField] private Button _arenaButton;
     [SerializeField] private Button _leaderboardButton;
     [SerializeField] private SceneLevelLoader _levelLoaderPanel;
-    [SerializeField] private LeadersPanel _leadersPlanel;
+    [SerializeField] private LeadersPanel _leadersPlanel;    
 
     private int _tutorialSceneIndex = 6;
     private int _startLevelIndex = 1;
+    private int _metaSceneIndex = 7;
+    private int _introSceneIndex = 0;
 
     private void OnEnable()
     {
         _newGameButton.onClick.AddListener(StartNewGame);
         _continueButton.onClick.AddListener(ContinueGame);
+        _arenaButton.onClick.AddListener(StartArena);
         _leaderboardButton.onClick.AddListener(ShowLeaderboard);
     }
 
@@ -24,6 +28,7 @@ public class StartMenu : MonoBehaviour
     {
         _newGameButton.onClick.RemoveListener(StartNewGame);
         _continueButton.onClick.RemoveListener(ContinueGame);
+        _arenaButton.onClick.RemoveListener(StartArena);
         _leaderboardButton.onClick.RemoveListener(ShowLeaderboard);
     }
 
@@ -86,6 +91,12 @@ public class StartMenu : MonoBehaviour
     {
         int currentLevel = DataHandler.Instance.GetSavedLevel();
         _levelLoaderPanel.Load(currentLevel);
+    }
+
+    private void StartArena()
+    {
+        DataHandler.Instance.SaveLevel(_introSceneIndex);
+        _levelLoaderPanel.Load(_metaSceneIndex);
     }
 
     private void ShowLeaderboard()
