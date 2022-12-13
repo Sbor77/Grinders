@@ -2149,6 +2149,7 @@ MonoBehaviour:
   - {fileID: 8791151804551881446, guid: e8997b363bdecd2408076cd6c2fb8781, type: 3}
   - {fileID: 4604683557206214305, guid: db7d6da3e7b8e8c4cb7645409ab71f55, type: 3}
   - {fileID: 5813451299658817458, guid: f314a41252f61d74e9b34ddd9a141bd5, type: 3}
+  _bossEnemyPrefab: {fileID: 0}
   _enemyParent: {fileID: 1742849970}
   _enemyLayer:
     serializedVersion: 2
@@ -5496,6 +5497,7 @@ MonoBehaviour:
   - {fileID: 57814196}
   _targetMoney: 0
   _targetKills: 0
+  _maxBosses: 0
 --- !u!1001 &1766064446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10928,6 +10930,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4512799579076504784, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512799579076504784, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512799579076504784, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512799579076504784, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512799579076504784, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512799579076504784, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7210498082171217238, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -10945,8 +10971,28 @@ PrefabInstance:
       value: -2.6015625
       objectReference: {fileID: 0}
     - target: {fileID: 7210498082820554294, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210498082820554294, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210498082820554294, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210498082820554294, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210498082820554294, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210498082820554294, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7210498083148236395, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_IsActive
@@ -11065,9 +11111,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _bossesField
+      value: 
+      objectReference: {fileID: 7210498082259735428}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: _enemySpawner
       value: 
       objectReference: {fileID: 565920108}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _bossKillsText
+      value: 
+      objectReference: {fileID: 7210498082259735429}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _enemyKillsText
+      value: 
+      objectReference: {fileID: 7210498082259735430}
     - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: _massKillButtonCooldown
       value: 
@@ -11086,6 +11144,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+--- !u!1 &7210498082259735428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5079119255171158339, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 7210498082259735427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7210498082259735429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5614400915461463301, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 7210498082259735427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7210498082259735430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7210498083153779250, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 7210498082259735427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7221741830775262247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 887086689141258385, guid: 00a04aed3ae5f7244aa3dd533e640491, type: 3}

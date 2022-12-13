@@ -98,7 +98,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -656,10 +656,10 @@ RectTransform:
   m_Father: {fileID: 8453041982494279979}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.8101962, y: 0.6612592}
+  m_AnchorMin: {x: 0.81000006, y: 0.7085555}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 46.39978, y: 11.255798}
-  m_SizeDelta: {x: -119.8997, y: -78.474}
+  m_AnchoredPosition: {x: 39, y: -6}
+  m_SizeDelta: {x: -179.03351, y: -74.211}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7210498082390844085
 CanvasRenderer:
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1183,7 +1183,9 @@ MonoBehaviour:
   _boxSpawner: {fileID: 0}
   _enemySpawner: {fileID: 0}
   _bigBoxText: {fileID: 2678613710346340587}
-  _KillsText: {fileID: 7210498083153779250}
+  _enemyKillsText: {fileID: 0}
+  _bossKillsText: {fileID: 0}
+  _bossesField: {fileID: 0}
   _massKillButtonCooldown: {fileID: 0}
   _soundImage: {fileID: 5678930211671535141}
   _volumeOn: {fileID: 21300000, guid: 53ddfc83e2159874d8758c9f24ca82ee, type: 3}
@@ -1720,7 +1722,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

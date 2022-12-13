@@ -36,14 +36,16 @@ public class QuestPanel : MonoBehaviour
 
 public class QuestInfo
 {
-    public int NeedCoinCollected { get; private set; }
-    public int NeedEnemyKilled { get; private set; }
+    public int TargetCoinCount { get; private set; }
+    public int TargetEnemyKills { get; private set; }
+    public int TargetBossKills { get; private set; }
     public bool NeedDestroyBigBox { get; private set; }
 
-    public QuestInfo(int coinCollected, int enemyKilled, bool bigBox)
+    public QuestInfo(int collectedCoins, int enemyKills, int bossKills, bool bigBox)
     {
-        NeedCoinCollected = coinCollected;
-        NeedEnemyKilled = enemyKilled;
-        NeedDestroyBigBox = bigBox;
+        TargetCoinCount = collectedCoins;
+        TargetEnemyKills = enemyKills;
+        TargetBossKills = bossKills;
+        NeedDestroyBigBox = bigBox;        
     }
 }

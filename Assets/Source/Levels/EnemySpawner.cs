@@ -42,9 +42,10 @@ public class EnemySpawner : MonoBehaviour
     private bool _isDeactivated;
     private int _spawnedEnemeiesCount;
     private int _currentBossesCount;
+    private int _bossKills;
 
     public event Action <int> IsPLayerKillsIncreased;
-    public event Action IsBossKilled;
+    public event Action <int> IsBossKilled;
 
     private void Awake()
     {
@@ -121,8 +122,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnBossDeactivated()
     {
-        _playerKills++;
-        IsBossKilled?.Invoke();        
+        _bossKills++;
+        IsBossKilled?.Invoke(_bossKills);
     }
 
     private void OnEnemyDeactivated()

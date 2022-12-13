@@ -26,6 +26,7 @@ public class Level : MonoBehaviour
     private int _totalLevelCoins;
     private int _currentKills;
     private int _totalLevelKills;
+    private int _currentBossKills;
 
     private bool _isBigboxDestroyed;
     private bool _isBigboxDoorOpened;
@@ -77,13 +78,19 @@ public class Level : MonoBehaviour
         _currentZoneIndex = _zones.Count - 1 >= savedZoneIndex ? savedZoneIndex : 0;        
     }
 
+    private void InitZones()
+    {        
+        ActivateZone(_currentZoneIndex);
+    }
+
     private void UpdateZoneTargetConditions()
     {
         int targetCoins = _zones[_currentZoneIndex].TargetMoney;
         int targetKills = _zones[_currentZoneIndex].TargetKills;
+        int targetBossKills = _zones[_currentZoneIndex].MaxBosses;
         bool bigboxActive = _currentZoneIndex == _zones.Count - 1;
 
-        QuestInfo conditions = new QuestInfo(targetCoins, targetKills, bigboxActive);
+        QuestInfo conditions = new QuestInfo(targetCoins, targetKills, targetBossKills, bigboxActive);
         _missionConditions = conditions;
     }
 
@@ -140,6 +147,7 @@ public class Level : MonoBehaviour
     {
         _currentCoins = _infoViewer.CurrentZoneCoins;
         _currentKills = _infoViewer.CurrentZoneKills;
+        _currentBossKills = _infoViewer.CurrentZoneBossKills;
         _isBigboxDestroyed = _infoViewer.IsBigboxDestroyed;
 
         ActivateNextZone();
@@ -169,8 +177,9 @@ public class Level : MonoBehaviour
     {
         bool conditions =
             _currentZoneIndex == _zones.Count - 1 &&
-            _currentCoins >= _missionConditions.NeedCoinCollected &&
-            _currentKills >= _missionConditions.NeedEnemyKilled || _isCheated;
+            _currentCoins >= _missionConditions.TargetCoinCount &&
+            _currentBossKills >= _missionConditions.TargetBossKills &&
+            _currentKills >= _missionConditions.TargetEnemyKills || _isCheated;
 
         return conditions;
     }
@@ -195,11 +204,6 @@ public class Level : MonoBehaviour
         DataHandler.Instance.SaveCompletedLevel(currentLevel);
         DataHandler.Instance.SaveLevel(currentLevel);
         DataHandler.Instance.SaveCurrentZoneIndex(0);
-    }
-
-    private void InitZones()
-    {        
-        ActivateZone(_currentZoneIndex);
     }
 
     /*private void InitZones()
@@ -254,6 +258,8 @@ public class Level : MonoBehaviour
             _totalLevelKills += _currentKills;            
             UpdateZoneTargetConditions();
             InitInfoViewer();
+
+            SaveCurrentLevel();
         }
         
         DataHandler.Instance.SaveCurrentZoneIndex(_currentZoneIndex);
@@ -261,10 +267,17 @@ public class Level : MonoBehaviour
 
     private bool IsZoneCompleted (int zoneIndex)
     {
-        if (_currentKills >= _zones[zoneIndex].TargetKills && _currentCoins >= _zones[zoneIndex].TargetMoney || _isCheated)        
+        if (_currentKills >= _zones[zoneIndex].TargetKills && _currentCoins >= _zones[zoneIndex].TargetMoney 
+            && _currentBossKills >= _zones[zoneIndex].MaxBosses || _isCheated)        
             return true;
         else
             return false;
+    }
+
+    private void SaveCurrentLevel()
+    {
+        int level = SceneManager.GetActiveScene().buildIndex;
+        DataHandler.Instance.SaveLevel(level);
     }
 
     private void SaveProgress()

@@ -243,7 +243,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37142
+  m_Name: pb_Mesh122464
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1163,6 +1163,17 @@ Transform:
   m_Father: {fileID: 281714410}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &159959056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7210498083153779250, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 1817942267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &163928389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,7 +1754,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37380
+  m_Name: pb_Mesh122696
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2403,7 +2414,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36528
+  m_Name: pb_Mesh121850
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2792,7 +2803,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36832
+  m_Name: pb_Mesh122152
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6310,7 +6321,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36692
+  m_Name: pb_Mesh122012
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9652,6 +9663,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 480997539194210081, guid: a7e7b0a9f6736f1409720bb0ae6e32a2, type: 3}
   m_PrefabInstance: {fileID: 1766479996}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1490529106 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5614400915461463301, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 1817942267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1500311954
 GameObject:
   m_ObjectHideFlags: 0
@@ -9755,7 +9777,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36500
+  m_Name: pb_Mesh121822
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10093,6 +10115,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530428772}
   m_Mesh: {fileID: 4300002, guid: a2d73265fe0105c44b1a15c6b569f14c, type: 3}
+--- !u!1 &1532310407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5079119255171158339, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+  m_PrefabInstance: {fileID: 1817942267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1542044806
 GameObject:
   m_ObjectHideFlags: 0
@@ -11977,6 +12004,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.2498169
       objectReference: {fileID: 0}
+    - target: {fileID: 7210498082171217239, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210498082171217239, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7210498082390844087, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 46.39966
@@ -12146,9 +12181,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1371502433}
     - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _bossesField
+      value: 
+      objectReference: {fileID: 1532310407}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: _enemySpawner
       value: 
       objectReference: {fileID: 1148581526}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _bossKillsText
+      value: 
+      objectReference: {fileID: 1490529106}
+    - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
+      propertyPath: _enemyKillsText
+      value: 
+      objectReference: {fileID: 159959056}
     - target: {fileID: 8453041982494279987, guid: 98ba577c5fde9004f8aff0091cd11873, type: 3}
       propertyPath: _massKillButtonCooldown
       value: 

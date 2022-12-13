@@ -11,8 +11,8 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private BoxSpawner _boxSpawner;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private TMP_Text _bigBoxText;
-    [SerializeField] private TMP_Text _KillsText;
-    [SerializeField] private TMP_Text _BossKillsText;
+    [SerializeField] private TMP_Text _enemyKillsText;
+    [SerializeField] private TMP_Text _bossKillsText;
     [SerializeField] private GameObject _bossesField;
     [SerializeField] private MassAttackView _massKillButtonCooldown;
     [SerializeField] private Image _soundImage;
@@ -28,6 +28,7 @@ public class InfoViewer : MonoBehaviour
     //private QuestInfo _missonConditions;
     private int _questCoinCollected;
     private int _questEnemyKills;
+    private int _questBossEnemyKills;
     private int _questBigboxCount = 1;
     private bool _questBigbox;
     private float _maxHealth;
@@ -35,9 +36,11 @@ public class InfoViewer : MonoBehaviour
 
     private int _currentZoneKills;
     private int _currentZoneCoins;
+    private int _bossKills;
 
     public int CurrentZoneKills => _currentZoneKills;
     public int CurrentZoneCoins => _currentZoneCoins;
+    public int CurrentZoneBossKills => _bossKills;
 
     //public QuestInfo MissionConditions => _missonConditions;
     public float CurrentHealth { get; private set; }
@@ -100,12 +103,14 @@ public class InfoViewer : MonoBehaviour
     public void SetCurrentZoneTargets(QuestInfo conditions)
     {
         //_missonConditions = conditions;
-        _questCoinCollected = conditions.NeedCoinCollected;
+        _questCoinCollected = conditions.TargetCoinCount;
+        _questEnemyKills = conditions.TargetEnemyKills;
+        _questBossEnemyKills = conditions.TargetBossKills;
         _questBigbox = conditions.NeedDestroyBigBox;
-        _questEnemyKills = conditions.NeedEnemyKilled;
 
         _currentZoneKills = 0;
         _currentZoneCoins = 0;
+        _bossKills = 0;
 
         ShowZoneTargets();
     }       
@@ -134,8 +139,15 @@ public class InfoViewer : MonoBehaviour
     private void ShowZoneTargets()
     {
         ChangeViewText(_goldText, 0, _questCoinCollected);
-        ChangeViewText(_KillsText, 0, _questEnemyKills);
+        ChangeViewText(_enemyKillsText, 0, _questEnemyKills);
         ChangeViewText(_bigBoxText, 0, _questBigbox ? _questBigboxCount : 0);
+
+        if (_questBossEnemyKills > 0)
+        {
+            _bossesField.SetActive(true);
+            ChangeViewText(_bossKillsText, 0, _questBossEnemyKills);
+        }
+
     }
 
     private void OnChangedHealth(float health)
@@ -153,19 +165,20 @@ public class InfoViewer : MonoBehaviour
         IsCurrentConditionsChanged?.Invoke();
     }
 
-    private void OnBossKilled()
-    {       
+    private void OnBossKilled(int value)
+    {        
+        _bossKills = value;        
+        _bossesField.SetActive(true);        
 
-        _bossesField.SetActive(true);
-        
-        //_BossKillsText
+        ChangeViewText(_bossKillsText, _bossKills, _questEnemyKills);
+        IsCurrentConditionsChanged?.Invoke();
     }
 
     private void OnChangedPlayerKills(int value)
     {
         _currentZoneKills++;
 
-        ChangeViewText(_KillsText, _currentZoneKills, _questEnemyKills);
+        ChangeViewText(_enemyKillsText, _currentZoneKills, _questEnemyKills);
         LevelKills = value;
         IsCurrentConditionsChanged?.Invoke();
     }
