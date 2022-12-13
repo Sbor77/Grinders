@@ -180,6 +180,7 @@ public class Level : MonoBehaviour
         DataHandler.Instance.SaveCurrentZoneIndex(zone);
         DataHandler.Instance.SaveLevelMoney(gold);
         DataHandler.Instance.SaveKills(kills);
+        DataHandler.Instance.SaveAllStats();
     }
 
     private void LoadCurrentLevelProggress()
@@ -304,7 +305,7 @@ public class Level : MonoBehaviour
         int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + _infoViewer.LevelCoins;
 
         DataHandler.Instance.SaveCompletedLevel(level);
-        DataHandler.Instance.SaveLevel(level);
+        //DataHandler.Instance.SaveLevel(level);
         DataHandler.Instance.SaveLevelMoney(_infoViewer.LevelCoins);
         DataHandler.Instance.SaveTotalMoney(totalMoney);
         DataHandler.Instance.SaveKills(_totalLevelKills);
