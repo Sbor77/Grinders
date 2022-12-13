@@ -193,10 +193,13 @@ public class EnemySpawner : MonoBehaviour
                     _currentBossesCount++;
                 }
             }
+            else
+            {
+                _spawnedEnemeiesCount++;
+            }
             
             inactiveEnemy.transform.position = spawnPosition;
             float spawnDelay = 0;
-            _spawnedEnemeiesCount++;
 
             if (_spawnedEnemeiesCount > _maxCounts[0])
             {

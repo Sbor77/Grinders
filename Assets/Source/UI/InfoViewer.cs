@@ -169,7 +169,7 @@ public class InfoViewer : MonoBehaviour
         _bossKills = value;
         _bossesField.SetActive(true);
 
-        ChangeViewText(_bossKillsText, _bossKills, _questEnemyKills);
+        ChangeViewText(_bossKillsText, _bossKills, _questBossEnemyKills);
         IsCurrentConditionsChanged?.Invoke();
     }
 
