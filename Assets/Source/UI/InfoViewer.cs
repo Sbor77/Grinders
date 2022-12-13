@@ -12,6 +12,8 @@ public class InfoViewer : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private TMP_Text _bigBoxText;
     [SerializeField] private TMP_Text _KillsText;
+    [SerializeField] private TMP_Text _BossKillsText;
+    [SerializeField] private GameObject _bossesField;
     [SerializeField] private MassAttackView _massKillButtonCooldown;
     [SerializeField] private Image _soundImage;
     [SerializeField] private Sprite _volumeOn;
@@ -53,9 +55,12 @@ public class InfoViewer : MonoBehaviour
     {
         if (_boxSpawner != null)
             _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
-        
+
         if (_enemySpawner != null)
+        {
             _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
+            _enemySpawner.IsBossKilled += OnBossKilled;
+        }            
 
         _player.ChangedHealth += OnChangedHealth;
         _player.ChangedCoin += OnChangedPlayerCoins;
@@ -69,7 +74,10 @@ public class InfoViewer : MonoBehaviour
             _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
 
         if (_enemySpawner != null)
+        {
             _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;
+            _enemySpawner.IsBossKilled -= OnBossKilled;
+        }
 
         _player.ChangedHealth -= OnChangedHealth;
         _player.ChangedCoin -= OnChangedPlayerCoins;
@@ -83,6 +91,8 @@ public class InfoViewer : MonoBehaviour
         _currentHealth = _maxHealth;
         _healthBarSlider.maxValue = _maxHealth;
         _healthBarSlider.value = _currentHealth;
+
+        _bossesField.SetActive(false);
 
         ToggleSoundIcon(DataHandler.Instance.GetSavedMuteValue());
     }
@@ -98,7 +108,7 @@ public class InfoViewer : MonoBehaviour
         _currentZoneCoins = 0;
 
         ShowZoneTargets();
-    }
+    }       
 
     private void OnMuteToggled()
     {
@@ -141,6 +151,14 @@ public class InfoViewer : MonoBehaviour
         ChangeViewText(_goldText, _currentZoneCoins, _questCoinCollected);
         LevelCoins = value;
         IsCurrentConditionsChanged?.Invoke();
+    }
+
+    private void OnBossKilled()
+    {       
+
+        _bossesField.SetActive(true);
+        
+        //_BossKillsText
     }
 
     private void OnChangedPlayerKills(int value)
