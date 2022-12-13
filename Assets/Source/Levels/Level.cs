@@ -283,11 +283,11 @@ public class Level : MonoBehaviour
     private void SaveProgress()
     {
         int level = SceneManager.GetActiveScene().buildIndex + 1;        
-        int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + _totalLevelCoins;
+        int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + _infoViewer.LevelCoins;
 
         DataHandler.Instance.SaveCompletedLevel(level);
         DataHandler.Instance.SaveLevel(level);
-        DataHandler.Instance.SaveLevelMoney(_totalLevelCoins);
+        DataHandler.Instance.SaveLevelMoney(_infoViewer.LevelCoins);
         DataHandler.Instance.SaveTotalMoney(totalMoney);
         DataHandler.Instance.SaveKills(_totalLevelKills);
         DataHandler.Instance.SaveAllStats();

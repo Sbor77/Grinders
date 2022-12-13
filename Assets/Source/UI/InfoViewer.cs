@@ -158,10 +158,10 @@ public class InfoViewer : MonoBehaviour
 
     private void OnChangedPlayerCoins(int value)
     {
-        _currentZoneCoins++;
+        _currentZoneCoins+=value;
 
-        ChangeViewText(_goldText, _currentZoneCoins, _questCoinCollected);
         LevelCoins = value;
+        ChangeViewText(_goldText, _currentZoneCoins, _questCoinCollected);
         IsCurrentConditionsChanged?.Invoke();
     }
 
