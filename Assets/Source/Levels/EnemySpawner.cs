@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<LevelZone> _zones;
     [SerializeField] private List<int> _maxCounts;
     [SerializeField] private List<Enemy> _enemyPrefabs;
+    [SerializeField] private Enemy _bossEnemyPrefab;
     [SerializeField] private Transform _enemyParent;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _respawnTime;
@@ -32,15 +33,18 @@ public class EnemySpawner : MonoBehaviour
     private float _burstDuration = 0.5f;
     private float _burstDurationAdd = 1f;
 
-    List<Enemy>[] _enemyArray;
+    List<Enemy>[] _enemyList;
+    List<Enemy> _bossEnemyList;
     private LevelZone _currentZone;        
     private int _currentZoneIndex;
     private int _playerKills;
     private float _spawnRadiusModifier = 1;
     private bool _isDeactivated;
     private int _spawnedEnemeiesCount;
+    private int _currentBossesCount;
 
     public event Action <int> IsPLayerKillsIncreased;
+    public event Action IsBossKilled;
 
     private void Awake()
     {
@@ -48,7 +52,8 @@ public class EnemySpawner : MonoBehaviour
         _trails = new List<ParticleSystem>();
         _currentZoneIndex = 0;
         _currentZone = _zones[_currentZoneIndex];
-        _enemyArray = new List<Enemy>[_zones.Count];
+        _enemyList = new List<Enemy>[_zones.Count];
+        _bossEnemyList = new List<Enemy>();
 
         GenerateAllEffects();
         GenerateAllEnemies();        
@@ -56,24 +61,35 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (var array in _enemyArray)
+        foreach (var array in _enemyList)
         {
             foreach (var enemy in array)
             {
                 enemy.IsDeactivated += OnEnemyDeactivated;
             }
         }
+
+        foreach (var boss in _bossEnemyList)
+        {
+            boss.IsDeactivated += OnBossDeactivated;
+        }
     }
 
     private void OnDisable()
     {
-        foreach (var array in _enemyArray)
+        foreach (var array in _enemyList)
         {
             foreach (var enemy in array)
             {
                 enemy.IsDeactivated -= OnEnemyDeactivated;
             }
         }
+
+        foreach (var boss in _bossEnemyList)
+        {
+            boss.IsDeactivated -= OnBossDeactivated;
+        }
+
     }
 
     public void SetZoneIndex(int index)
@@ -94,13 +110,19 @@ public class EnemySpawner : MonoBehaviour
     {
         _isDeactivated = true;
 
-        foreach (var array in _enemyArray)
+        foreach (var array in _enemyList)
         {
             foreach (var enemy in array)
             {
                 enemy.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void OnBossDeactivated()
+    {
+        _playerKills++;
+        IsBossKilled?.Invoke();        
     }
 
     private void OnEnemyDeactivated()
@@ -124,39 +146,55 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _zones.Count; i++)
         {
-            _enemyArray[i] = new();
+            _enemyList[i] = new();
         }
 
         for (int i = 0; i < _zones.Count; i++)
         {
             for (int j = 0; j < _zones[i].EnemyPoints.Count; j++)
-            {
-                Vector3 position = _zones[i].EnemyPoints[j].transform.position;
+            {               
                 Enemy randomPrefab = GetRandomEnemy(_enemyPrefabs);
-                var newEnemy = Instantiate(randomPrefab, position, Quaternion.identity, _enemyParent);
-
-                newEnemy.ChangeSpeed(_startSpeedModifier);
-                newEnemy.Deactivate();
-                _enemyArray[i].Add(newEnemy);
+                GenerateInactiveEnemies(randomPrefab, _enemyList[i]);
             }
+        }
+
+        for (int i = 0; i < _zones[_zones.Count - 1].MaxBosses; i++)
+        {
+            GenerateInactiveEnemies(_bossEnemyPrefab, _bossEnemyList);            
         }
 
         SpawnEnemy();        
     }
 
+    private void GenerateInactiveEnemies (Enemy enemyPrefab, List<Enemy> enemies)
+    {
+        var newEnemy = Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, _enemyParent);
+        newEnemy.ChangeSpeed(_startSpeedModifier);
+        newEnemy.Deactivate();
+        enemies.Add(newEnemy);
+    }
+
     private void SpawnEnemy()
     {
-        var enemies = _enemyArray[_currentZoneIndex];
+        var enemies = _enemyList[_currentZoneIndex];        
 
         if (TryGetInactiveEnemy(enemies, out Enemy inactiveEnemy) && GetCurrentEnemyCount() < GetMaxEnemyCount() && _isDeactivated == false)
         {
             Vector3 freePoint = GetFreePointToSpawn(_currentZone);                        
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _spawnRadiusModifier;
             Vector3 spawnPosition = freePoint  + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
+
+            if (_currentZoneIndex == _zones.Count-1 && _currentBossesCount < _zones[_currentZoneIndex].MaxBosses)
+            {
+                if (TryGetInactiveEnemy(_bossEnemyList, out Enemy inactiveBossEnemy))
+                {
+                    inactiveEnemy = inactiveBossEnemy;
+                    _currentBossesCount++;
+                }
+            }            
+            
             inactiveEnemy.transform.position = spawnPosition;
-
             float spawnDelay = 0;
-
             _spawnedEnemeiesCount++;
 
             if (_spawnedEnemeiesCount > _maxCounts[0])
@@ -183,7 +221,7 @@ public class EnemySpawner : MonoBehaviour
         {
             if (i != _currentZoneIndex)
             {
-                foreach (var enemy in _enemyArray[i])
+                foreach (var enemy in _enemyList[i])
                 {
                     enemy.gameObject.SetActive(false);
                 }
@@ -195,7 +233,7 @@ public class EnemySpawner : MonoBehaviour
     {
         int count = 0;
 
-        foreach (var enemy in _enemyArray[_currentZoneIndex])
+        foreach (var enemy in _enemyList[_currentZoneIndex])
         {
             if (enemy.gameObject.activeSelf == true)
                 count++;
