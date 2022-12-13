@@ -52,6 +52,7 @@ public class Level : MonoBehaviour
         SetCurrenZoneIndex();
         InitZones();
         UpdateZoneTargetConditions();
+        LoadCurrentLevelProggress();
         InitInfoViewer();
         InitSpawners();
         InitPlayer();
@@ -75,7 +76,7 @@ public class Level : MonoBehaviour
     private void SetCurrenZoneIndex()
     {
         int savedZoneIndex = DataHandler.Instance.GetSavedCurrentZoneIndex();
-        _currentZoneIndex = _zones.Count - 1 >= savedZoneIndex ? savedZoneIndex : 0;        
+        _currentZoneIndex = _zones.Count - 1 >= savedZoneIndex ? savedZoneIndex : 0;
     }
 
     private void InitZones()
@@ -113,8 +114,8 @@ public class Level : MonoBehaviour
 
     private void SetPlayerPosition()
     {
-        if (_playerStartPoints != null)                    
-            _player.transform.position = _playerStartPoints[_currentZoneIndex].position;        
+        if (_playerStartPoints != null)
+            _player.transform.position = _playerStartPoints[_currentZoneIndex].position;
     }
 
     private void OnDyingPlayerScreen()
@@ -173,6 +174,23 @@ public class Level : MonoBehaviour
             ShowEndLevelScenario();
     }
 
+    private void SaveCurrentLevelProggress(int level, int zone, int gold, int kills)
+    {
+        DataHandler.Instance.SaveLevel(level);
+        DataHandler.Instance.SaveCurrentZoneIndex(zone);
+        DataHandler.Instance.SaveLevelMoney(gold);
+        DataHandler.Instance.SaveKills(kills);
+    }
+
+    private void LoadCurrentLevelProggress()
+    {
+        if (DataHandler.Instance.GetSavedLevel() == SceneManager.GetActiveScene().buildIndex)
+        {
+            _totalLevelCoins = DataHandler.Instance.GetSavedLevelMoney();
+            _totalLevelKills = DataHandler.Instance.GetSavedKills();
+        }
+    }
+
     private bool IsBigBoxConditionsFulfilled()
     {
         bool conditions =
@@ -202,7 +220,7 @@ public class Level : MonoBehaviour
         int currentLevel = SceneManager.GetActiveScene().buildIndex;
 
         DataHandler.Instance.SaveCompletedLevel(currentLevel);
-        DataHandler.Instance.SaveLevel(currentLevel);
+        //DataHandler.Instance.SaveLevel(currentLevel);
         DataHandler.Instance.SaveCurrentZoneIndex(0);
     }
 
@@ -255,34 +273,34 @@ public class Level : MonoBehaviour
             _boxSpawner.SetZoneIndex(_currentZoneIndex);
             _enemySpawner.SetZoneIndex(_currentZoneIndex);
             _totalLevelCoins += _currentCoins;
-            _totalLevelKills += _currentKills;            
+            _totalLevelKills += _currentKills;
             UpdateZoneTargetConditions();
             InitInfoViewer();
 
-            SaveCurrentLevel();
+            SaveCurrentLevelProggress(GetCurrentLevel(), _currentZoneIndex, _totalLevelCoins, _totalLevelKills);
         }
         
-        DataHandler.Instance.SaveCurrentZoneIndex(_currentZoneIndex);
+        //DataHandler.Instance.SaveCurrentZoneIndex(_currentZoneIndex);
     }
 
     private bool IsZoneCompleted (int zoneIndex)
     {
         if (_currentKills >= _zones[zoneIndex].TargetKills && _currentCoins >= _zones[zoneIndex].TargetMoney 
-            && _currentBossKills >= _zones[zoneIndex].MaxBosses || _isCheated)        
+            && _currentBossKills >= _zones[zoneIndex].MaxBosses || _isCheated)
             return true;
         else
             return false;
     }
 
-    private void SaveCurrentLevel()
+    private int GetCurrentLevel()
     {
-        int level = SceneManager.GetActiveScene().buildIndex;
-        DataHandler.Instance.SaveLevel(level);
+        return SceneManager.GetActiveScene().buildIndex;
+        
     }
 
     private void SaveProgress()
     {
-        int level = SceneManager.GetActiveScene().buildIndex + 1;        
+        int level = SceneManager.GetActiveScene().buildIndex + 1;
         int totalMoney = DataHandler.Instance.GetSavedTotalMoney() + _infoViewer.LevelCoins;
 
         DataHandler.Instance.SaveCompletedLevel(level);

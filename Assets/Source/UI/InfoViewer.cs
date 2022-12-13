@@ -147,7 +147,6 @@ public class InfoViewer : MonoBehaviour
             _bossesField.SetActive(true);
             ChangeViewText(_bossKillsText, 0, _questBossEnemyKills);
         }
-
     }
 
     private void OnChangedHealth(float health)
@@ -158,7 +157,7 @@ public class InfoViewer : MonoBehaviour
 
     private void OnChangedPlayerCoins(int value)
     {
-        _currentZoneCoins+=value;
+        _currentZoneCoins += value;
 
         LevelCoins = value;
         ChangeViewText(_goldText, _currentZoneCoins, _questCoinCollected);
@@ -166,9 +165,9 @@ public class InfoViewer : MonoBehaviour
     }
 
     private void OnBossKilled(int value)
-    {        
-        _bossKills = value;        
-        _bossesField.SetActive(true);        
+    {
+        _bossKills = value;
+        _bossesField.SetActive(true);
 
         ChangeViewText(_bossKillsText, _bossKills, _questEnemyKills);
         IsCurrentConditionsChanged?.Invoke();

@@ -6,9 +6,9 @@ public class QuestPanel : MonoBehaviour
 {
     [SerializeField] private CameraHandler _cameraHandler;
     [SerializeField] private InfoViewer _infoViewer;
-    [SerializeField] private Button _continueButton;    
-    [SerializeField] private TMP_Text _zonesCount;    
-    [SerializeField] private GameObject _infoPanel;    
+    [SerializeField] private Button _continueButton;
+    [SerializeField] private TMP_Text _zonesCount;
+    [SerializeField] private GameObject _infoPanel;
 
     private void OnEnable()
     {

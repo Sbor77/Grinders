@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
     List<Enemy>[] _enemyList;
     List<Enemy> _bossEnemyList;
-    private LevelZone _currentZone;        
+    private LevelZone _currentZone;
     private int _currentZoneIndex;
     private int _playerKills;
     private float _spawnRadiusModifier = 1;
@@ -57,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
         _bossEnemyList = new List<Enemy>();
 
         GenerateAllEffects();
-        GenerateAllEnemies();        
+        GenerateAllEnemies();
     }
 
     private void OnEnable()
@@ -161,10 +161,10 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < _zones[_zones.Count - 1].MaxBosses; i++)
         {
-            GenerateInactiveEnemies(_bossEnemyPrefab, _bossEnemyList);            
+            GenerateInactiveEnemies(_bossEnemyPrefab, _bossEnemyList);
         }
 
-        SpawnEnemy();        
+        SpawnEnemy();
     }
 
     private void GenerateInactiveEnemies (Enemy enemyPrefab, List<Enemy> enemies)
@@ -177,22 +177,22 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        var enemies = _enemyList[_currentZoneIndex];        
+        var enemies = _enemyList[_currentZoneIndex];
 
         if (TryGetInactiveEnemy(enemies, out Enemy inactiveEnemy) && GetCurrentEnemyCount() < GetMaxEnemyCount() && _isDeactivated == false)
         {
-            Vector3 freePoint = GetFreePointToSpawn(_currentZone);                        
+            Vector3 freePoint = GetFreePointToSpawn(_currentZone);
             Vector2 randomOffsetPosition = UnityEngine.Random.insideUnitCircle * _spawnRadiusModifier;
-            Vector3 spawnPosition = freePoint  + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
+            Vector3 spawnPosition = freePoint + new Vector3(randomOffsetPosition.x, 0, randomOffsetPosition.y);
 
-            if (_currentZoneIndex == _zones.Count-1 && _currentBossesCount < _zones[_currentZoneIndex].MaxBosses)
+            if (_currentZoneIndex == _zones.Count - 1 && _currentBossesCount < _zones[_currentZoneIndex].MaxBosses)
             {
                 if (TryGetInactiveEnemy(_bossEnemyList, out Enemy inactiveBossEnemy))
                 {
                     inactiveEnemy = inactiveBossEnemy;
                     _currentBossesCount++;
                 }
-            }            
+            }
             
             inactiveEnemy.transform.position = spawnPosition;
             float spawnDelay = 0;
@@ -201,7 +201,7 @@ public class EnemySpawner : MonoBehaviour
             if (_spawnedEnemeiesCount > _maxCounts[0])
             {
                 ShowSpawnEffects(spawnPosition);
-                spawnDelay = _burstDuration + _trailDuration;                
+                spawnDelay = _burstDuration + _trailDuration;
             }
 
             DOVirtual.DelayedCall(spawnDelay, () =>

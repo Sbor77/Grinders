@@ -64,7 +64,7 @@ public class Player : Characters
     public void AddMoney(int value)
     {
         _coins += value;
-        ChangedCoin?.Invoke(_coins);
+        ChangedCoin?.Invoke(value);
     }
 
     public void Heal(int value)
