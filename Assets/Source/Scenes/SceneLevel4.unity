@@ -876,7 +876,7 @@ MonoBehaviour:
   - {fileID: 579860348}
   _targetMoney: 3
   _targetKills: 5
-  _maxBosses: 0
+  _maxBosses: 3
 --- !u!1001 &41586647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12175,7 +12175,7 @@ MonoBehaviour:
   - {fileID: 6948732013236413756, guid: 4f987a7eb2e6a2546b021a2081ca06ec, type: 3}
   - {fileID: 4449667726229326942, guid: ca91a23936c860246be3017637cccb7a, type: 3}
   - {fileID: 5866666020242272253, guid: c12314af1d5c8694c91a571883f94133, type: 3}
-  _bossEnemyPrefab: {fileID: 0}
+  _bossEnemyPrefab: {fileID: 5901970638436765042, guid: 746f003912a3dda4186cb0561a6d4700, type: 3}
   _enemyParent: {fileID: 1145674624}
   _enemyLayer:
     serializedVersion: 2

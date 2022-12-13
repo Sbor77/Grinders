@@ -439,6 +439,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540436693}
     m_Modifications:
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676701985998937799, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2701210816371816793, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
       propertyPath: m_Name
       value: Joystick
@@ -525,6 +541,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2701210816371816794, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618884158584785803, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12914,7 +12946,7 @@ MonoBehaviour:
   - {fileID: 734029380}
   _targetMoney: 2
   _targetKills: 4
-  _maxBosses: 2
+  _maxBosses: 1
 --- !u!1001 &2006936997
 PrefabInstance:
   m_ObjectHideFlags: 0

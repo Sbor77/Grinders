@@ -4353,7 +4353,7 @@ MonoBehaviour:
   - {fileID: 5813451299658817458, guid: f314a41252f61d74e9b34ddd9a141bd5, type: 3}
   - {fileID: 6948732013236413756, guid: 4f987a7eb2e6a2546b021a2081ca06ec, type: 3}
   - {fileID: 4449667726229326942, guid: ca91a23936c860246be3017637cccb7a, type: 3}
-  _bossEnemyPrefab: {fileID: 0}
+  _bossEnemyPrefab: {fileID: 5901970638436765042, guid: 746f003912a3dda4186cb0561a6d4700, type: 3}
   _enemyParent: {fileID: 2079894240}
   _enemyLayer:
     serializedVersion: 2
@@ -16073,7 +16073,7 @@ MonoBehaviour:
   - {fileID: 883537214}
   _targetMoney: 3
   _targetKills: 9
-  _maxBosses: 0
+  _maxBosses: 2
 --- !u!65 &1952306894
 BoxCollider:
   m_ObjectHideFlags: 0

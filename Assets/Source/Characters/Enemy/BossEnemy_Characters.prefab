@@ -5109,12 +5109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e048dcbd6a62dce4691ff137a3a6d117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _damage: 15
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 128
   _takeDamageSFX: {fileID: 3137249133435413079}
-  _health: 3
+  _health: 300
   _delayDieHiding: 3
   _delayStartStunEffect: 0
   _stunEffectDuration: 0.1
