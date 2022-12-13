@@ -76,6 +76,11 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        LoadCurrentLevelProggress();
+    }
+
     private void OnDisable()
     {
         foreach (var array in _enemyList)
@@ -120,6 +125,14 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void LoadCurrentLevelProggress()
+    {
+        if (DataHandler.Instance.GetSavedLevel() == UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)
+        {
+            _playerKills = DataHandler.Instance.GetSavedKills();
+        }
+    }
+
     private void OnBossDeactivated()
     {
         _bossKills++;
@@ -134,7 +147,7 @@ public class EnemySpawner : MonoBehaviour
         if (_playerKills % _enemyCount == 0 && _enableSpeedIncrease)
         {
             _startSpeedModifier += _speedModifierIncrease;
-            _startSpeedModifier = _startSpeedModifier > _maxSpeedModifier ? _maxSpeedModifier : _startSpeedModifier;            
+            _startSpeedModifier = _startSpeedModifier > _maxSpeedModifier ? _maxSpeedModifier : _startSpeedModifier;
         }
 
         if (GetCurrentEnemyCount() < GetMaxEnemyCount())

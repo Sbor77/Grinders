@@ -113,7 +113,16 @@ public class InfoViewer : MonoBehaviour
         _bossKills = 0;
 
         ShowZoneTargets();
-    }       
+        LoadCurrentLevelProggress();
+    }
+
+    private void LoadCurrentLevelProggress()
+    {
+        if (DataHandler.Instance.GetSavedLevel() == UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)
+        {
+            LevelCoins = DataHandler.Instance.GetSavedLevelMoney();
+        }
+    }
 
     private void OnMuteToggled()
     {
@@ -159,7 +168,7 @@ public class InfoViewer : MonoBehaviour
     {
         _currentZoneCoins += value;
 
-        LevelCoins = value;
+        LevelCoins += value;
         ChangeViewText(_goldText, _currentZoneCoins, _questCoinCollected);
         IsCurrentConditionsChanged?.Invoke();
     }
