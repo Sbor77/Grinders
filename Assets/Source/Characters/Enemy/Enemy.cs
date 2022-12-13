@@ -8,7 +8,7 @@ public class Enemy : Characters
 {
     [SerializeField] protected AudioSource _takeDamageSFX;
 
-    [SerializeField] private float _health;
+    [SerializeField] protected float _health;
     [SerializeField] private float _delayDieHiding = 3f;
     [SerializeField] private float _delayStartStunEffect = 1.5f;
     [SerializeField] private float _stunEffectDuration = 3f;
