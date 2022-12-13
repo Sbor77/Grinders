@@ -254,7 +254,7 @@ public class Level : MonoBehaviour
             ActivateZone(++_currentZoneIndex);
             _boxSpawner.SetZoneIndex(_currentZoneIndex);
             _enemySpawner.SetZoneIndex(_currentZoneIndex);
-            _totalLevelCoins += _currentKills;
+            _totalLevelCoins += _currentCoins;
             _totalLevelKills += _currentKills;            
             UpdateZoneTargetConditions();
             InitInfoViewer();
