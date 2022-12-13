@@ -8,6 +8,8 @@ public class Tutorial : MonoBehaviour
 {
     private const float MaxPosition = 200f;
     private const float Delay = 0.5f;
+    private const int HandRepeat = 3;
+    private const int MouseRepeat = 2;
 
     [SerializeField] private JoystickTutorial _joystick;
     [SerializeField] private Image _mouseImage;
@@ -55,7 +57,7 @@ public class Tutorial : MonoBehaviour
         if (!DataHandler.Instance.IsMobile())
         {
             _mouseImage.gameObject.SetActive(true);
-            _handImage.gameObject.SetActive(false);            
+            _handImage.gameObject.SetActive(false);
             StartPCMoveAnimation();
         }
         else
@@ -63,7 +65,6 @@ public class Tutorial : MonoBehaviour
             _mouseImage.gameObject.SetActive(false);
             _handImage.gameObject.SetActive(true);
             _handImage.enabled = false;
-            //StartMobileMoveAnimation();
         }
     }
 
@@ -105,8 +106,6 @@ public class Tutorial : MonoBehaviour
     public void OnButtonMassAttackActivate()
     {
         _joystick.NotAllowedToAttack();
-
-        //DOVirtual.DelayedCall(4, () => _endScreen.SetActive(true));
     }
 
     private void LoadLevelOne()
@@ -118,9 +117,10 @@ public class Tutorial : MonoBehaviour
     {
         _massAttackComentText.gameObject.SetActive(false);
         _massAttackPcComentText.gameObject.SetActive(false);
-        _attackText.gameObject.SetActive(false);
+        _massAttackText.gameObject.SetActive(false);
 
-        float endScreenDelay = 6f;
+        float endScreenDelay = HandRepeat / Delay;
+
         DOVirtual.DelayedCall(endScreenDelay, () => _endScreen.SetActive(true));
     }
 
@@ -165,12 +165,12 @@ public class Tutorial : MonoBehaviour
     private void StartPCMoveAnimation()
     {
         Sequence moveAnimation = DOTween.Sequence();
-        moveAnimation.AppendCallback(() => { ShowAnimationMouseClick(_mouseLeftButtonSprite, Delay, 2); });
-        moveAnimation.AppendInterval(2f);
-        moveAnimation.Append(_mouseImage.transform.DOLocalMoveY(MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
-        moveAnimation.Append(_mouseImage.transform.DOLocalMoveY(-MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
-        moveAnimation.Append(_mouseImage.transform.DOLocalMoveX(MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
-        moveAnimation.Append(_mouseImage.transform.DOLocalMoveX(-MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
+        moveAnimation.AppendCallback(() => { ShowAnimationMouseClick(_mouseLeftButtonSprite, MouseRepeat); });
+        moveAnimation.AppendInterval(MouseRepeat);
+        moveAnimation.Append(_mouseImage.transform.DOLocalMoveY(MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(MouseRepeat, LoopType.Yoyo));
+        moveAnimation.Append(_mouseImage.transform.DOLocalMoveY(-MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(MouseRepeat, LoopType.Yoyo));
+        moveAnimation.Append(_mouseImage.transform.DOLocalMoveX(MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(MouseRepeat, LoopType.Yoyo));
+        moveAnimation.Append(_mouseImage.transform.DOLocalMoveX(-MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(MouseRepeat, LoopType.Yoyo));
         moveAnimation.AppendInterval(Delay);
         moveAnimation.AppendCallback(() =>
         {
@@ -191,8 +191,8 @@ public class Tutorial : MonoBehaviour
         _mouseImage.enabled = true;
         Sequence attackAnimation = DOTween.Sequence();
         attackAnimation.AppendCallback(() => { ChangeTitleText(_attackText); ChangeComentText(_attackComentText); });
-        attackAnimation.AppendCallback(() => { ShowAnimationMouseClick(_mouseRightButtonSprite, Delay, 3); });
-        attackAnimation.AppendInterval(3f);
+        attackAnimation.AppendCallback(() => { ShowAnimationMouseClick(_mouseRightButtonSprite, HandRepeat); });
+        attackAnimation.AppendInterval(HandRepeat);
         attackAnimation.AppendCallback(() => { _mouseImage.sprite = _mouseSprite; });
         attackAnimation.AppendInterval(Delay);
         attackAnimation.AppendCallback(() =>
@@ -213,8 +213,8 @@ public class Tutorial : MonoBehaviour
             ChangeTitleText(_attackText); 
             ChangeComentText(_attackComentText); 
         });
-        attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, Delay, 3); });
-        attackAnimation.AppendInterval(6f);
+        attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, HandRepeat); });
+        attackAnimation.AppendInterval(HandRepeat / Delay);
         attackAnimation.AppendCallback(() =>
         {
             _joystick.AllowToAttack();
@@ -233,8 +233,8 @@ public class Tutorial : MonoBehaviour
             ChangeTitleText(_attackText);
             ChangeComentText(_massAttackComentText);
         });
-        attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, Delay, 3); });
-        attackAnimation.AppendInterval(6f);
+        attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, HandRepeat); });
+        attackAnimation.AppendInterval(HandRepeat / Delay);
         attackAnimation.AppendCallback(() =>
         {
             _joystick.AllowToAttack();
@@ -243,23 +243,23 @@ public class Tutorial : MonoBehaviour
         });        
     }
 
-    private void ShowAnimationMouseClick(Sprite clickSprite, float delay, int repeatCount)
+    private void ShowAnimationMouseClick(Sprite clickSprite, int repeatCount)
     {
         Sequence clickAnimation = DOTween.Sequence();
 
         for (int i = 0; i < repeatCount; i++)
         {
             clickAnimation.AppendCallback(() => { _mouseImage.sprite = _mouseSprite; });
-            clickAnimation.AppendInterval(delay);
+            clickAnimation.AppendInterval(Delay);
             clickAnimation.AppendCallback(() => { _mouseImage.sprite = clickSprite; });
-            clickAnimation.AppendInterval(delay);
+            clickAnimation.AppendInterval(Delay);
         }
     }
 
-    private void ShowAnimationHandClick(Image _handImage, float delay, int repeatCount)
+    private void ShowAnimationHandClick(Image _handImage, int repeatCount)
     {
-        int repeateAction = 2 * repeatCount;
-        _handImage.transform.DOScale(HandScaleSize, delay).SetEase(Ease.Linear).SetLoops(repeateAction, LoopType.Yoyo);
+        int repeateAction = (int)(repeatCount / Delay);
+        _handImage.transform.DOScale(HandScaleSize, Delay).SetEase(Ease.Linear).SetLoops(repeateAction, LoopType.Yoyo);
     }
 
     private void ChangeTitleText(TMP_Text titleText)
@@ -310,10 +310,5 @@ public class Tutorial : MonoBehaviour
             text.gameObject.SetActive(true);
             text.transform.DOScale(Vector3.one, Delay).SetEase(Ease.Linear).SetLoops(1);
         }
-    }
-
-    private void HideTutorial()
-    {
-        gameObject.SetActive(false);
     }
 }

@@ -5,22 +5,26 @@ public class GameFocus : MonoBehaviour
 {
     private void Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
         WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
-                
+
         GamesSdk.Instance.AdVideoOpened += OnPlayAd;
         GamesSdk.Instance.AdVideoClosed += OnStopAd;
         GamesSdk.Instance.InterstitialAdOpened += OnPlayAd;
-        GamesSdk.Instance.InterstitialAdClosed += OnStopAd;        
+        GamesSdk.Instance.InterstitialAdClosed += OnStopAd;
+#endif
     }
 
     private void OnDisable()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
         WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
-                
+
         GamesSdk.Instance.AdVideoOpened -= OnPlayAd;
         GamesSdk.Instance.AdVideoClosed -= OnStopAd;
         GamesSdk.Instance.InterstitialAdOpened -= OnPlayAd;
-        GamesSdk.Instance.InterstitialAdClosed -= OnStopAd;        
+        GamesSdk.Instance.InterstitialAdClosed -= OnStopAd;
+#endif
     }
 
     private void OnInBackgroundChange(bool inBackground)
@@ -28,7 +32,7 @@ public class GameFocus : MonoBehaviour
         if (inBackground)
             Pause();
         else
-            Resume();        
+            Resume();
     }
 
     private void OnPlayAd()
