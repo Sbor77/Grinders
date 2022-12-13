@@ -14,8 +14,10 @@ public class MetaGame : MonoBehaviour
     [SerializeField] private FinishPanelMeta _finishPanelMeta;    
     [SerializeField] private List<DoorOpener> _doors;
 
+    private int _bossSpawnInterval = 10;
     private float _doorOpenDelay = 1;    
-    private int _currentKills;
+    private int _currentRegularKills;
+    private int _currentBossKills;
 
     private void OnEnable()
     {
@@ -52,8 +54,13 @@ public class MetaGame : MonoBehaviour
 
     private void OnCurrentConditionsChanged()
     {
-        _currentKills = _infoViewer.LevelKills;
-        DataHandler.Instance.SaveKills(_currentKills);        
+        _currentRegularKills = _infoViewer.CurrentZoneKills;
+        _currentBossKills = _infoViewer.CurrentZoneBossKills;
+
+        if (_currentRegularKills % _bossSpawnInterval == 0)                    
+            _zone.AddBossTarget();        
+
+        DataHandler.Instance.SaveKills(_currentRegularKills);        
     }
 
     private void OpenDoors()

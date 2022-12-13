@@ -125,6 +125,21 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void ForceBossSpawn(Enemy bossPrefab, int zoneIndex)
+    {
+        float spawnDelay = _burstDuration + _trailDuration;
+        var spawnPosition = GetRandomPosition(_zones[zoneIndex].EnemyPoints);
+        var boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity, _enemyParent);
+
+        ShowSpawnEffects(spawnPosition);
+
+        DOVirtual.DelayedCall(spawnDelay, () =>
+        {
+            boss.Activate();
+            boss.Restore();
+        });
+    }
+
     private void LoadCurrentLevelProggress()
     {
         if (DataHandler.Instance.GetSavedLevel() == UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)
@@ -158,6 +173,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void GenerateAllEnemies()
     {
+        int bossesCount = 10;
+
         for (int i = 0; i < _zones.Count; i++)
         {
             _enemyList[i] = new();
@@ -172,7 +189,9 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < _zones[_zones.Count - 1].MaxBosses; i++)
+        //for (int i = 0; i < _zones[_zones.Count - 1].MaxBosses; i++)
+
+        for (int i = 0; i < bossesCount; i++)
         {
             GenerateInactiveEnemies(_bossEnemyPrefab, _bossEnemyList);
         }
@@ -203,8 +222,8 @@ public class EnemySpawner : MonoBehaviour
                 if (TryGetInactiveEnemy(_bossEnemyList, out Enemy inactiveBossEnemy))
                 {
                     inactiveEnemy = inactiveBossEnemy;
-                    _currentBossesCount++;
-                }
+                    _currentBossesCount++;             
+                }                
             }
             else
             {

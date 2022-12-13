@@ -46,6 +46,11 @@ public class LevelZone : MonoBehaviour
         _isActive = false;
     }*/
 
+    public void AddBossTarget()
+    {
+        _maxBosses++;
+    }
+
     public void Activate()
     {
         _isActive = true;

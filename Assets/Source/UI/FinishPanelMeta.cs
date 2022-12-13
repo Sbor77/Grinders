@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class FinishPanelMeta : MonoBehaviour
 {    
     [SerializeField] private InfoViewer _infoViewer;
-    [SerializeField] private TMP_Text _metaKillsCount; 
+    [SerializeField] private TMP_Text _regularKillsCount;
+    [SerializeField] private TMP_Text _bossKillsCount;
     [SerializeField] private TMP_Text _metaEarnedCoinsCount;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _againButton;
@@ -26,18 +27,19 @@ public class FinishPanelMeta : MonoBehaviour
         _againButton.onClick.RemoveListener(ReloadMetaGame);
     }
 
-    public void Init()
-    {
-        _metaKillsCount.text = _infoViewer.LevelKills.ToString();
-        _metaEarnedCoinsCount.text = GetCurrentCoinsEarned().ToString();
-
-        SaveEarnedMoney();
-    }
-
     public void Activate()
     {
         Init();
         gameObject.SetActive(true);        
+    }
+
+    private void Init()
+    {
+        _regularKillsCount.text = _infoViewer.CurrentZoneKills.ToString();
+        _bossKillsCount.text = _infoViewer.CurrentZoneBossKills.ToString();
+        _metaEarnedCoinsCount.text = GetCurrentCoinsEarned().ToString();
+
+        SaveEarnedMoney();
     }
 
     public void Deactivate()
@@ -61,8 +63,9 @@ public class FinishPanelMeta : MonoBehaviour
 
     private int GetCurrentCoinsEarned()
     {        
-        int killToCoinIndex = 1;
-        int value = _infoViewer.LevelKills * killToCoinIndex;
+        int regularKills = 1;
+        int bossKills = 10;
+        int value = _infoViewer.CurrentZoneKills * regularKills + _infoViewer.CurrentZoneBossKills * bossKills;
         return value;
     }
 
