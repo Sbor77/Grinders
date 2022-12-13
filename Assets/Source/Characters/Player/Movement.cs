@@ -6,6 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController), typeof(CapsuleCollider))]
 public class Movement : MonoBehaviour
 {
+    private const float AngleCorrection = -1f;
+    private const float AddBoostMoveSpeed = 0.5f;
+    private const int _maxPointCount = 10;
+
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _speedInAttack;
@@ -22,20 +26,17 @@ public class Movement : MonoBehaviour
     private bool _isMoving = false;
     private bool _isTakingDamage = false;
     private bool _massAttack = false;
-    private float _halfRotation => _rotationSpeed / 2f;
     private int _currentAttacksCount;
     private float _delayMassAttack = 3f;
 
-    private const float AngleCorrection = -1f;
-    private const float AddBoostMoveSpeed = 0.5f;
-    private const int _maxPointCount = 10;
+    public float Speed => _speed;
+
+    private float _halfRotation => _rotationSpeed / 2f;
 
     public event Action<State,bool> ChangedState;
     public event Action<float> ChangedMoveSpeed;
     public event Action ChangedBoostSpeed;
     public event Action<int, int> ChangedMassAttackCooldown;
-
-    public float Speed => _speed;
 
     private void Awake()
     {

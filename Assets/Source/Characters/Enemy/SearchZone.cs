@@ -8,14 +8,14 @@ public class SearchZone : MonoBehaviour
 
     private WaitForSeconds _delay = new WaitForSeconds(.5f);
     private Coroutine _waitCanSee = null;
-    private bool _isAcquireTarget;
+    //private bool _isAcquireTarget;
 
     public event Action<Player> ChangedTarget;
 
-    private void OnEnable()
-    {
-        _isAcquireTarget = false;
-    }
+    //private void OnEnable()
+    //{
+    //    _isAcquireTarget = false;
+    //}
 
     private void OnDisable()
     {
@@ -41,7 +41,7 @@ public class SearchZone : MonoBehaviour
         if (other.TryGetComponent(out Player player))
         {
             ChangedTarget?.Invoke(null);
-            _isAcquireTarget = false;
+            //_isAcquireTarget = false;
             StopCoroutine();
         }
     }
@@ -60,7 +60,7 @@ public class SearchZone : MonoBehaviour
         }
         
         ChangedTarget?.Invoke(target);
-        _isAcquireTarget = true;
+        //_isAcquireTarget = true;
         //print($"Вижу плеера");
         StopCoroutine();
     }

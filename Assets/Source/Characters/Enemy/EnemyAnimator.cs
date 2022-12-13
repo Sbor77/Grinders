@@ -21,7 +21,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Animator _animator;
-    [SerializeField] private Enemy _enemy;
+    private Enemy _enemy;
     private float _attackLength;
     private float _attackMultiplier = 1.5f;
     private float _minSpeed = 0.1f;

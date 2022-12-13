@@ -10,7 +10,6 @@ public class Player : Characters
     [SerializeField] private ParticleSystem _weaponEffect;
     [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _woundEffect;
-    //[SerializeField] private LayerMask _wallMask;
 
     private Movement _movement;
     private float _currentHealth;

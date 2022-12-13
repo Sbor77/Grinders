@@ -1,5 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
@@ -21,7 +19,7 @@ public class Enemy : Characters
     protected bool _isDead = false;
     protected float _currentHealth;
     
-    [SerializeField] private Mover _mover;
+    private Mover _mover;
 
     public float StanEffectDuration => _stunEffectDuration;
 
