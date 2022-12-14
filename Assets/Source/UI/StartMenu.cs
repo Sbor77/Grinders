@@ -34,7 +34,7 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
-        if (DataHandler.Instance.GetSavedLevel() <= _startLevelIndex)
+        if (DataHandler.Instance.GetSavedCompletedLevel() < _startLevelIndex)
             _continueButton.interactable = false;
 
         ActivateLeaderboard();
