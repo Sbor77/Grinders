@@ -8599,6 +8599,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1766064449 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4437687499949349016, guid: 28363bf6e90cf73428f701129de3ed1f, type: 3}
+  m_PrefabInstance: {fileID: 1766064446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1766064451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8615,6 +8626,7 @@ MonoBehaviour:
   _joystickInner: {fileID: 490861119}
   _attackButton: {fileID: 1766064448}
   _skillButton: {fileID: 77834979}
+  _mobileJoyPosition: {fileID: 1766064449}
   _moveToTouchDownPosition: 0
   _canMove: 0
   _canAttack: 0

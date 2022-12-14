@@ -65,6 +65,7 @@ public class Tutorial : MonoBehaviour
             _mouseImage.gameObject.SetActive(false);
             _handImage.gameObject.SetActive(true);
             _handImage.enabled = false;
+            _joystick.AllowToMove();
         }
     }
 

@@ -11,6 +11,7 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
     [SerializeField] protected RectTransform _joystickInner;
     [SerializeField] protected Button _attackButton;
     [SerializeField] protected Button _skillButton;
+    [SerializeField] private Image _mobileJoyPosition;
 
     public event Action SkillButtonClick;
     public event Action<Vector2> ChangedDirection;
@@ -20,6 +21,25 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
     public abstract void OnDrag(PointerEventData eventData);
     public abstract void OnPointerDown(PointerEventData eventData);
     public abstract void OnPointerUp(PointerEventData eventData);
+
+    private void Start()
+    {
+        if (DataHandler.Instance.IsMobile())
+        {
+            //_moveToTouchDownPosition = true;
+            if (_mobileJoyPosition != null)
+                _joystickBackground.transform.position = _mobileJoyPosition.transform.position;
+
+            _joystickBackground.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
+            _joystickInner.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
+        }
+        else
+        {
+            _attackButton.gameObject.SetActive(false);
+            _joystickBackground.GetComponent<Image>().color = Color.clear;
+            _joystickInner.GetComponent<Image>().color = Color.clear;
+        }
+    }
 
     protected void CalculateJoystickInnerPosition(Vector2 position)
     {

@@ -7,7 +7,7 @@ public class Joystick : Joysticks
 {
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .1f;
     [SerializeField] private bool _moveToTouchDownPosition = false;
-    [SerializeField] private Image _mobileJoyPosition;
+    //[SerializeField] private Image _mobileJoyPosition;
 
     private bool _isTouchDown = false;
     private float _currentDownTime;
@@ -18,22 +18,22 @@ public class Joystick : Joysticks
         _attackButton.onClick.AddListener(OnAttackButtonClick);
     }
 
-    private void Start()
-    {
-        if (DataHandler.Instance.IsMobile())
-        {
-            //_moveToTouchDownPosition = true;
-            _joystickBackground.transform.position = _mobileJoyPosition.transform.position;
-            _joystickBackground.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
-            _joystickInner.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
-        }
-        else
-        {
-            _attackButton.gameObject.SetActive(false);
-            _joystickBackground.GetComponent<Image>().color = Color.clear;
-            _joystickInner.GetComponent<Image>().color = Color.clear;
-        }
-    }
+    //private void Start()
+    //{
+    //    if (DataHandler.Instance.IsMobile())
+    //    {
+    //        //_moveToTouchDownPosition = true;
+    //        _joystickBackground.transform.position = _mobileJoyPosition.transform.position;
+    //        _joystickBackground.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
+    //        _joystickInner.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
+    //    }
+    //    else
+    //    {
+    //        _attackButton.gameObject.SetActive(false);
+    //        _joystickBackground.GetComponent<Image>().color = Color.clear;
+    //        _joystickInner.GetComponent<Image>().color = Color.clear;
+    //    }
+    //}
 
     private void Update()
     {

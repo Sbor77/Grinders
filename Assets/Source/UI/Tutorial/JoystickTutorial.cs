@@ -22,21 +22,21 @@ public class JoystickTutorial : Joysticks
         _attackButton.onClick.AddListener(OnAttackButtonClick);
     }
 
-    private void Start()
-    {
-        if (DataHandler.Instance.IsMobile())
-        {
-            _moveToTouchDownPosition = true;
-            _joystickBackground.GetComponent<Image>().color = Color.white;
-            _joystickInner.GetComponent<Image>().color = Color.white;
-        }
-        else
-        {
-            _attackButton.gameObject.SetActive(false);
-            _joystickBackground.GetComponent<Image>().color = Color.clear;
-            _joystickInner.GetComponent<Image>().color = Color.clear;
-        }
-    }
+    //private void Start()
+    //{
+    //    if (DataHandler.Instance.IsMobile())
+    //    {
+    //        _moveToTouchDownPosition = true;
+    //        _joystickBackground.GetComponent<Image>().color = Color.white;
+    //        _joystickInner.GetComponent<Image>().color = Color.white;
+    //    }
+    //    else
+    //    {
+    //        _attackButton.gameObject.SetActive(false);
+    //        _joystickBackground.GetComponent<Image>().color = Color.clear;
+    //        _joystickInner.GetComponent<Image>().color = Color.clear;
+    //    }
+    //}
 
     private void Update()
     {
