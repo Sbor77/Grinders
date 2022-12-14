@@ -13,10 +13,10 @@ public class GamesSdk : MonoBehaviour
     public event Action AdVideoClosed;
     public event Action InterstitialAdOpened;
     public event Action InterstitialAdClosed;
-    public event Action<bool> ChangedLeaders;
+    //public event Action<bool> ChangedLeaders;
     
-    private const float WaitTime = .25f;    
-    private string _leaderboardName = "LeaderBoard";    
+    private const float WaitTime = .25f;
+    private string _leaderboardName = "LeaderBoard";
 
     public string LeaderboardName => _leaderboardName;
     public static GamesSdk Instance { get; private set; }
