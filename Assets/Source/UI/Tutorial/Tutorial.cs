@@ -169,7 +169,7 @@ public class Tutorial : MonoBehaviour
         moveAnimation.AppendCallback(() =>
         {
             _mouseImage.sprite = _mouseSprite;
-            ChangeComentText(_moveComentText);
+            ChangeComentText(_mobileMoveComentText);
             _firstPathArrow.SetActive(true);
         });
         moveAnimation.AppendInterval(Delay);
