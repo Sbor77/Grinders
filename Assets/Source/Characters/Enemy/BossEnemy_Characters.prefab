@@ -5136,9 +5136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stoppingDistance: 0.5
-  _bias: 10
-  _maxDelay: 5
-  _attackDistance: 4
+  _bias: 5
+  _maxDelay: 4
+  _attackDistance: 3
   _searchZone: {fileID: 1508748232957161966}
   _weapon: {fileID: 8880546877278718950}
   _wallMask:

@@ -60,8 +60,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.37037036
+      - time: 0.36704808
         functionName: SetDamage
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: acd6d45d657342d4f9bd4e3bfe59f7c9, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9852946
+        functionName: Attack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: acd6d45d657342d4f9bd4e3bfe59f7c9, type: 3}
         floatParameter: 0

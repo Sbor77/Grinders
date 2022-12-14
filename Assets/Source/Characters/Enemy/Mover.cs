@@ -125,7 +125,18 @@ public class Mover : MonoBehaviour
         _searchZone.gameObject.SetActive(true);
         _animator.ResetState();
         _agent.enabled = true;
-        _canMove = true;        
+        _canMove = true;
+    }
+
+    public void Attack()
+    {
+        _animator.FinishAttack();
+
+        if (_isStunned == false)
+        {
+            _isAttaking = false;
+            _canMove = true;
+        }
     }
 
     private void OnEnemyStunned(bool isStunned)
@@ -168,15 +179,6 @@ public class Mover : MonoBehaviour
         _searchZone.gameObject.SetActive(false);
         _agent.enabled = false;
         _isAlive = false;
-    }
-
-    private void Attack()
-    {
-        if (_isStunned == false)
-        {
-            _isAttaking = false;
-            _canMove = true;
-        }
     }
 
     #region Patrol
@@ -234,7 +236,7 @@ public class Mover : MonoBehaviour
                 {
                     _isAttaking = true;
                     float attackDelay = _animator.StartAttack();
-                    Invoke(nameof(Attack), attackDelay);
+                    //Invoke(nameof(Attack), attackDelay);
                     _canMove = false;
                 }
                 else

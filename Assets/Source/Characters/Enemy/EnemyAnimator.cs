@@ -100,6 +100,11 @@ public class EnemyAnimator : MonoBehaviour
         _animator.ResetTrigger(Reset);
     }
 
+    public void FinishAttack()
+    {
+        _animator.ResetTrigger(Attack);
+    }
+
     private void ChangeAttackSpeedModifier(float attackSpeed)
     {
         _animator.SetFloat(AttackSpeed, attackSpeed);

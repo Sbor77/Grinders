@@ -8,6 +8,9 @@ public class MoverBoss : Mover
     {
         base.SetDamage();
 
+        if (_target == null || _target.IsDead)
+            return;
+
         if (_target.CurrentState == State.Attack)
             _enemy.Attack(_target);
     }
