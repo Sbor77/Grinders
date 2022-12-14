@@ -5269,12 +5269,12 @@ MonoBehaviour:
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 128
+  _takeDamageSFX: {fileID: 1610300637376162196}
   _health: 10
   _delayDieHiding: 3
   _delayStartStunEffect: 0.5
   _stunEffectDuration: 3
   _agent: {fileID: 2663152279715146702}
-  _takeDamageSFX: {fileID: 1610300637376162196}
   _dieEffect: {fileID: 4996996632379262878}
   _stunEffect: {fileID: 8397892434629836979}
 --- !u!114 &5813451299658817457
@@ -5298,7 +5298,6 @@ MonoBehaviour:
   _wallMask:
     serializedVersion: 2
     m_Bits: 128
-  _canAttackDelay: 0.5
 --- !u!114 &8744370913712509822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5335,8 +5334,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 23
-  MaxDistance: 50
+  MinDistance: 10
+  MaxDistance: 35
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
