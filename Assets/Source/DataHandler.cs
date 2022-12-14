@@ -230,7 +230,7 @@ public class DataHandler : MonoBehaviour
 
     public float GetSavedTotalVolume()
     {
-        float defaultVolume = 1;
+        float defaultVolume = 0.5f;
 
         if (PlayerPrefs.HasKey(_totalVolume))
             return PlayerPrefs.GetFloat(_totalVolume);
@@ -240,7 +240,7 @@ public class DataHandler : MonoBehaviour
 
     public float GetSavedMusicVolume()
     {
-        float defaultVolume = 1;
+        float defaultVolume = 0.5f;
 
         if (PlayerPrefs.HasKey(_musicVolume))
             return PlayerPrefs.GetFloat(_musicVolume);
