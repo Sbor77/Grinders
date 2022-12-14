@@ -12,6 +12,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private LeadersPanel _leadersPlanel;    
 
     private int _tutorialSceneIndex = 6;
+    private int _lastlevelIndex = 4;
     private int _startLevelIndex = 1;
     private int _metaSceneIndex = 7;
     private int _introSceneIndex = 0;
@@ -89,8 +90,12 @@ public class StartMenu : MonoBehaviour
 
     private void ContinueGame()
     {
-        int currentLevel = DataHandler.Instance.GetSavedLevel();
-        _levelLoaderPanel.Load(currentLevel);
+        int currentLevel = DataHandler.Instance.GetSavedCompletedLevel();
+
+        if (currentLevel < _lastlevelIndex)
+            _levelLoaderPanel.Load(currentLevel + 1);
+        else
+            _levelLoaderPanel.Load(currentLevel);
     }
 
     private void StartArena()

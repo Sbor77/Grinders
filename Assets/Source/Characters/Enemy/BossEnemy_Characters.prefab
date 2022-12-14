@@ -5110,7 +5110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e048dcbd6a62dce4691ff137a3a6d117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 15
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 128
@@ -5144,7 +5144,6 @@ MonoBehaviour:
   _wallMask:
     serializedVersion: 2
     m_Bits: 128
-  _canAttackDelay: 0.2
 --- !u!114 &4805656984149085473
 MonoBehaviour:
   m_ObjectHideFlags: 0
