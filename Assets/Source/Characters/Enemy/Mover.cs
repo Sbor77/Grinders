@@ -138,12 +138,11 @@ public class Mover : MonoBehaviour
         _isStunned = isStunned;
 
         _canMove = !isStunned;
-        //_isAttaking = isStunned;
+        _isAttaking = isStunned;
     }
 
     private void OnTakeDamage()
-    {
-        
+    {        
         /*_onTakeDamageTween.Kill();
         _onTakeDamageTween = null;            
         
@@ -173,8 +172,11 @@ public class Mover : MonoBehaviour
 
     private void Attack()
     {
-        _isAttaking = false;
-        _canMove = true;
+        if (_isStunned == false)
+        {
+            _isAttaking = false;
+            _canMove = true;
+        }
     }
 
     #region Patrol
@@ -224,7 +226,8 @@ public class Mover : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Player player) && _isAttaking)
+
+        if (other.TryGetComponent(out Player player) && !_isAttaking)
         {
             if (_canMove && _enemy.CanSee(player.transform))
             {

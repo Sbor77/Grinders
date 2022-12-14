@@ -6180,20 +6180,6 @@ MonoBehaviour:
   _boxPoints: []
   _enemyPoints:
   - {fileID: 1593221871}
-  - {fileID: 716015155}
-  - {fileID: 43131845}
-  - {fileID: 2034920725}
-  - {fileID: 689677976}
-  - {fileID: 881033879}
-  - {fileID: 1651718684}
-  - {fileID: 1169403356}
-  - {fileID: 1317035437}
-  - {fileID: 1274597413}
-  - {fileID: 1274597413}
-  - {fileID: 1274597413}
-  - {fileID: 1274597413}
-  - {fileID: 1274597413}
-  - {fileID: 1274597413}
   _targetMoney: 0
   _targetKills: 0
   _maxBosses: 0
@@ -7234,6 +7220,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _damage
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _health
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_RootOrder
       value: 6
