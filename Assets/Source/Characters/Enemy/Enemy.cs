@@ -63,7 +63,7 @@ public class Enemy : Characters
         IsAlive();
     }
 
-    public void Restore()
+    public virtual void Restore()
     {        
         _currentHealth = _health;
         _mover.ResetState();

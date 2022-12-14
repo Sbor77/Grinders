@@ -104,6 +104,7 @@ public class Animations : MonoBehaviour
     private void MassAttack()
     {
         _animator.SetTrigger(AreaAttack);
+        _animator.ResetTrigger(TakedDamage);
     }
 
     private void StateAttackSpin(State state)

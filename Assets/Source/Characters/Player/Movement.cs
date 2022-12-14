@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
     private bool _isTakingDamage = false;
     private bool _massAttack = false;
     private int _currentAttacksCount;
-    private float _delayMassAttack = 3f;
+    private float _delayMassAttack = 3.5f;
 
     public float Speed => _speed;
 

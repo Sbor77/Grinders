@@ -13,7 +13,7 @@ public class Mover : MonoBehaviour
     [SerializeField] private SearchZone _searchZone;
     [SerializeField] private Transform _weapon;
     [SerializeField] private LayerMask _wallMask;
-    [SerializeField] [Range(0.1f,1f)] private float _canAttackDelay = 0.5f;
+    //[SerializeField] [Range(0.1f,1f)] private float _canAttackDelay = 0.5f;
 
     protected Enemy _enemy;
     protected Player _target;
@@ -30,7 +30,7 @@ public class Mover : MonoBehaviour
     private bool _canMove = true;
     private bool _isAlive = true;
     private bool _isDancing = false;
-    private bool _isCanAttack = false;
+    //private bool _isCanAttack = false;
 
     protected bool _isAcquireTarget => _target != null;
 
@@ -119,6 +119,7 @@ public class Mover : MonoBehaviour
         _searchZone.gameObject.SetActive(true);
         _animator.ResetState();
         _agent.enabled = true;
+        _canMove = true;
     }
 
     private void OnTakeDamage()
@@ -143,6 +144,7 @@ public class Mover : MonoBehaviour
     private void Attack()
     {
         _isAttaking = false;
+        _canMove = true;
     }
 
     #region Patrol
@@ -201,6 +203,7 @@ public class Mover : MonoBehaviour
                     _isAttaking = true;
                     float attackDelay = _animator.StartAttack();
                     Invoke(nameof(Attack), attackDelay);
+                    _canMove = false;
                 }
                 else
                 {

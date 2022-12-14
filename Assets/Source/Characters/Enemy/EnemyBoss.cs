@@ -17,4 +17,10 @@ public class EnemyBoss : Enemy
         _healthBar.value = _currentHealth / _health;
         IsAlive();
     }
+
+    public override void Restore()
+    {
+        base.Restore();
+        _healthBar.value = _currentHealth / _health;
+    }
 }

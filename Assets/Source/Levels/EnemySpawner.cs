@@ -104,7 +104,7 @@ public class EnemySpawner : MonoBehaviour
         _currentZone = _zones[_currentZoneIndex];
 
         DeactivateEnemiesInRestZones();
-        SpawnEnemy();        
+        SpawnEnemy();
     }
 
     public void Activate()
@@ -190,12 +190,13 @@ public class EnemySpawner : MonoBehaviour
         }
 
         //for (int i = 0; i < _zones[_zones.Count - 1].MaxBosses; i++)
-
-        for (int i = 0; i < bossesCount; i++)
+        if (_bossEnemyPrefab != null)
         {
-            GenerateInactiveEnemies(_bossEnemyPrefab, _bossEnemyList);
+            for (int i = 0; i < bossesCount; i++)
+            {
+                GenerateInactiveEnemies(_bossEnemyPrefab, _bossEnemyList);
+            }
         }
-
         SpawnEnemy();
     }
 
