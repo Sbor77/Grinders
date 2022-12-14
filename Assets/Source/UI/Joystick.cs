@@ -84,7 +84,11 @@ public class Joystick : Joysticks
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        if (!DataHandler.Instance.IsMobile())
+        if (DataHandler.Instance.IsMobile())
+        {
+            ReleasedJoystick();
+        }
+        else
         {
             if (Input.GetMouseButtonUp(0))
             {
@@ -95,7 +99,8 @@ public class Joystick : Joysticks
             }
             else
             {
-                OnAttackButtonClick();
+                if (!DataHandler.Instance.IsMobile())
+                    OnAttackButtonClick();
             }
         }
     }

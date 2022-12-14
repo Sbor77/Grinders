@@ -74,14 +74,21 @@ public class JoystickTutorial : Joysticks
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonUp(0) && _canMove)
+        if (DataHandler.Instance.IsMobile())
         {
             ReleasedJoystick();
         }
         else
         {
-            if (_canAttack && !DataHandler.Instance.IsMobile())
-                OnAttackButtonClick();
+            if (Input.GetMouseButtonUp(0) && _canMove)
+            {
+                ReleasedJoystick();
+            }
+            else
+            {
+                if (_canAttack && !DataHandler.Instance.IsMobile())
+                    OnAttackButtonClick();
+            }
         }
     }
 
