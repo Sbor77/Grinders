@@ -19,7 +19,14 @@ public class JoystickTutorial : Joysticks
     private void OnEnable()
     {
         _skillButton.onClick.AddListener(OnSkillButtonClick);
-        _attackButton.onClick.AddListener(OnAttackButtonClick);
+        _attackButton.onClick.AddListener(OnAttackClick);
+    }
+
+    private void OnDisable()
+    {
+        ReleasedJoystick();
+        _skillButton.onClick.RemoveListener(OnSkillButtonClick);
+        _attackButton.onClick.RemoveListener(OnAttackClick);
     }
 
     //private void Start()
@@ -43,13 +50,6 @@ public class JoystickTutorial : Joysticks
         if (Input.GetKeyDown(KeyCode.Space))
             if (_canMassAttack)
                 OnSkillButtonClick();
-    }
-
-    private void OnDisable()
-    {
-        ReleasedJoystick();
-        _skillButton.onClick.RemoveListener(OnSkillButtonClick);
-        _attackButton.onClick.RemoveListener(OnAttackButtonClick);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -124,5 +124,11 @@ public class JoystickTutorial : Joysticks
     {
         base.ButtonActivate();
         _tutorial.OnButtonMassAttackActivate();
+    }
+
+    private void OnAttackClick()
+    {
+        if (_canAttack)
+            OnAttackButtonClick();
     }
 }

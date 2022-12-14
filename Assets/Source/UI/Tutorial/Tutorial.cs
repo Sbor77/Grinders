@@ -52,6 +52,18 @@ public class Tutorial : MonoBehaviour
         _massAttack.IsActivated += OnAreaAttackActivated;
     }
 
+    private void OnDisable()
+    {
+        _exitButton.onClick.RemoveListener(LoadLevelOne);
+        _playButton.onClick.RemoveListener(LoadLevelOne);
+        _massAttack.IsActivated -= OnAreaAttackActivated;
+
+        for (int i = 0; i < _enemies.Length; i++)
+        {
+            _enemies[i].Dying -= OnEnemysDead;
+        }
+    }
+
     private void Start()
     {
         if (!DataHandler.Instance.IsMobile())
@@ -65,19 +77,7 @@ public class Tutorial : MonoBehaviour
             _mouseImage.gameObject.SetActive(false);
             _handImage.gameObject.SetActive(true);
             _handImage.enabled = false;
-            _joystick.AllowToMove();
-        }
-    }
-
-    private void OnDisable()
-    {
-        _exitButton.onClick.RemoveListener(LoadLevelOne);
-        _playButton.onClick.RemoveListener(LoadLevelOne);
-        _massAttack.IsActivated -= OnAreaAttackActivated;
-
-        for (int i = 0; i < _enemies.Length; i++)
-        {
-            _enemies[i].Dying -= OnEnemysDead;
+            StartMobileMoveAnimation();
         }
     }
 
@@ -161,6 +161,23 @@ public class Tutorial : MonoBehaviour
             if (!DataHandler.Instance.IsMobile())
                 ChangeComentText(_finishPointComentText);
         }
+    }
+
+    private void StartMobileMoveAnimation()
+    {
+        Sequence moveAnimation = DOTween.Sequence();       
+        moveAnimation.AppendCallback(() =>
+        {
+            _mouseImage.sprite = _mouseSprite;
+            ChangeComentText(_moveComentText);
+            _firstPathArrow.SetActive(true);
+        });
+        moveAnimation.AppendInterval(Delay);
+        moveAnimation.AppendCallback(() =>
+        {
+            _joystick.AllowToMove();
+            _joystick.enabled = true;
+        });
     }
 
     private void StartPCMoveAnimation()
