@@ -248,7 +248,7 @@ public class Tutorial : MonoBehaviour
         Sequence attackAnimation = DOTween.Sequence();
         attackAnimation.AppendCallback(() => 
         { 
-            ChangeTitleText(_attackText);
+            ChangeTitleText(_massAttackText);
             ChangeComentText(_massAttackComentText);
         });
         attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, HandRepeat); });
