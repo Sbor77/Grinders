@@ -6180,20 +6180,26 @@ MonoBehaviour:
   _boxPoints: []
   _enemyPoints:
   - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
-  - {fileID: 1593221871}
+  - {fileID: 716015155}
+  - {fileID: 43131845}
+  - {fileID: 2034920725}
+  - {fileID: 689677976}
+  - {fileID: 881033879}
+  - {fileID: 1651718684}
+  - {fileID: 1169403356}
+  - {fileID: 1317035437}
+  - {fileID: 1274597413}
+  - {fileID: 235067194}
+  - {fileID: 271802743}
+  - {fileID: 766843167}
+  - {fileID: 1710492021}
+  - {fileID: 317823939}
+  - {fileID: 1628149257}
+  - {fileID: 1952943570}
+  - {fileID: 1717707291}
+  - {fileID: 59642084}
+  - {fileID: 1347986490}
+  - {fileID: 57814196}
   _targetMoney: 0
   _targetKills: 0
   _maxBosses: 0
@@ -6340,6 +6346,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4ad782bbfe8151439777c7e6c90f201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1785197915 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1000149713991367706, guid: 0c6dcf47973be9c45ac3e4bde9b9e938, type: 3}
+  m_PrefabInstance: {fileID: 1000149714429937985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33bfe77a9e3dd0d4cb57b2d198a40cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1801024767
@@ -7271,6 +7288,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Characters
       objectReference: {fileID: 0}
+    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _joystick
+      value: 
+      objectReference: {fileID: 1766064448}
+    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
+      propertyPath: _areaAttack
+      value: 
+      objectReference: {fileID: 1785197915}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
 --- !u!1 &1909913583
