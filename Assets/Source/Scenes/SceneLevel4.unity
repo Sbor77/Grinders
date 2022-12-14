@@ -816,6 +816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 37925595}
   - component: {fileID: 37925596}
+  - component: {fileID: 37925597}
   m_Layer: 0
   m_Name: Zone_3
   m_TagString: Untagged
@@ -877,6 +878,19 @@ MonoBehaviour:
   _targetMoney: 3
   _targetKills: 5
   _maxBosses: 3
+--- !u!65 &37925597
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37925594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 35, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: -13}
 --- !u!1001 &41586647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2777,6 +2791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 239794930}
   - component: {fileID: 239794931}
+  - component: {fileID: 239794932}
   m_Layer: 0
   m_Name: Zone_2
   m_TagString: Untagged
@@ -2839,6 +2854,19 @@ MonoBehaviour:
   _targetMoney: 2
   _targetKills: 4
   _maxBosses: 0
+--- !u!65 &239794932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239794929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: -12}
 --- !u!1 &240094191
 GameObject:
   m_ObjectHideFlags: 0
@@ -20773,7 +20801,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh482106
+  m_Name: pb_Mesh50128
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
