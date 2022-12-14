@@ -26,6 +26,8 @@ public class Enemy : Characters
     public event Action Dying;
     public event Action TakedDamage;
     public event Action IsDeactivated;
+    public event Action <bool>IsStunned;
+    
 
     private void Awake()
     {
@@ -87,8 +89,16 @@ public class Enemy : Characters
         }
         else
         {
-            DOVirtual.DelayedCall(_delayStartStunEffect, () => _stunEffect.gameObject.SetActive(true));
-            DOVirtual.DelayedCall(_stunEffectDuration, () => _stunEffect.gameObject.SetActive(false));
+            DOVirtual.DelayedCall(_delayStartStunEffect, () => 
+            {
+                _stunEffect.gameObject.SetActive(true);
+                IsStunned?.Invoke(true);
+            });
+            DOVirtual.DelayedCall(_stunEffectDuration, () =>
+            {
+                _stunEffect.gameObject.SetActive(false);
+                IsStunned?.Invoke(false);
+            });
         }
     }
 }

@@ -30,7 +30,11 @@ public class Mover : MonoBehaviour
     private bool _canMove = true;
     private bool _isAlive = true;
     private bool _isDancing = false;
+    private bool _isStunned;
+
     //private bool _isCanAttack = false;
+
+    private Tween _onTakeDamageTween;
 
     protected bool _isAcquireTarget => _target != null;
 
@@ -48,6 +52,7 @@ public class Mover : MonoBehaviour
         _searchZone.ChangedTarget += OnChangedTarget;
         _enemy.Dying += OnDying;
         _enemy.TakedDamage += OnTakeDamage;
+        _enemy.IsStunned += OnEnemyStunned;
         _agent.enabled = true;
         Patrol();
     }
@@ -57,6 +62,7 @@ public class Mover : MonoBehaviour
         _searchZone.ChangedTarget -= OnChangedTarget;
         _enemy.Dying -= OnDying;
         _enemy.TakedDamage -= OnTakeDamage;
+        _enemy.IsStunned -= OnEnemyStunned;
     }
 
     private void FixedUpdate()
@@ -99,7 +105,7 @@ public class Mover : MonoBehaviour
 
         if (distanceToPlayer <= _attackDistance)
         {
-            if (_target.CurrentState == State.Move)
+            if (_target.CurrentState == State.Move && _canMove)
                 _enemy.Attack(_target);
 
             if (_target.IsDead)
@@ -119,18 +125,37 @@ public class Mover : MonoBehaviour
         _searchZone.gameObject.SetActive(true);
         _animator.ResetState();
         _agent.enabled = true;
-        _canMove = true;
+        _canMove = true;        
+    }
+
+    private void OnEnemyStunned(bool isStunned)
+    {
+        if (isStunned)
+            print("ÊÎÍÒÓÆÅÍ");
+        else
+            print("ÎÒÏÓÑÒÈËÎ");
+
+        _isStunned = isStunned;
+
+        _canMove = !isStunned;
+        //_isAttaking = isStunned;
     }
 
     private void OnTakeDamage()
     {
+        
+        /*_onTakeDamageTween.Kill();
+        _onTakeDamageTween = null;            
+        
+
         _canMove = false;
         _isAttaking = true;
-        DOVirtual.DelayedCall(_enemy.StanEffectDuration, () => 
+
+        _onTakeDamageTween = DOVirtual.DelayedCall(_enemy.StanEffectDuration, () => 
         { 
             _canMove = true;
-            _isAttaking = false;
-        });
+            _isAttaking = false;            
+        });*/
     }
 
     private void StopDance()
@@ -199,7 +224,7 @@ public class Mover : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Player player) && !_isAttaking)
+        if (other.TryGetComponent(out Player player) && _isAttaking)
         {
             if (_canMove && _enemy.CanSee(player.transform))
             {

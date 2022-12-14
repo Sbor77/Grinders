@@ -27,6 +27,8 @@ public class EnemyAnimator : MonoBehaviour
     private float _minSpeed = 0.1f;
     private bool _isMoveing;
 
+    private float _newCurrentSpeed;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -38,13 +40,13 @@ public class EnemyAnimator : MonoBehaviour
     {
         _enemy.Dying += OnDying;
         _enemy.TakedDamage += OnTakeDamage;
-        _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);
+        _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);        
     }
 
     private void OnDisable()
     {
         _enemy.Dying -= OnDying;
-        _enemy.TakedDamage -= OnTakeDamage;
+        _enemy.TakedDamage -= OnTakeDamage;        
     }
 
     private void Start()
@@ -54,10 +56,12 @@ public class EnemyAnimator : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float currentSpeed = _agent.velocity.magnitude / _agent.speed;
-        _animator.SetFloat(Speed, currentSpeed);
+        //float currentSpeed = _agent.velocity.magnitude / _agent.speed;
 
-        if (currentSpeed > _minSpeed)
+        _newCurrentSpeed = _agent.velocity.magnitude / _agent.speed;
+        _animator.SetFloat(Speed, _newCurrentSpeed);
+
+        if (_newCurrentSpeed > _minSpeed)
         {
             if (_isMoveing == false)
             {
