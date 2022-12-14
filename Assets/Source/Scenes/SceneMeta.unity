@@ -6180,6 +6180,20 @@ MonoBehaviour:
   _boxPoints: []
   _enemyPoints:
   - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
+  - {fileID: 1593221871}
   _targetMoney: 0
   _targetKills: 0
   _maxBosses: 0
@@ -6326,17 +6340,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4ad782bbfe8151439777c7e6c90f201, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1785197915 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1000149713991367706, guid: 0c6dcf47973be9c45ac3e4bde9b9e938, type: 3}
-  m_PrefabInstance: {fileID: 1000149714429937985}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33bfe77a9e3dd0d4cb57b2d198a40cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1801024767
@@ -7220,14 +7223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _damage
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3385797037905172197, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _health
-      value: 3000
-      objectReference: {fileID: 0}
     - target: {fileID: 4805299535026478063, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -7275,26 +7270,6 @@ PrefabInstance:
     - target: {fileID: 5324392595880280405, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
       propertyPath: m_Name
       value: Player_Characters
-      objectReference: {fileID: 0}
-    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _joystick
-      value: 
-      objectReference: {fileID: 1766064448}
-    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _areaAttack
-      value: 
-      objectReference: {fileID: 1785197915}
-    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _beforeMassAttack
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5713195580975693076, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}
-      propertyPath: _ceilLayerMask.m_Bits
-      value: 1024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b2c443bb86813f4f80ade11ef9be1c0, type: 3}

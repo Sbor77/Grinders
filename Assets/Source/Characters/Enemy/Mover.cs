@@ -105,7 +105,7 @@ public class Mover : MonoBehaviour
 
         if (distanceToPlayer <= _attackDistance)
         {
-            if (_target.CurrentState == State.Move && _canMove)
+            if (_target.CurrentState == State.Move)
                 _enemy.Attack(_target);
 
             if (_target.IsDead)
@@ -226,7 +226,6 @@ public class Mover : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-
         if (other.TryGetComponent(out Player player) && !_isAttaking)
         {
             if (_canMove && _enemy.CanSee(player.transform))

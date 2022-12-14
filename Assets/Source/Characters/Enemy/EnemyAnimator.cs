@@ -25,9 +25,7 @@ public class EnemyAnimator : MonoBehaviour
     private float _attackLength;
     private float _attackMultiplier = 1.5f;
     private float _minSpeed = 0.1f;
-    private bool _isMoveing;
-
-    private float _newCurrentSpeed;
+    private bool _isMoveing;    
 
     private void Awake()
     {
@@ -56,12 +54,10 @@ public class EnemyAnimator : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //float currentSpeed = _agent.velocity.magnitude / _agent.speed;
+        float currentSpeed = _agent.velocity.magnitude / _agent.speed;        
+        _animator.SetFloat(Speed, currentSpeed);
 
-        _newCurrentSpeed = _agent.velocity.magnitude / _agent.speed;
-        _animator.SetFloat(Speed, _newCurrentSpeed);
-
-        if (_newCurrentSpeed > _minSpeed)
+        if (currentSpeed > _minSpeed)
         {
             if (_isMoveing == false)
             {
