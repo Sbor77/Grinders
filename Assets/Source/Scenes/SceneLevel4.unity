@@ -875,8 +875,8 @@ MonoBehaviour:
   - {fileID: 852546998}
   - {fileID: 1295080005}
   - {fileID: 579860348}
-  _targetMoney: 3
-  _targetKills: 5
+  _targetMoney: 15
+  _targetKills: 35
   _maxBosses: 3
 --- !u!65 &37925597
 BoxCollider:
@@ -2851,8 +2851,8 @@ MonoBehaviour:
   - {fileID: 2000632033}
   - {fileID: 449374309}
   - {fileID: 2014212579}
-  _targetMoney: 2
-  _targetKills: 4
+  _targetMoney: 12
+  _targetKills: 25
   _maxBosses: 0
 --- !u!65 &239794932
 BoxCollider:
@@ -9176,8 +9176,8 @@ MonoBehaviour:
   - {fileID: 1086601087}
   - {fileID: 2104164028}
   - {fileID: 1070181371}
-  _targetMoney: 3
-  _targetKills: 3
+  _targetMoney: 10
+  _targetKills: 20
   _maxBosses: 0
 --- !u!1001 &757133118
 PrefabInstance:

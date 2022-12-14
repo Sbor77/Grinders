@@ -394,8 +394,8 @@ MonoBehaviour:
   - {fileID: 2123465376}
   - {fileID: 1258031664}
   - {fileID: 1616088310}
-  _targetMoney: 2
-  _targetKills: 4
+  _targetMoney: 7
+  _targetKills: 15
   _maxBosses: 0
 --- !u!43 &74938071
 Mesh:
@@ -3460,7 +3460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.4789906, y: 0, z: 0, w: 0.8778201}
-  m_LocalPosition: {x: 16.37, y: 19.979872, z: -46.13}
+  m_LocalPosition: {x: 3, y: 13.5, z: -9.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
