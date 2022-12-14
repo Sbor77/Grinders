@@ -54,43 +54,34 @@ public class JoystickTutorial : Joysticks
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if (!DataHandler.Instance.IsMobile())
+        if (Input.GetMouseButtonDown(0) && _canMove)
         {
-            if (Input.GetMouseButtonDown(0) && _canMove)
-            {
-                if (_moveToTouchDownPosition)
-                    _joystickBackground.transform.position = eventData.position;
+            if (_moveToTouchDownPosition)
+                _joystickBackground.transform.position = eventData.position;
 
-                OnDrag(eventData);
-            }
+            OnDrag(eventData);
         }
     }
 
     public override void OnDrag(PointerEventData eventData)
     {
-        if (!DataHandler.Instance.IsMobile())
+        if (Input.GetMouseButton(0) && _canMove)
         {
-            if (Input.GetMouseButton(0) && _canMove)
-            {
-                CalculateJoystickInnerPosition(eventData.position);
-                CalculateInputVector();
-            }
+            CalculateJoystickInnerPosition(eventData.position);
+            CalculateInputVector();
         }
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        if (!DataHandler.Instance.IsMobile())
+        if (Input.GetMouseButtonUp(0) && _canMove)
         {
-            if (Input.GetMouseButtonUp(0) && _canMove)
-            {
-                ReleasedJoystick();
-            }
-            else
-            {
-                if (_canAttack)
-                    OnAttackButtonClick();
-            }
+            ReleasedJoystick();
+        }
+        else
+        {
+            if (_canAttack && !DataHandler.Instance.IsMobile())
+                OnAttackButtonClick();
         }
     }
 
