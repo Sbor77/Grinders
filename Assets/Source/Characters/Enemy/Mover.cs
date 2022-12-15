@@ -141,11 +141,6 @@ public class Mover : MonoBehaviour
 
     private void OnEnemyStunned(bool isStunned)
     {
-        if (isStunned)
-            print("йнмрсфем");
-        else
-            print("нросярхкн");
-
         _isStunned = isStunned;
 
         _canMove = !isStunned;
