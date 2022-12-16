@@ -65,7 +65,12 @@ public class Movement : MonoBehaviour
         if (_isMoving)
         {
             TurnDirection();
-            _controller.Move(_speed * Time.deltaTime * transform.forward);
+            Vector3 moveDirection = _speed * transform.forward;
+
+            if (_controller.isGrounded == false)
+                moveDirection += Vector3.down; 
+
+            _controller.Move(moveDirection * Time.deltaTime);
             float currentSpeed = _controller.velocity.magnitude / _speed;
             ChangedMoveSpeed?.Invoke(currentSpeed);
         }
