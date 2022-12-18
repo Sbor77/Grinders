@@ -27,6 +27,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private TMP_Text _moveComentText;
     [SerializeField] private TMP_Text _mobileMoveComentText;
     [SerializeField] private TMP_Text _attackComentText;
+    [SerializeField] private TMP_Text _mobileAttackComentText;
     [SerializeField] private TMP_Text _coinCollectComentText;
     [SerializeField] private TMP_Text _nextAttackComentText;
     [SerializeField] private TMP_Text _finishPointComentText;
@@ -229,7 +230,7 @@ public class Tutorial : MonoBehaviour
         attackAnimation.AppendCallback(() => 
         { 
             ChangeTitleText(_attackText); 
-            ChangeComentText(_attackComentText); 
+            ChangeComentText(_mobileAttackComentText); 
         });
         attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, HandRepeat); });
         attackAnimation.AppendInterval(HandRepeat / Delay);
@@ -301,9 +302,9 @@ public class Tutorial : MonoBehaviour
 
     private void ChangeComentText(TMP_Text text)
     {
-
         _moveComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _attackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _mobileAttackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _coinCollectComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _nextAttackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _finishPointComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
@@ -316,6 +317,7 @@ public class Tutorial : MonoBehaviour
     {
         _moveComentText.gameObject.SetActive(false);
         _mobileMoveComentText.gameObject.SetActive(false);
+        _mobileAttackComentText.gameObject.SetActive(false);
         _attackComentText.gameObject.SetActive(false);
         _coinCollectComentText.gameObject.SetActive(false);
         _nextAttackComentText.gameObject.SetActive(false);
