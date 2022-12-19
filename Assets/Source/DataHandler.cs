@@ -205,17 +205,26 @@ public class DataHandler : MonoBehaviour
 
     public int GetSavedHealthSkill()
     {
-        return PlayerPrefs.GetInt(_healthSkill);
+        if (PlayerPrefs.HasKey(_healthSkill))
+            return PlayerPrefs.GetInt(_healthSkill);
+        else
+            return 1;
     }
 
     public int GetSavedSpeedSkill()
     {
-        return PlayerPrefs.GetInt(_speedSkill);
+        if (PlayerPrefs.HasKey(_speedSkill))
+            return PlayerPrefs.GetInt(_speedSkill);
+        else
+            return 1;
     }
 
     public int GetSavedRadiusSkill()
     {
-        return PlayerPrefs.GetInt(_radiusSkill);
+        if (PlayerPrefs.HasKey(_radiusSkill))
+            return PlayerPrefs.GetInt(_radiusSkill);
+        else
+            return 1;
     }
 
     public int GetSavedMuteValue()

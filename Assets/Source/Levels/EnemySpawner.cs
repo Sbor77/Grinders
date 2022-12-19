@@ -25,6 +25,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int _enemyCount = 5;
     [SerializeField] private float _speedModifierIncrease = 0.5f;
 
+    public event Action <int> IsPLayerKillsIncreased;
+    public event Action <int> IsBossKilled;
+
     List<ParticleSystem> _bursts;
     List<ParticleSystem> _trails;
     private float _startTrailHeight = 25;
@@ -32,7 +35,6 @@ public class EnemySpawner : MonoBehaviour
     private float _trailDuration = 0.3f;
     private float _burstDuration = 0.5f;
     private float _burstDurationAdd = 1f;
-
     List<Enemy>[] _enemyList;
     List<Enemy> _bossEnemyList;
     private LevelZone _currentZone;
@@ -44,17 +46,14 @@ public class EnemySpawner : MonoBehaviour
     private int _currentBossesCount;
     private int _bossKills;
 
-    public event Action <int> IsPLayerKillsIncreased;
-    public event Action <int> IsBossKilled;
-
     private void Awake()
     {
         _bursts = new List<ParticleSystem>();
         _trails = new List<ParticleSystem>();
-        _currentZoneIndex = 0;
-        _currentZone = _zones[_currentZoneIndex];
         _enemyList = new List<Enemy>[_zones.Count];
         _bossEnemyList = new List<Enemy>();
+        _currentZoneIndex = 0;
+        _currentZone = _zones[_currentZoneIndex];
 
         GenerateAllEffects();
         GenerateAllEnemies();
@@ -76,11 +75,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        LoadCurrentLevelProggress();
-    }
-
     private void OnDisable()
     {
         foreach (var array in _enemyList)
@@ -96,6 +90,11 @@ public class EnemySpawner : MonoBehaviour
             boss.IsDeactivated -= OnBossDeactivated;
         }
 
+    }
+
+    private void Start()
+    {
+        LoadCurrentLevelProggress();
     }
 
     public void SetZoneIndex(int index)
@@ -125,27 +124,10 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void ForceBossSpawn(Enemy bossPrefab, int zoneIndex)
-    {
-        float spawnDelay = _burstDuration + _trailDuration;
-        var spawnPosition = GetRandomPosition(_zones[zoneIndex].EnemyPoints);
-        var boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity, _enemyParent);
-
-        ShowSpawnEffects(spawnPosition);
-
-        DOVirtual.DelayedCall(spawnDelay, () =>
-        {
-            boss.Activate();
-            boss.Restore();
-        });
-    }
-
     private void LoadCurrentLevelProggress()
     {
-        if (DataHandler.Instance.GetSavedLevel() == UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)
-        {
-            _playerKills = DataHandler.Instance.GetSavedKills();
-        }
+        if (DataHandler.Instance.GetSavedLevel() == UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)        
+            _playerKills = DataHandler.Instance.GetSavedKills();        
     }
 
     private void OnBossDeactivated()
@@ -188,8 +170,7 @@ public class EnemySpawner : MonoBehaviour
                 GenerateInactiveEnemies(randomPrefab, _enemyList[i]);
             }
         }
-
-        //for (int i = 0; i < _zones[_zones.Count - 1].MaxBosses; i++)
+        
         if (_bossEnemyPrefab != null)
         {
             for (int i = 0; i < bossesCount; i++)
@@ -197,6 +178,7 @@ public class EnemySpawner : MonoBehaviour
                 GenerateInactiveEnemies(_bossEnemyPrefab, _bossEnemyList);
             }
         }
+
         SpawnEnemy();
     }
 

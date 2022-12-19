@@ -6019,8 +6019,8 @@ MonoBehaviour:
   - {fileID: 1607144210}
   - {fileID: 471675756}
   - {fileID: 20872701}
-  _targetMoney: 10
-  _targetKills: 20
+  _targetMoney: 2
+  _targetKills: 2
   _maxBosses: 0
 --- !u!1 &870715076
 GameObject:

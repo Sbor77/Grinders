@@ -4,15 +4,12 @@ using UnityEngine;
 public class LevelZone : MonoBehaviour
 {
     [SerializeField] private List<DoorOpener> _doors;
-    [SerializeField] private List<Transform> _boxPoints;    
-    [SerializeField] private List<Transform> _enemyPoints;    
+    [SerializeField] private List<Transform> _boxPoints;
+    [SerializeField] private List<Transform> _enemyPoints;
     [SerializeField] private int _targetMoney;
     [SerializeField] private int _targetKills;
     [SerializeField] private int _maxBosses;
-
-    private bool _isActive;
-
-    public bool IsActive => _isActive;
+        
     public int TargetMoney => _targetMoney;
     public int TargetKills => _targetKills;
     public int MaxBosses => _maxBosses;
@@ -24,9 +21,7 @@ public class LevelZone : MonoBehaviour
         if (other.gameObject.GetComponent<Player>())
         {
             if (_doors != null)
-                CloseDoors();
-
-            _isActive = true;
+                CloseDoors();            
         }
     }
 
@@ -35,32 +30,14 @@ public class LevelZone : MonoBehaviour
         foreach (var enemy in _enemyPoints)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(enemy.transform.position, 0.2f);        
+            Gizmos.DrawSphere(enemy.transform.position, 0.2f);
         }
     }
-
-    /*public void Init (int targetMoney, int targetKills)
-    {
-        _targetMoney = targetMoney;
-        _targetKills = targetKills;
-        _isActive = false;
-    }*/
 
     public void AddBossTarget()
     {
         _maxBosses++;
-    }
-
-    public void Activate()
-    {
-        _isActive = true;
-        OpenDoors();
-    }
-
-    public void Deactivate()
-    {
-        _isActive = false;
-    }
+    }    
 
     public void OpenDoors()
     {
@@ -73,7 +50,7 @@ public class LevelZone : MonoBehaviour
         }
     }
 
-    public void CloseDoors()
+    private void CloseDoors()
     {
         if (_doors != null)
         {
