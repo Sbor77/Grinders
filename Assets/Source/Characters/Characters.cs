@@ -15,16 +15,13 @@ public abstract class Characters : MonoBehaviour, IDamageable
     public bool CanSee(Transform target)
     {
         Vector3 heading = target.position - transform.position;
-        Vector3 direction = heading / heading.magnitude;
+        Vector3 direction = heading / heading.magnitude;        
 
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, direction, out hit, heading.magnitude, _obstacleMask))
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, heading.magnitude, _obstacleMask))
             return false;
 
         return true;
     }
-
 }
 
 public interface IDamageable

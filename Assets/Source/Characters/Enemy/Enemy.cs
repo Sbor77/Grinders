@@ -20,7 +20,7 @@ public class Enemy : Characters
     public event Action IsDeactivated;
     public event Action <bool>IsStunned;
 
-    protected bool IsDead = false;
+    protected bool IsDead;
     protected float CurrentHealth;
     
     private Mover _mover;    

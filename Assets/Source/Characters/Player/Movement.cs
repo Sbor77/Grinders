@@ -8,35 +8,34 @@ public class Movement : MonoBehaviour
 {
     private const float AngleCorrection = -1f;
     private const float AddBoostMoveSpeed = 0.5f;
-    private const int _maxPointCount = 10;
+    private const int MaxPointCount = 10;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _speedInAttack;
-    [SerializeField] private int _beforeMassAttack = 2;
+    [SerializeField] private int _massAttackDelay = 2;
     [SerializeField] private float _attackDistance = 15f;
     [SerializeField] private Joysticks _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
     [SerializeField] private AreaAttack _areaAttack;
 
+    public event Action<State,bool> IsStateChanged;
+    public event Action<float> IsMoveSpeedChanged;
+    public event Action IsBoostSpeedChanged;
+    public event Action<int, int> IsMassAttackCooldownChanged;
+
     private CharacterController _controller;
     private CapsuleCollider _collider;
     private Vector3 _attackDirection = Vector3.forward;
     private Vector3 _moveDirection = Vector3.forward;
-    private bool _isMoving = false;
-    private bool _isTakingDamage = false;
-    private bool _massAttack = false;
+    private bool _isMoving;
+    private bool _isTakingDamage;
+    private bool _isMassAttackApplying;
     private int _currentAttacksCount;
+    private float _halfRotation;
     private float _delayMassAttack = 3.5f;
 
-    public float Speed => _speed;
-
-    private float _halfRotation => _rotationSpeed / 2f;
-
-    public event Action<State,bool> ChangedState;
-    public event Action<float> ChangedMoveSpeed;
-    public event Action ChangedBoostSpeed;
-    public event Action<int, int> ChangedMassAttackCooldown;
+    public float Speed => _speed;    
 
     private void Awake()
     {
@@ -46,18 +45,23 @@ public class Movement : MonoBehaviour
 
     private void OnEnable()
     {
-        _joystick.ChangedDirection += OnChangedDirection;
-        _joystick.ReleasedTouch += OnReleasedTouch;
-        _joystick.AttackButtonClick += StartAttack;
-        _joystick.SkillButtonClick += UseMassAttack;
+        _joystick.ChangedDirection += OnJoystickDirectionChanged;
+        _joystick.ReleasedTouch += OnJoystickTouchReleased;
+        _joystick.AttackButtonClick += OnJoystickAttackClicked;
+        _joystick.SkillButtonClick += OnJoystickMassAttackClicked;
     }
 
     private void OnDisable()
     {
-        _joystick.ChangedDirection -= OnChangedDirection;
-        _joystick.ReleasedTouch -= OnReleasedTouch;
-        _joystick.AttackButtonClick -= StartAttack;
-        _joystick.SkillButtonClick -= UseMassAttack;
+        _joystick.ChangedDirection -= OnJoystickDirectionChanged;
+        _joystick.ReleasedTouch -= OnJoystickTouchReleased;
+        _joystick.AttackButtonClick -= OnJoystickAttackClicked;
+        _joystick.SkillButtonClick -= OnJoystickMassAttackClicked;
+    }
+
+    private void Start()
+    {
+        _halfRotation = _rotationSpeed / 2f;
     }
 
     private void Update()
@@ -72,13 +76,19 @@ public class Movement : MonoBehaviour
 
             _controller.Move(moveDirection * Time.deltaTime);
             float currentSpeed = _controller.velocity.magnitude / _speed;
-            ChangedMoveSpeed?.Invoke(currentSpeed);
+            IsMoveSpeedChanged?.Invoke(currentSpeed);
         }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.TryGetComponent(out Point point))
+            _collider.enabled = true;
     }
 
     public void OnDied()
     {
-        this.enabled = false;
+        enabled = false;
     }
 
     public void Init(int speedLevel)
@@ -89,27 +99,27 @@ public class Movement : MonoBehaviour
         if (speedLevel > 1)
             _rotationSpeed += _halfRotation * speedLevel;
 
-        ChangedBoostSpeed?.Invoke();
-        ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+        IsBoostSpeedChanged?.Invoke();
+        IsMassAttackCooldownChanged?.Invoke(_currentAttacksCount, _massAttackDelay);
     }
 
-    public void KilledPerAttack(bool isKilled)
+    public void CountCurrentAttacks(bool isKilled)
     {
         if (isKilled)
         {
             _currentAttacksCount++;
-            ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+            IsMassAttackCooldownChanged?.Invoke(_currentAttacksCount, _massAttackDelay);
         }
 
-        if (_currentAttacksCount >= _beforeMassAttack)
+        if (_currentAttacksCount >= _massAttackDelay)
             _joystick.ButtonActivate();
     }
 
-    public void ChangedHitDamage(bool isTakingDamage = false)
+    public void ChangeTakingDamageState(bool isTakingDamage = false)
     {
         _isTakingDamage = isTakingDamage;
 
-        if (_currentAttacksCount >= _beforeMassAttack)
+        if (_currentAttacksCount >= _massAttackDelay)
             _joystick.ButtonActivate();
     }
 
@@ -118,7 +128,7 @@ public class Movement : MonoBehaviour
         return (speedLevel - 1) * AddBoostMoveSpeed;
     }
 
-    private void OnChangedDirection(Vector2 direction)
+    private void OnJoystickDirectionChanged(Vector2 direction)
     {
         if (direction != Vector2.zero)
         {
@@ -127,11 +137,11 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void UseMassAttack()
+    private void OnJoystickMassAttackClicked()
     {
         if (!_isTakingDamage)
         {
-            _massAttack = true;
+            _isMassAttackApplying = true;
             StartMassAttack();
         }
     }
@@ -143,37 +153,37 @@ public class Movement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, currentAngle, 0f);
     }
 
-    private void OnReleasedTouch()
+    private void OnJoystickTouchReleased()
     {
         _isMoving = false;
-        ChangedMoveSpeed?.Invoke(0f);
+        IsMoveSpeedChanged?.Invoke(0f);
     }
 
-    private void StartAttack()
+    private void OnJoystickAttackClicked()
     {
-       StartMoveingAttack();
+        StartAttack();
     }
 
     private void StartMassAttack()
     {
-        ChangedState?.Invoke(State.Attack, true);
-        SetChangeMoving(false);
+        IsStateChanged?.Invoke(State.Attack, true);
+        SetMovingActive(false);
         _currentAttacksCount = 0;
-        ChangedMassAttackCooldown?.Invoke(_currentAttacksCount, _beforeMassAttack);
+        IsMassAttackCooldownChanged?.Invoke(_currentAttacksCount, _massAttackDelay);
         Invoke(nameof(EndMassAttack), _delayMassAttack);
         _areaAttack.Apply();
     }
 
     private void EndMassAttack()
     {
-        ChangedState?.Invoke(State.Move, false);
-        SetChangeMoving(true);
-        _massAttack = false;
+        IsStateChanged?.Invoke(State.Move, false);
+        SetMovingActive(true);
+        _isMassAttackApplying = false;
     }
 
-    private void StartMoveingAttack()
+    private void StartAttack()
     {
-        SetChangeMoving(false);
+        SetMovingActive(false);
         _attackDirection = transform.forward;
         _attackDirection.y = 0;
         List<Vector3> movePoints = GetMovePoints();
@@ -181,11 +191,11 @@ public class Movement : MonoBehaviour
         if (movePoints != null)
         {
             StartCoroutine(Move(movePoints));
-            ChangedState?.Invoke(State.Attack, false);
+            IsStateChanged?.Invoke(State.Attack, false);
         }
         else
         { 
-            SetChangeMoving(true);
+            SetMovingActive(true);
         }
     }
 
@@ -202,7 +212,7 @@ public class Movement : MonoBehaviour
             _startAttackPosition = newPoint;
             movePoints.Add(newPoint);
 
-            if (movePoints.Count > _maxPointCount)
+            if (movePoints.Count > MaxPointCount)
                 return null;
         }
 
@@ -224,15 +234,15 @@ public class Movement : MonoBehaviour
         }
 
         return point;
-    }
+    }    
 
-    private void SetChangeMoving(bool activate)
+    private void SetMovingActive(bool value)
     {
-        _controller.enabled = activate;
-        _joystick.enabled = activate;
+        _controller.enabled = value;
+        _joystick.enabled = value;
 
-        if (_massAttack == false)
-            _collider.enabled = !activate;
+        if (_isMassAttackApplying == false)
+            _collider.enabled = !value;
     }
 
     private IEnumerator Move(List<Vector3> points)
@@ -240,8 +250,8 @@ public class Movement : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
             yield return StartMove(points[i]);
 
-        ChangedState?.Invoke(State.Move, false);
-        SetChangeMoving(true);
+        IsStateChanged?.Invoke(State.Move, false);
+        SetMovingActive(true);
     }
 
     private Coroutine StartMove(Vector3 point)
@@ -256,11 +266,5 @@ public class Movement : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, pointPosition, _speedInAttack * Time.deltaTime);
             yield return null;
         }
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.collider.TryGetComponent(out Point point))
-            _collider.enabled = true;
     }
 }

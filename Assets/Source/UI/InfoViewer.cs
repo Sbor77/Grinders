@@ -68,7 +68,7 @@ public class InfoViewer : MonoBehaviour
         _player.ChangedHealth += OnChangedHealth;
         _player.ChangedCoin += OnChangedPlayerCoins;
         _soundButton.onClick.AddListener(OnMuteToggled);
-        _movement.ChangedMassAttackCooldown += OnChangedMassCooldown;
+        _movement.IsMassAttackCooldownChanged += OnChangedMassCooldown;
     }
 
     private void OnDisable()
@@ -85,7 +85,7 @@ public class InfoViewer : MonoBehaviour
         _player.ChangedHealth -= OnChangedHealth;
         _player.ChangedCoin -= OnChangedPlayerCoins;
         _soundButton.onClick.RemoveListener(OnMuteToggled);
-        _movement.ChangedMassAttackCooldown -= OnChangedMassCooldown;
+        _movement.IsMassAttackCooldownChanged -= OnChangedMassCooldown;
     }
 
     void Start()

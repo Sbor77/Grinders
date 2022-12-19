@@ -46,12 +46,12 @@ public class Player : Characters
 
     private void OnEnable()
     {
-        _movement.ChangedState += OnChangedState;
+        _movement.IsStateChanged += OnChangedState;
     }
 
     private void OnDisable()
     {
-        _movement.ChangedState -= OnChangedState;
+        _movement.IsStateChanged -= OnChangedState;
     }
 
     public void Init(int healthSkillLevel, int speedSkillLevel)
@@ -79,7 +79,7 @@ public class Player : Characters
         {
             _takeDamageSFX.Play();
             _currentHealth = ChangeHealth(-damage);
-            _movement.ChangedHitDamage(true);
+            _movement.ChangeTakingDamageState(true);
             TakedDamage?.Invoke();
             ActivateEffect(_damageEffect, _effectDuration);
             ActivateEffect(_woundEffect, _effectDuration);
@@ -101,7 +101,7 @@ public class Player : Characters
         if (state == State.Attack)
             _isKilledPerAttack = false;
         else
-            _movement.KilledPerAttack(_isKilledPerAttack);
+            _movement.CountCurrentAttacks(_isKilledPerAttack);
     }
 
     private float ChangeHealth(float value)

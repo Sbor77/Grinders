@@ -35,43 +35,50 @@ public class Animations : MonoBehaviour
         _player = GetComponent<Player>();
     }
 
-    private void Start()
-    {
-        _mover.ChangedState += OnChangedStateAttack;
-        _mover.ChangedMoveSpeed += OnChangedMoveSpeed;
-        _mover.ChangedBoostSpeed += OnChangedBoostSpeed;
-        _player.IsDied += OnDying;
-        _player.TakedDamage += OnTakedDamage;
-        OnChangedBoostSpeed();
-    }
-
-    private void OnChangedBoostSpeed()
-    {
-        _animator.SetFloat(Modifier, _mover.Speed / SpeedModifier);
+    private void OnEnable()
+    {        
+        _mover.IsStateChanged += OnMoverStateChanged;
+        _mover.IsMoveSpeedChanged += OnMoveSpeedChanged;
+        _mover.IsBoostSpeedChanged += OnBoostSpeedChanged;
+        _player.IsDied += OnPlayerDied;
+        _player.TakedDamage += OnPlayerDamageTaken;
     }
 
     private void OnDisable()
     {
-        _mover.ChangedState -= OnChangedStateAttack;
-        _mover.ChangedMoveSpeed -= OnChangedMoveSpeed;
-        _player.IsDied -= OnDying;
-        _player.TakedDamage -= OnTakedDamage;
+        _mover.IsStateChanged -= OnMoverStateChanged;
+        _mover.IsMoveSpeedChanged -= OnMoveSpeedChanged; 
+        _mover.IsBoostSpeedChanged -= OnBoostSpeedChanged;
+        _player.IsDied -= OnPlayerDied;
+        _player.TakedDamage -= OnPlayerDamageTaken;
     }
 
-    private void OnTakedDamage()
+    private void Start()
+    {
+        OnBoostSpeedChanged();
+    }
+
+    private void OnBoostSpeedChanged()
+    {
+        _animator.SetFloat(Modifier, _mover.Speed / SpeedModifier);
+    }
+
+    private void OnPlayerDamageTaken()
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(TakedDamage) == false)
         {
             _animator.SetTrigger(TakedDamage);
             float takeDamageDuration = _takeDamageClip.length;
-            DOVirtual.DelayedCall(takeDamageDuration, () => _mover.ChangedHitDamage(false));
+            DOVirtual.DelayedCall(takeDamageDuration, () => _mover.ChangeTakingDamageState(false));
         }
-
     }
 
-    private void OnDying() => _animator.SetTrigger(Died);
+    private void OnPlayerDied()
+    {
+        _animator.SetTrigger(Died);
+    }
 
-    private void OnChangedMoveSpeed(float speed)
+    private void OnMoveSpeedChanged(float speed)
     {
         _animator.SetFloat(Speed, speed);
 
@@ -90,7 +97,7 @@ public class Animations : MonoBehaviour
         }
     }
 
-    private void OnChangedStateAttack(State state, bool massAttack)
+    private void OnMoverStateChanged(State state, bool massAttack)
     {
         if (state == State.Attack && massAttack)
         {

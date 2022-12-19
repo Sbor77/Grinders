@@ -34648,7 +34648,7 @@ MonoBehaviour:
   _speed: 6
   _rotationSpeed: 720
   _speedInAttack: 15
-  _beforeMassAttack: 4
+  _massAttackDelay: 2
   _attackDistance: 15
   _joystick: {fileID: 0}
   _wallLayerMask:
@@ -34671,8 +34671,8 @@ MonoBehaviour:
   _takeDamageClip: {fileID: -203655887218126122, guid: cb70d46b33ea9234d8ac0d536ea619a6, type: 3}
   _attackVFX: {fileID: 6475615425885104099}
   _moveSFX: {fileID: 7174414731611085008}
-  _spinAttackSound: {fileID: 8300000, guid: 3a6649f44ee794b4dbc8f5ea24bfed71, type: 3}
-  _walkSound: {fileID: 8300000, guid: bb2695b7d3ab9b942b1afd039360b073, type: 3}
+  _spinAttackSound: {fileID: 8300000, guid: 1252fd363d297ec438e7c962922a0a81, type: 3}
+  _walkSound: {fileID: 8300000, guid: 992e875b4d963d04a80ef9c38a77c403, type: 3}
 --- !u!114 &3385797037905172197
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,10 +23,10 @@ public class Mover : MonoBehaviour
     private Vector3 _zeroPoint;
     private Vector3 _movePoint;
     private float _baseAgentSpeed;
-    private bool _isAttaking = false;
+    private bool _isAttaking;
     private bool _canMove = true;
     private bool _isAlive = true;
-    private bool _isDancing = false;
+    private bool _isDancing;
     private bool _isStunned;    
 
     protected bool IsAcquireTarget => PlayerTarget != null;
