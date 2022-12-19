@@ -96,8 +96,8 @@ public class Tutorial : MonoBehaviour
 
     public void OnStayFinishPoint()
     {
-        _joystick.NotAllowedToMove();
-        _joystick.AllowToMassAttack();
+        _joystick.DisableMoving();
+        _joystick.EnableMassAttacking();
 
         if (!DataHandler.Instance.IsMobile())
             ChangeComentText(_massAttackPcComentText);
@@ -107,7 +107,7 @@ public class Tutorial : MonoBehaviour
 
     public void OnButtonMassAttackActivate()
     {
-        _joystick.NotAllowedToAttack();
+        _joystick.DisableAttacking();
     }
 
     private void LoadLevelOne()
@@ -155,7 +155,6 @@ public class Tutorial : MonoBehaviour
         if (_killedEnemys >= _enemies.Length)
         {
             _secondPathArrow.SetActive(false);
-
             ChangeTitleText(_massAttackText);
             DOVirtual.DelayedCall(Delay, () => { _finishPoint.gameObject.SetActive(true); });
 
@@ -176,7 +175,7 @@ public class Tutorial : MonoBehaviour
         moveAnimation.AppendInterval(Delay);
         moveAnimation.AppendCallback(() =>
         {
-            _joystick.AllowToMove();
+            _joystick.EnableMoving();
             _joystick.enabled = true;
         });
     }
@@ -200,7 +199,7 @@ public class Tutorial : MonoBehaviour
         moveAnimation.AppendInterval(1f);
         moveAnimation.AppendCallback(() =>
         {
-            _joystick.AllowToMove();
+            _joystick.EnableMoving();
             _mouseImage.enabled = false;
         });
     }
@@ -217,7 +216,7 @@ public class Tutorial : MonoBehaviour
         attackAnimation.AppendCallback(() =>
         {
             _joystick.enabled = true;
-            _joystick.AllowToAttack();
+            _joystick.EnableAttacking();
             _mouseImage.enabled = false;
         });
     }
@@ -236,7 +235,7 @@ public class Tutorial : MonoBehaviour
         attackAnimation.AppendInterval(HandRepeat / Delay);
         attackAnimation.AppendCallback(() =>
         {
-            _joystick.AllowToAttack();
+            _joystick.EnableAttacking();
             _handImage.enabled = false;
             _joystick.enabled = true;
         });
@@ -256,7 +255,7 @@ public class Tutorial : MonoBehaviour
         attackAnimation.AppendInterval(HandRepeat / Delay);
         attackAnimation.AppendCallback(() =>
         {
-            _joystick.AllowToAttack();
+            _joystick.EnableAttacking();
             _handImage.enabled = false;
             _joystick.enabled = true;
         });        
@@ -286,7 +285,6 @@ public class Tutorial : MonoBehaviour
         _moveText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _attackText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _massAttackText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-
         DOVirtual.DelayedCall(Delay, () => { ShowTitleText(titleText); });
     }
 
@@ -295,7 +293,6 @@ public class Tutorial : MonoBehaviour
         _moveText.gameObject.SetActive(false);
         _attackText.gameObject.SetActive(false);
         _massAttackText.gameObject.SetActive(false);
-
         titleText.gameObject.SetActive(true);
         titleText.transform.DOScale(Vector3.one, Delay).SetEase(Ease.Linear).SetLoops(1);
     }
@@ -309,7 +306,6 @@ public class Tutorial : MonoBehaviour
         _nextAttackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _finishPointComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _massAttackPcComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-
         DOVirtual.DelayedCall(Delay, () => { ShowText(text); });
     }
 

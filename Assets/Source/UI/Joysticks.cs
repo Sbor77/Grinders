@@ -25,8 +25,7 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
     private void Start()
     {
         if (DataHandler.Instance.IsMobile())
-        {
-            //_moveToTouchDownPosition = true;
+        {            
             if (_mobileJoyPosition != null)
                 _joystickBackground.transform.position = _mobileJoyPosition.transform.position;
 
@@ -60,12 +59,11 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     protected void ReleasedJoystick()
     {
-        _joystickInner.anchoredPosition = Vector2.zero;
-        //_inputVector = Vector2.zero;
+        _joystickInner.anchoredPosition = Vector2.zero;        
         ReleasedTouch?.Invoke();
     }
 
-    public virtual void ButtonActivate()
+    public virtual void ActivateMassAttackButton()
     {
         _skillButton.interactable = true;
     }

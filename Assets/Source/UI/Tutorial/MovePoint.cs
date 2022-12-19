@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovePoint : Point
@@ -8,11 +6,10 @@ public class MovePoint : Point
 
     public override void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.GetComponent<Player>())
         {
             _tutorial.OnStayMovePoint();
-            Destroy(gameObject);
-            //gameObject.SetActive(false);
+            Destroy(gameObject);         
         }
     }
 }

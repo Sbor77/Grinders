@@ -11,25 +11,21 @@ public class Player : Characters
     [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _woundEffect;
 
-    private Movement _movement;
-    private float _currentHealth;
-    private int _coins;
-    private State _currentState = State.Move;
-    private float _effectDuration = 3f;
-    private int _addBoostMaxHealth = 10;
-    private bool _isKilledPerAttack;
-
     public event Action<float> ChangedHealth;
     public event Action<int> ChangedCoin;
     public event Action IsDied;
     public event Action TakedDamage;
 
+    private Movement _movement;
+    private float _currentHealth;    
+    private State _currentState = State.Move;
+    private float _effectDuration = 3f;
+    private int _addBoostMaxHealth = 10;
+    private bool _isKilledPerAttack;
+
     public State CurrentState => _currentState;
-
     public float MaxHealth => _health;
-
     public bool IsDead => _currentHealth == 0;
-
 
     private void Awake()
     {
@@ -62,8 +58,7 @@ public class Player : Characters
     }
 
     public void AddMoney(int value)
-    {
-        _coins += value;
+    {        
         ChangedCoin?.Invoke(value);
     }
 

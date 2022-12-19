@@ -112,7 +112,7 @@ public class Movement : MonoBehaviour
         }
 
         if (_currentAttacksCount >= _massAttackDelay)
-            _joystick.ButtonActivate();
+            _joystick.ActivateMassAttackButton();
     }
 
     public void ChangeTakingDamageState(bool isTakingDamage = false)
@@ -120,7 +120,7 @@ public class Movement : MonoBehaviour
         _isTakingDamage = isTakingDamage;
 
         if (_currentAttacksCount >= _massAttackDelay)
-            _joystick.ButtonActivate();
+            _joystick.ActivateMassAttackButton();
     }
 
     private float LoadBoostSpeed(int speedLevel)

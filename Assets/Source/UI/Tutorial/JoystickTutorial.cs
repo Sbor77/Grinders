@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
-//using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class JoystickTutorial : Joysticks
 {
@@ -27,23 +24,7 @@ public class JoystickTutorial : Joysticks
         ReleasedJoystick();
         _skillButton.onClick.RemoveListener(OnSkillButtonClick);
         _attackButton.onClick.RemoveListener(OnAttackClick);
-    }
-
-    //private void Start()
-    //{
-    //    if (DataHandler.Instance.IsMobile())
-    //    {
-    //        _moveToTouchDownPosition = true;
-    //        _joystickBackground.GetComponent<Image>().color = Color.white;
-    //        _joystickInner.GetComponent<Image>().color = Color.white;
-    //    }
-    //    else
-    //    {
-    //        _attackButton.gameObject.SetActive(false);
-    //        _joystickBackground.GetComponent<Image>().color = Color.clear;
-    //        _joystickInner.GetComponent<Image>().color = Color.clear;
-    //    }
-    //}
+    }   
 
     private void Update()
     {
@@ -92,35 +73,35 @@ public class JoystickTutorial : Joysticks
         }
     }
 
-    public void AllowToMove()
+    public void EnableMoving()
     {
         _canMove = true;
     }
 
-    public void AllowToAttack()
+    public void EnableAttacking()
     {
         _canAttack = true;
     }
 
-    public void NotAllowedToAttack()
+    public void DisableAttacking()
     {
         _canAttack = false;
     }
 
-    public void NotAllowedToMove()
+    public void DisableMoving()
     {
         _canMove = false;
         ReleasedJoystick();
     }
 
-    public void AllowToMassAttack()
+    public void EnableMassAttacking()
     {
         _canMassAttack = true;
     }
 
-    public override void ButtonActivate()
+    public override void ActivateMassAttackButton()
     {
-        base.ButtonActivate();
+        base.ActivateMassAttackButton();
         _tutorial.OnButtonMassAttackActivate();
     }
 
