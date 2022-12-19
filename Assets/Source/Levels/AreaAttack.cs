@@ -16,8 +16,8 @@ public class AreaAttack : MonoBehaviour
     [SerializeField] private GameObject _chargeRotator;
     [SerializeField] private ParticleSystem _chargeEffect;
     [Space]
-    [SerializeField] private float _radius;
-    [SerializeField] private float _damage;
+    [SerializeField] private float _mainRadius;
+    [SerializeField] private float _mainDamage;
     [SerializeField] private float _stunDamage;
     [SerializeField] private float _chargeDuration;
 
@@ -26,42 +26,29 @@ public class AreaAttack : MonoBehaviour
     private float _effectHeiht = 0.05f;
     private float _radiusOffset = 2;
     private Vector3 _rotationAroundY = new Vector3(0, 360, 0);
-    private Vector3 _effectPosition;
-    
-    private float _stunRadius => _radius * 2f;
+    private Vector3 _effectPosition;    
+    private float _stunRadius;
+
+    private void Start()
+    {
+        _stunRadius = _mainRadius * _radiusOffset;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, _mainRadius);
+
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position, _stunRadius);
+    }
 
     public void Apply()
     {
         Animate();
-        DamageTargets(_radius, 0);
+        ApplyAreaDamage(_mainRadius, _stunDamage);
         IsActivated?.Invoke();
-    }
-
-    private void SetChargeEffectPosition()
-    {
-        _chargeEffect.transform.localPosition = new Vector3(0, _effectHeiht, - (_radius + _radiusOffset));
-    }
-
-    private void ShowChargeEffect()
-    {
-        float effectLiveTime = 1.5f;
-
-        _chargeEffect.gameObject.SetActive(true);
-
-        _chargeRotator.transform.DORotate(_rotationAroundY, _chargeDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
-
-        DOVirtual.DelayedCall(effectLiveTime, () => _chargeEffect.gameObject.SetActive(false));
-    }
-
-    private void DamageTargets(float radius, float damage)
-    {
-        ApplyAreaDamage(radius, damage);
-    }
-
-    private void StunTargets()
-    {
-        ApplyAreaDamage(_stunRadius, _stunDamage);
-    }
+    }   
 
     private void ApplyAreaDamage(float radius, float damage)
     {
@@ -74,54 +61,41 @@ public class AreaAttack : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, _radius);
-
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position, _stunRadius);
-    }
-
     private void Animate()
     {
+        float interval = 0.5f;
+
         _effectPosition = new Vector3 (_player.transform.position.x, _effectHeiht, _player.transform.position.z);
-
         transform.position = _effectPosition;
-
+        _auraEffect.gameObject.SetActive(true);
         SetChargeEffectPosition();
 
         Sequence animation = DOTween.Sequence();
-
-        _auraEffect.gameObject.SetActive(true);
         
         animation.AppendCallback(() => 
         {
             ShowChargeEffect();
             _chargeSound.Play();
         });
-        animation.Join(_auraEffect.transform.DOScale(_radius, _chargeDuration).SetEase(Ease.Linear));
-
-        animation.AppendInterval(0.5f);
+        animation.Join(_auraEffect.transform.DOScale(_mainRadius, _chargeDuration).SetEase(Ease.Linear));
+        animation.AppendInterval(interval);
         animation.AppendCallback(() =>
         {
-            DamageTargets(_radius, _damage);
+            ApplyAreaDamage(_mainRadius, _mainDamage);
             _auraEffect.gameObject.SetActive(false);
-            _explosionEffect.transform.localScale = Vector3.one * _radius;
+            _explosionEffect.transform.localScale = Vector3.one * _mainRadius;
             _explosionEffect.gameObject.SetActive(true);
         });
-
         animation.AppendInterval(_chargeDuration);
         animation.AppendCallback( () =>
         {
             StunTargets();
             _explosionSound.Play();
-            _decalEffect.transform.localScale = Vector3.one * _radius;
+            _decalEffect.transform.localScale = Vector3.one * _mainRadius;
             _decalEffect.gameObject.SetActive(true);
         });
         animation.AppendInterval(_explosionEffect.main.duration);
         animation.AppendCallback(() => StunTargets());
-
         animation.AppendInterval(_chargeDuration );
         animation.AppendCallback(() =>
         {
@@ -130,5 +104,24 @@ public class AreaAttack : MonoBehaviour
 
         animation.AppendInterval(_chargeDuration + _explosionEffect.main.duration + _decalEffect.main.duration);
         animation.AppendCallback(() => _decalEffect.gameObject.SetActive(false));
+    }
+
+    private void SetChargeEffectPosition()
+    {
+        _chargeEffect.transform.localPosition = new Vector3(0, _effectHeiht, - (_mainRadius + _radiusOffset));
+    }
+
+    private void ShowChargeEffect()
+    {
+        float effectLiveTime = 1.5f;
+
+        _chargeEffect.gameObject.SetActive(true);
+        _chargeRotator.transform.DORotate(_rotationAroundY, _chargeDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+        DOVirtual.DelayedCall(effectLiveTime, () => _chargeEffect.gameObject.SetActive(false));
+    }
+
+    private void StunTargets()
+    {
+        ApplyAreaDamage(_stunRadius, _stunDamage);
     }
 }

@@ -61,8 +61,8 @@ MonoBehaviour:
   _chargeSound: {fileID: 1000149713991367708}
   _chargeRotator: {fileID: 1000149715139520490}
   _chargeEffect: {fileID: 1406213750296065480}
-  _radius: 4
-  _damage: 100
+  _mainRadius: 4
+  _mainDamage: 100
   _stunDamage: 0
   _chargeDuration: 1
 --- !u!82 &1000149713991367707
