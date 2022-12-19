@@ -130,6 +130,17 @@ public class Mover : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        _enemyAnimator.FinishAttack();
+
+        if (_isStunned == false)
+        {
+            _isAttaking = false;
+            _canMove = true;
+        }
+    }
+
     public void ResetState()
     {
         _isAlive = true;

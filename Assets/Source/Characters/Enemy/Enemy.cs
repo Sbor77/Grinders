@@ -35,6 +35,11 @@ public class Enemy : Characters
         CurrentHealth = Health;
     }
 
+    public void Attack()
+    {
+        _mover.Attack();
+    }
+
     public void Deactivate()
     {
         gameObject.SetActive(false);

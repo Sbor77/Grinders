@@ -48,7 +48,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private void Start()
     {
-        _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);        
+        //_animator.SetFloat(Modifier, _agent.speed / SpeedModifier);        
         ChangeAttackSpeedModifier(_attackMultiplier);
     }
 
