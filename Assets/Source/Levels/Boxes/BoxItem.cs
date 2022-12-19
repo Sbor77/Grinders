@@ -1,5 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -20,9 +18,7 @@ public class BoxItem : MonoBehaviour
     private void Start()
     {
         _defaultScale = transform.localScale;
-
         _defaultHeight = transform.position.y;
-
         _defaultLocalPosition = transform.localPosition;
     }
 
@@ -37,11 +33,8 @@ public class BoxItem : MonoBehaviour
         float increaseScaleRatio = 3f;
 
         _endlessRotation.Kill();
-
         transform.eulerAngles = Vector3.zero;
-
         _collectEffect.Play();
-
         _collectingSequence = DOTween.Sequence();
 
         _collectingSequence.AppendCallback(_collectEffect.Play);
@@ -65,21 +58,18 @@ public class BoxItem : MonoBehaviour
     public void Activate()
     {
         gameObject.SetActive(true);
-
         RotateOnY();
     }
 
     public void GenerateValue(int minValue, int maxValue)
     {
-        _value = UnityEngine.Random.Range(minValue, maxValue + 1);
+        _value = Random.Range(minValue, maxValue + 1);
     }
 
     private void RotateOnY()
     {
         float rotationTime = 1;
-
         transform.eulerAngles = Vector3.zero;
-
         _endlessRotation = transform.DORotate(_rotationAroundY, rotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
     }
 }
