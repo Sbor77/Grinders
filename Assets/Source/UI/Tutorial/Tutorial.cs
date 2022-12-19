@@ -88,10 +88,10 @@ public class Tutorial : MonoBehaviour
         _joystick.enabled = false;
         _joystick.AttackButtonClick += OnAttack;
 
-        if (!DataHandler.Instance.IsMobile())
-            StartPCAttackAnimation();
-        else
+        if (DataHandler.Instance.IsMobile())
             StartMobileAttackAnimation();
+        else
+            StartPCAttackAnimation();
     }
 
     public void OnStayFinishPoint()
@@ -99,10 +99,10 @@ public class Tutorial : MonoBehaviour
         _joystick.DisableMoving();
         _joystick.EnableMassAttacking();
 
-        if (!DataHandler.Instance.IsMobile())
-            ChangeComentText(_massAttackPcComentText);
-        else
+        if (DataHandler.Instance.IsMobile())
             StartMobileMassAttackAnimation();
+        else
+            ChangeComentText(_massAttackPcComentText);
     }
 
     public void OnButtonMassAttackActivate()
@@ -122,7 +122,6 @@ public class Tutorial : MonoBehaviour
         _massAttackText.gameObject.SetActive(false);
 
         float endScreenDelay = HandRepeat / Delay;
-
         DOVirtual.DelayedCall(endScreenDelay, () => _endScreen.SetActive(true));
     }
 
@@ -136,7 +135,9 @@ public class Tutorial : MonoBehaviour
 
     private void OnItemCollected()
     {
-        _wallDoor.DOMoveY(0f, 1f).SetEase(Ease.Linear).SetLoops(1);
+        float doorHieght = 1f;
+
+        _wallDoor.DOMoveY(0f, doorHieght).SetEase(Ease.Linear).SetLoops(1);
         _attackText.gameObject.SetActive(true);
         ChangeComentText(_nextAttackComentText);
         _secondPathArrow.SetActive(true);
@@ -156,9 +157,9 @@ public class Tutorial : MonoBehaviour
         {
             _secondPathArrow.SetActive(false);
             ChangeTitleText(_massAttackText);
-            DOVirtual.DelayedCall(Delay, () => { _finishPoint.gameObject.SetActive(true); });
+            DOVirtual.DelayedCall(Delay, () => _finishPoint.gameObject.SetActive(true));
 
-            if (!DataHandler.Instance.IsMobile())
+            if (DataHandler.Instance.IsMobile() == false)
                 ChangeComentText(_finishPointComentText);
         }
     }
@@ -183,7 +184,7 @@ public class Tutorial : MonoBehaviour
     private void StartPCMoveAnimation()
     {
         Sequence moveAnimation = DOTween.Sequence();
-        moveAnimation.AppendCallback(() => { ShowAnimationMouseClick(_mouseLeftButtonSprite, MouseRepeat); });
+        moveAnimation.AppendCallback(() => ShowAnimationMouseClick(_mouseLeftButtonSprite, MouseRepeat));
         moveAnimation.AppendInterval(MouseRepeat);
         moveAnimation.Append(_mouseImage.transform.DOLocalMoveY(MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(MouseRepeat, LoopType.Yoyo));
         moveAnimation.Append(_mouseImage.transform.DOLocalMoveY(-MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(MouseRepeat, LoopType.Yoyo));
@@ -208,10 +209,14 @@ public class Tutorial : MonoBehaviour
     {
         _mouseImage.enabled = true;
         Sequence attackAnimation = DOTween.Sequence();
-        attackAnimation.AppendCallback(() => { ChangeTitleText(_attackText); ChangeComentText(_attackComentText); });
-        attackAnimation.AppendCallback(() => { ShowAnimationMouseClick(_mouseRightButtonSprite, HandRepeat); });
+        attackAnimation.AppendCallback(() => 
+        {
+            ChangeTitleText(_attackText); 
+            ChangeComentText(_attackComentText); 
+        });
+        attackAnimation.AppendCallback(() => ShowAnimationMouseClick(_mouseRightButtonSprite, HandRepeat));
         attackAnimation.AppendInterval(HandRepeat);
-        attackAnimation.AppendCallback(() => { _mouseImage.sprite = _mouseSprite; });
+        attackAnimation.AppendCallback(() => _mouseImage.sprite = _mouseSprite);
         attackAnimation.AppendInterval(Delay);
         attackAnimation.AppendCallback(() =>
         {
@@ -231,7 +236,7 @@ public class Tutorial : MonoBehaviour
             ChangeTitleText(_attackText); 
             ChangeComentText(_mobileAttackComentText); 
         });
-        attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, HandRepeat); });
+        attackAnimation.AppendCallback(() => ShowAnimationHandClick(_handImage, HandRepeat));
         attackAnimation.AppendInterval(HandRepeat / Delay);
         attackAnimation.AppendCallback(() =>
         {
@@ -251,7 +256,7 @@ public class Tutorial : MonoBehaviour
             ChangeTitleText(_massAttackText);
             ChangeComentText(_massAttackComentText);
         });
-        attackAnimation.AppendCallback(() => { ShowAnimationHandClick(_handImage, HandRepeat); });
+        attackAnimation.AppendCallback(() => ShowAnimationHandClick(_handImage, HandRepeat));
         attackAnimation.AppendInterval(HandRepeat / Delay);
         attackAnimation.AppendCallback(() =>
         {
@@ -267,9 +272,9 @@ public class Tutorial : MonoBehaviour
 
         for (int i = 0; i < repeatCount; i++)
         {
-            clickAnimation.AppendCallback(() => { _mouseImage.sprite = _mouseSprite; });
+            clickAnimation.AppendCallback(() => _mouseImage.sprite = _mouseSprite);
             clickAnimation.AppendInterval(Delay);
-            clickAnimation.AppendCallback(() => { _mouseImage.sprite = clickSprite; });
+            clickAnimation.AppendCallback(() => _mouseImage.sprite = clickSprite);
             clickAnimation.AppendInterval(Delay);
         }
     }
@@ -285,7 +290,8 @@ public class Tutorial : MonoBehaviour
         _moveText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _attackText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _massAttackText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        DOVirtual.DelayedCall(Delay, () => { ShowTitleText(titleText); });
+
+        DOVirtual.DelayedCall(Delay, () => ShowTitleText(titleText));
     }
 
     private void ShowTitleText(TMP_Text titleText)
@@ -293,6 +299,7 @@ public class Tutorial : MonoBehaviour
         _moveText.gameObject.SetActive(false);
         _attackText.gameObject.SetActive(false);
         _massAttackText.gameObject.SetActive(false);
+
         titleText.gameObject.SetActive(true);
         titleText.transform.DOScale(Vector3.one, Delay).SetEase(Ease.Linear).SetLoops(1);
     }
@@ -306,7 +313,8 @@ public class Tutorial : MonoBehaviour
         _nextAttackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _finishPointComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
         _massAttackPcComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        DOVirtual.DelayedCall(Delay, () => { ShowText(text); });
+
+        DOVirtual.DelayedCall(Delay, () => ShowText(text));
     }
 
     private void ShowText(TMP_Text text)

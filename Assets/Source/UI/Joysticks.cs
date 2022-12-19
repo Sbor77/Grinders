@@ -63,7 +63,7 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
         ReleasedTouch?.Invoke();
     }
 
-    public virtual void ActivateMassAttackButton()
+    public virtual void ButtonActivate()
     {
         _skillButton.interactable = true;
     }

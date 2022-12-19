@@ -34648,7 +34648,7 @@ MonoBehaviour:
   _speed: 6
   _rotationSpeed: 720
   _speedInAttack: 15
-  _massAttackDelay: 2
+  _massAttackDelay: 4
   _attackDistance: 15
   _joystick: {fileID: 0}
   _wallLayerMask:

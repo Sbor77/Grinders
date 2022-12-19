@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _speedInAttack;
-    [SerializeField] private int _massAttackDelay = 2;
+    [SerializeField] private int _massAttackDelay = 4;
     [SerializeField] private float _attackDistance = 15f;
     [SerializeField] private Joysticks _joystick;
     [SerializeField] private LayerMask _wallLayerMask;
@@ -112,7 +112,7 @@ public class Movement : MonoBehaviour
         }
 
         if (_currentAttacksCount >= _massAttackDelay)
-            _joystick.ActivateMassAttackButton();
+            _joystick.ButtonActivate();
     }
 
     public void ChangeTakingDamageState(bool isTakingDamage = false)
@@ -120,7 +120,7 @@ public class Movement : MonoBehaviour
         _isTakingDamage = isTakingDamage;
 
         if (_currentAttacksCount >= _massAttackDelay)
-            _joystick.ActivateMassAttackButton();
+            _joystick.ButtonActivate();
     }
 
     private float LoadBoostSpeed(int speedLevel)

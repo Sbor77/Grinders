@@ -67,7 +67,7 @@ public class JoystickTutorial : Joysticks
             }
             else
             {
-                if (_canAttack && !DataHandler.Instance.IsMobile())
+                if (_canAttack && DataHandler.Instance.IsMobile() == false)
                     OnAttackButtonClick();
             }
         }
@@ -99,9 +99,9 @@ public class JoystickTutorial : Joysticks
         _canMassAttack = true;
     }
 
-    public override void ActivateMassAttackButton()
+    public override void ButtonActivate()
     {
-        base.ActivateMassAttackButton();
+        base.ButtonActivate();
         _tutorial.OnButtonMassAttackActivate();
     }
 

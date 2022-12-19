@@ -6,7 +6,7 @@ public class FinishPoint : Point
 
     public override void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.GetComponent<Player>())
         {
             _tutorial.OnStayFinishPoint();
             Destroy(gameObject);
