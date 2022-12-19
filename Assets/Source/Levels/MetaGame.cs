@@ -16,8 +16,7 @@ public class MetaGame : MonoBehaviour
 
     private int _bossSpawnInterval = 10;
     private float _doorOpenDelay = 1;    
-    private int _currentRegularKills;
-    private int _currentBossKills;
+    private int _currentRegularKills;    
 
     private void OnEnable()
     {
@@ -54,8 +53,7 @@ public class MetaGame : MonoBehaviour
 
     private void OnCurrentConditionsChanged()
     {
-        _currentRegularKills = _infoViewer.CurrentZoneKills;
-        _currentBossKills = _infoViewer.CurrentZoneBossKills;
+        _currentRegularKills = _infoViewer.CurrentZoneKills;        
 
         if (_currentRegularKills % _bossSpawnInterval == 0)                    
             _zone.AddBossTarget();        

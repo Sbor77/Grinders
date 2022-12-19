@@ -26,7 +26,7 @@ public class SkillBuyer : MonoBehaviour
         _buyHealthButton.onClick.AddListener(OnHealthBuy);
         _buyMoveButton.onClick.AddListener(OnMoveSpeedBuy);
         _buyRadiusButton.onClick.AddListener(OnRadiusBuy);
-        _buyCoinsButton.onClick.AddListener(OnVideoAdBuyCoin);        
+        _buyCoinsButton.onClick.AddListener(OnVideoAdCoinBuy);        
         GamesSdk.Instance.Rewarded += OnRewardedCoinsBuy;        
     }
 
@@ -35,7 +35,7 @@ public class SkillBuyer : MonoBehaviour
         _buyHealthButton.onClick.RemoveListener(OnHealthBuy);
         _buyMoveButton.onClick.RemoveListener(OnMoveSpeedBuy);
         _buyRadiusButton.onClick.RemoveListener(OnRadiusBuy);
-        _buyCoinsButton.onClick.RemoveListener(OnVideoAdBuyCoin);
+        _buyCoinsButton.onClick.RemoveListener(OnVideoAdCoinBuy);
         GamesSdk.Instance.Rewarded -= OnRewardedCoinsBuy;
     }
 
@@ -58,10 +58,10 @@ public class SkillBuyer : MonoBehaviour
         else
             _radiusPriceText.text = _radiusLevelPrices[DataHandler.Instance.GetSavedRadiusSkill()].ToString();
 
-        ButtonIsValid();
+        CheckButtonInteractivity();
     }
 
-    private void ButtonIsValid()
+    private void CheckButtonInteractivity()
     {
         if (DataHandler.Instance.GetSavedHealthSkill() >= _healthLevelPrices.Length)
             _buyHealthButton.interactable = false;
@@ -113,7 +113,7 @@ public class SkillBuyer : MonoBehaviour
         }
     }
 
-    private void OnVideoAdBuyCoin()
+    private void OnVideoAdCoinBuy()
     {
         GamesSdk.Instance.VideoAdShow();
     }
