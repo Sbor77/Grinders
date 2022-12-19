@@ -38,7 +38,6 @@ public class EnemyAnimator : MonoBehaviour
     {
         _enemy.IsDied += OnDying;
         _enemy.IsTakenDamage += OnDamageTaken;
-        _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);        
     }
 
     private void OnDisable()
@@ -49,6 +48,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private void Start()
     {
+        _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);        
         ChangeAttackSpeedModifier(_attackMultiplier);
     }
 

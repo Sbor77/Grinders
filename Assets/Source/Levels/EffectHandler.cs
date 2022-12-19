@@ -16,9 +16,7 @@ public class EffectHandler : MonoBehaviour
     private void Start()
     {
         StopAllEffects();
-
         _waitDelay = new WaitForSeconds(_delay);
-
         Duration = _effects.Count * _cycles * _delay;
     }
 
@@ -45,7 +43,6 @@ public class EffectHandler : MonoBehaviour
             foreach (var effect in _effects)
             {
                 effect.Play();
-
                 yield return _waitDelay;
             }
 

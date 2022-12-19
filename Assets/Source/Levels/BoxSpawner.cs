@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System;
-//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,18 +20,16 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private int _maxHealthAmount;
     [SerializeField] private int _finalBoxMoneyAmount;
 
+    public event Action <int> IsBigBoxCollected;
+
     private List<Box>[] _boxArray;
     private LevelZone _currentZone;
     private int _currentZoneIndex;
-
+    private bool _isStopped;        
     private Box _bigBox;
     private Vector3 _tempPosition = new Vector3(0, 5, 0);
     private float _respawnDelay = 2f;
     private float _circleOffsetModifier = 1;
-    private bool _isStopped;
-
-    //public event Action <int> IsPlayerMoneyIncreased;
-    public event Action <int> IsBigBoxCollected;
 
     private void Awake()
     {
@@ -75,9 +72,7 @@ public class BoxSpawner : MonoBehaviour
     {
         _currentZoneIndex = index;
         _currentZone = _zones[_currentZoneIndex];
-        SpawnBox();
-
-        //_player
+        SpawnBox();        
     }
 
     public void UnshadeBigbox()
@@ -135,7 +130,7 @@ public class BoxSpawner : MonoBehaviour
 
     private void GenerateAllBoxes()
     {
-        int additive = 10;
+        int additionalBoxes = 10;
 
         for (int i = 0; i < _zones.Count; i++)
         {
@@ -144,7 +139,7 @@ public class BoxSpawner : MonoBehaviour
 
         for (int i = 0; i < _zones.Count; i++)
         {
-            int totalBoxCount = _zones[i].BoxPoints.Count + additive;
+            int totalBoxCount = _zones[i].BoxPoints.Count + additionalBoxes;
             int boxWithCrossCount = Mathf.CeilToInt(totalBoxCount * _boxWithCrossChanceRatio);
 
             for (int j = 0; j < totalBoxCount; j++)
