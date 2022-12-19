@@ -20133,8 +20133,8 @@ MonoBehaviour:
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  _takeDamageSFX: {fileID: 6709128063197685028}
-  _health: 7
+  TakeDamageSFX: {fileID: 6709128063197685028}
+  Health: 9
   _delayDieHiding: 3
   _delayStartStunEffect: 0.5
   _stunEffectDuration: 3

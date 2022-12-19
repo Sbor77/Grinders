@@ -203,7 +203,7 @@ public class EnemySpawner : MonoBehaviour
     private void GenerateInactiveEnemies (Enemy enemyPrefab, List<Enemy> enemies)
     {
         var newEnemy = Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, _enemyParent);
-        newEnemy.ChangeSpeed(_startSpeedModifier);
+        newEnemy.ChangeMoverSpeed(_startSpeedModifier);
         newEnemy.Deactivate();
         enemies.Add(newEnemy);
     }
@@ -242,7 +242,7 @@ public class EnemySpawner : MonoBehaviour
 
             DOVirtual.DelayedCall(spawnDelay, () =>
             {
-                inactiveEnemy.ChangeSpeed(_startSpeedModifier);
+                inactiveEnemy.ChangeMoverSpeed(_startSpeedModifier);
                 inactiveEnemy.Activate();
                 inactiveEnemy.Restore();
 

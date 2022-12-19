@@ -6,9 +6,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Mover))]
 public class Enemy : Characters
 {
-    [SerializeField] protected AudioSource _takeDamageSFX;
-
-    [SerializeField] protected float _health;
+    [SerializeField] protected AudioSource TakeDamageSFX;
+    [SerializeField] protected float Health;
     [SerializeField] private float _delayDieHiding = 3f;
     [SerializeField] private float _delayStartStunEffect = 1.5f;
     [SerializeField] private float _stunEffectDuration = 3f;
@@ -16,18 +15,15 @@ public class Enemy : Characters
     [SerializeField] private ParticleSystem _dieEffect;
     [SerializeField] private ParticleSystem _stunEffect;
 
-    protected bool _isDead = false;
-    protected float _currentHealth;
-    
-    private Mover _mover;
-
-    public float StanEffectDuration => _stunEffectDuration;
-
-    public event Action Dying;
-    public event Action TakedDamage;
+    public event Action IsDied;
+    public event Action IsTakenDamage;
     public event Action IsDeactivated;
     public event Action <bool>IsStunned;
+
+    protected bool IsDead = false;
+    protected float CurrentHealth;
     
+    private Mover _mover;    
 
     private void Awake()
     {
@@ -36,12 +32,7 @@ public class Enemy : Characters
 
     private void Start()
     {
-        _currentHealth = _health;
-    }
-
-    public void Attack()
-    {
-        _mover.Attack();
+        CurrentHealth = Health;
     }
 
     public void Deactivate()
@@ -54,35 +45,35 @@ public class Enemy : Characters
         gameObject.SetActive(true);
     }
 
-    public void ChangeSpeed(float value)
+    public void ChangeMoverSpeed(float value)
     {
         _mover.ChangeSpeed(value);
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float value)
     {
-        if (_isDead)
+        if (IsDead)
             return;
 
-        _takeDamageSFX.Play();
-        _currentHealth -= damage;
-        TakedDamage?.Invoke();
+        TakeDamageSFX.Play();
+        CurrentHealth -= value;
+        IsTakenDamage?.Invoke();
         IsAlive();
     }
 
     public virtual void Restore()
     {        
-        _currentHealth = _health;
+        CurrentHealth = Health;
         _mover.ResetState();
-        _isDead = false;
+        IsDead = false;
     }
 
     protected void IsAlive()
     {
-        if (_currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
-            Dying?.Invoke();
-            _isDead = true;
+            IsDied?.Invoke();
+            IsDead = true;
             _dieEffect.gameObject.SetActive(true);
 
             DOVirtual.DelayedCall(_delayDieHiding, () =>

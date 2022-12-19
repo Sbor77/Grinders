@@ -6,16 +6,10 @@ public class SearchZone : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
 
+    public event Action<Player> IsTargetOutOfSight;
+
     private WaitForSeconds _delay = new WaitForSeconds(.5f);
-    private Coroutine _waitCanSee = null;
-    //private bool _isAcquireTarget;
-
-    public event Action<Player> ChangedTarget;
-
-    //private void OnEnable()
-    //{
-    //    _isAcquireTarget = false;
-    //}
+    private Coroutine _canSeeJob;
 
     private void OnDisable()
     {
@@ -29,9 +23,9 @@ public class SearchZone : MonoBehaviour
             if (player.IsDead == false)
             {
                 if (_enemy.CanSee(player.transform))
-                    ChangedTarget?.Invoke(player);
+                    IsTargetOutOfSight?.Invoke(player);
                 else
-                    _waitCanSee = StartCoroutine(CanSeeTarget(player));
+                    _canSeeJob = StartCoroutine(CanSeeTarget(player));
             }
         }
     }
@@ -40,37 +34,28 @@ public class SearchZone : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            ChangedTarget?.Invoke(null);
-            //_isAcquireTarget = false;
+            IsTargetOutOfSight?.Invoke(null);            
             StopCoroutine();
         }
     }
-
-    //public void OnDie()
-    //{
-    //    StopCoroutine();
-    //}
-
+ 
     private IEnumerator CanSeeTarget(Player target)
     {
         while (_enemy.CanSee(target.transform) == false)
         {
-            yield return _delay;
-            //print($"не вижу плеера");
+            yield return _delay;            
         }
         
-        ChangedTarget?.Invoke(target);
-        //_isAcquireTarget = true;
-        //print($"Вижу плеера");
+        IsTargetOutOfSight?.Invoke(target);        
         StopCoroutine();
     }
 
     private void StopCoroutine()
     {
-        if (_waitCanSee != null)
+        if (_canSeeJob != null)
         {
-            StopCoroutine(_waitCanSee);
-            _waitCanSee = null;
+            StopCoroutine(_canSeeJob);
+            _canSeeJob = null;
         }
     }
 }

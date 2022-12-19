@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,18 +7,18 @@ public class EnemyBoss : Enemy
 
     public override void TakeDamage(float damage)
     {
-        if (_isDead)
+        if (IsDead)
             return;
 
-        _takeDamageSFX.Play();
-        _currentHealth -= damage;
-        _healthBar.value = _currentHealth / _health;
+        TakeDamageSFX.Play();
+        CurrentHealth -= damage;
+        _healthBar.value = CurrentHealth / Health;
         IsAlive();
     }
 
     public override void Restore()
     {
         base.Restore();
-        _healthBar.value = _currentHealth / _health;
+        _healthBar.value = CurrentHealth / Health;
     }
 }

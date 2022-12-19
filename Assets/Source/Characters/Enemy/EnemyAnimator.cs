@@ -25,7 +25,7 @@ public class EnemyAnimator : MonoBehaviour
     private float _attackLength;
     private float _attackMultiplier = 1.5f;
     private float _minSpeed = 0.1f;
-    private bool _isMoveing;    
+    private bool _isMoving;    
 
     private void Awake()
     {
@@ -36,15 +36,15 @@ public class EnemyAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemy.Dying += OnDying;
-        _enemy.TakedDamage += OnTakeDamage;
+        _enemy.IsDied += OnDying;
+        _enemy.IsTakenDamage += OnDamageTaken;
         _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);        
     }
 
     private void OnDisable()
     {
-        _enemy.Dying -= OnDying;
-        _enemy.TakedDamage -= OnTakeDamage;        
+        _enemy.IsDied -= OnDying;
+        _enemy.IsTakenDamage -= OnDamageTaken;        
     }
 
     private void Start()
@@ -59,27 +59,22 @@ public class EnemyAnimator : MonoBehaviour
 
         if (currentSpeed > _minSpeed)
         {
-            if (_isMoveing == false)
+            if (_isMoving == false)
             {
-                _isMoveing = true;
+                _isMoving = true;
                 _moveSFX.Play();
             }
         }
         else
         {
-            _isMoveing = false;
+            _isMoving = false;
             _moveSFX.Stop();
         }
     }
 
-    public void ChangeSpeedModifier(float value)
+    public void ChangeSpeedModifier()
     {
         _animator.SetFloat(Modifier, _agent.speed / SpeedModifier);
-    }
-
-    public void ChangeAttackSpeed(float modifier)
-    {
-        ChangeAttackSpeedModifier(_attackMultiplier * modifier);
     }
 
     public float StartAttack()
@@ -116,9 +111,9 @@ public class EnemyAnimator : MonoBehaviour
         _animator.SetTrigger(Died);
     }
 
-    private void OnTakeDamage()
+    private void OnDamageTaken()
     {
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName(TakeDamage))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(TakeDamage) == false)
             _animator.SetTrigger(TakeDamage);
     }
 }

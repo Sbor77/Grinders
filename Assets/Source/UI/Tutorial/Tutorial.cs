@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour
 
         for (int i = 0; i < _enemies.Length; i++)
         {
-            _enemies[i].Dying -= OnEnemysDead;
+            _enemies[i].IsDied -= OnEnemysDead;
         }
     }
 
@@ -144,7 +144,7 @@ public class Tutorial : MonoBehaviour
 
         for (int i = 0; i < _enemies.Length; i++)
         {
-            _enemies[i].Dying += OnEnemysDead;
+            _enemies[i].IsDied += OnEnemysDead;
         }
     }
 

@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using DG.Tweening;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Enemy), typeof(EnemyAnimator))]
 public class Mover : MonoBehaviour
@@ -12,57 +11,49 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _attackDistance = 2f;
     [SerializeField] private SearchZone _searchZone;
     [SerializeField] private Transform _weapon;
-    [SerializeField] private LayerMask _wallMask;
-    //[SerializeField] [Range(0.1f,1f)] private float _canAttackDelay = 0.5f;
+    [SerializeField] private LayerMask _wallMask;    
 
-    protected Enemy _enemy;
-    protected Player _target;
+    protected Enemy Enemy;
+    protected Player PlayerTarget;
 
     private NavMeshAgent _agent;
-    private EnemyAnimator _animator;
-    private Coroutine GetNewPointWithDelay;
-    private Coroutine _canAttackCoroutine;
+    private EnemyAnimator _enemyAnimator;
+    private Coroutine _getNewPointWithDelay;    
     private WaitForSeconds _delay;
     private Vector3 _zeroPoint;
     private Vector3 _movePoint;
-    private float _baseSpeed;
+    private float _baseAgentSpeed;
     private bool _isAttaking = false;
     private bool _canMove = true;
     private bool _isAlive = true;
     private bool _isDancing = false;
-    private bool _isStunned;
+    private bool _isStunned;    
 
-    //private bool _isCanAttack = false;
-
-    private Tween _onTakeDamageTween;
-
-    protected bool _isAcquireTarget => _target != null;
+    protected bool IsAcquireTarget => PlayerTarget != null;
 
     private void Awake()
     {
+        Enemy = GetComponent<Enemy>();
         _agent = GetComponent<NavMeshAgent>();
-        _enemy = GetComponent<Enemy>();
-        _animator = GetComponent<EnemyAnimator>();
-        _baseSpeed = _agent.speed;
+        _enemyAnimator = GetComponent<EnemyAnimator>();
+        _baseAgentSpeed = _agent.speed;
     }
 
     private void OnEnable()
     {
         _zeroPoint = transform.position;
-        _searchZone.ChangedTarget += OnChangedTarget;
-        _enemy.Dying += OnDying;
-        _enemy.TakedDamage += OnTakeDamage;
-        _enemy.IsStunned += OnEnemyStunned;
+        _searchZone.IsTargetOutOfSight += OnTargetChanged;
+        Enemy.IsDied += OnEnemyDied;        
+        Enemy.IsStunned += OnEnemyStunned;
         _agent.enabled = true;
         Patrol();
     }
 
     private void OnDisable()
     {
-        _searchZone.ChangedTarget -= OnChangedTarget;
-        _enemy.Dying -= OnDying;
-        _enemy.TakedDamage -= OnTakeDamage;
-        _enemy.IsStunned -= OnEnemyStunned;
+        _searchZone.IsTargetOutOfSight -= OnTargetChanged;
+        Enemy.IsDied -= OnEnemyDied;        
+        Enemy.IsStunned -= OnEnemyStunned;
     }
 
     private void FixedUpdate()
@@ -72,16 +63,16 @@ public class Mover : MonoBehaviour
 
         if (_canMove)
         {
-            if (_isAcquireTarget)
+            if (IsAcquireTarget)
             {
                 if (_isAttaking == false)
-                    _agent.destination = _target.transform.position;
+                    _agent.destination = PlayerTarget.transform.position;
             }
             else
             {
-                if (GetNewPointWithDelay == null && _isDancing == false)
+                if (_getNewPointWithDelay == null && _isDancing == false)
                     if (_agent.remainingDistance <= _stoppingDistance)
-                        GetNewPointWithDelay = StartCoroutine(GetNextPoint());
+                        _getNewPointWithDelay = StartCoroutine(GetNextPoint());
             }
         }
         else
@@ -90,27 +81,48 @@ public class Mover : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out Player player) && !_isAttaking)
+        {
+            if (_canMove && Enemy.CanSee(player.transform))
+            {
+                if (player.IsDead == false)
+                {
+                    _isAttaking = true;
+                    _enemyAnimator.StartAttack();                    
+                    _canMove = false;
+                }
+                else
+                {
+                    if (_isDancing == false)
+                        OnTargetChanged(null);
+                }
+            }
+        }
+    }
+
     public void ChangeSpeed(float value)
     {
-        _agent.speed = _baseSpeed * value;
-        _animator.ChangeSpeedModifier(value);
+        _agent.speed = _baseAgentSpeed * value;
+        _enemyAnimator.ChangeSpeedModifier();
     }
 
     public virtual void SetDamage()
     {
-        if (_isAlive == false || _target == null || _target.IsDead)
+        if (_isAlive == false || PlayerTarget == null || PlayerTarget.IsDead)
             return;
 
-        float distanceToPlayer = Vector3.Distance(_target.transform.position, transform.position);
+        float distanceToPlayer = Vector3.Distance(PlayerTarget.transform.position, transform.position);
 
         if (distanceToPlayer <= _attackDistance)
         {
-            if (_target.CurrentState == State.Move)
-                _enemy.Attack(_target);
+            if (PlayerTarget.CurrentState == State.Move)
+                Enemy.Attack(PlayerTarget);
 
-            if (_target.IsDead)
+            if (PlayerTarget.IsDead)
             {
-                float delay = _animator.StartWin();
+                float delay = _enemyAnimator.StartWin();
                 _weapon.gameObject.SetActive(false);
                 _isDancing = true;
                 Invoke(nameof(StopDance), delay);
@@ -121,46 +133,18 @@ public class Mover : MonoBehaviour
     public void ResetState()
     {
         _isAlive = true;
-        _target = null;
+        PlayerTarget = null;
         _searchZone.gameObject.SetActive(true);
-        _animator.ResetState();
+        _enemyAnimator.ResetState();
         _agent.enabled = true;
         _canMove = true;
     }
 
-    public void Attack()
-    {
-        _animator.FinishAttack();
-
-        if (_isStunned == false)
-        {
-            _isAttaking = false;
-            _canMove = true;
-        }
-    }
-
     private void OnEnemyStunned(bool isStunned)
     {
-        _isStunned = isStunned;
-
         _canMove = !isStunned;
+        _isStunned = isStunned;
         _isAttaking = isStunned;
-    }
-
-    private void OnTakeDamage()
-    {        
-        /*_onTakeDamageTween.Kill();
-        _onTakeDamageTween = null;            
-        
-
-        _canMove = false;
-        _isAttaking = true;
-
-        _onTakeDamageTween = DOVirtual.DelayedCall(_enemy.StanEffectDuration, () => 
-        { 
-            _canMove = true;
-            _isAttaking = false;            
-        });*/
     }
 
     private void StopDance()
@@ -169,7 +153,7 @@ public class Mover : MonoBehaviour
         _weapon.gameObject.SetActive(true);
     }
 
-    private void OnDying()
+    private void OnEnemyDied()
     {
         _searchZone.gameObject.SetActive(false);
         _agent.enabled = false;
@@ -177,16 +161,6 @@ public class Mover : MonoBehaviour
     }
 
     #region Patrol
-    private IEnumerator GetNextPoint()
-    {
-        float timeDelay = Random.Range(0, _maxDelay);
-        _delay = new WaitForSeconds(timeDelay);
-
-        yield return _delay;
-        Patrol();
-        GetNewPointWithDelay = null;
-    }
-
     private void Patrol()
     {
         _movePoint = GetNewPatrolPoint();
@@ -199,6 +173,16 @@ public class Mover : MonoBehaviour
             _agent.destination = _movePoint;
     }
 
+    private IEnumerator GetNextPoint()
+    {
+        float timeDelay = Random.Range(0, _maxDelay);
+        _delay = new WaitForSeconds(timeDelay);
+
+        yield return _delay;
+        Patrol();
+        _getNewPointWithDelay = null;
+    }
+
     private Vector3 GetNewPatrolPoint()
     {
         float randomX = Random.Range(-_bias, _bias);
@@ -207,39 +191,17 @@ public class Mover : MonoBehaviour
         return newPoint;
     }
 
-    private void OnChangedTarget(Player player)
+    private void OnTargetChanged(Player player)
     {
         if (_canMove)
         {
-            _target = player;
+            PlayerTarget = player;
 
-            if (_target != null)
-                _agent.destination = _target.transform.position;
+            if (PlayerTarget != null)
+                _agent.destination = PlayerTarget.transform.position;
             else
                 _agent.SetDestination(_movePoint);
         }
     }
     #endregion
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.TryGetComponent(out Player player) && !_isAttaking)
-        {
-            if (_canMove && _enemy.CanSee(player.transform))
-            {
-                if (player.IsDead == false)
-                {
-                    _isAttaking = true;
-                    float attackDelay = _animator.StartAttack();
-                    //Invoke(nameof(Attack), attackDelay);
-                    _canMove = false;
-                }
-                else
-                {
-                    if (_isDancing == false)
-                        OnChangedTarget(null);
-                }
-            }
-        }
-    }
 }
