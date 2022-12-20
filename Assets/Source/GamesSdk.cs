@@ -12,10 +12,9 @@ public class GamesSdk : MonoBehaviour
     public event Action AdVideoOpened;
     public event Action AdVideoClosed;
     public event Action InterstitialAdOpened;
-    public event Action InterstitialAdClosed;
-    //public event Action<bool> ChangedLeaders;
+    public event Action InterstitialAdClosed;    
     
-    private const float WaitTime = .25f;
+    private float _waitTime = .25f;
     private string _leaderboardName = "LeaderBoard";
 
     public string LeaderboardName => _leaderboardName;
@@ -53,7 +52,7 @@ public class GamesSdk : MonoBehaviour
 
         while (!YandexGamesSdk.IsInitialized)
         {
-            yield return new WaitForSeconds(WaitTime);
+            yield return new WaitForSeconds(_waitTime);
 
             if (YandexGamesSdk.IsInitialized)
             { 

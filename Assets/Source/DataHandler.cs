@@ -30,7 +30,6 @@ public class DataHandler : MonoBehaviour
         else
         {
             Instance = this;
-
             DontDestroyOnLoad(this);
         }
     }   
