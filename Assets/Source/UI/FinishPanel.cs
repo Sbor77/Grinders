@@ -27,11 +27,8 @@ public class FinishPanel : MonoBehaviour
     public void Init()
     {
         _levelCoinsCount.text = _infoViewer.LevelCoins.ToString();
-
         _levelKillsCount.text = _infoViewer.LevelKills.ToString();
-
         _levelScoreCount.text = GetCurrentScore().ToString();
-
         _totalScoreCount.text = GetTotalScore().ToString();        
     }
 
@@ -40,17 +37,10 @@ public class FinishPanel : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void Deactivate()
-    {
-        gameObject.SetActive(false);
-    }
-
     private int GetTotalScore()
     {
         int value = DataHandler.Instance.GetSavedTotalScore() + GetCurrentScore();
-
         DataHandler.Instance.SaveTotalScore(value);
-
         return value;
     }
 
@@ -58,9 +48,7 @@ public class FinishPanel : MonoBehaviour
     {
         int coinMultiplier = 50;
         int killMultiplier = 10;
-
         int value = _infoViewer.LevelCoins * coinMultiplier + _infoViewer.LevelCoins * killMultiplier;
-
         return value;
     }
 

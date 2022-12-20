@@ -7,8 +7,7 @@ public class DeathPanel : MonoBehaviour
 {
     [SerializeField] private Button _dieButton;
     [SerializeField] private Button _continueButton;
-    [SerializeField] private List<ButtonSceneLoader> _buttonLoaders;
-    //[SerializeField] private ShopIcon _shopIcon;
+    [SerializeField] private List<ButtonSceneLoader> _buttonLoaders;    
 
     private bool _rewarded;
     private int _dieSceneIndex;

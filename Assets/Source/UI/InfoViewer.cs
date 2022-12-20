@@ -24,8 +24,7 @@ public class InfoViewer : MonoBehaviour
     private const int MaxVolume = 1;
     private const int MinVolume = 0;
     private Movement _movement;
-    private Button _soundButton;
-    //private QuestInfo _missonConditions;
+    private Button _soundButton;    
     private int _questCoinCollected;
     private int _questEnemyKills;
     private int _questBossEnemyKills;
@@ -33,16 +32,13 @@ public class InfoViewer : MonoBehaviour
     private bool _questBigbox;
     private float _maxHealth;
     private float _currentHealth;
-
     private int _currentZoneKills;
     private int _currentZoneCoins;
     private int _bossKills;
 
     public int CurrentZoneKills => _currentZoneKills;
     public int CurrentZoneCoins => _currentZoneCoins;
-    public int CurrentZoneBossKills => _bossKills;
-
-    //public QuestInfo MissionConditions => _missonConditions;
+    public int CurrentZoneBossKills => _bossKills;    
     public float CurrentHealth { get; private set; }
     public int LevelKills { get; private set; }
     public int LevelCoins { get; private set; }
@@ -57,35 +53,35 @@ public class InfoViewer : MonoBehaviour
     private void OnEnable()
     {
         if (_boxSpawner != null)
-            _boxSpawner.IsBigBoxCollected += OnDestroyBigBox;
+            _boxSpawner.IsBigBoxCollected += OnBigBoxCollected;
 
         if (_enemySpawner != null)
         {
-            _enemySpawner.IsPLayerKillsIncreased += OnChangedPlayerKills;
+            _enemySpawner.IsPLayerKillsIncreased += OnPlayerKillsChanged;
             _enemySpawner.IsBossKilled += OnBossKilled;
         }            
 
-        _player.ChangedHealth += OnChangedHealth;
-        _player.ChangedCoin += OnChangedPlayerCoins;
+        _player.ChangedHealth += OnHealthChanged;
+        _player.ChangedCoin += OnPlayerCoinsChanged;
         _soundButton.onClick.AddListener(OnMuteToggled);
-        _movement.IsMassAttackCooldownChanged += OnChangedMassCooldown;
+        _movement.IsMassAttackCooldownChanged += OnMassCooldownChanged;
     }
 
     private void OnDisable()
     {
         if (_boxSpawner != null)
-            _boxSpawner.IsBigBoxCollected -= OnDestroyBigBox;
+            _boxSpawner.IsBigBoxCollected -= OnBigBoxCollected;
 
         if (_enemySpawner != null)
         {
-            _enemySpawner.IsPLayerKillsIncreased -= OnChangedPlayerKills;
+            _enemySpawner.IsPLayerKillsIncreased -= OnPlayerKillsChanged;
             _enemySpawner.IsBossKilled -= OnBossKilled;
         }
 
-        _player.ChangedHealth -= OnChangedHealth;
-        _player.ChangedCoin -= OnChangedPlayerCoins;
+        _player.ChangedHealth -= OnHealthChanged;
+        _player.ChangedCoin -= OnPlayerCoinsChanged;
         _soundButton.onClick.RemoveListener(OnMuteToggled);
-        _movement.IsMassAttackCooldownChanged -= OnChangedMassCooldown;
+        _movement.IsMassAttackCooldownChanged -= OnMassCooldownChanged;
     }
 
     void Start()
@@ -94,20 +90,17 @@ public class InfoViewer : MonoBehaviour
         _currentHealth = _maxHealth;
         _healthBarSlider.maxValue = _maxHealth;
         _healthBarSlider.value = _currentHealth;
-
         _bossesField.SetActive(false);
 
         ToggleSoundIcon(DataHandler.Instance.GetSavedMuteValue());
     }
 
     public void SetCurrentZoneTargets(QuestInfo conditions)
-    {
-        //_missonConditions = conditions;
+    {     
         _questCoinCollected = conditions.TargetCoinCount;
         _questEnemyKills = conditions.TargetEnemyKills;
         _questBossEnemyKills = conditions.TargetBossKills;
         _questBigbox = conditions.NeedDestroyBigBox;
-
         _currentZoneKills = 0;
         _currentZoneCoins = 0;
         _bossKills = 0;
@@ -118,10 +111,8 @@ public class InfoViewer : MonoBehaviour
 
     private void LoadCurrentLevelProggress()
     {
-        if (DataHandler.Instance.GetSavedLevel() == UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)
-        {
-            LevelCoins = DataHandler.Instance.GetSavedLevelMoney();
-        }
+        if (DataHandler.Instance.GetSavedLevel() == UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)        
+            LevelCoins = DataHandler.Instance.GetSavedLevelMoney();        
     }
 
     private void OnMuteToggled()
@@ -138,10 +129,8 @@ public class InfoViewer : MonoBehaviour
         _soundImage.sprite = volume == MaxVolume ? _volumeOn : _volumeOff;
     }
 
-    private void OnChangedMassCooldown(int current, int max)
-    {
-        float value;
-        value = Mathf.Clamp(current, 0, max);
+    private void OnMassCooldownChanged(int current, int max)
+    {        
         _massKillButtonCooldown.ChangedMassAttackCooldown(current);
     }
 
@@ -158,16 +147,15 @@ public class InfoViewer : MonoBehaviour
         }
     }
 
-    private void OnChangedHealth(float health)
+    private void OnHealthChanged(float health)
     {
         _healthBarSlider.value = health;
         CurrentHealth = health;
     }
 
-    private void OnChangedPlayerCoins(int value)
+    private void OnPlayerCoinsChanged(int value)
     {
         _currentZoneCoins += value;
-
         LevelCoins += value;
         ChangeViewText(_goldText, _currentZoneCoins, _questCoinCollected);
         IsCurrentConditionsChanged?.Invoke();
@@ -177,21 +165,19 @@ public class InfoViewer : MonoBehaviour
     {
         _bossKills = value;
         _bossesField.SetActive(true);
-
         ChangeViewText(_bossKillsText, _bossKills, _questBossEnemyKills);
         IsCurrentConditionsChanged?.Invoke();
     }
 
-    private void OnChangedPlayerKills(int value)
+    private void OnPlayerKillsChanged(int value)
     {
         _currentZoneKills++;
-
         ChangeViewText(_enemyKillsText, _currentZoneKills, _questEnemyKills);
         LevelKills = value;
         IsCurrentConditionsChanged?.Invoke();
     }
 
-    private void OnDestroyBigBox(int count)
+    private void OnBigBoxCollected(int count)
     {
         ChangeViewText(_bigBoxText, count, _questBigboxCount);
         IsBigboxDestroyed = count == _questBigboxCount;
