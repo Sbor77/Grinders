@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,8 +7,8 @@ public class DeathPanel : MonoBehaviour
 {
     [SerializeField] private Button _dieButton;
     [SerializeField] private Button _continueButton;
-    [SerializeField] private ArenaIcon _arenaIcon;
-    [SerializeField] private ShopIcon _shopIcon;
+    [SerializeField] private List<ButtonSceneLoader> _buttonLoaders;
+    //[SerializeField] private ShopIcon _shopIcon;
 
     private bool _rewarded;
     private int _dieSceneIndex;
@@ -30,8 +31,11 @@ public class DeathPanel : MonoBehaviour
 
     public void Activate(int dieSceneIndex = 0)
     {
-        _arenaIcon?.Deactivate();
-        _shopIcon?.Deactivate();
+        foreach (var button in _buttonLoaders)
+        {
+            button.Deactivate();
+        }
+        
         _dieSceneIndex = dieSceneIndex;
         gameObject.SetActive(true);
         _rewarded = false;

@@ -16,7 +16,7 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
     public event Action SkillButtonClick;
     public event Action<Vector2> ChangedDirection;
     public event Action ReleasedTouch;
-    public event Action AttackButtonClick;
+    public event Action AttackButtonClick;    
 
     public abstract void OnDrag(PointerEventData eventData);
     public abstract void OnPointerDown(PointerEventData eventData);
@@ -24,13 +24,16 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     private void Start()
     {
+        Color joystickBackground = new (1, 1, 1, 0.7f);
+        Color joystickInner = new (1, 1, 1, 0.7f);
+
         if (DataHandler.Instance.IsMobile())
         {            
             if (_mobileJoyPosition != null)
                 _joystickBackground.transform.position = _mobileJoyPosition.transform.position;
 
-            _joystickBackground.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
-            _joystickInner.GetComponent<Image>().color = new Color(1, 1, 1, 0.7f);
+            _joystickBackground.GetComponent<Image>().color = joystickBackground;
+            _joystickInner.GetComponent<Image>().color = joystickInner;
         }
         else
         {

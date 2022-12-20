@@ -7,7 +7,7 @@ public class Joystick : Joysticks
     [SerializeField] [Range(0.01f, 0.5f)] private float _clickTimeDelta = .1f;
     [SerializeField] private bool _moveToTouchDownPosition = false;    
 
-    private bool _isTouchDown = false;
+    private bool _isTouchDown;
     private float _currentDownTime;
 
     private void OnEnable()
