@@ -14,7 +14,9 @@ public class LeadersPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _playerScore;
     [SerializeField] private TextMeshProUGUI _playerPlace;
 
-    private const int MaxViews = 5;
+    private int _maxViews = 5;
+    private string _anonymous = "Anonymous";
+    private string _zero = "0";
 
     private void OnEnable()
     {
@@ -56,12 +58,12 @@ public class LeadersPanel : MonoBehaviour
                     string name = entry.player.publicName;
 
                     if (string.IsNullOrEmpty(name))
-                        name = "Anonymous";
+                        name = _anonymous;
 
                     int score = entry.score;
                     int place = entry.rank;
 
-                    if (place > MaxViews)
+                    if (place > _maxViews)
                         break;
 
                     AddLeader(name, score, place);
@@ -71,10 +73,9 @@ public class LeadersPanel : MonoBehaviour
             Leaderboard.GetPlayerEntry(GamesSdk.Instance.LeaderboardName, (result) =>
             {
                 if (result == null)
-                {
-                    Debug.Log("Player is not present in the leaderboard.");
-                    _playerPlace.text = "0";
-                    _playerScore.text = "0";
+                {                    
+                    _playerPlace.text = _zero;
+                    _playerScore.text = _zero;
                 }
                 else
                 {
@@ -98,6 +99,6 @@ public class LeadersPanel : MonoBehaviour
     private void AddLeader(string name, int score, int place)
     {
         var view = Instantiate(_template, _content.transform);
-        view.Render(name, score.ToString(), place.ToString());
+        view.Show(name, score.ToString(), place.ToString());
     }
 }
