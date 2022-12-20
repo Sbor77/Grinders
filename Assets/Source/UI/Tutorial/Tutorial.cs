@@ -17,10 +17,12 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private Sprite _mouseSprite;
     [SerializeField] private Sprite _mouseLeftButtonSprite;
     [SerializeField] private Sprite _mouseRightButtonSprite;
+    [Space]
     [SerializeField] private Box _box;
     [SerializeField] private Transform _wallDoor;
     [SerializeField] private Transform _finishPoint;
     [SerializeField] private Enemy[] _enemies;
+    [Space]
     [SerializeField] private TMP_Text _moveText;
     [SerializeField] private TMP_Text _attackText;
     [SerializeField] private TMP_Text _massAttackText;
@@ -41,27 +43,27 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject _secondPathArrow;
     [SerializeField] private GameObject _endScreen;
 
-    private Vector3 TextScaleSize = new Vector3(0.1f, 0.1f, 0.1f);
-    private Vector3 HandScaleSize = new Vector3(0.8f, 0.8f, 1f);
-    private int _killedEnemys = 0;
+    private Vector3 _textScaleSize = new Vector3(0.1f, 0.1f, 0.1f);
+    private Vector3 _handScaleSize = new Vector3(0.8f, 0.8f, 1f);
+    private int _killedEnemies = 0;
     private int _levelOneSceneIndex = 1;
 
     private void OnEnable()
     {
         _exitButton.onClick.AddListener(LoadLevelOne);
         _playButton.onClick.AddListener(LoadLevelOne);
-        _massAttack.IsActivated += OnAreaAttackActivated;
+        _massAttack.IsActivated += OnMassAttackActivated;
     }
 
     private void OnDisable()
     {
         _exitButton.onClick.RemoveListener(LoadLevelOne);
         _playButton.onClick.RemoveListener(LoadLevelOne);
-        _massAttack.IsActivated -= OnAreaAttackActivated;
+        _massAttack.IsActivated -= OnMassAttackActivated;
 
         for (int i = 0; i < _enemies.Length; i++)
         {
-            _enemies[i].IsDied -= OnEnemysDead;
+            _enemies[i].IsDied -= OnEnemiesDead;
         }
     }
 
@@ -115,7 +117,7 @@ public class Tutorial : MonoBehaviour
         SceneManager.LoadScene(_levelOneSceneIndex);
     }
 
-    private void OnAreaAttackActivated()
+    private void OnMassAttackActivated()
     {
         _massAttackComentText.gameObject.SetActive(false);
         _massAttackPcComentText.gameObject.SetActive(false);
@@ -145,15 +147,15 @@ public class Tutorial : MonoBehaviour
 
         for (int i = 0; i < _enemies.Length; i++)
         {
-            _enemies[i].IsDied += OnEnemysDead;
+            _enemies[i].IsDied += OnEnemiesDead;
         }
     }
 
-    private void OnEnemysDead()
+    private void OnEnemiesDead()
     {
-        _killedEnemys++;
+        _killedEnemies++;
 
-        if (_killedEnemys >= _enemies.Length)
+        if (_killedEnemies >= _enemies.Length)
         {
             _secondPathArrow.SetActive(false);
             ChangeTitleText(_massAttackText);
@@ -167,6 +169,7 @@ public class Tutorial : MonoBehaviour
     private void StartMobileMoveAnimation()
     {
         Sequence moveAnimation = DOTween.Sequence();       
+
         moveAnimation.AppendCallback(() =>
         {
             _mouseImage.sprite = _mouseSprite;
@@ -184,6 +187,7 @@ public class Tutorial : MonoBehaviour
     private void StartPCMoveAnimation()
     {
         Sequence moveAnimation = DOTween.Sequence();
+
         moveAnimation.AppendCallback(() => ShowAnimationMouseClick(_mouseLeftButtonSprite, MouseRepeat));
         moveAnimation.AppendInterval(MouseRepeat);
         moveAnimation.Append(_mouseImage.transform.DOLocalMoveY(MaxPosition, Delay).SetEase(Ease.Linear).SetLoops(MouseRepeat, LoopType.Yoyo));
@@ -209,6 +213,7 @@ public class Tutorial : MonoBehaviour
     {
         _mouseImage.enabled = true;
         Sequence attackAnimation = DOTween.Sequence();
+
         attackAnimation.AppendCallback(() => 
         {
             ChangeTitleText(_attackText); 
@@ -231,6 +236,7 @@ public class Tutorial : MonoBehaviour
         _handImage.transform.position = _joystick.AttackButtonPosition;
         _handImage.enabled = true;
         Sequence attackAnimation = DOTween.Sequence();
+
         attackAnimation.AppendCallback(() => 
         { 
             ChangeTitleText(_attackText); 
@@ -251,6 +257,7 @@ public class Tutorial : MonoBehaviour
         _handImage.transform.position = _joystick.MassAttackButtonPosition;
         _handImage.enabled = true;
         Sequence attackAnimation = DOTween.Sequence();
+
         attackAnimation.AppendCallback(() => 
         { 
             ChangeTitleText(_massAttackText);
@@ -282,14 +289,14 @@ public class Tutorial : MonoBehaviour
     private void ShowAnimationHandClick(Image _handImage, int repeatCount)
     {
         int repeateAction = (int)(repeatCount / Delay);
-        _handImage.transform.DOScale(HandScaleSize, Delay).SetEase(Ease.Linear).SetLoops(repeateAction, LoopType.Yoyo);
+        _handImage.transform.DOScale(_handScaleSize, Delay).SetEase(Ease.Linear).SetLoops(repeateAction, LoopType.Yoyo);
     }
 
     private void ChangeTitleText(TMP_Text titleText)
     {
-        _moveText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _attackText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _massAttackText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _moveText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _attackText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _massAttackText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
 
         DOVirtual.DelayedCall(Delay, () => ShowTitleText(titleText));
     }
@@ -306,13 +313,13 @@ public class Tutorial : MonoBehaviour
 
     private void ChangeComentText(TMP_Text text)
     {
-        _moveComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _attackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _mobileAttackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _coinCollectComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _nextAttackComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _finishPointComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
-        _massAttackPcComentText.transform.DOScale(TextScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _moveComentText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _attackComentText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _mobileAttackComentText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _coinCollectComentText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _nextAttackComentText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _finishPointComentText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
+        _massAttackPcComentText.transform.DOScale(_textScaleSize, Delay).SetEase(Ease.Linear).SetLoops(1);
 
         DOVirtual.DelayedCall(Delay, () => ShowText(text));
     }

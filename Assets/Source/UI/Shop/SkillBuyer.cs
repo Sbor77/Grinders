@@ -58,10 +58,10 @@ public class SkillBuyer : MonoBehaviour
         else
             _radiusPriceText.text = _radiusLevelPrices[DataHandler.Instance.GetSavedRadiusSkill()].ToString();
 
-        CheckButtonInteractivity();
+        SetButtonInteractivity();
     }
 
-    private void CheckButtonInteractivity()
+    private void SetButtonInteractivity()
     {
         if (DataHandler.Instance.GetSavedHealthSkill() >= _healthLevelPrices.Length)
             _buyHealthButton.interactable = false;

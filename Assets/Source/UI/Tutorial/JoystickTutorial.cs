@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 public class JoystickTutorial : Joysticks
 {
     [SerializeField] private bool _moveToTouchDownPosition = false;
-
     [SerializeField] private bool _canMove = false;
     [SerializeField] private bool _canAttack = false;
     [SerializeField] private bool _canMassAttack = false;
@@ -28,9 +27,8 @@ public class JoystickTutorial : Joysticks
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            if (_canMassAttack)
-                OnSkillButtonClick();
+        if (Input.GetKeyDown(KeyCode.Space) && _canMassAttack)
+            OnSkillButtonClick();
     }
 
     public override void OnPointerDown(PointerEventData eventData)
