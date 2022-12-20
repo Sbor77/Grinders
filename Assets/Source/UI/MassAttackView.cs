@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +9,8 @@ public class MassAttackView : MonoBehaviour
 
     private void Start()
     {
-        SetMassAttackCooldown(0);
+        int startValue = 0;
+        SetMassAttackCooldown(startValue);
     }
 
     public void ChangedMassAttackCooldown(int active)

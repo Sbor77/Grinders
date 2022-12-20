@@ -57,13 +57,6 @@ public class StartMenu : MonoBehaviour
 
     private void StartNewGame()
     {
-        int muteState = DataHandler.Instance.GetSavedMuteValue();
-        float totalVolume = DataHandler.Instance.GetSavedTotalVolume();
-        float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
-        string language = DataHandler.Instance.GetSavedLanguage();
-
-        DataHandler.Instance.DeleteAllStatsWithExcludes();
-
         int defaultLevel = 1;
         int defaultHealthSkill = 1;
         int defaultSpeedSkill = 1;
@@ -71,6 +64,12 @@ public class StartMenu : MonoBehaviour
         int defaultKills = 0;
         int defaultTotalMoney = 0;
         int defaultLevelMoney = 0;
+        int muteState = DataHandler.Instance.GetSavedMuteValue();
+        float totalVolume = DataHandler.Instance.GetSavedTotalVolume();
+        float musicVolume = DataHandler.Instance.GetSavedMusicVolume();
+        string language = DataHandler.Instance.GetSavedLanguage();
+
+        DataHandler.Instance.DeleteAllStatsWithExcludes();
 
         DataHandler.Instance.SaveLevel(defaultLevel);
         DataHandler.Instance.SaveHealthSkill(defaultHealthSkill);

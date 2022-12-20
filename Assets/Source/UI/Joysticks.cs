@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    private const float Half = .5f;
+    private const float Half = 0.5f;
 
     [SerializeField] protected RectTransform _joystickBackground;
     [SerializeField] protected RectTransform _joystickInner;
@@ -43,6 +43,11 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
         }
     }
 
+    public virtual void ButtonActivate()
+    {
+        _skillButton.interactable = true;
+    }
+
     protected void CalculateJoystickInnerPosition(Vector2 position)
     {
         Vector2 directPosition = position - (Vector2)_joystickBackground.position;
@@ -64,11 +69,6 @@ public abstract class Joysticks : MonoBehaviour, IDragHandler, IPointerDownHandl
     {
         _joystickInner.anchoredPosition = Vector2.zero;        
         ReleasedTouch?.Invoke();
-    }
-
-    public virtual void ButtonActivate()
-    {
-        _skillButton.interactable = true;
     }
 
     protected void OnAttackButtonClick()

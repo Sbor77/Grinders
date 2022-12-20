@@ -27,7 +27,7 @@ public class VolumePanel : MonoBehaviour
 
     public void Start()
     {
-        _muteStateToggle.isOn = DataHandler.Instance.GetSavedMuteValue() == MaxVolume ? true : false;
+        _muteStateToggle.isOn = DataHandler.Instance.GetSavedMuteValue() == MaxVolume;
         _totalVolumeSlider.value = DataHandler.Instance.GetSavedTotalVolume();
         _musicVolumeSlider.value = DataHandler.Instance.GetSavedMusicVolume();
 
