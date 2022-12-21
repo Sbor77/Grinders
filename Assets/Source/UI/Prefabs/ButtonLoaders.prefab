@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0410\u041F\u0413\u0420\u0415\u0419\u0414"
+  m_text: UPGRADE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f7fcb5cdde01ee345b0538d794a03bdb, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: f7fcb5cdde01ee345b0538d794a03bdb, type: 2}
@@ -219,7 +219,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3662308efef1ddc4cab17d38a8924ab5, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0410\u0420\u0415\u041D\u0410"
+  m_text: ARENA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f7fcb5cdde01ee345b0538d794a03bdb, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: f7fcb5cdde01ee345b0538d794a03bdb, type: 2}
@@ -555,7 +555,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 759ff3efa4b1d4283ac05a2b4c084b38, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
